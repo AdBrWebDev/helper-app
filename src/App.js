@@ -1,5 +1,5 @@
 import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import React, {Suspense} from 'react';
+import React, {Suspense, lazy} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 //import IconButton from '@material-ui/core/IconButton';
@@ -12,14 +12,14 @@ import SearchIcons from '@material-ui/icons/Search';*/
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'material-icons/iconfont/material-icons.css';
 import Footer from './components/Footer';
-const MainPg = React.lazy(() => import('./pages/MainPg'));
-const Nature = React.lazy(() => import('./pages/Nature'));
+const MainPg = lazy(() => import('./pages/MainPg'));
+const Nature = lazy(() => import('./pages/Nature'));
 
 function App() {
   return (
     <Suspense fallback={'loading....'}>
       <Router>
-        <AppBar className="bg-dark">
+        <AppBar className='bg-dark'>
           <Toolbar>
             <Typography className="mx-5 my-auto">Helper</Typography>
             <InputBase placeholder="Hľadať..." />

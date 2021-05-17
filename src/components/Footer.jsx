@@ -7,9 +7,9 @@ export default function Footer(){
     window.addEventListener('online', () => CheckStatus())
     function CheckStatus(){
         if(navigator.onLine){
-            status = <Box class='bg-success py-1'><i className="material-icons">wifi</i>online</Box>;
+            status = <Box class='bg-success py-1'><i className="material-icons my-auto mx-1">wifi</i>online</Box>;
         }else{
-            status = <Box class='bg-danger'><i className="material-icons">wifi_off</i>offline</Box>;;
+            status = <Box class='bg-danger'><i className="material-icons my-auto">wifi_off</i>offline</Box>;;
         }
         return status;
     }

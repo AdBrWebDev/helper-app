@@ -1,10 +1,33 @@
 import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
 import '../App.css';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import {gsap, TimelineLite, Power3} from 'gsap';
+import React, {useEffect} from 'react';
 
 export default function Nature(){
+    let tl = new TimelineLite();
+
+    useEffect(() => {
+        tl.from('img', {y: 200, opacity: 0, ease: Power3.zoomIn, delay: .5});
+    })
+
     return(
         <Box>
             <img className='w-100' src='/images/forest.jpg' alt='forest' id='nature-img' />
+            <Container>
+                <Card className="my-5 container p-5 shadow-lg" id='forest-form'>
+                    <form autoComplete="off" className="row container text-center px-5">
+                        <TextField label="Meno" className="my-1" />
+                        <TextField label="Priezvisko" className="my-1" />
+                        <TextField label="E-mail" className="my-1" autoComplete="off" />
+                        <TextField label="Telefónne číslo" className="my-1" />
+                        <Box><Button variant='contained' color='secondary' className="my-4">Odoslať</Button></Box>
+                    </form>
+                </Card>
+            </Container>
         </Box>
     )
 }

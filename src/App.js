@@ -11,9 +11,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcons from '@material-ui/icons/Search';*/
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'material-icons/iconfont/material-icons.css';
+import 'materialize-css/dist/css/materialize.css';
 import Footer from './components/Footer';
+import './App.css';
 const MainPg = lazy(() => import('./pages/MainPg'));
 const Nature = lazy(() => import('./pages/Nature'));
+const Weather = lazy(() => import('./pages/Weather'))
 
 function App() {
   return (
@@ -32,6 +35,7 @@ function App() {
             <Route path="/Nature" component={Nature} />
         </Switch>
       </Router>
+      <Weather />
       <Footer />
       </Suspense>
   );

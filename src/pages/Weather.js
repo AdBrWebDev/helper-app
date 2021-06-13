@@ -64,7 +64,7 @@ export default function Weather(){
                     </Grid>
                     <Box className="mx-auto mt-3">
                     <Typography variant="h3">3-dňová predpoveď</Typography>
-                        <Grid container>
+                        <Grid container className="text-center">
                         {forecast.map((forecast) => <ForecastCard forecast={forecast} />)}
                         </Grid>
                     </Box>

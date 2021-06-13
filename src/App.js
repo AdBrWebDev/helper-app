@@ -16,7 +16,7 @@ import Footer from './components/Footer';
 import './App.css';
 const MainPg = lazy(() => import('./pages/MainPg'));
 const Nature = lazy(() => import('./pages/Nature'));
-const Weather = lazy(() => import('./pages/Weather'))
+const Weather = lazy(() => import('./pages/Weather'));
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
         <AppBar className='bg-dark'>
           <Toolbar>
             <Typography className="mx-5 my-auto">Helper</Typography>
-            <InputBase placeholder="Hľadať..." />
+            <InputBase placeholder="Hľadať..." className="text-info" />
             <Typography><Link className="mx-5" to="/">Hlavná stánka</Link></Typography>
             <Typography><Link to="/Nature">Príroda</Link></Typography>
           </Toolbar>

@@ -57,9 +57,9 @@ export default function Weather(){
                             <Typography><i className="material-icons mx-2">UV</i>{curWeather.uv}</Typography>
                         </Grid>
                         <Grid item xs={6}>
-                            <Typography><i className="material-icons mx-2">water_drop</i>{curWeather.precip_mm} mm</Typography>
+                            <Typography><i className="material-icons mx-2 text-info">water_drop</i>{curWeather.precip_mm} mm</Typography>
                             <Typography><i className="material-icons mx-2">public</i>{curWeather.pressure_mb} kPa</Typography>
-                            <Typography><i className="material-icons mx-2">air</i>{curWeather.wind_kph} km/h</Typography>
+                            <Typography><i className="material-icons mx-2 text-info">air</i>{curWeather.wind_kph} km/h</Typography>
                         </Grid>
                     </Grid>
                     <Box className="mx-auto mt-3">

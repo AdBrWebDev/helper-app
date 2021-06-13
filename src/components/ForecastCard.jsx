@@ -13,7 +13,7 @@ export default function ForecastCard(props){
     const conditionIcon = props.forecast.day.condition.icon;
     console.log(props);
     return(<Grid key={props.index} xs={12} sm={12} md={6} xl={4} lg={4}>
-        <Paper id="forItem" elevation={3} className="p-5 m-4 text-center" onClick={() => openWeather(!showWeather)}>
+        <Paper id="forItem" elevation={3} className="p-5 m-3 text-center" onClick={() => openWeather(!showWeather)}>
         <Typography variant="h6" className="mb-1">{props.forecast.date}</Typography>
         <img src={conditionIcon} alt="icon" />
         <Typography>{props.forecast.day.condition.text}</Typography>

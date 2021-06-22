@@ -1,12 +1,10 @@
 import React, {useState, lazy} from 'react';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import '../App.css';
-//const HourForecast = lazy(() => import('./HourForecast'));
-import HourForecast from './HourForecast';
+const HourForecast = lazy(() => import('./HourForecast'));
 
 export default function ForecastCard(props){
     const [showWeather, openWeather] = useState(false);

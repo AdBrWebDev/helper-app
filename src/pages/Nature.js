@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import {gsap, TimelineLite, Power3} from 'gsap';
 import React, {useEffect} from 'react';
+import { Typography } from '@material-ui/core';
 
 export default function Nature(){
     let tl = new TimelineLite();
@@ -16,7 +17,10 @@ export default function Nature(){
 
     return(
         <Box>
-            <img className='w-100' src='/images/forest.jpg' alt='forest' id='nature-img' />
+            <Box>
+                <img className='w-100' src='/images/forest.jpg' alt='forest' />
+                <Typography style={{color: "white", position: 'absolute', top: "45%"}} className="text-center" variant="h1">Pomôž nám ochrániť prírodu</Typography>
+            </Box>
             <Container>
                 <Card className="my-5 container p-5 shadow-lg" id='forest-form'>
                     <form autoComplete="off" className="row container text-center px-5">

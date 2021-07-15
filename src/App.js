@@ -14,34 +14,19 @@ import './App.css';
 import MainNav from './components/Main-nav';
 const Nature = lazy(() => import('./pages/Nature'));
 const Weather = lazy(() => import('./pages/Weather'));
+const Cycling = lazy(() => import('./pages/cycling/CyclingMNPG'))
 
 function App() {
   return (
     <Suspense fallback={'loading....'}>
       <Router>
-        <Grid>
-          <Grid item xs={12} sm={12} md={6} xl={3} lg={6}>
-            <img src="/images/cycling.jpg" alt="" />
-          </Grid>
-          <Grid item xs={12} sm={12} md={6} xl={3} lg={6}>
-            <img src="" alt="" />
-          </Grid>
-          <Grid item xs={12} sm={12} md={6} xl={3} lg={6}>
-            <img src="" alt="" />
-          </Grid>
-          <Grid item xs={12} sm={12} md={6} xl={3} lg={6}>
-            <img src="" alt="" />
-          </Grid>
-        </Grid>
           
           <Link to="/">Cyklistika</Link>
-          <Link to="/Nature">Turistika</Link>
-          <Link to="/Nature">Lyžovanie</Link>
-          <Link to="/Nature">Beh</Link>
+         
       
         <Switch>
-            <Route path="/MainPg" component={Nature} />
-            <Route path="/Nature" component={Nature} />
+            <Route path="/" component={Cycling} />
+            
         </Switch>
       </Router>
       {/*<MainNav />

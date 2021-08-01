@@ -3,6 +3,7 @@ import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'material-icons/iconfont/material-icons.css';
 import 'materialize-css/dist/css/materialize.css';
+import Footer from '../../components/Footer'
 const MainPage = lazy(() => import('./MainPage'))
 const Articles = lazy(() => import('./Articles'))
 const BikeHelper = lazy(() => import('./BikeHelper'))
@@ -20,13 +21,14 @@ export default function CyclingMNPG(){
         <Link to="/Tracking">Plánovač trasy</Link>
         <Link to="/BikeHelper">Pomocník</Link>
       <Switch>
-          <Route  path="/" component={MainPage} />
-          <Route exact path="/Forum" component={Forum} />
+          <Route exact path="/" component={MainPage} />
+          <Route path="/Forum" component={Forum} />
           <Route path="/Map" component={Map} />
           <Route path="/Articles" component={Articles} />
           <Route path="/Tracking" component={TrackingRoute} />
           <Route path="/BikeHelper" component={BikeHelper} />
       </Switch>
     </Router>
+    <Footer />
     </Suspense>)
 }

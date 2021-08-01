@@ -11,7 +11,6 @@ import 'materialize-css/dist/css/materialize.css';
 import Box from '@material-ui/core/Box';
 import Footer from './components/Footer';
 import './App.css';
-import MainNav from './components/Main-nav';
 const Nature = lazy(() => import('./pages/Nature'));
 const Weather = lazy(() => import('./pages/Weather'));
 const Cycling = lazy(() => import('./pages/cycling/CyclingMNPG'))
@@ -20,14 +19,22 @@ function App() {
   return (
     <Suspense fallback={'loading....'}>
       <Router>
-          
-          <Link to="/">Cyklistika</Link>
-         
-      
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Cycling</Link>
+            </li>
+            <li>
+              <Link to="/weather">Weahther</Link>
+            </li>
+          </ul>
+        </nav>
         <Switch>
-            <Route path="/" component={Cycling} />
-            
+            <Route exact path="/" component={Cycling} />
+            <Route path="/weather" component={Weather} />
         </Switch>
+        </div>
       </Router>
       {/*<MainNav />
       <Router>

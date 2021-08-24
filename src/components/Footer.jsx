@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import '../App.css';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import Avatar from '@material-ui/core/Avatar'
 
 export default function Footer(){
     let status;
@@ -23,10 +24,11 @@ export default function Footer(){
             <Typography className="text-center text-white">{CheckStatus()}</Typography>
             <Box className="p-5">
             <Grid container>
-                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-
+                <Grid item className="d-flex mt-3" xs={12} sm={12} md={4} lg={4} xl={4}>
+                    <Avatar src="/images/strava.svg" />
+                    <Avatar src="/images/xiaomi.png" />
                 </Grid>
-                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
                     <Grid container className="text-center">
                         <Grid item xs={6}>
                             <Typography className="text-white mb-3" variant="h4">Sleduj nás na</Typography>

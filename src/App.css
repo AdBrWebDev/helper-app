@@ -39,3 +39,7 @@
   #footer-icons:focus{
     background: transparent;
   }
+
+  #devices{
+    transform: scale(3)
+  }

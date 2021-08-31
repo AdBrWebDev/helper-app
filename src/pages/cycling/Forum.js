@@ -19,10 +19,12 @@ export default function Forum(){
             </Box>
         </Box>
         {newTheme && <Box id="dark-background">
-            <Container className="bg-dark">     
-                <Card>
-                    <Typography>Pridať novú tému</Typography>
-                    <Button variant="outlined" color="secondary">Pridať</Button>
+            <Container>  
+                <Card className="bg-white container text-center p-5 shadow">
+                    <Button variant="outlined" color="secondary" onClick={() => NewTheme(!newTheme)} style={{'top': -30, 'left': 20, 'position': 'relative', 'float': 'right'}}>x</Button>
+                    <Typography variant="h3">Pridať novú tému</Typography>
+                        <input type="text" placeholder="Názov témy" className="form-control mb-4 text-center" />
+                        <Button variant="outlined" color="secondary">Pridať</Button>
                 </Card>
             </Container>
         </Box>}

@@ -10,7 +10,6 @@ const Articles = lazy(() => import('./Articles'))
 const BikeHelper = lazy(() => import('./BikeHelper'))
 const Forum = lazy(() => import('./Forum'))
 const Map = lazy(() => import('./Map'))
-const TrackingRoute = lazy(() => import('./TrackingRoute'))
 
 export default function CyclingMNPG(){
     return(<Suspense fallback={'loading....'}>
@@ -20,7 +19,6 @@ export default function CyclingMNPG(){
         <Link to="/Map">Mapa</Link>
         <Link to="/Articles">Články</Link>
         <Link to="/Nature">Príroda</Link>
-        <Link to="/Tracking">Plánovač trasy</Link>
         <Link to="/BikeHelper">Pomocník</Link>
       <Switch>
           <Route exact path="/" component={MainPage} />
@@ -28,7 +26,6 @@ export default function CyclingMNPG(){
           <Route path="/Map" component={Map} />
           <Route path="/Articles" component={Articles} />
           <Route path="/Nature" component={Nature} />
-          <Route path="/Tracking" component={TrackingRoute} />
           <Route path="/BikeHelper" component={BikeHelper} />
       </Switch>
     </Router>

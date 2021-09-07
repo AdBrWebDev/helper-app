@@ -24,9 +24,11 @@ export default function Footer(){
             <Typography className="text-center text-white">{CheckStatus()}</Typography>
             <Box className="p-5">
             <Grid container>
-                <Grid item className="d-flex mt-3" xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <Avatar src="/images/strava.svg" />
+                <Grid item className=" my-4 text-center container" xs={12} sm={12} md={4} lg={4} xl={4}>
+                    <Box className="d-flex container">
+                    <Avatar src="/images/strava.svg" style={{"marginRight": "20px"}} />
                     <Avatar src="/images/xiaomi.png" />
+                    </Box>
                 </Grid>
                 <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
                     <Grid container className="text-center">

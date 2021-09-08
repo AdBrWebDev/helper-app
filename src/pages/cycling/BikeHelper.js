@@ -3,6 +3,8 @@ import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import '../../App.css'
+import Health from '../Health'
+import BikeRepair from '../../components/BikeRepair'
 
 export default function BikeHelper(){
     const [openHelp, bikeHelp] = useState(false)
@@ -21,7 +23,7 @@ export default function BikeHelper(){
                 </Button>
             </Grid>
         </Grid>
-        {health}
-        {bikeHelp && <Box></Box>}
+        {health && <Health />}
+        {bikeHelp && <BikeRepair />}
     </Box>)
 }

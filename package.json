@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^5.0.1",
     "chakra-ui": "^0.3.9",
+    "express": "^4.17.1",
     "framer-motion": "^4.1.16",
     "gsap": "^3.6.1",
     "material-icons": "^0.6.3",

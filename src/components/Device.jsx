@@ -14,7 +14,6 @@ import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import Paper from '@material-ui/core/Paper'
 import TableBody from '@material-ui/core/TableBody'
-import { TextFormatSharp } from '@material-ui/icons'
 
 export default function Device(props){
     const [device, openDevice] = useState(false)

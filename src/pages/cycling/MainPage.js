@@ -1,5 +1,4 @@
 import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
 import AppInDevices from '../../components/AppInDevices'
 
 export default function MainPage(){

@@ -3,6 +3,7 @@ import React, {Suspense, lazy} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'material-icons/iconfont/material-icons.css';
 import 'materialize-css/dist/css/materialize.css';
+import 'bulma/css/bulma.min.css'
 import './App.css';
 const Weather = lazy(() => import('./pages/Weather'))
 const Cycling = lazy(() => import('./pages/cycling/CyclingMNPG'))

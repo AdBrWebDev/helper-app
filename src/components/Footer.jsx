@@ -23,7 +23,7 @@ export default function Footer(){
         <Box className="bg-dark">
             <Typography className="text-center text-white">{CheckStatus()}</Typography>
             <Box className="p-5">
-            <Grid container>
+            <Grid container className="container py-5">
                 <Grid item className=" my-4 text-center container" xs={12} sm={12} md={4} lg={4} xl={4}>
                     <Box className="d-flex container">
                     <Avatar src="/images/strava.svg" style={{"marginRight": "20px"}} />

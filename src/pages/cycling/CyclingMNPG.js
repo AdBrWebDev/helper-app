@@ -12,11 +12,12 @@ const Articles = lazy(() => import('./Articles'))
 const BikeHelper = lazy(() => import('./BikeHelper'))
 const Forum = lazy(() => import('./Forum'))
 const Map = lazy(() => import('./Map'))
+const Eshop = lazy(() => import('../Eshop'))
 
 export default function CyclingMNPG(){
     return(<Suspense fallback={'loading....'}>
     <Router>
-        <nav className="navbar is-danger px-5">
+        <nav className="navbar is-dark px-5 shadow position-fixed top-0">
             <Box className="navbar-brand">
                 <Link className="navbar-item" href="#"></Link>
                 <Box className="navbar-burger" data-target="navbar">
@@ -28,6 +29,7 @@ export default function CyclingMNPG(){
             <Box id="navbar" className="navbar-menu">
                 <Box className="navbar-start">
                 <Link className="navbar-item" to="/">Uvod</Link>
+                <Link className="navbar-item" to="/eshop">E-shop</Link>
                 <Link className="navbar-item" to="/Forum">Forum</Link>
                 <Link className="navbar-item" to="/Map">Mapa</Link>
                 <Link className="navbar-item" to="/Articles">Články</Link>
@@ -38,6 +40,7 @@ export default function CyclingMNPG(){
         </nav>
       <Switch>
           <Route exact path="/" component={MainPage} />
+          <Route path="/eshop" component={Eshop} />
           <Route path="/Forum" component={Forum} />
           <Route path="/Map" component={Map} />
           <Route path="/Articles" component={Articles} />

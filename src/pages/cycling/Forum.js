@@ -10,11 +10,13 @@ export default function Forum(){
     const [newTheme, NewTheme] = useState(false)
 
     return (<Box>
-        <Box className="container p-3 rounded bg-white my-4">
-            <Button variant="outlined" className="text-dark" onClick={() => NewTheme(!newTheme)}>Pridať tému</Button>
+        <Box className="container p-3 rounded bg-white shadow my-5">
+            <Box className="text-end mb-5">
+            <Button variant="outlined" color="secondary" onClick={() => NewTheme(!newTheme)}>Pridať tému</Button>
+            </Box>
             <Box>
-                <Card className="p-2 my-2">
-                    <Typography>Pravidla pridavania príspevkov</Typography>
+                <Card className="p-3 my-2 px-5 shadow">
+                    <Typography style={{'cursor': 'pointer'}}>Pravidla pridavania príspevkov</Typography>
                 </Card>
             </Box>
         </Box>

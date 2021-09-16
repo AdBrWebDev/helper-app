@@ -15,7 +15,7 @@ function App() {
   return (
     <Suspense fallback={'loading....'}>
       <Router>
-      <div className="bg-dark">
+        <div className="bg-dark">
         <nav>
           <ul>
             <li>

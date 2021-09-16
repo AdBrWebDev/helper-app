@@ -3,6 +3,8 @@ import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'material-icons/iconfont/material-icons.css';
 import 'materialize-css/dist/css/materialize.css';
+import 'bulma/css/bulma.min.css'
+import Box from '@material-ui/core/Box'
 import Footer from '../../components/Footer';
 const Nature = lazy(() => import('../Nature'))
 const MainPage = lazy(() => import('./MainPage'))
@@ -14,12 +16,26 @@ const Map = lazy(() => import('./Map'))
 export default function CyclingMNPG(){
     return(<Suspense fallback={'loading....'}>
     <Router>
-        <Link to="/">Uvod</Link>
-        <Link to="/Forum">Forum</Link>
-        <Link to="/Map">Mapa</Link>
-        <Link to="/Articles">Články</Link>
-        <Link to="/Nature">Príroda</Link>
-        <Link to="/BikeHelper">Pomocník</Link>
+        <nav className="navbar is-danger px-5">
+            <Box className="navbar-brand">
+                <Link className="navbar-item" href="#"></Link>
+                <Box className="navbar-burger" data-target="navbar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </Box>
+            </Box>
+            <Box id="navbar" className="navbar-menu">
+                <Box className="navbar-start">
+                <Link className="navbar-item" to="/">Uvod</Link>
+                <Link className="navbar-item" to="/Forum">Forum</Link>
+                <Link className="navbar-item" to="/Map">Mapa</Link>
+                <Link className="navbar-item" to="/Articles">Články</Link>
+                <Link className="navbar-item" to="/Nature">Príroda</Link>
+                <Link className="navbar-item" to="/BikeHelper">Pomocník</Link>
+                </Box>
+            </Box>
+        </nav>
       <Switch>
           <Route exact path="/" component={MainPage} />
           <Route path="/Forum" component={Forum} />

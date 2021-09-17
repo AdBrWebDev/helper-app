@@ -1,19 +1,19 @@
 import React, {useState} from 'react'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
-import Container from '@material-ui/core/Container'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import Button from '@material-ui/core/Button'
-import CardContent from '@material-ui/core/CardContent'
-import TableContainer from '@material-ui/core/TableContainer'
-import Table from '@material-ui/core/Table'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
-import Paper from '@material-ui/core/Paper'
-import TableBody from '@material-ui/core/TableBody'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import Button from '@mui/material/Button'
+import CardContent from '@mui/material/CardContent'
+import TableContainer from '@mui/material/TableContainer'
+import Table from '@mui/material/Table'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import TableCell from '@mui/material/TableCell'
+import Paper from '@mui/material/Paper'
+import TableBody from '@mui/material/TableBody'
 
 export default function Device(props){
     const [device, openDevice] = useState(false)
@@ -26,7 +26,7 @@ export default function Device(props){
                 <Container>
                     <Card className="bg-dark p-5 rounded text-white container">
                         <CardActions>
-                            <Button variant="outlined" color="secondary" style={{'top': -30, 'right': 0, 'position': 'relative', 'float': 'right'}}>x</Button>
+                            <Button variant="outlined" color="primary">x</Button>
                         </CardActions>
                         <CardContent>
                             <i id="devices" className="material-icons my-4">{props.icon}</i>

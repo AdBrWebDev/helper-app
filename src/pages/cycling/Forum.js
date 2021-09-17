@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import Container from '@material-ui/core/Container'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import Container from '@mui/material/Container'
 import '../../App.css'
 
 export default function Forum(){

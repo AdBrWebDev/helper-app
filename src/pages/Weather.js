@@ -1,9 +1,9 @@
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import InputBase from '@material-ui/core/InputBase';
-import Grid from '@material-ui/core/Grid'
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import InputBase from '@mui/material/InputBase';
+import Grid from '@mui/material/Grid'
 import '../App.css';
 import React, {useState} from 'react';
 import ForecastCard from '../components/ForecastCard';

@@ -1,12 +1,12 @@
 import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
+import Container from '@mui/material/Container';
 import '../App.css';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
 import {gsap, TimelineLite, Power3} from 'gsap';
 import React, {useEffect} from 'react';
-import { Typography } from '@material-ui/core';
+import Typography from '@mui/material/Typography';
 
 export default function Nature(){
     let tl = new TimelineLite();
@@ -28,7 +28,7 @@ export default function Nature(){
                         <TextField label="Priezvisko" className="my-1" />
                         <TextField label="E-mail" className="my-1" autoComplete="off" />
                         <TextField label="Telefónne číslo" className="my-1" />
-                        <Box><Button variant='contained' color='secondary' className="my-4">Odoslať</Button></Box>
+                        <Box><Button variant='contained' color='error' className="my-4">Odoslať</Button></Box>
                     </form>
                 </Card>
             </Container>

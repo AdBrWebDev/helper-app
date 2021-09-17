@@ -1,12 +1,12 @@
 import React, {lazy, useState} from 'react'
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import Container from '@material-ui/core/Container'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
+import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import Container from '@mui/material/Container'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
 import '../App.css'
 const Device = lazy(() => import('./Device'))
 
@@ -30,7 +30,7 @@ export default function AppInDevices(){
             <Container>
                 <Card className="bg-dark p-5 rounded text-white container">
                     <CardActions>
-                        <Button variant="outlined" color="secondary" style={{'top': -30, 'right': 0, 'position': 'relative', 'float': 'right'}} onClick={() => openDownload(!download)}>x</Button>
+                        <Button variant="outlined" color="error" style={{'top': -30, 'right': 0, 'position': 'relative', 'float': 'right'}} onClick={() => openDownload(!download)}>x</Button>
                     </CardActions>
                     <CardContent>
                     </CardContent>

@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'material-icons/iconfont/material-icons.css';
 import 'materialize-css/dist/css/materialize.css';
 import 'bulma/css/bulma.min.css'
-import Box from '@material-ui/core/Box'
+import Box from '@mui/material/Box'
 import Footer from '../../components/Footer';
 const Nature = lazy(() => import('../Nature'))
 const MainPage = lazy(() => import('./MainPage'))

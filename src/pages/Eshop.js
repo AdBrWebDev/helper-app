@@ -1,7 +1,7 @@
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
-import Container from '@material-ui/core/Container'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
+import Container from '@mui/material/Container'
 
 export default function Eshop(){
     return(<Box className="text-white container p-5 my-5">

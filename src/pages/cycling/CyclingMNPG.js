@@ -11,7 +11,7 @@ const MainPage = lazy(() => import('./MainPage'))
 const Articles = lazy(() => import('./Articles'))
 const BikeHelper = lazy(() => import('./BikeHelper'))
 const Forum = lazy(() => import('./Forum'))
-const Map = lazy(() => import('./Map'))
+const Map = lazy(() => import('../Map'))
 const Eshop = lazy(() => import('../Eshop'))
 
 export default function CyclingMNPG(){

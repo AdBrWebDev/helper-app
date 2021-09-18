@@ -1,4 +1,4 @@
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import '../App.css';
 import TextField from '@mui/material/TextField';

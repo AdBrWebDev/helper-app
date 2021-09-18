@@ -5,7 +5,8 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import Button from '@mui/material/Button'
-import Rating from '@material-ui/lab/Rating'
+import Rating from '@mui/material/Rating'
+import StarIcon from '@mui/icons-material/Star'
 
 export default function Articles(){
     return(<Box className="bg-dark container py-5">
@@ -29,12 +30,12 @@ export default function Articles(){
                             <Grid container>
                             <Grid item className="d-flex text-center my-1 ml-2">
                                 <Typography variant="h6">Náročnosť:</Typography>
-                                <Rating name="read-only" value={3} readOnly />
+                                <Rating value={2.5} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55}} />}></Rating>
                             </Grid>
                             <Grid item className="d-flex text-center">
-                            <Button variant="contained" color="secondary" className="mx-1"><i className="material-icons">thumb_up</i></Button>
-                            <Button variant="contained" color="secondary" className="mx-1"><i className="material-icons">favorite</i></Button>
-                            <Button variant="contained" color="secondary" className="mx-1"><i className="material-icons">star</i></Button>
+                            <Button variant="contained" color="error" className="mx-1"><i className="material-icons">thumb_up</i></Button>
+                            <Button variant="contained" color="error" className="mx-1"><i className="material-icons">favorite</i></Button>
+                            <Button variant="contained" color="error" className="mx-1"><i className="material-icons">star</i></Button>
                             </Grid>
                             </Grid>
                         </CardActions>

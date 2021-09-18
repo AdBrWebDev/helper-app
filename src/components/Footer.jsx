@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import '../App.css';
-//import TwitterIcon from '@mui/icon/Twitter';
 import Avatar from '@mui/material/Avatar'
 
 export default function Footer(){
@@ -36,7 +35,6 @@ export default function Footer(){
                         <Grid item xs={6}>
                             <Typography className="text-white mb-3" variant="h4">Sleduj nás na</Typography>
                             <Button id="footer-icons" variant="outlined" className="text-info"><i className="material-icons">facebook</i></Button>
-                            <Button id="footer-icons" variant="outlined" className="text-white">{/*<TwitterIcon />*/}</Button>
                         </Grid>
                         <Grid item xs={6}>
                             <Typography className="text-white mb-3" variant="h4">Appka aj v mobile</Typography>

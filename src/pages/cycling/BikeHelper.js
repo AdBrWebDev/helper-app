@@ -15,8 +15,8 @@ export default function BikeHelper(){
                 <Health />
             </Grid>
             <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>
-                <Button className="align-middle position-relative" variant="contained" onClick={() => openHelp(!bikeHelp)} color="error" style={{'transform': 'scale(4)', 'marginTop': '300px'}}>
-                    <i className="material-icons text-white">pedal_bike</i>
+                <Button className="align-middle position-relative" variant="outlined" onClick={() => openHelp(!bikeHelp)} color="info" style={{'transform': 'scale(4)', 'marginTop': '300px'}}>
+                    <i className="material-icons text-info">pedal_bike</i>
                 </Button>
             </Grid>
         </Grid>

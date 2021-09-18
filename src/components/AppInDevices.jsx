@@ -25,7 +25,7 @@ export default function AppInDevices(){
         <Grid container className="mb-5">
             {devices.map((device, index) => <Device terms={device.terms} index={index} os={device.os} icon={device.icon} text={device.typography}/>)}
         </Grid>
-        <Button variant="outlined" color="secondary" className="mt-5 p-4" onClick={() => openDownload(!download)}>stiahnuť pathfinder <i className="material-icons mx-1">download</i></Button>
+        <Button variant="outlined" color="info" className="mt-5 p-4" onClick={() => openDownload(!download)}>stiahnuť pathfinder <i className="material-icons mx-1">download</i></Button>
         {download && <Box id="dark-background">
             <Container>
                 <Card className="bg-dark p-5 rounded text-white container">

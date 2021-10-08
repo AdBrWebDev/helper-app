@@ -37,7 +37,7 @@ export default function Weather(){
         <>
         <Button variant="contained" className="btn-floating pulse cyan" onClick={() => openWeather(!weather)} style={{bottom: 30, right: 30, position: 'fixed'}}><i className="material-icons">wb_sunny</i></Button>
       {(weather) ? 
-        (<Box id="dark-layer">
+        (<Box id="dark-background">
             <Container className="bg-dark text-white mt-5 p-5 shadow-lg rounded" style={{height: '90%', overflow: 'auto'}}>
             <Button variant="contained" color="secondary" onClick={()=> openWeather(!weather)} style={{position: 'relative', float: 'right' ,top: -30, right: -30}}>x</Button>
                 <Box noValidate autoComplete="off" className="p-5 mt-5 text-center" >

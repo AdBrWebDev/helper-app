@@ -6,6 +6,7 @@ import 'materialize-css/dist/css/materialize.css';
 import 'bulma/css/bulma.min.css'
 import Box from '@mui/material/Box'
 import Footer from '../../components/Footer';
+import Button from '@mui/material/Button'
 const Nature = lazy(() => import('../Nature'))
 const MainPage = lazy(() => import('./MainPage'))
 const Articles = lazy(() => import('./Articles'))
@@ -35,6 +36,11 @@ export default function CyclingMNPG(){
                 <Link className="navbar-item" to="/Articles">Články</Link>
                 <Link className="navbar-item" to="/Nature">Príroda</Link>
                 <Link className="navbar-item" to="/BikeHelper">Pomocník</Link>
+                </Box>
+            </Box>
+            <Box className="navbar-end">
+                <Box className="navbar-item">
+                    <Button variant="outlined" color="info">Prihlásenie / registrácia</Button>
                 </Box>
             </Box>
         </nav>

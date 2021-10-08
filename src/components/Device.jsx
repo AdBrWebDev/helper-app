@@ -24,7 +24,7 @@ export default function Device(props){
             <Typography>{props.text}</Typography>
             {device && <Box id="dark-background">
                 <Container>
-                    <Card className="bg-dark p-5 rounded text-white container">
+                    <Card className="bg-dark p-5 rounded text-white container border border-info">
                         <CardActions>
                             <Button variant="outlined" color="primary">x</Button>
                         </CardActions>

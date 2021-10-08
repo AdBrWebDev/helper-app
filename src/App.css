@@ -4,7 +4,6 @@
   
   ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 1px rgba(0,0,0,0);
-    border-radius: 50px;
     background-color: rgba(54, 36, 36, 1);
   }
    
@@ -50,7 +49,15 @@
     transition: .7s;
   }
 
+  #shadow{
+    box-shadow: 0 0 30px 55px rgba(56, 120, 146, 0.5);
+  }
+
   #card:hover{
     transform: scale(1.05);
     box-shadow: 0 0 30px 15px rgba(56, 120, 146, 0.5);
+  }
+
+  Button:focus{
+    background: transparent !important;
   }

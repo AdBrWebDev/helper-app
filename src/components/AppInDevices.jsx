@@ -28,7 +28,7 @@ export default function AppInDevices(){
         <Button variant="outlined" color="info" className="mt-5 p-4" onClick={() => openDownload(!download)}>stiahnuť pathfinder <i className="material-icons mx-1">download</i></Button>
         {download && <Box id="dark-background">
             <Container>
-                <Card className="bg-dark p-5 rounded text-white container">
+                <Card className="bg-dark p-5 rounded text-white container border border-info">
                     <CardActions>
                         <Button variant="outlined" color="error" style={{'top': -30, 'right': 0, 'position': 'relative', 'float': 'right'}} onClick={() => openDownload(!download)}>x</Button>
                     </CardActions>

@@ -1,10 +1,11 @@
-import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import React, {Suspense, lazy} from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'material-icons/iconfont/material-icons.css';
-import 'materialize-css/dist/css/materialize.css';
+import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import React, {Suspense, lazy} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'material-icons/iconfont/material-icons.css'
+import 'materialize-css/dist/css/materialize.css'
 import 'bulma/css/bulma.min.css'
-import './App.css';
+import './App.css'
+import Box from '@mui/material/Box'
 const Weather = lazy(() => import('./pages/Weather'))
 const Cycling = lazy(() => import('./pages/cycling/CyclingMNPG'))
 const Hiking = lazy(() => import('./pages/hiking/HikingMNPG'))
@@ -15,7 +16,7 @@ function App() {
   return (
     <Suspense fallback={'loading....'}>
       <Router>
-        <div className="bg-dark">
+        <Box className="bg-dark">
         <nav>
           <ul>
             <li>
@@ -42,7 +43,7 @@ function App() {
             <Route path="/running" component={Running} />
             <Route path="/skiing" component={Skiing} />
         </Switch>
-        </div>
+        </Box>
       </Router>
       <Weather />
       </Suspense>

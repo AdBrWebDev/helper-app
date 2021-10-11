@@ -11,10 +11,10 @@ export default function BikeHelper(){
 
     return(<Box className="text-center align-middle">
         <Grid container>
-            <Grid item xs={12} sm={12} md={6} xl={6} lg={6} style={{'minHeight': '700px'}}>
+            <Grid item xs={12} sm={12} md={6} xl={6} lg={6} style={{'height': '770px'}}>
                 <Health />
             </Grid>
-            <Grid item xs={12} sm={12} md={6} xl={6} lg={6} style={{'minHeight': '700px'}}>
+            <Grid item xs={12} sm={12} md={6} xl={6} lg={6} style={{'height': '770px'}}>
                 <Button id="card" className="align-middle position-relative" variant="outlined" onClick={() => openHelp(!bikeHelp)} color="info" style={{'transform': 'scale(4)', 'marginTop': '300px'}}>
                     <i className="material-icons text-info">pedal_bike</i>
                 </Button>

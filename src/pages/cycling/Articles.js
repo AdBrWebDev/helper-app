@@ -8,13 +8,12 @@ import Button from '@mui/material/Button'
 import Rating from '@mui/material/Rating'
 import StarIcon from '@mui/icons-material/Star'
 import '../../App.css'
+import MainImageOfPage from '../../components/MainImageOfPage'
 
 export default function Articles(){
-    return(<Box className="bg-dark container py-5">
-                <Box className="p-5 mb-5">
-                    <Typography variant="h3" className="w-75 text-center">Zažil si niečo neobyčajné a chceš sa o zážitok podeliť s ostatnými?</Typography>
-                </Box>
-        <Box>
+    return(<Box className="bg-dark">
+        <MainImageOfPage img="/images/articles-img.jpg" text="Zažil si niečo neobyčajné a chceš sa o zážitok podeliť s ostatnými?" />
+        <Box className="container py-5">
             <Grid container>
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
                     <Card className="text-center bg-dark border border-info text-white border-2 pb-2" id="card">

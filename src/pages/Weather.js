@@ -35,7 +35,7 @@ export default function Weather(){
     }
     return(
         <>
-        <Button variant="contained" className="btn-floating pulse cyan" onClick={() => openWeather(!weather)} style={{bottom: 30, right: 30, position: 'fixed'}}><i className="material-icons">wb_sunny</i></Button>
+        <Button variant="contained" className="btn-floating pulse btn-info btn-waves waves-light" onClick={() => openWeather(!weather)} style={{bottom: 30, right: 30, position: 'fixed'}}><i className="material-icons">wb_sunny</i></Button>
       {(weather) ? 
         (<Box id="dark-background">
             <Container className="bg-dark text-white mt-5 p-5 shadow-lg rounded" style={{height: '90%', overflow: 'auto'}}>

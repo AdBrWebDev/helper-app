@@ -19,7 +19,7 @@ export default function Device(props){
     const [device, openDevice] = useState(false)
 
     return(
-        <Grid item index={props.index} onClick={() => openDevice(!device)} xs={12} sm={6} md={6} lg={3} xl={3} style={{"cursor": "pointer"}}>
+        <Grid item className="py-4" index={props.index} onClick={() => openDevice(!device)} xs={12} sm={6} md={6} lg={3} xl={3} style={{"cursor": "pointer"}}>
             <i id="devices" className="material-icons my-5">{props.icon}</i>
             <Typography>{props.text}</Typography>
             {device && <Box id="dark-background">

@@ -20,7 +20,7 @@ export default function Footer(){
     }
 
     return(
-        <Box className="bg-dark">
+        <Box className="bg-dark" style={{'bottom': 0}}>
             <Typography className="text-center text-white">{CheckStatus()}</Typography>
             <Box className="p-5">
             <Grid container className="container py-5">

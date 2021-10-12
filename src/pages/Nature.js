@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import '../App.css';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import {gsap, TimelineLite, Power3} from 'gsap';
@@ -23,13 +22,13 @@ export default function Nature(){
             </Box>
             <Container>
                 <Card className="my-5 container p-5 shadow-lg" id='forest-form'>
-                    <form autoComplete="off" className="row container text-center px-5">
-                        <TextField label="Meno" className="my-1" />
-                        <TextField label="Priezvisko" className="my-1" />
-                        <TextField label="E-mail" className="my-1" autoComplete="off" />
-                        <TextField label="Telefónne číslo" className="my-1" />
+                    <Box autoComplete="off" className="row container text-center px-5">
+                        <input label="Meno" className="text-center" variant="standard" placeholder="Meno" />
+                        <input label="Priezvisko" variant="standard" className="my-1" />
+                        <input label="E-mail" variant="standard" className="my-1" />
+                        <input label="Telefónne číslo" className="my-1" variant="standard" />
                         <Box><Button variant='contained' color='error' className="my-4">Odoslať</Button></Box>
-                    </form>
+                    </Box>
                 </Card>
             </Container>
         </Box>

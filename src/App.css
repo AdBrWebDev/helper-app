@@ -61,3 +61,7 @@
   Button:focus{
     background: transparent !important;
   }
+
+  #nature-border{
+    box-shadow: 0 0 30px 5px rgba(50, 153, 55, 0.5);
+  }

@@ -26,19 +26,19 @@ export default function Device(props){
                 <Container>
                     <Card className="bg-dark p-5 rounded text-white container border border-info">
                         <CardActions>
-                            <Button variant="outlined" color="primary">x</Button>
+                            <Button variant="outlined" onClick={() => openDevice(!device)} color="error">x</Button>
                         </CardActions>
                         <CardContent>
                             <i id="devices" className="material-icons my-4">{props.icon}</i>
                             <Typography variant="h5">{props.text}</Typography>
                             <TableContainer component={Paper}>
-                                <Table>
+                                <Table style={{'backgroundColor': 'transparent'}}>
                                     <TableHead>
                                         <TableRow>Minimálne hardvérové požiadavky</TableRow>
                                     </TableHead>
                                     <TableBody>
                                         {/*(props.terms).map((term, index) => <TableRow index={index}>
-                                            <TableCell>{term[0]}</TableCell>
+                                            <TableCell>{term[0][0].toString()}: {term[0][1].toString()}</TableCell>
     </TableRow>)*/}
                                     </TableBody>
                                 </Table>

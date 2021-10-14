@@ -17,7 +17,7 @@ const clothes = [
 export default function Eshop(){
     return(<Box className="text-white container p-5 my-5">
         <Box className="message is-info">
-            <Typography className="message-body">Začiatok predaja 22.11.2021</Typography>
+            <Typography className="message-body">Začiatok predaja 22.11.2022</Typography>
         </Box>
         <Container>
         <Typography variant="h3" className="my-4">GPS locatory</Typography>

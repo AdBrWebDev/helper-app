@@ -10,11 +10,13 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
+import Divider from '@mui/material/Divider';
 import '../App.css'
 
 
 export default function Nature(){
     const [expand, setExpand] = useState('panel1');
+    const [form, openForm] = useState(false);
 
     let tl = new TimelineLite();
 
@@ -32,7 +34,7 @@ export default function Nature(){
                 <img className='w-100' src='/images/forest.jpg' alt='forest' />
                 <Typography style={{color: "white", position: 'absolute', top: "45%"}} className="text-center" variant="h1">Pomôž nám ochrániť prírodu</Typography>
             </Box>
-            <Box className='level is-mobile mt-5'>
+            <Box className='level is-mobile mt-5 py-3'>
                 <Box className="level-item has-text-centered">
                      <Box>
                          <Typography className="heading">Je nás už</Typography>
@@ -46,42 +48,47 @@ export default function Nature(){
                      </Box>
                 </Box>
             </Box>
-            <Typography variant="h3">Prečo sa k nam pridať</Typography>
             <Container>
+                <Typography variant="h3">Čo chceme dosiahnuť</Typography>
                 <Card className="border border-success bg-transparent text-white my-5 p-5" id="nature-border">
-                    kaskdjfhaskjdh
+                    <Typography variant="h6">36% zníženie tažby dreva</Typography>
+                    <Divider className="my-5" />
+                    <Typography variant="h5">Chceš nám pomôcť? <Button onClick={() => openForm(!form)} className="ml-5"variant="outlined" color="success"><i className="material-icons">park</i></Button></Typography>
+                    <Typography className="mt-4" style={{'opacity': .3, 'fontSize': '12px'}}>Platí pre územie slovenskej republiky</Typography>
                 </Card>
             </Container>
-            <Typography variant="h3">Tak čo, zaujali sme ťa?</Typography>
             <Typography variant="h3">Chceš pomôcť viac?</Typography>
             <Container>
-                <Accordion expanded={expand === 'panel1'} onChange={changePanel('panel1')}>
-                    <AccordionSummary aria-controls="panel1-control" id="panel1">
-                        <Typography>Bicykel namiesto auta</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>aklsdhfkajsh</Typography>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion expanded={expand === 'panel2'} onChange={changePanel('panel2')}>
-                    <AccordionSummary aria-controls="panel2-control" id="panel2">
-                        <Typography>Bicykel namiesto auta</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>aklsdhfkajsh</Typography>
-                    </AccordionDetails>
-                </Accordion>
-            </Container>
-            <Container>
-                <Card className="my-5 container p-5 shadow-lg" id='forest-form'>
-                    <Box autoComplete="off" className="row container text-center px-5">
+                {form && 
+                <Box id="dark-background">
+                <Card className="my-5 container p-5 bg-dark border border-success" id='nature-border'>
+                <Button variant="outlined" color="error" style={{'top': -10, 'right': 0, 'position': 'relative', 'float': 'right'}} onClick={() => openForm(!form)}>x</Button>
+                    <Box autoComplete="off" className="row container text-center p-5">
                         <input label="Meno" className="text-center" variant="standard" placeholder="Meno" />
                         <input label="Priezvisko" variant="standard" className="my-1" />
                         <input label="E-mail" variant="standard" className="my-1" />
                         <input label="Telefónne číslo" className="my-1" variant="standard" />
                         <Box><Button variant='contained' color='error' className="my-4">Odoslať</Button></Box>
                     </Box>
-                </Card>
+                </Card></Box>}
+                <Container className="mb-3">
+                <Accordion className="bg-dark border border-success text-white" id="nature-border" expanded={expand === 'panel1'} onChange={changePanel('panel1')}>
+                    <AccordionSummary className="border border-bottom border-success" id="nature-border" aria-controls="panel1-control" id="panel1">
+                        <Typography variant="h6">Bicykel namiesto auta</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>aklsdhfkajsh</Typography>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion className="bg-dark border border-success text-white" id="nature-border" expanded={expand === 'panel2'} onChange={changePanel('panel2')}>
+                    <AccordionSummary className="border border-bottom border-success" id="nature-border" aria-controls="panel2-control" id="panel2">
+                        <Typography variant="h6">Bicykel namiesto auta</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>aklsdhfkajsh</Typography>
+                    </AccordionDetails>
+                </Accordion>
+                </Container>
             </Container>
         </Box>
     )

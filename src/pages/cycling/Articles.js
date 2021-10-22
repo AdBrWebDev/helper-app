@@ -1,5 +1,7 @@
+import React, {useState} from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -8,12 +10,39 @@ import Button from '@mui/material/Button'
 import Rating from '@mui/material/Rating'
 import StarIcon from '@mui/icons-material/Star'
 import '../../App.css'
+import Pagination from '@mui/material/Pagination'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
 import MainImageOfPage from '../../components/MainImageOfPage'
 
 export default function Articles(){
-    return(<Box className="bg-dark">
+    const [count, setCount] = useState(15)
+
+    const setNum = (event) => {
+        setCount(event.target.value)
+    }
+
+    return(<Box className="bg-dark text-center">
         <MainImageOfPage img="/images/articles-img.jpg" text="Zažil si niečo neobyčajné a chceš sa o zážitok podeliť s ostatnými?" />
-        <Box className="container py-5">
+        <Container>
+        <Box style={{'width': '150px'}}>
+            <FormControl fullWidth>
+                <Select className="text-white my-5 border border-info"
+                labelId="select-articles-count"
+                id="select"
+                value={count}
+                label={count}
+                onChange={setNum}
+                title="Vybrať počet článkov na strane">
+                    <MenuItem value={15}>15</MenuItem>
+                    <MenuItem value={21}>21</MenuItem>
+                    <MenuItem value={30}>30</MenuItem>
+                </Select>
+            </FormControl>
+        </Box>
+        </Container>
+        <Box className="container py-5 text-center">
             <Grid container>
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
                     <Card className="text-center bg-dark border border-info text-white border-2 pb-2" id="card">
@@ -42,6 +71,9 @@ export default function Articles(){
                     </Card>
                 </Grid>
             </Grid>
+            <Box className="text-center w-25 mx-auto">
+                <Pagination style={{'background': 'transparent'}} className="my-5" size="large" variant="outlined" count={2} color="info" />
+            </Box>
         </Box>
     </Box>)
 }

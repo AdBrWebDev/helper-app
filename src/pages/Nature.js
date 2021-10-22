@@ -57,7 +57,7 @@ export default function Nature(){
                     <Typography className="mt-4" style={{'opacity': .3, 'fontSize': '12px'}}>Platí pre územie slovenskej republiky</Typography>
                 </Card>
             </Container>
-            <Typography variant="h3">Chceš pomôcť viac?</Typography>
+            <Typography variant="h3" className="my-3">Chceš pomôcť viac?</Typography>
             <Container>
                 {form && 
                 <Box id="dark-background">

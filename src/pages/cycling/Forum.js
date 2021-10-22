@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import Container from '@mui/material/Container'
+import Pagination from '@mui/material/Pagination'
 import '../../App.css'
 
 export default function Forum(){
@@ -20,9 +21,12 @@ export default function Forum(){
                 </Card>
             </Box>
         </Box>
+        <Box className="text-center w-25 mx-auto">
+                <Pagination style={{'background': 'transparent'}} className="my-5" size="large" variant="outlined" count={2} color="info" />
+        </Box>
         {newTheme && <Box id="dark-background">
             <Container>  
-                <Card className="bg-dark container text-center border border-info border-2 text-white p-5 shadow" id="shadow">
+                <Card className="bg-dark container text-center border border-info border-2 text-white p-5 shadow w-75" id="shadow">
                     <Button variant="outlined" color="info" onClick={() => NewTheme(!newTheme)} style={{'top': -10, 'left': 10, 'position': 'relative', 'float': 'right'}}>x</Button>
                     <Typography variant="h3">Pridať novú tému</Typography>
                         <input type="text" placeholder="Názov témy" className="form-control mb-4 text-center text-info" />

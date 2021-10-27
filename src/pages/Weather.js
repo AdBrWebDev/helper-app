@@ -38,11 +38,11 @@ export default function Weather(){
         <Button variant="contained" className="btn-floating pulse btn-info btn-waves waves-light" onClick={() => openWeather(!weather)} style={{bottom: 30, right: 30, position: 'fixed'}}><i className="material-icons">wb_sunny</i></Button>
       {(weather) ? 
         (<Box id="dark-background">
-            <Container className="bg-dark text-white mt-5 p-5 shadow-lg rounded" style={{height: '90%', overflow: 'auto'}}>
-            <Button variant="contained" color="secondary" onClick={()=> openWeather(!weather)} style={{position: 'relative', float: 'right' ,top: -30, right: -30}}>x</Button>
+            <Container className="bg-dark text-white mt-5 p-5 shadow-lg rounded border border-info border-2" style={{height: '90%', overflow: 'auto'}}>
+            <Button variant="outlined" color="info" onClick={()=> openWeather(!weather)} style={{position: 'relative', float: 'right'}}>x</Button>
                 <Box noValidate autoComplete="off" className="p-5 mt-5 text-center" >
                     <InputBase className="mx-3 text-center text-white" value={town} onChange={(e) => setTown(e.target.value)} />
-                    <Button disabled={town.length === 0} onClick={() => searchWeather()} variant="contained" color="secondary"><i className="material-icons" on>search</i></Button>
+                    <Button disabled={town.length === 0} onClick={() => searchWeather()} variant="contained" color="info"><i className="material-icons" on>search</i></Button>
                 </Box>
                 {(town) ?
                 (<Box className="text-center">

@@ -7,7 +7,7 @@ export default function ProductCard(props){
         <Box className="card bg-dark border border-info border-2" id="card" key={props.index}>
                     <Box className="card-image">
                         <figure className="image is 4by3 m-2">
-                            <img style={{"maxHeight": 300}} src={props.img} />
+                            <img style={{"maxHeight": 300}} src={props.img} alt={props.title} />
                         </figure>
                     </Box>
                     <Box className="card-content text-center">

@@ -6,7 +6,7 @@ import Card from '@mui/material/Card';
 import {gsap, TimelineLite, Power3} from 'gsap';
 import React, {useEffect, useState} from 'react';
 import Typography from '@mui/material/Typography';
-import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+//import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';

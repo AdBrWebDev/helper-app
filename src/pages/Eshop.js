@@ -26,7 +26,7 @@ export default function Eshop(){
                 {GPS.map((gps, index) => <ProductCard index={index} img={gps.img} title={gps.title} price={gps.price} />)}
             </Grid>
         </Grid>
-        <Typography variant="h3" className="my-4">Oblečenie a doplnky </Typography>
+        <Typography variant="h3" className="my-4">Oblečenie  a doplnky </Typography>
         <Grid container>
             <Grid item xs={6} sm={6} lg={3} xl={3} md={4}>
                 {clothes.map((clothes, index) => <ProductCard index={index} img={clothes.img} title={clothes.title} price={clothes.price} />)}

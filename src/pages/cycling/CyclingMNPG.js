@@ -29,7 +29,7 @@ export default function CyclingMNPG(){
             </Box>
             <Box id="navbar" className="navbar-menu">
                 <Box className="navbar-start">
-                <Link className="navbar-item" to="/">Uvod</Link>
+                <Link className="navbar-item" to="/">Hlavná stránka</Link>
                 <Link className="navbar-item" to="/eshop">E-shop</Link>
                 <Link className="navbar-item" to="/Forum">Forum</Link>
                 <Link className="navbar-item" to="/Map">Mapa</Link>

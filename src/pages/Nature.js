@@ -49,9 +49,14 @@ export default function Nature(){
                 </Box>
             </Box>
             <Container>
-                <Typography variant="h3">Čo chceme dosiahnuť</Typography>
+                <Typography variant="h3">Aké sú naše ciele</Typography>
                 <Card className="border border-success bg-transparent text-white my-5 p-5" id="nature-border">
                     <Typography variant="h6">36% zníženie tažby dreva</Typography>
+                    <Typography variant="h6">Vysadenie 17 miliónov stromov ročne</Typography>
+                    <Typography variant="h6">10% zníženie lovu zveri</Typography>
+                    <Typography variant="h6">Viac ako 100 km nových cyklotrás každý rok</Typography>
+                    <Typography variant="h6">Zvýšenie dotácii pre kupu elektromobilov</Typography>
+                    <Typography variant="h6">10% zníženie ťažby nerastných surovín</Typography>
                     <Divider className="my-5" />
                     <Typography variant="h5">Chceš nám pomôcť? <Button onClick={() => openForm(!form)} className="ml-5"variant="outlined" color="success"><i className="material-icons">park</i></Button></Typography>
                     <Typography className="mt-4" style={{'opacity': .3, 'fontSize': '12px'}}>Platí pre územie slovenskej republiky</Typography>

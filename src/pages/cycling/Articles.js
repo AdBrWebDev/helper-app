@@ -26,7 +26,7 @@ export default function Articles(){
     return(<Box className="bg-dark text-center">
         <MainImageOfPage img="/images/articles-img.jpg" text="Zažil si niečo neobyčajné a chceš sa o zážitok podeliť s ostatnými?" />
         <Container>
-        <Box style={{'width': '150px'}}>
+        <Box style={{'width': '350px'}} className="d-flex">
             <FormControl fullWidth>
                 <Select className="text-white my-5 border border-info"
                 labelId="select-articles-count"

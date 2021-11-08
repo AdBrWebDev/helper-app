@@ -24,7 +24,7 @@ export default function Articles(){
     }
 
     return(<Box className="bg-dark text-center">
-        <MainImageOfPage img="/images/articles-img.jpg" text="Zažil si niečo neobyčajné a chceš sa o zážitok podeliť s ostatnými?" />
+        <MainImageOfPage img="articles-img.jpg" text="Zažil si niečo neobyčajné a chceš sa o zážitok podeliť s ostatnými?" />
         <Container>
         <Box style={{'width': '350px'}} className="d-flex">
             <FormControl fullWidth>

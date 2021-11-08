@@ -11,7 +11,7 @@ import TableContainer from '@mui/material/TableContainer'
 import Table from '@mui/material/Table'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-//import TableCell from '@mui/material/TableCell'
+import TableCell from '@mui/material/TableCell'
 import Paper from '@mui/material/Paper'
 import TableBody from '@mui/material/TableBody'
 
@@ -37,9 +37,10 @@ export default function Device(props){
                                         <TableRow>Minimálne hardvérové požiadavky</TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {/*(props.terms).map((term, index) => <TableRow index={index}>
-                                            <TableCell>{term[0][0].toString()}: {term[0][1].toString()}</TableCell>
-    </TableRow>)*/}
+                                        {(props.terms).map((term, index) => <TableRow index={index}>
+                                            <TableCell>Operačný systém</TableCell>
+                                            <TableCell>{term.os}</TableCell>
+    </TableRow>)}
                                     </TableBody>
                                 </Table>
                             </TableContainer>

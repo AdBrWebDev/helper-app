@@ -1,13 +1,14 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
 
 export default function ProductCard(props){
-    return(<Box>
+    return(<Grid item xs={6} sm={6} lg={3} xl={3} md={4}>
         <Box className="card bg-dark border border-info border-2" id="card" key={props.index}>
                     <Box className="card-image">
                         <figure className="image is 4by3 m-2">
-                            <img style={{"maxHeight": 300}} src={props.img} alt={props.title} />
+                            <img style={{"maxHeight": 300}} src={`/images/${props.img}`} alt={props.title} />
                         </figure>
                     </Box>
                     <Box className="card-content text-center">
@@ -19,5 +20,5 @@ export default function ProductCard(props){
                         </Box>
                     </Box>
                 </Box>
-    </Box>);
+    </Grid>);
 }

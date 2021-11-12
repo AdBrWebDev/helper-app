@@ -8,10 +8,13 @@ import Container from '@mui/material/Container'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import '../App.css'
+const os = require('os')
 const Device = lazy(() => import('./Device'))
 
 export default function AppInDevices(){
     const [download, openDownload] = useState(false)
+
+    console.log(os.arch())
 
     const devices = [
         {icon: 'smartphone', typography: 'smartphone', terms: [{os: 'Android'}, {minVersion: '8.0 Oreo'}, {ram: 2}, {memory: 32}, {cpu: 1}, {minDisplaySize: '5'}, {gps: true}, {bluetooth: true}]},

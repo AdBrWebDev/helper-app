@@ -9,12 +9,13 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import '../App.css'
 const Sections = lazy(() => import('../components/Sections')) 
+const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 
 export default function Nature(){
     const [form, openForm] = useState(false);
 
     const sections = [
-        {img: '/images/jacket.jpg', text: 'Hneď prvý bod sa zdá byť celkom jednoduchý, ale aj tak máme problém ho dodržiavať. Hmm...ani ja nie som dobrým príkladom. Pozerám, že aj u mňa v predsieni sa zbytočne svieti. Neváham sa postaviť a vypínam svetlo.Je jeseň, zima klope na dvere a stmieva sa oveľa skôr. Preto v tomto období míňame elektriny viac. V lete toľko svetla nepotrebujeme, ale zase spotrebujeme energiu na iné - keď kosíme trávu, keď sa chceme schladiť - pustíme si ventilátor, alebo keď čistíme bazén, atď. Preto treba aspoň dávať pozor a elektrinu nenechať prúdiť, keď netreba... no každý musí začať od seba.', title: 'Šetri elektrickou energiou'},
+        {img: '/images/saveEnergy.png', text: 'Hneď prvý bod sa zdá byť celkom jednoduchý, ale aj tak máme problém ho dodržiavať. Hmm...ani ja nie som dobrým príkladom. Pozerám, že aj u mňa v predsieni sa zbytočne svieti. Neváham sa postaviť a vypínam svetlo.Je jeseň, zima klope na dvere a stmieva sa oveľa skôr. Preto v tomto období míňame elektriny viac. V lete toľko svetla nepotrebujeme, ale zase spotrebujeme energiu na iné - keď kosíme trávu, keď sa chceme schladiť - pustíme si ventilátor, alebo keď čistíme bazén, atď. Preto treba aspoň dávať pozor a elektrinu nenechať prúdiť, keď netreba... no každý musí začať od seba.', title: 'Šetri elektrickou energiou'},
         {img: '/images/jacket.jpg', text: 'Aj tebe sa stáva, že dokým vyhodíš niečo do kontajnera, rozmýšľaš: „Kam toto a kam tamto vlastne patrí?“ Možno také plastové fľaše tiež premýšľajú v obchode, čo s nimi bude, ak ich niekto kúpi, ale vôbec netuší, kam po vypití vody patria. Ja som natrafila na tento vtipný EkoKomiks, verím, že pobaví aj teba.', title: 'Trieď odpad'},
         {img: '/images/jacket.jpg', text: 'Ak by celý svet spotreboval toľko papiera v priemere na obyvateľa ako Nemecko za posledný rok, tak by len Číne nestačila celá dnešná svetová produkcia papiera. To je sila, však? Skús preto vždy predtým ako zahodíš papier do koša popremýšľať, či je využitý na 100%.', title: 'Používaj papier z oboch strán'},
         {img: '/images/jacket.jpg', text: 'Nie je to myslené, že by sme teraz mali piť menej vody alebo nepiť vôbec. To určite nie. Skôr by sme si mali uvedomiť, koľko hektolitrov vody denne pretečie zbytočne z kohútikov v kuchyni, v kúpeľni, na záhrade, či v hoteli, alebo na športoviskách, atď.', title: 'Šetri vodou'},
@@ -26,6 +27,8 @@ export default function Nature(){
         {img: '/images/jacket.jpg', text: 'Je tvoja chladnička plná každý týždeň? Ale aj tvoj smetný kôš je často plný? Taký je väčšinou obraz slovenských domácností. V obchodoch nás vyzývajú rôznymi zľavami a akciami k čo najväčšiemu nákupu a veľakrát sa stane, že kúpime niečo, čo ani nestihneme skonzumovať. Končí to kde? No, v smetnom koši.Plytváme časom, peniazmi, jedlom a ešte aj odpadom, ktorý je v tomto prípade zbytočný a len preto, že nám v obchode „jedia oči“ a hádžeme do košíka všetko zaradom.', title: 'Neplytvaj jedlom'}
     ]
 
+    const goals = ['36% zníženie tažby dreva', 'Vysadba 17 miliónov stromov ročne', '10% zníženie lovu zveri', 'Viac ako 100 km nových cyklotrás každý rok', 'Zvýšenie dotácii pre kupu elektromobilov', '10% zníženie ťažby nerastných surovín', 'zrušenie uhoľných elektrární']
+
     let tl = new TimelineLite();
 
     useEffect(() => {
@@ -34,10 +37,7 @@ export default function Nature(){
 
     return(
         <Box className="text-white text-center">
-            <Box>
-                <img className='w-100' src='/images/forest.jpg' alt='forest' />
-                <Typography style={{color: "white", position: 'absolute', top: "45%"}} className="text-center" variant="h1">Pomôž nám ochrániť prírodu</Typography>
-            </Box>
+            <MainImageOfPage img="forest.jpg" text="Pomôž nám ochrániť prírodu" href="" />
             <Box className='level is-mobile mt-5 py-3'>
                 <Box className="level-item has-text-centered">
                      <Box>
@@ -54,14 +54,11 @@ export default function Nature(){
             </Box>
             <Container>
                 <Typography variant="h3">Aké sú naše ciele</Typography>
-                <Card className="border border-success bg-transparent text-white my-5 p-5" id="nature-border">
-                    <Typography variant="h6" className="py-3 mt-4">36% zníženie tažby dreva</Typography>
-                    <Typography variant="h6" className="py-3">Vysadenie 17 miliónov stromov ročne</Typography>
-                    <Typography variant="h6" className="py-3">10% zníženie lovu zveri</Typography>
-                    <Typography variant="h6" className="py-3">Viac ako 100 km nových cyklotrás každý rok</Typography>
-                    <Typography variant="h6" className="py-3">Zvýšenie dotácii pre kupu elektromobilov</Typography>
-                    <Typography variant="h6" className="py-3 mb-5">10% zníženie ťažby nerastných surovín</Typography>
-                    <Divider className="my-5" />
+                <Card className="border border-success bg-transparent text-white py-3 my-5" id="nature-border">
+                    <Box className="my-5 py-1">
+                        {goals.map((goal, index) => <Typography variant="h6" key={index} className="py-3">{goal}</Typography>)}
+                    </Box>
+                    <Divider className="m-5" />
                     <Typography variant="h5" className="py-2">Chceš nám pomôcť? <Button onClick={() => openForm(!form)} className="ml-5"variant="outlined" color="success"><i className="material-icons">park</i></Button></Typography>
                     <Typography className="mt-4" style={{'opacity': .3, 'fontSize': '12px'}}>Platí pre územie slovenskej republiky</Typography>
                 </Card>

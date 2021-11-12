@@ -15,7 +15,7 @@ export default function MainPage(){
     {img: '', title: 'Pomocník', link: './BikeHelper', text:""}]
 
     return(<Box className="w-100 text-center">
-        <MainImageOfPage img="cyclingMain.jpg" text="" />
+        <MainImageOfPage img="cyclingMain.jpg" text="Vitaj! Chceš vedieť čo tu nájdeš?" href="" />
         <AppInDevices />
         <LinearProgress className="container bg-transparent" />
         <Typography variant="h2" color="white" className="my-5 pt-5">Prečo pathfinder</Typography>

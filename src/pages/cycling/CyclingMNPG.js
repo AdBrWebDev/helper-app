@@ -9,7 +9,7 @@ import Footer from '../../components/Footer';
 import Button from '@mui/material/Button'
 const Nature = lazy(() => import('../Nature'))
 const MainPage = lazy(() => import('./MainPage'))
-const Articles = lazy(() => import('./Articles'))
+const ArticlesData = lazy(() => import('./ArticlesData'))
 const BikeHelper = lazy(() => import('./BikeHelper'))
 const ForumData = lazy(() => import('./ForumData'))
 const Map = lazy(() => import('../Map'))
@@ -33,7 +33,7 @@ export default function CyclingMNPG(){
                 <Link className="navbar-item" to="/eshop">E-shop</Link>
                 <Link className="navbar-item" to="/ForumData">Forum</Link>
                 <Link className="navbar-item" to="/Map">Mapa</Link>
-                <Link className="navbar-item" to="/Articles">Články</Link>
+                <Link className="navbar-item" to="/ArticlesData">Články</Link>
                 <Link className="navbar-item" to="/Nature">Príroda</Link>
                 <Link className="navbar-item" to="/BikeHelper">Pomocník</Link>
                 </Box>
@@ -49,7 +49,7 @@ export default function CyclingMNPG(){
           <Route path="/eshop" component={Eshop} />
           <Route path="/ForumData" component={ForumData} />
           <Route path="/Map" component={Map} />
-          <Route path="/Articles" component={Articles} />
+          <Route path="/ArticlesData" component={ArticlesData} />
           <Route path="/Nature" component={Nature} />
           <Route path="/BikeHelper" component={BikeHelper} />
       </Switch>

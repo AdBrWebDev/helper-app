@@ -5,14 +5,14 @@ import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import Container from '@mui/material/Container'
 import Pagination from '@mui/material/Pagination'
-import '../../App.css'
-import MainImageOfPage from '../../components/MainImageOfPage'
+import '../App.css'
+import MainImageOfPage from '../components/MainImageOfPage'
 
-export default function Forum(){
+export default function Forum(props){
     const [newTheme, NewTheme] = useState(false)
 
     return (<Box>
-        <MainImageOfPage img="" text="" />
+        <MainImageOfPage img={props.img} text={props.text} />
         <Box className="container p-3 rounded bg-dark shadow my-5">
             <Box className="text-end mb-5">
             <Button variant="outlined" color="info" onClick={() => NewTheme(!newTheme)}>Pridať tému</Button>

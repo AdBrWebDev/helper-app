@@ -7,14 +7,14 @@ import '../App.css'
 const ProductCard = lazy(() => import('../components/ProductCard'))
 
 const GPS = [
-    {img: 'GPS.jpg', title: 'GPS pathfinder 500', price: 50},
-    {img: 'GPS.jpg', title: 'GPS pathfinder 500', price: 80}
+    {img: 'gps-tracker.png', title: 'GPS pathfinder 500', price: 50},
+    {img: 'gps-tracker.png', title: 'GPS pathfinder 500', price: 80}
 ]
 
 const clothes = [
-    {img: 'jacket.jpg', title: 'Jacket pathfinder', price: 40},
-    {img: 'jacket.jpg', title: 'Jacket pathfinder', price: 10},
-    {img: 'jacket.jpg', title: 'Jacket pathfinder', price: 20}
+    {img: 'jacket.png', title: 'Jacket pathfinder', price: 40},
+    {img: 'jacket.png', title: 'Jacket pathfinder', price: 10},
+    {img: 'jacket.png', title: 'Jacket pathfinder', price: 20}
 ]
 
 export default function Eshop(){

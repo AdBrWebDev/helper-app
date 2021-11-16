@@ -13,7 +13,7 @@ export default function MainPage(){
     {img: 'maps.png', title: 'Mapa', link: '../Map.js', text: "So mnou sa nestratíš"},
     {img: 'slDom.jpg', title: 'Články', link: './Articles', text: "Spoznávaj nové miesta"},
     {img: 'forest.jpg', title: 'Príroda', link: './Nature', text: "Pomôž zachrániť prírodu"},
-    {img: '', title: 'Pomocník', link: './BikeHelper', text:""}]
+    {img: 'pathfinder.jpg', title: 'Pomocník', link: './BikeHelper', text:""}]
 
     return(<Box className="w-100 text-center">
         <MainImageOfPage img="cyclingMain.jpg" text="Vitaj! Chceš vedieť čo tu nájdeš?" href="" />

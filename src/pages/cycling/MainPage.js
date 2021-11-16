@@ -9,7 +9,7 @@ const Sponsors = lazy(() => import('../../components/Sponsors'))
 
 export default function MainPage(){
     const sections = [{img: 'maps.png', title: 'E-shop', link: './Nature', text: "Chceš sa k nám pridať"},
-    {img: 'bike-repair.jpg', title: 'Fórum', link: './Forum', text: "Potrebuješ pomôcť?"},
+    {img: 'forum-img.jpg', title: 'Fórum', link: './Forum', text: "Potrebuješ pomôcť?"},
     {img: 'maps.png', title: 'Mapa', link: '../Map.js', text: "So mnou sa nestratíš"},
     {img: 'slDom.jpg', title: 'Články', link: './Articles', text: "Spoznávaj nové miesta"},
     {img: 'forest.jpg', title: 'Príroda', link: './Nature', text: "Pomôž zachrániť prírodu"},

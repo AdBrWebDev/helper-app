@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import '../App.css'
 const ProductCard = lazy(() => import('../components/ProductCard'))
+const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 
 const GPS = [
     {img: 'gps-tracker.png', title: 'GPS pathfinder 500', price: 50},
@@ -19,6 +20,7 @@ const clothes = [
 
 export default function Eshop(){
     return(<Box className="text-white p-5 my-5">
+        <MainImageOfPage img="gps-tracker.png" text="Pridaj sa k nám" href="" />
         <Box className="container">
         <Box className="message is-info">
             <Typography className="message-body">Začiatok predaja 22.11.2022</Typography>

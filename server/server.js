@@ -7,7 +7,7 @@ const dbcon = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: '',
+    database: 'pathfinder',
 })
 
 app.use(cors());
@@ -22,8 +22,15 @@ app.get('/api/get', (req, res) => {
 
 app.post('/api/insert', (req, res) => {
     const name = req.body.name;
-    const sqlInsert = "INSERT INTO users (name) VALUES(?)";
-    dbcon.query(sqlInsert, [name], (err, result) => {
+    const surname = req.body.surname;
+    const phone = req.body.phone;
+    const country = req.body.country;
+    const city = req.body.city;
+    const street = req.body.street;
+    const age = req.body.age;
+    const e_mail = req.body.e_mail;
+    const sqlInsert = "INSERT INTO users (id_user, name, surname, phone, country, city, street, age, is_admin, avatar, e_mail) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+    dbcon.query(sqlInsert, ['',name, surname, phone, country, city, street,age, '', '', e_mail], (err, result) => {
         console.log(result)
     })
 })

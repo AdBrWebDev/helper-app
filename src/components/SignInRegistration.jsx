@@ -27,11 +27,13 @@ export default function SignInRegistration(){
     }
 
     const signUp = () => {
-        Axios.post("http://localhost:3001/login", {loginEmail: loginEmail, loginPassword: loginPassword}).then((response) => {
+        console.log(loginEmail, loginPassword)
+        Axios.post('http://localhost:3001/login', {loginEmail: loginEmail, loginPassword: loginPassword}).then((response) => {
             if(response.data.massage){
                 setUser(response.data.massage)
             }else{
                 setUser(response.data[0].name)
+                console.log(response)
             }
         })
     }
@@ -56,8 +58,8 @@ export default function SignInRegistration(){
             <Card className="my-3">
                 <Typography>Registrácia</Typography>
                 <Box component="form" className="text-center mx-auto">
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setLoginEmail(e.target.value)}} label="e-mail" name="loginEmail" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setLoginPassword(e.target.value)}} label="heslo" name="loginPassword" />
+                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setLoginEmail(e.target.value)}} label="loginEmail" name="loginEmail" />
+                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setLoginPassword(e.target.value)}} label="loginPassword" name="loginPassword" />
                 <Button type="submit" variant="outlined" color="primary" onClick={(e) => signUp(e.preventDefault())}>Prihlásiť</Button>
                 </Box>
             </Card>

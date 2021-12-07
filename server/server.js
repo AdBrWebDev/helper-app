@@ -41,27 +41,38 @@ app.post('/register', (req, res) => {
     const age = req.body.age;
     const e_mail = req.body.e_mail;
     const password = req.body.password;
-    const sqlInsert = "INSERT INTO users (id_user, name, surname, phone, country, city, street, age, is_admin, avatar, e_mail, password) VALUES(?,?,?,?,?,?,?,?,?,?,?, ?)";
-    dbcon.query(sqlInsert, ['',name, surname, phone, country, city, street,age, '', '', e_mail, password], (err, result) => {
-        console.log(result)
+    bcrypt.hash(password, rounds, (err, hash) => {
+        if(err){
+            console.log(err)
+        }
+        dbcon.query("INSERT INTO users (id_user, name, surname, phone, country, city, street, age, is_admin, avatar, e_mail, password) VALUES(?,?,?,?,?,?,?,?,?,?,?, ?)", 
+            ['',name, surname, phone, country, city, street,age, '', '', e_mail, hash], (err, result) => {
+            console.log(err)
+        })
     })
-})
+    })
 
 app.post('/login', (req, res) => {
     const loginEmail = req.body.loginEmail;
     const loginPassword = req.body.loginPassword;
-    const sqlInsert = "SELECT * FROM users WHERE e_mail = ? AND password = ?";
-    dbcon.query(sqlInsert, [loginEmail, loginPassword], (err, result) => {
+    dbcon.query("SELECT * FROM users WHERE e_mail = ?", [loginEmail], (err, result) => {
+        console.log(result)
         if(err){
             res.send({err: err})
         }
-        if(result){
-            res.send(result)
+        if(result.length > 0){
+            bcrypt.compare(loginPassword, result[0].password, (error, response) => {
+                if(response){
+                    res.send(result)
+                }else{
+                    res.send({message: "Wrong users email or password!!"})
+                }
+            })
         }else{
-            res.send("Wrong users login")
+            res.send({message: "Wrong users login"})
         }
-    })  
-})
+    }); 
+});
 
 
 app.listen(3001, () => {

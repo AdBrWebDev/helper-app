@@ -51,6 +51,7 @@ CREATE TABLE eshop_product_image
 (
 	id_product INT NOT NULL,
     img MEDIUMBLOB,
+    alt VARCHAR(20),
     FOREIGN KEY (id_product) REFERENCES e_shop(id_product)
 )
 ENGINE=INNODB
@@ -77,3 +78,23 @@ CREATE TABLE orders
     FOREIGN KEY (id_user) REFERENCES users(id_user)
 )
 ENGINE=INNODB
+
+
+/*e-shop insert */
+INSERT INTO e_shop
+VALUES
+('', 'GPS pathfinder 1.0', 50, 13),
+('', 'GPS pathfinder 2.0', 80, 5),
+('', 'Mikina pathfinder climber', 40, 3),
+('', 'Tričko pathfinder liner', 24, 0),
+('', 'Šiltovka pathfinder stealth', 12, 0)
+
+/*pathfinder plus*/
+CREATE TABLE pathfinder_plus
+(
+	theme VARCHAR(25),
+    image BLOB(65000),
+    title VARCHAR(50),
+    header VARCHAR(50),
+    text TEXT(65000)
+)

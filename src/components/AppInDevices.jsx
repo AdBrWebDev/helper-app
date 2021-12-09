@@ -17,10 +17,10 @@ export default function AppInDevices(){
     console.log(os.arch())
 
     const devices = [
-        {icon: 'smartphone', typography: 'smartphone', terms: [{os: 'Android'}, {minVersion: '8.0 Oreo'}, {ram: 2}, {memory: 32}, {cpu: 1}, {minDisplaySize: '5'}, {gps: true}, {bluetooth: true}]},
-        {icon: 'laptop', typography: 'PC', terms: [{os: 'Windows'}, {minVersion: '7 a vyššie'}, {ram: 4}, {memory: 120}, {cpu: 1}]},
-        {icon: 'tv', typography: 'android-tv', os: 'Android-tv', terms: [{'Operačný systém': 'android'}, {}]},
-        {icon: 'watch', typography: 'smartwatch', os: 'Wear OS', terms: [{'': ''}]}
+        {icon: 'smartphone', typography: 'smartphone', terms: [{os: 'Android'}, {minVersion: '8.0'}, {ram: 2}, {memory: 32}, {cpu: 2}, {minDisplaySize: '5'}]},
+        {icon: 'laptop', typography: 'PC', terms: [{os: 'Windows'}, {minVersion: 'Windows 10'}, {ram: 4}, {memory: 120}, {cpu: 2}]},
+        {icon: 'tv', typography: 'android-tv', terms: [{os: 'Android'}]},
+        {icon: 'watch', typography: 'smartwatch', terms: [{os: 'Wear OS'}]}
     ]
 
     return(<Box style={{"minHeight": 400}} className="container mt-5 mb-5 py-5 text-white text-center">

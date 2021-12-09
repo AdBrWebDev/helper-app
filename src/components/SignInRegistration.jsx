@@ -1,4 +1,4 @@
-import React, {useState, /*useEffect*/} from 'react';
+import React, {useState, useEffect} from 'react';
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -7,8 +7,17 @@ import TextField from '@mui/material/TextField'
 import '../App.css'
 import Axios from 'axios'
 import Button from '@mui/material/Button'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import Avatar from '@mui/material/Avatar'
+import Paper from '@mui/material/Paper'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText';
+
 
 export default function SignInRegistration(){
+    const [form, openForm] = useState(false)
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [country, setCountry] = useState('')
@@ -21,7 +30,20 @@ export default function SignInRegistration(){
     const [loginEmail, setLoginEmail] = useState('')
     const [loginPassword, setLoginPassword] = useState('')
     const [user, setUser] = useState('')
+    const [anchor, setAnchor] = useState(null)
+    const [profile, openProfile] = useState(false)
+    const open = Boolean(anchor)
+    const openMenu = (e) => {
+        setAnchor(e.currentTarget)
+    }
+    const closeMenu = () => {
+        setAnchor(null)
+    }
 
+    let avatar = null
+
+
+    Axios.defaults.withCredentials = true;
     const submit = () => {
         Axios.post('http://localhost:3001/register', {name: name, surname: surname, phone: phone, country: country, city: city, street: street, age: age, e_mail: e_mail, password: password}).then(() => {alert("insert successful")})
     }
@@ -34,13 +56,71 @@ export default function SignInRegistration(){
             }else{
                 setUser(response.data[0].name)
                 console.log(response)
+                localStorage.setItem("userId", response.data[0].id_user)
+                localStorage.setItem("userName", response.data[0].name)
+                localStorage.setItem("email", response.data[0].e_mail)
             }
         })
     }
 
-    return(<Box id="dark-background">
+    useEffect(() => {
+        Axios.get("http://localhost:3001/login").then((response) => {
+            if(response.data.loggedIn === true){
+            setUser(response.data.user[0].name)
+            }
+        })
+    }, [])
+
+    const logout = () => {
+        Axios.get("http://localhost:3001/logout").then(localStorage.removeItem("username") && localStorage.removeItem("id_user"))
+    }
+
+    return(<Box>
+        {localStorage.getItem("userName") != null ? <Box>
+        <Button id="userOptions" aria-controls="userOptions" aria-haspopup="true" aria-expanded={open ? 'true': undefined} onClick={openMenu}>{localStorage.getItem("userName")}</Button>
+        <Menu id="userOptions" anchorEl={anchor} open={open} onClose={closeMenu} MenuListProps={{
+            'aria-labelledby': 'userOptions',
+        }}>
+            <MenuItem onClick={() => openProfile(!profile)}>Môj profil</MenuItem>
+            <MenuItem onClick={logout}>Odhlásenie</MenuItem>
+        </Menu>
+        </Box> :
+        <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia {user}</Button>}   
+        {profile &&<Box id="dark-background"> <Card>
+            <Button variant="outlined" color="error" onClick={() => openProfile(!profile)}>x</Button>
+                <Avatar src={avatar == null ? "/images/alien.png" : 'avatar'} />
+                <Typography>{localStorage.getItem("userName")}</Typography>
+                <Paper>
+                <Typography>Vaše objednávky</Typography>
+                <List>
+                    <ListItem>
+                        <ListItemText primary="žiadne objednávky" />
+                    </ListItem>
+            </List>
+                </Paper>
+                <Paper>
+                <Typography>Vaše članky</Typography>
+                <List>
+                    <ListItem>
+                        <ListItemText primary="žiadne aktivity" />
+                    </ListItem>
+            </List>
+                </Paper>
+                <Paper>
+                <Typography>Vaše aktivity vo fóre</Typography>
+                <List>
+                    <ListItem>
+                        <ListItemText primary="žiadne aktivity" />
+                    </ListItem>
+            </List>
+                </Paper>
+            </Card></Box>}
+        {form && <Box id="dark-background">
         <Container>
             <Card>
+                <Box>
+                <Button color="error" variant="outlined" onClick={() => openForm(!form)}>x</Button>
+                </Box>
                 <Typography>Registrácia</Typography>
                 <Box component="form" className="text-center mx-auto">
                 <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setName(e.target.value)}} label="meno" name="name" />
@@ -65,5 +145,5 @@ export default function SignInRegistration(){
             </Card>
             <h1>{user}</h1>
         </Container>
-    </Box>);
+    </Box>}</Box>);
 }

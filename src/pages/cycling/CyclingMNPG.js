@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy} from "react";
 import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'material-icons/iconfont/material-icons.css';
@@ -7,7 +7,6 @@ import 'bulma/css/bulma.min.css'
 import '../../App.css'
 import Box from '@mui/material/Box'
 import Footer from '../../components/Footer';
-import Button from '@mui/material/Button'
 const Nature = lazy(() => import('../Nature'))
 const MainPage = lazy(() => import('./MainPage'))
 const ArticlesData = lazy(() => import('./ArticlesData'))
@@ -18,8 +17,6 @@ const Eshop = lazy(() => import('../Eshop'))
 const SignInRegistration = lazy(() => import('../../components/SignInRegistration'))
 
 export default function CyclingMNPG(){
-    const [form, openForm] = useState(false)
-
     return(<Suspense fallback={'loading....'}>
     <Router>
         <nav className="navbar is-dark px-5 shadow position-fixed top-0">
@@ -44,7 +41,7 @@ export default function CyclingMNPG(){
             </Box>
             <Box className="navbar-end">
                 <Box className="navbar-item">
-                    <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>
+                    <SignInRegistration />
                 </Box>
             </Box>
         </nav>
@@ -58,7 +55,6 @@ export default function CyclingMNPG(){
           <Route path="/BikeHelper" component={BikeHelper} />
       </Switch>
     </Router>
-    {form && <SignInRegistration/>}
     <Footer />
     </Suspense>)
 }

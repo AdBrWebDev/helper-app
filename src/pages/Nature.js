@@ -3,15 +3,17 @@ import Container from '@mui/material/Container';
 import '../App.css';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import React, {useEffect, useState, lazy} from 'react';
+import React, {useState, lazy} from 'react';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import '../App.css'
+import Axios from 'axios';
 const Sections = lazy(() => import('../components/Sections')) 
 const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 
 export default function Nature(){
     const [form, openForm] = useState(false);
+    let user = localStorage.getItem('userId')
 
     const sections = [
         {img: 'saveEnergy.png', text: 'Hneď prvý bod sa zdá byť celkom jednoduchý, ale aj tak máme problém ho dodržiavať. Hmm...ani ja nie som dobrým príkladom. Pozerám, že aj u mňa v predsieni sa zbytočne svieti. Neváham sa postaviť a vypínam svetlo.Je jeseň, zima klope na dvere a stmieva sa oveľa skôr. Preto v tomto období míňame elektriny viac. V lete toľko svetla nepotrebujeme, ale zase spotrebujeme energiu na iné - keď kosíme trávu, keď sa chceme schladiť - pustíme si ventilátor, alebo keď čistíme bazén, atď. Preto treba aspoň dávať pozor a elektrinu nenechať prúdiť, keď netreba... no každý musí začať od seba.', title: 'Šetri elektrickou energiou'},
@@ -27,6 +29,11 @@ export default function Nature(){
     ]
 
     const goals = ['36% zníženie tažby dreva', 'Vysadba 17 miliónov stromov ročne', '10% zníženie lovu zveri', 'Viac ako 100 km nových cyklotrás každý rok', 'Zvýšenie dotácii pre kupu elektromobilov', '10% zníženie ťažby nerastných surovín', 'zrušenie uhoľných elektrární']
+
+    const submitNatureForm = () => {
+        let date = new Date()
+        Axios.post('http://localhost:3001/natureForm', {user: user, date: date})
+    }
 
     return(
         <Box className="text-white text-center">
@@ -59,13 +66,7 @@ export default function Nature(){
                 <Box id="dark-background">
                 <Card className="my-5 container p-5 bg-dark border border-success" id='nature-border'>
                 <Button variant="outlined" color="error" style={{'top': -10, 'right': 0, 'position': 'relative', 'float': 'right'}} onClick={() => openForm(!form)}>x</Button>
-                    <Box autoComplete="off" className="row container text-center p-5">
-                        <input label="Meno" className="text-center" variant="standard" placeholder="Meno" />
-                        <input label="Priezvisko" variant="standard" className="my-1" />
-                        <input label="E-mail" variant="standard" className="my-1" />
-                        <input label="Telefónne číslo" className="my-1" variant="standard" />
-                        <Box><Button variant='contained' color='error' className="my-4">Odoslať</Button></Box>
-                    </Box>
+                    <Button variant='outlined' color='success' className="my-4" onClick={submitNatureForm}>Podpisať</Button>
                 </Card></Box>}
             </Container>
             <Typography variant="h3" className="my-3 mt-5 pt-5">Top 10 ako pomôcť prírode</Typography>

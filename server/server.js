@@ -1,10 +1,10 @@
 const express = require('express');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
-/*const cookieParser = require('cookie-parser');
-const session = require('express-session');*/
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const bcrypt = require('bcrypt');
 const rounds = 10;
 
@@ -15,8 +15,22 @@ const dbcon = mysql.createPool({
     database: 'pathfinder',
 })
 
-app.use(cors());
 app.use(express.json());
+app.use(cors({
+    origin: "http://localhost:3000",
+    methods: ['GET', 'POST'], 
+    credentials: true
+}));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(session({
+    key: "userId",
+    secret: "subscribe",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { expires: 1000*60*60*24}
+}))
+
 app.get('/api/get-user', (req, res) => {
     const sqlSelect = "SELECT * FROM users";
     dbcon.query(sqlSelect, (err, result) => {
@@ -27,6 +41,15 @@ app.get('/api/get-user', (req, res) => {
 app.get('/api/eshop-products', (req, res) => {
     const sqlSelect = "SELECT * FROM e_shop";
     dbcon.query(sqlSelect, (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/natureForm', (req, res) => {
+    const userId = req.body.user;
+    const date = req.body.date;
+    const pushToDb = "INSERT INTO nature_form (id_user, date) VALUES (?, ?)";
+    dbcon.query(pushToDb, [userId, date], (err, result) => {
         res.send(result)
     })
 })
@@ -63,16 +86,26 @@ app.post('/login', (req, res) => {
         if(result.length > 0){
             bcrypt.compare(loginPassword, result[0].password, (error, response) => {
                 if(response){
+                    req.session.user = result;
+                    console.log(req.session.user)
                     res.send(result)
                 }else{
                     res.send({message: "Wrong users email or password!!"})
                 }
             })
         }else{
-            res.send({message: "Wrong users login"})
+            res.send({message: "User doesn't exit!"})
         }
     }); 
 });
+
+app.get("/login", (res, req) => {
+    if(req.session.user){
+        res.send({loggedIn: true, user: req.session.user})
+    }else{
+        res.send({loggedIn: false, user: req.session.user})
+    }
+})
 
 
 app.listen(3001, () => {

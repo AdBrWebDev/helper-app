@@ -45,6 +45,24 @@ app.get('/api/eshop-products', (req, res) => {
     })
 })
 
+app.get('/BikeForumItems', (req, res) => {
+    dbcon.query("SELECT title, COUNT(*) FROM forum", (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/forumNewItem', (req, res) => {
+    const id_user = req.body.id_user;
+    const dateOfPublic = req.body.dateOfPublic;
+    const title = req.body.title;
+    const text = req.body.text;
+    const theme = req.body.theme;
+    const newForumItem = "INSERT INTO forum (id_item ,id_user, dateOfPublic, title, text, image, theme) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    dbcon.query(newForumItem, ['',id_user, dateOfPublic, title, text, '', theme], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.post('/natureForm', (req, res) => {
     const userId = req.body.user;
     const date = req.body.date;

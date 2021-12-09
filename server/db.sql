@@ -98,3 +98,17 @@ CREATE TABLE pathfinder_plus
     header VARCHAR(50),
     text TEXT(65000)
 )
+
+/*forum*/
+CREATE TABLE forum
+(
+    id_item INT AUTO_INCREMENT PRIMARY KEY, 
+	id_user INT,
+    dateOfPublic DATETIME,
+    title VARCHAR(70) NOT NULL,
+    text MEDIUMTEXT,
+    image MEDIUMBLOB,
+    theme VARCHAR(30),
+    FOREIGN KEY (id_user) REFERENCES users(id_user)
+)
+ENGINE=INNODB

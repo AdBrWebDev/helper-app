@@ -86,7 +86,7 @@ export default function SignInRegistration(){
         </Menu>
         </Box> :
         <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia {user}</Button>}   
-        {profile &&<Box id="dark-background"> <Card>
+        {profile &&<Box id="dark-background"> <Card className="container">
             <Button variant="outlined" color="error" onClick={() => openProfile(!profile)}>x</Button>
                 <Avatar src={avatar == null ? "/images/alien.png" : 'avatar'} />
                 <Typography>{localStorage.getItem("userName")}</Typography>

@@ -5,16 +5,13 @@ import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import Container from '@mui/material/Container'
-import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import '../App.css'
-const os = require('os')
 const Device = lazy(() => import('./Device'))
 
 export default function AppInDevices(){
     const [download, openDownload] = useState(false)
-
-    console.log(os.arch())
+    let date = new Date('September 25 2022 00:00:00');
 
     const devices = [
         {icon: 'smartphone', typography: 'smartphone', terms: [{os: 'Android'}, {minVersion: '8.0'}, {ram: 2}, {memory: 32}, {cpu: 2}, {minDisplaySize: '5'}]},
@@ -31,11 +28,38 @@ export default function AppInDevices(){
         <Button variant="outlined" color="info" className="my-5 p-4" onClick={() => openDownload(!download)}>stiahnuť pathfinder <i className="material-icons mx-1">download</i></Button>
         {download && <Box id="dark-background">
             <Container>
-                <Card className="bg-dark p-5 rounded text-white container border border-info">
-                    <CardActions>
-                        <Button variant="outlined" color="error" style={{'top': -30, 'right': 0, 'position': 'relative', 'float': 'right'}} onClick={() => openDownload(!download)}>x</Button>
-                    </CardActions>
+                <Card className="bg-dark p-5 rounded text-center text-white container border border-info">
+                        <Box><Button variant="outlined" color="error" onClick={() => openDownload(!download)}>x</Button></Box>
                     <CardContent>
+                    <Box className="message is-info">
+                        <Typography className="message-body">Aplikacie budú dostupné od: 11.11.2022</Typography>
+                    </Box>
+                        <Grid container>
+                            <Grid className="my-3" item xs={12} sm={12} md={6} lg={3} xl={3}>
+                                <Box>
+                                <i className="material-icons">smartphone</i>
+                                </Box>
+                                <Button color="info" variant="outlined">Stiahnuť Pathfinder</Button>
+                            </Grid>
+                            <Grid className="my-3" item xs={12} sm={12} md={6} lg={3} xl={3}>
+                                <Box>
+                                <i className="material-icons">laptop</i>
+                                </Box>
+                                <Button color="info" variant="outlined">Stiahnuť Pathfinder</Button>
+                            </Grid>
+                            <Grid className="my-3" item xs={12} sm={12} md={6} lg={3} xl={3}>
+                                <Box>
+                                <i className="material-icons">tv</i>
+                                </Box>
+                                <Button color="info" variant="outlined">Stiahnuť Pathfinder</Button>
+                            </Grid>
+                            <Grid className="my-3" item xs={12} sm={12} md={6} lg={3} xl={3}>
+                                <Box>
+                                <i className="material-icons">watch</i>
+                                </Box>
+                                <Button color="info" variant="outlined">Stiahnuť Pathfinder</Button>
+                            </Grid>
+                        </Grid>
                     </CardContent>
                 </Card>
             </Container>

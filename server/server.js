@@ -38,6 +38,13 @@ app.get('/api/get-user', (req, res) => {
     })
 })
 
+app.get('/pathPlus', (req, res) => {
+    const SelectPlus = "SELECT * FROM pathfinder_plus";
+    dbcon.query(SelectPlus, (err, result) => {
+        res.send(result)
+    })
+})
+
 app.get('/api/eshop-products', (req, res) => {
     const sqlSelect = "SELECT * FROM e_shop";
     dbcon.query(sqlSelect, (err, result) => {

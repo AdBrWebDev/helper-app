@@ -25,7 +25,8 @@ export default function Forum(props){
 
     useEffect(() => {
         Axios.get('http://localhost:3001/BikeForumItems').then((response) => {
-            setItems(response.data)
+            console.log(response.data)
+            //setItems(response.data)
         });
     }, []);
 

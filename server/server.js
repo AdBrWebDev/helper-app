@@ -31,6 +31,12 @@ app.use(session({
     cookie: { expires: 1000*60*60*24}
 }))
 
+app.get('/signs', (req, res) => {
+    dbcon.query("SELECT COUNT(id_user) as sum FROM nature_form", (err, result) => {
+        res.send(result)
+    })
+})
+
 app.get('/api/get-user', (req, res) => {
     const sqlSelect = "SELECT * FROM users";
     dbcon.query(sqlSelect, (err, result) => {

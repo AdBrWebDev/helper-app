@@ -1,4 +1,4 @@
-import React, {useState, lazy, useEffect} from 'react'
+import React, {useState, lazy} from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -15,10 +15,14 @@ export default function PathfinderPlus(props){
     const openF = () => {
         openWindow(!window);
         function getData(){
-            Axios.get('http://localhost:3001/pathPlus').then(result => setResult(result))
+            Axios.get('http://localhost:3001/pathPlus').then(result => {
+            setResult(result.data)
+        })
         }
         getData();
     }
+
+    console.log(result)
 
     return(<Box className="text-center align-middle">
     <Grid container>
@@ -37,7 +41,8 @@ export default function PathfinderPlus(props){
                 <Button variant="outlined" color="error" onClick={() => openWindow(!window)}>x</Button>
                 </Box>
                 <Box>
-                    <Typography className="text-white">{result.data[0]}</Typography>
+                    {result.map((res, index) =>
+                <Typography key={index} className="text-white">{res.text}</Typography>)}
                 </Box>
             </Card>
         </Box>}

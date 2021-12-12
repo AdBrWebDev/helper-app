@@ -13,7 +13,14 @@ const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 
 export default function Nature(){
     const [form, openForm] = useState(false);
+    const [signs, setSigns] = useState([]);
     let user = localStorage.getItem('userId')
+
+    function Signs() {
+        Axios.get('http://localhost:3001/signs').then(result => setSigns(result.data[0].sum)
+        )}
+
+    Signs()
 
     const sections = [
         {img: 'saveEnergy.png', text: 'Hneď prvý bod sa zdá byť celkom jednoduchý, ale aj tak máme problém ho dodržiavať. Hmm...ani ja nie som dobrým príkladom. Pozerám, že aj u mňa v predsieni sa zbytočne svieti. Neváham sa postaviť a vypínam svetlo.Je jeseň, zima klope na dvere a stmieva sa oveľa skôr. Preto v tomto období míňame elektriny viac. V lete toľko svetla nepotrebujeme, ale zase spotrebujeme energiu na iné - keď kosíme trávu, keď sa chceme schladiť - pustíme si ventilátor, alebo keď čistíme bazén, atď. Preto treba aspoň dávať pozor a elektrinu nenechať prúdiť, keď netreba... no každý musí začať od seba.', title: 'Šetri elektrickou energiou'},
@@ -41,14 +48,14 @@ export default function Nature(){
             <Box className='level is-mobile mt-5 py-3'>
                 <Box className="level-item has-text-centered">
                      <Box>
-                         <Typography className="heading">Je nás už</Typography>
-                         <Typography variant="h2" className="title text-white">50</Typography>
+                         <Typography className="heading">Počet podpisov</Typography>
+                         <Typography variant="h2" className="title text-white">{signs}</Typography>
                      </Box>
                 </Box>
                 <Box className="level-item has-text-centered">
                      <Box>
                          <Typography className="heading">Chývajúce podpisy</Typography>
-                         <Typography variant="h2" className="title text-white">799 950</Typography>
+                         <Typography variant="h2" className="title text-white">{signs < 800000 ? (800000-signs).toString() : 'Dosiahli sme cieľ'}</Typography>
                      </Box>
                 </Box>
             </Box>

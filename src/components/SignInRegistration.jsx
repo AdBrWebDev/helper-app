@@ -14,6 +14,7 @@ import Paper from '@mui/material/Paper'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText';
+import Grid from '@mui/material/Grid'
 
 
 export default function SignInRegistration(){
@@ -86,11 +87,15 @@ export default function SignInRegistration(){
         </Menu>
         </Box> :
         <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia {user}</Button>}   
-        {profile &&<Box id="dark-background"> <Card className="container">
-            <Button variant="outlined" color="error" onClick={() => openProfile(!profile)}>x</Button>
-                <Avatar src={avatar == null ? "/images/alien.png" : 'avatar'} />
+        {profile &&<Box id="dark-background"> <Card className="container text-center bg-dark text-white">
+            <Button variant="outlined" color="error" className="my-3" onClick={() => openProfile(!profile)}>x</Button>
+                <Grid container>
+                    <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                    <Avatar className="mx-auto my-5" sx={{width: 86, height: 86}} src={avatar == null ? "/images/alien.png" : 'avatar'} />
                 <Typography>{localStorage.getItem("userName")}</Typography>
-                <Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                    <Paper>
                 <Typography>Vaše objednávky</Typography>
                 <List>
                     <ListItem>
@@ -114,6 +119,9 @@ export default function SignInRegistration(){
                     </ListItem>
             </List>
                 </Paper>
+                    </Grid>
+                </Grid>
+                
             </Card></Box>}
         {form && <Box id="dark-background">
         <Container>

@@ -11,6 +11,8 @@ const Health = lazy(() => import('./Health'))
 export default function PathfinderPlus(props){
     const [window, openWindow] = useState(false)
     const [result, setResult] = useState([])
+    const [detailWin, openDetailWin] = useState(false)
+    const [details, setDetails] = useState([])
 
     const openF = () => {
         openWindow(!window);
@@ -22,7 +24,18 @@ export default function PathfinderPlus(props){
         getData();
     }
 
-    console.log(result)
+    const openDetails = (search) => {
+        openDetailWin(!detailWin)
+        function sendDetails(){
+            Axios.post('http://localhost:3001/findDetails', {search: search}).then(result => {
+                setDetails(result.data)
+            })
+        }
+        console.log(search)
+        sendDetails();
+    }
+
+    console.log(details)
 
     return(<Box className="text-center align-middle">
     <Grid container>
@@ -41,10 +54,27 @@ export default function PathfinderPlus(props){
                 <Button variant="outlined" color="error" onClick={() => openWindow(!window)}>x</Button>
                 </Box>
                 <Box>
-                    {result.map((res, index) =>
-                <Typography key={index} className="text-white">{res.text}</Typography>)}
+                    {result.map((res, index) => <Button index={index} variant="outlined" color="info" onClick={()=> openDetails(res.header)}>{res.header}</Button>)}
                 </Box>
             </Card>
         </Box>}
+        {detailWin && <Box id="dark-background">
+                <Card className="container bg-dark text-white h-75 p-5 mb-5 border border-info" style={{'overflowY': 'scroll'}}>
+                <Box>
+                    <Button variant="outlined" color="error" className="mb-5" onClick={() => openDetailWin(!detailWin)}>x</Button>
+                </Box>
+                {details.map((detail, index) => <Box className="my-5" key={index}>
+                    <Grid container>
+                        <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>
+                            <img src="" alt="" />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>
+                        <Typography variant="h1">{index+1}</Typography>
+                        <Typography>{detail.text}</Typography>
+                        </Grid>
+                    </Grid>
+                </Box>)}
+                </Card>
+            </Box>}
 </Box>)
 }

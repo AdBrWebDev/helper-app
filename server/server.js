@@ -32,28 +32,40 @@ app.use(session({
 }))
 
 app.get('/signs', (req, res) => {
-    dbcon.query("SELECT COUNT(id_user) as sum FROM nature_form", (err, result) => {
+    dbcon.query("SELECT COUNT(id_user) AS sum FROM nature_form", (err, result) => {
         res.send(result)
     })
 })
 
-app.get('/api/get-user', (req, res) => {
+app.post('/findDetails', (req, res) => {
+    const header = req.body.search;
+    dbcon.query(`SELECT * FROM pathfinder_plus WHERE header = ?`, [header], (err, result) => {
+        res.send(result)
+    })
+})
+
+/*app.get('/api/get-user', (req, res) => {
     const sqlSelect = "SELECT * FROM users";
     dbcon.query(sqlSelect, (err, result) => {
+        res.send(result)
+    })
+})*/
+
+app.get('/getInfo', (req, res) => {
+    dbcon.query("SELECT * FROM eshop_product_image", (err, result) => {
+        res.send(result)
+    })
+})
+
+app.get('/products', (req, res) => {
+    dbcon.query("SELECT * FROM e_shop", (err, result) => {
         res.send(result)
     })
 })
 
 app.get('/pathPlus', (req, res) => {
-    const SelectPlus = "SELECT * FROM pathfinder_plus";
+    const SelectPlus = "SELECT DISTINCT(header) FROM pathfinder_plus";
     dbcon.query(SelectPlus, (err, result) => {
-        res.send(result)
-    })
-})
-
-app.get('/api/eshop-products', (req, res) => {
-    const sqlSelect = "SELECT * FROM e_shop";
-    dbcon.query(sqlSelect, (err, result) => {
         res.send(result)
     })
 })

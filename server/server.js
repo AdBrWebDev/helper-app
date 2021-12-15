@@ -70,8 +70,14 @@ app.get('/pathPlus', (req, res) => {
     })
 })
 
-app.get('/BikeForumItems', (req, res) => {
-    dbcon.query("SELECT title, COUNT(*) FROM forum", (err, result) => {
+app.post('/forumItems', (req, res) => {
+    dbcon.query("SELECT title FROM forum WHERE theme = ?", [req.body.theme], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/findItems', (req, res) => {
+    dbcon.query("SELECT * FROM forum WHERE title = ?", [req.body.txt], (err, result) => {
         res.send(result)
     })
 })

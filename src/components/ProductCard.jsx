@@ -13,7 +13,7 @@ export default function ProductCard(props){
     const openInfo = () => {
         infoOpened(!iWindow)
         function getInfo() {
-                Axios.get('http://localhost:3001/getInfo').then((response) => {
+                Axios.get('http://localhost:3001/getInfo', {product: props.id}).then((response) => {
                     setInfo(response)
                     console.log(response)
                 })
@@ -21,7 +21,7 @@ export default function ProductCard(props){
         getInfo()
     }
 
-     
+    console.log(props.id)     
 
     return(<Grid key={props.index} item xs={6} sm={6} lg={3} xl={3} md={4}>
         <Box className="card bg-dark border border-info border-2" id="card" key={props.index}>

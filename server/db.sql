@@ -94,9 +94,9 @@ CREATE TABLE pathfinder_plus
 (
 	theme VARCHAR(25),
     image BLOB(65000),
-    title VARCHAR(50),
-    header VARCHAR(50),
-    text TEXT(65000)
+    title VARCHAR(100),
+    header VARCHAR(100),
+    text MEDIUMTEXT
 )
 
 /*forum*/
@@ -131,3 +131,112 @@ VALUES
 (3, '/images/jacket.png', 'mainImage'),
 (4, '/images/jacket.png', 'mainImage'),
 (5, '/images/jacket.png', 'mainImage')
+
+/*pathPlus cycling insert*/
+INSERT INTO pathfinder_plus(theme, image, title, header, text)
+VALUES
+('cycling', '', 'roztrhnuta-retaz', 'Roztrhnutá reťaz', 'Reťaz pred opravou zložte z prievozníka bicykla a rozložte ju. Článok, ktorý budete odstraňovať, vložte do nitovača a vytlačte jeho čap.
+
+Ten musí z článku vyčnievať. Článok potom z reťaze odstráňte. Bude na to možno potrebná trochu väčšia sila. Ak vám to ani s použitím sily nepôjde, skúste s článkami reťaze hýbať.'),
+('cycling', '', 'roztrhnuta-retaz', 'Roztrhnutá reťaz', 'Ako náhle je rozbitý článok odstránený, spojíte oba konce reťaze. Čap, ktorý vyčnieva, zahákujete za protiľahlý článok.
+
+Pritom pridržíte reťaz a nasadíte na ňu nitovač podobne, ako keď ste odstraňovali poškodený článok. Spájané články musia byť urovnané a dobre uchytené v nitovači.'),
+('cycling', '', 'roztrhnuta-retaz', 'Roztrhnutá reťaz', 'Čap zatlačte na oboch stranách tak, aby tu bol presah. Články znitujte a vyskúšajte, či sa reťaz v spoji môže dostatočne hýbať. Ak áno, môžete reťaz nasadiť.'),
+('cycling', '', 'rozrezany-plast', 'Rozrezaný plášť', 'Nájdite dieru, či už s namontovaným, alebo odmontovaným kolesom. Otáčajte ho a snažte sa započuť unikajúci vzduch. Ak je diera väčšia, nájdete ju ľahšie. Unikajúci vzduch z tých menších ucítite viac na perách alebo na líci.'),
+('cycling', '', 'rozrezany-plast', 'Rozrezaný plášť', 'Pretočte koleso tak, aby bola diera najnižšie. Tesniace mlieko tak stečie k diere a bude najvyššia šanca, že ju utesní. Počkajte pár desiatok sekúnd a potom skúste plášť znovu nafúkať.'),
+('cycling', '', 'rozrezany-plast', 'Rozrezaný plášť', 'Ak mlieko začne prskať cez dieru von, je príliš veľká na to, aby ju utesnilo. Na scénu prichádza sada na opravu bezdušákov. Otočte koleso tak, aby bola diera hore. Zabránite tak vytekaniu tesniaceho prostriedku.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Prepružte prudko bike smerom dolu aby ste naplnili negatívnu komoru v tlmiči a uvoľnili celú dráhu zdvihu.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Sadnite si na bike minimálne na 5 sekúnd a nechajte svojho asistenta zatlačiť gumený O-krúžok na tlmiči nahor (alebo nadol) ku gumenému tesneniu.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Opatrne posúvajte svoju váhu dopredu a snažte sa zosadnúť z bicykla bez ďalšieho pohnutia O-krúžku.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Zmerajte vzdialenosť o ktorú bol O-krúžok stlačený od tesnenia v mm.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Vydeľte toto číslo celkovým zdvihom tlmiča (často je to menej ako je reálna dĺžka piestu, pozrite si príručku k tlmiču) a potom vynásobte 100 aby ste dostali percentuálny pokles, napr. (15 mm / 50 mm) x 100 = 30%.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Mnoho výrobcov bude mať navrhované nastavenie SAGu ale keby nie odporúčame základné nastavenie na 30%. Ak potrebujete menší SAG jednoducho tlmič dofúkate, ak potrebujete väčší SAG, tlmič sfúknete. Vzduch pridávajte po 10 psi a postup opakujte kým nedosiahnete požadovaný SAG.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Prepružte vidlicu aby ste nabili negatívnu komoru a uvoľnil tesnenia.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Postavte sa na biku tak ako keď na ňom idete a vydržte aspoň 5 sekúnd, nechajt svojho asistenta posunúť gumený O-krúžok na nohe vidlice úplne dole na gumové tesnenie.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Opatrne preneste svoju váhu späť a vystúpte z bicykla bez toho aby ste poholi s O-krúžkom.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Zmerajte vzdialenosť o ktorú bol O-krúžok tlačený smerom hore od tesnenia v mm. Vydeľte toto číslo celkovou dĺžkou (napr. 160 mm) a potom x 100, aby ste dostali výsledok poklesu v percentách.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Na dosiahnutie správneho SAGu pridajte alebo odoberte vzduch zo vzduchovej pružiny podľa potreby a zopakujte celý proces.'),
+('cycling', '', 'nastavenie-vidlice', 'Nastavenie vzduchovej vidlice / tlmiča', 'Začnite s odporúčaním výrobcu, alebo ak žiadne nie je, odporúčame 20%. Ak potrebujete menší SAG, jednoducho vidlicu dofúkajte, ak potrebujete viac SAGu, vidlicu sfúknite. Vidlicu dofukávajte po 10 psi a postup opakujte kým nedosiahnete požadovaný SAG.'),
+('cycling', '', 'Vymena-plasta', 'Vymena plášta', 'Po vypustení tlaku z duše opatrne zasunieme montpáku pod pätku plášťa (pozor, aby sa duša nedostala medzi plášť a montpáku, mohlo by dôjsť k jej prederaveniu) a tlakom na páku pretiahneme pätku plášťa cez hranu ráfika.'),
+('cycling', '', 'Vymena-plasta', 'Vymena plášta', 'Teraz máme dve možnosti. Ak ide plášť ľahko dole, stačí ho rukou pridržať a ťahom montpáky po hrane ráfika postupne uvolňovať. Ak plášť v ráfiku drží pevne, prichádza ku slovu druhá varianta. Prvú montpáku zachytíme pomocou špeciálného očka za špicu, v malej vzdialenosti nasadíme pod pätku plášťa druhú montpáku a zopakujeme postup z prvého bodu. Potom už by mal ísť plášť ľahko demontovať dole. Ak vaša montpáka nie je vybavená očkom, stačí ju len pridržať.
+Nasleduje vytiahnutie duše. K dokončeniu demontáže plášťa už nie sú potrebné montpáky, plášť ide ľahko vybrať rukou.'),
+('cycling', '', 'Vymena-plasta', 'Vymena plášta', 'Pri nasadzovaní plášťa na bicykel najskôr nasunieme plášť len jednou pätkou – jednou stranou plášťa do ráfika. Dôležitejší je prvý krok pred inštaláciou duše v podobe jej mierneho nahustenia tak, aby držala tvar.'),
+('cycling', '', 'Vymena-plasta', 'Vymena plášta', 'Dušu začíname nasadzovať od ventilku, až potom pokračujeme po celom obvode ráfika. Aj s montážou druhej strany plášťa do ráfika je nutné začať od ventilu. Ten mierne zatlačíme späť do ráfika a potom nasadíme pätku plášťa pod ventil. Tento krok je dôležitý pre to, aby sme mohli plášť presne usadiť v ráfiku.'),
+('cycling', '', 'Vymena-plasta', 'Vymena plášta', 'Potom od ventilu pokračujeme po obvode ráfiku obidvoma rukami v nasadzovaní plášťa. Väčšina plášťov sa dá nasadiť holými rukami. Ak nie, musí opäť prejsť ku slovu montpáka. Postupujte s najväčšou opatrnosťou, aby nedošlo k poškodeniu duše.'),
+('cycling', '', 'Vymena-plasta', 'Vymena plášta', 'Pred nahustením je dobré skontrolovať, či ventil nie je nakrivo. Predíde sa tak zbytočnému defektu. Zhruba po dosiahnutí polovičky tlaku je dobré hustenie prerušiť a roztočiť koleso v ruke. Obyčajný pohľad odhalí, či je plášť presne usadený a nikde nehádže. Ak je to potrebné, usadíme plášť dôkladne do ráfika.'),
+('cycling', '', 'Vymena-plasta', 'Vymena plášta', 'Zvláštnou kapitolou sú bezdušové plášte na bicykel. Ich nasadenie do ráfika je zhodné s montážou bežných plášťov, ale pozor na kovové montpáky, ktoré môžu poškodiť ráfik a spôsobiť netesnosť systému. Prvým krokom je nasadenie celého plášťa do ráfika. Potom budeme potrebovať mydlovú vodu (stačí trošku Jari do vody) pre ľahšie zapadnutie pätky do ráfika a pre lepšie utesnenie systému pri hustení.'),
+('cycling', '', 'Vymena-plasta', 'Vymena plášta', 'Mydlovou vodou potrieme obidve pätky plášťa a potom pristúpime k husteniu. Na hustenie bezdušových plášťov na bicykel je lepšie použiť veľkú pumpu, keďže k lepšiemu zapadnutiu pätiek do ráfika je potrebný vyšší prvotný tlak.'),
+('cycling', '', 'centrovanie-kolies', 'Centrovanie kolies', 'Najprv nájdite miesto, kde koleso hádže. Aby ste miesto nestratili, môžete si ho na bicykli označiť.
+
+Pri centrovaní na výšku priťahujeme drôty v mieste, kde sa koleso vychyľuje smerom von a zároveň povolíme o rovnaký počet otáčok tiež drôty na protiľahlej strane kolesa.
+
+Výchyliek do strán si zatiaľ nevšímajte a postup opakujte pokiaľ nie je koleso na výšku vyrovnané.'),
+('cycling', '', 'centrovanie-kolies', 'Centrovanie kolies', 'V mieste, kde ráfik hádže do strany, povolíme drôty vedúce k strane ku ktorej sa koleso vychyľuje a spárované drôty pritiahneme o rovnaký počet otáčok.
+
+Pamätajte, že drôty v kolese nesmú byť príliš voľné, ani prepnuté, inak by mohli praskať.'),
+('cycling', '', 'vymena-stredoveho-zlozenia', 'Výmena stredového zloženia', 'Uvoľnite pomocou inbusového kľúča ľavú kľuku.'),
+('cycling', '', 'vymena-stredoveho-zlozenia', 'Výmena stredového zloženia', 'Skrutkovačom vysuňte poistku a ľahkým poklepaním ľavú kľuku demontujte zo stredovej osky. Následne pomocou gumeného kladivka vysuňte pravú kľuku s integrovanou oskou.'),
+('cycling', '', 'vymena-stredoveho-zlozenia', 'Výmena stredového zloženia', 'Čistou handričkou odstráňte nečistoty a starú vazelínu z misiek stredovéjo zloženia.'),
+('cycling', '', 'vymena-stredoveho-zlozenia', 'Výmena stredového zloženia', 'Naneste na osku kvalitnú vazelínu a osku opätovne zasuňte do misiek stredového zloženia. Aby ste predišli nepríjemným zvukom, drážk yako v kľuke, tak aj na oske dôkladne vyčistíte a jemne namažte vazelínou.'),
+('cycling', '', 'vymena-stredoveho-zlozenia', 'Výmena stredového zloženia', 'Nasuňte ľavú kľuku do správnej polohy oproti pavej kľuke a dotiahnite skrutky. Pozor : šetrite silou, výrobca doporučuje maximálne 10-15 Nm, aby nedošlo k strhnutiu závitu a tým k znehodnoteniu celej kľuky. Skrutky uťahujte striedavo, nie jeden nadoraz a až potom druhý.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Búchanie bowdenov je otravné. Či už to klbko káblov pred riadidlami, alebo vnútorne vedené hadice a bowdeny. Bowdeny by mali byť správnej dĺžky a vhodne vedené tak aby nebúchali o seba ani o rám či vidlicu.
+
+Zopnutie napríklad zadného bowdenu a brzdovej hadice dohromady malými páskami, izolepov, alebo zmršťovacou bužírkou dokáže vyčistiť a umlčať kokpit. Bicykel tiež vyzerá oveľa profesionálnejšie.
+
+Ak vás výrobca nalákal na elegantné vnútorné vedenie káblov no neodhlučnil ich, zvuky klepania zvnútra rámu môžu byť na nevydržanie.
+
+Sťahovacie pásky s neodstrihnutým koncom, zmotaná a prilepená pena spod plávajúcej podlahy, objednanie penových trubiek od iných výrobcov, trikov sme počuli už mnoho. Kreativite sa kladie iba jedna medza, veľkosť vstupných dier do rámu.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Hlavice, ktoré držia sedlo na sedlovke dokážu často vŕzgať, nakoľko majú niekoľko styčných plôch. Tie sa zanášajú špinou a trú o seba, ak nie sú dostatočne a rovnomerne dotiahnuté skrutky.
+
+Dôkladné prečistenie všetkých malých dielov sedlovky, koľajníc sedla a silikónový sprej, alebo tenký film vazelíny* na styčné plochy opäť riešia situáciu. Hlavice sedloviek sú pravdepodobne príčinou, ak zvuk počuť pri zaťažovaní zvrchu nadol.
+
+Ak sú škodnou miesta, kde sú koľajnice pripevnené k telu sedla. Môže vám pomôcť pár kvapiek ťažšieho oleja.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Samotná trubka sedlovky v ráme bicykla vŕzga a praská častejšie pri pohybe spredu dozadu.
+
+Kontaminácia je opäť najpravdepodobnejším dôvodom nevhodných zvukov, no príčinou býva aj nechcený pohyb spôsobený zlým kontaktom, pridlhou a príliš ponorenou či naopak málo zasunutou sedlovkou alebo slabo dotiahnutou objímkou.
+
+Správny pomer zasunutej a vonkajšej dĺžky sedlovky a objímka dotiahnutá na moment udávaný výrobcom vyrieši pol problému. Dobrému kontaktu napomáha čistota a tá správna chémia. Na kovové materiály tenký film vazelíny, na karbónové diely protišmyková pasta pre ne určená.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Čapy odpruženia obsahujú ložiská a pri pružení sú vystavené nielen silám v rovine rámu, ale aj bočným silám snažiacim sa krútiť bicyklom. Tým sa namáhajú ložiská samotné ale aj kontaktné plochy, pre nalisovanie ložísk. K tomu prirátajte skrutky/osi čapu, matice, podložky, prach, blato, následné umývanie a zub času.
+
+Čisté diely natrené tenkým filmom vazelíny v kontaktoch. Stredný loctite na závitoch a utiahnutie na určený moment zaistí, aby pri jazde nedošlo k uvoľneniu a poškodeniu dielov. V prípade ďalšieho praskania/vŕzgania mu často predíde zalisovanie ložísk spolu s použitím silného loctitu.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Pedále môžu vŕzgať tiež. Dobre ich vyčistite a mechanizmus a styčné plochy zapínania tretry nastriekajte silikónovým olejom.
+
+Odmontujte pedále s kľúk, vyčistite dôkladne závity na kľukách aj pedáloch a dobre ich namažte. (ideálne medenou pastou proti zatvrdnutiu).
+
+Ak počujete pískanie, stáva sa, že gumené tesnenie na vnútornej strane niektorých pedálov má v sebe špinu je suché, alebo vyťahané a nedrží na svojom mieste.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Ak ste ho niekedy videli rozložené viete ako veľa kovových kontaktov sa tu nachádza. Aj koľko špiny a vody sa tam dokáže dostať. Ak nepomôže starý dobrý trojboj rozobrať, vyčistiť namazať, šanca je, že problémom je korunka vidlice (čítaj ďalej), alebo samotný styk medzi rámom a miskou hlavového zloženia, alebo podložka nalisovaná a stĺpiku vidlice.
+
+V takomto prípade pomáha preinštalovanie s inšpekciou po nerovnostiach, prasklinách, či výrobných nedokonalostiach. Pri lisovaní naspať použite na styčné plochy silnejší loctite.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Rovnaký prípad ako pri sedlovke. Po čistých plochách je dôležité použiť správnu chémiu v závislosti na materiáloch, z ktorých sú diely vyrobené. Na záver dodržať správny doťahovací moment všetkých skrutiek, a postupné doťahovanie do kríža.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Je to jedno z posledných miest kde by človek hľadal príčinu, no drôty bowdenu dokážu vŕzgať o kovové koncovky a tie zas o rám bicykla. Čisto zastrihnutý bowden a plastové koncovky, ktoré tomu predchádzajú by však mali byť štandardom v každom dobrom servise.
+
+Ročná výmena bowdenu a lanka pre ľahšie a precíznejšie radenie utišuje bowdeny tiež, nakoľko sa čisté bowdeny nemusia tak napínať ako tie staré, špinavé a lepkavé.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'V nábojoch je mnoho malých dielov, čo sa dotýkajú a pohybujú po sebe, čistota a lubrikácia je dôležitá tak ako všade. Moderným nábojom so zapuzdrenými ložiskami prospieva použitie loctitu na lisovaných plochách.
+
+Ďalšie miesto je rozhranie orechu a kazety, najmä na kazetách Sram vyžadujúcich XD orech sa často vyskytuje praskanie, ktoré vie umlčať poriadne namazanie orechu alebo styčných plôch dielov kazety.
+
+Rýchloupináky, najmä tie s odhaleným mechanizmom, zbierajú špinu a pri namáhaní jazdou sa tiež stávajú povodcom hluku.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Tento zvuk je indikátorom toho, že by ste mali špajdle dotiahnuť. Ak však problémy vytrvávajú kvapka hustého oleja do styku špajdlí, alebo na niple.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Výmenná pätka je dnes štandardom. Pri padaní a nárazoch vie byť záchrancom oveľa drahšej prehadzovačky. Predstavuje však ďalšiu styčnú plochu, ktorá je často vystavená zaťažovaniu a deformačným silám.
+
+Aj tu platí recept čistoty vhodnej chémie a správne dotiahnuté, loctitom zabezpečené skrutky.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Ak máte staršiu prehadzovačku Sram s napinákom prvej generácie (type 2) a počujete zvláštne zvuky pri každom prepružení zadnej stavby, pomáha natlačenie vazelíny pod krytku/maticu napínacieho mechanizmu.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Korunky vidlíc najmä tie, ktoré sú dosť namáhané alebo majú výrobný defekt niekedy začnú vŕzgať. Zvuk z tohto miesta znamená len jediné, začiatok konca.
+
+Takýto diel je zrelý na reklamáciu, alebo výmenu. Snažiť sa ho umlčať alebo ignorovať vám môže prechádzať roky, no môže sa skončiť katastrofou za jazdy.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odstránenie pukania / vrzgania', 'Hoci ide o raritu aj samotný rám, väčšinou hliníkový môže vŕzgať. Spôsobujú to nedokonalé zvary, kovové špony a nahrubo opracované konce trubky pred zváraním. Tento problém je všeobecne považovaný za neopraviteľný.
+
+Jim Potter, majiteľ legendárnej opravovne bicyklov Vecchio’s Bicicletteria v Colorade však opravil na radu firmy Cannondale viacero rámov rôznych značiek tým, že do nich na problematické miesta nalial horúci ľanový olej. Je to nekonvenčné a nevieme ako to funguje, ale pri cene nového rámu to asi stojí za vyskúšanie.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Upevnite bicykel do montážneho stojana a odstráňte koleso (kolesá).'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Otočte brzdovú páčku na riadidlách tak, aby vrchná strana nádržky bola vo vodorovnej polohe.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Vyčistite páčku od nečistôt a utrite okolo krytu nádržky. Odstráňte kryt nádržky. To umožní, aby prebytočná kvapalina unikla zo zásobníka.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Vyberte poistku upevňovacej skrutky na brzdovej doštičke a vyskrutkujte upevňovaciu skrutku doštičky.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Odstráňte brzdové doštičky zatlačením smerom von, od osi náboja. Zapamätajte si orientáciu vratnej pružiny medzi doštičkami. Táto pružina pomáha uvoľneniu doštičiek od rotora počas brzdenia.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Utrite oblasti piestu dočista. Na čistenie povrchu piestov a vnútra tela strmeňa použite čistú handričku a jemné rozpúšťadlá, ako je izopropylalkohol.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Pomocou plastové páčky, alebo montpáky na pneumatiky, zatlačte oba piesty do tela strmeňa. Zatlačte neďaleko stredu piestu a vyhnite sa tlačeniu na hranu piestu.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Zatlačte piestiky späť do tela strmeňa.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Umiestnite vratnú pružinu medzi nové brzdové doštičky.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Umiestnite doštičky do strmeňa. Otvor brzdových došičiek a pružiny zlaďte s otvorom na upevňovaciu skrutku.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Nainštalujte a bezpečne utiahnite skrutky na upevnenie doštičiek.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Nainštalujte kryt nádrže a zaistite skrutkami.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Nainštalujte koleso a vyskúšajte brzdu silným stlačením brzdovej páčky. Ak je páčka na pocit mäkká, bude potrebné doplniť brzdovú kvaplainu. Ak doštičky drú alebo sú nevyrovnané, nastavte ich do správnej polohy.'),

@@ -13,6 +13,7 @@ export default function PathfinderPlus(props){
     const [result, setResult] = useState([])
     const [detailWin, openDetailWin] = useState(false)
     const [details, setDetails] = useState([])
+    const [SEARCH, setSearch] = useState('')
 
     const openF = () => {
         openWindow(!window);
@@ -33,6 +34,7 @@ export default function PathfinderPlus(props){
         }
         console.log(search)
         sendDetails();
+        setSearch(search)
     }
 
     console.log(details)
@@ -63,6 +65,7 @@ export default function PathfinderPlus(props){
                 <Box>
                     <Button variant="outlined" color="error" className="mb-5" onClick={() => openDetailWin(!detailWin)}>x</Button>
                 </Box>
+                <Typography variant="h3">{SEARCH}</Typography>
                 {details.map((detail, index) => <Box className="my-5" key={index}>
                     <Grid container>
                         <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>

@@ -14,8 +14,8 @@ export default function Forum(props){
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
     const [items, setItems] = useState([])
-    const [txt, setTxt] = useState('')
     const [window, oWindow] = useState(false)
+    const [forumItems, setForumItems] = useState([])
     let user = localStorage.getItem('userId')
 
     const createNewItem = () => {
@@ -24,15 +24,21 @@ export default function Forum(props){
     }
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/BikeForumItems').then((response) => {
+        Axios.post('http://localhost:3001/forumItems', {theme: props.title}).then((response) => {
             console.log(response.data)
-            //setItems(response.data)
+            setItems(response.data)
         });
     }, []);
 
     const openWindow = (txt) => {
-        setTxt(txt);
-        oWindow(true)
+        function findThemes(){
+            Axios.post('http://localhost:3001/findItems', {txt: txt}).then((response) => {
+                console.log(response.data)
+                setForumItems(response.data)
+            })
+        }
+        findThemes();
+        oWindow(!window)
     }
 
     return (<Box>
@@ -43,7 +49,7 @@ export default function Forum(props){
             </Box>
             <Box>
                 {items.map((item, index) => <Card key={index} className="p-3 my-2 px-5 border border-info bg-dark text-info border-2 shadow">
-                    <Typography value={item.title} onClick={(e) => openWindow(e.target.value)} style={{'cursor': 'pointer'}}>{item.title}</Typography>
+                    <Typography onClick={() => openWindow(item.title)} style={{'cursor': 'pointer'}}>{item.title}</Typography>
                 </Card>)}
             </Box>
         </Box>
@@ -61,9 +67,10 @@ export default function Forum(props){
                 </Card>
             </Container>
         </Box>}
-        {window && <Box>
+        {window && <Box id="dark-background">
             <Card className="bg-dark container text-center border border-info border-2 text-white p-5 shadow w-75" id="shadow">
-                    
+                <Button variant="outlined" color="error" onClick={() => openWindow(!window)} style={{'top': -10, 'left': 10, 'position': 'relative', 'float': 'right'}}>x</Button>
+                    {forumItems.map((fItems, index) => <Typography index={index} className="text-white">{fItems.text}</Typography>)}
                 </Card>
             </Box>}
     </Box>)

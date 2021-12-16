@@ -239,4 +239,51 @@ Jim Potter, majiteľ legendárnej opravovne bicyklov Vecchio’s Bicicletteria v
 ('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Umiestnite doštičky do strmeňa. Otvor brzdových došičiek a pružiny zlaďte s otvorom na upevňovaciu skrutku.'),
 ('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Nainštalujte a bezpečne utiahnite skrutky na upevnenie doštičiek.'),
 ('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Nainštalujte kryt nádrže a zaistite skrutkami.'),
-('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Nainštalujte koleso a vyskúšajte brzdu silným stlačením brzdovej páčky. Ak je páčka na pocit mäkká, bude potrebné doplniť brzdovú kvaplainu. Ak doštičky drú alebo sú nevyrovnané, nastavte ich do správnej polohy.'),
+('cycling', '', 'roztrhnuta-retaz', 'Odvzdušnenie brzd', 'Nainštalujte koleso a vyskúšajte brzdu silným stlačením brzdovej páčky. Ak je páčka na pocit mäkká, bude potrebné doplniť brzdovú kvaplainu. Ak doštičky drú alebo sú nevyrovnané, nas')
+
+
+/*first-aid */
+INSERT INTO pathfinder_plus(theme, image, title, header, text)
+VALUES
+('first-aid', '', 'upal', 'Úpal', 'Preneste postihnutého do chladného prostredia a uložte ho do ležiacej alebo pololežiacej polohy.'),
+('first-aid', '', 'upal', 'Úpal', 'Začnite s chladením akýmkoľvek spôsobom:
+
+potieraním vlažnou vodou a ovievaním na urýchlenie odparovania. Studená voda nie je vhodná, spomaľuje vydávanie tepla kožou vyžarovaním,
+
+vložením vrecka s ľadom zabaleného do uteráka ku krku, do podpazušia a slabín,
+
+prikrytím postihnutého vlhkou plachtou.'),
+('first-aid', '', 'upal', 'Úpal', 'Podávajte postihnutému nesladenú a neprichutenú vodu z vodovodu po dúškoch. Množstvo regulujte tak, aby mal moč len slabo žltú farbu a bol bez zápachu. Tmavší moč svedčí o nedostatku tekutín.'),
+('first-aid', '', 'upal', 'Úpal', 'Ak sa ťažkosti nezmiernia po 30 minútach, vyhľadajte pomoc lekára.'),
+('first-aid', '', 'upal', 'Úpal', 'Pri zmätenosti, alebo bezvedomí ihneď volajte záchrannú službu.'),
+('first-aid', '', 'spalena-pokožka', 'Spálená pokožka', 'Prvým základným krokom, ktorý by ste mali urobiť, je doplnenie tekutín, ktoré sa pri prehriatí stratili.
+'),
+('first-aid', '', 'spalena-pokožka', 'Spálená pokožka', 'Následne začnite riešiť samotnú spálenú pokožku:'),
+('first-aid', '', 'spalena-pokožka', 'Spálená pokožka', 'Začať môžete studenou alebo vlažnou sprchou, ktorá vám uľaví od bolesti a kožu mierne upokojí. Po sprche sú ideálne masti na popáleniny, ktoré natierajte v pravidelných intervaloch v tenkej vrstve na dobre vysušenú kožu.'),
+('first-aid', '', 'vyron', 'Vyvrtnutie členka / výron', 'Na vyvrtnutý členok si ihneď priložte ľad vo vrecúšku alebo balíček mrazenej zeleniny, aby ste chladom zmiernili bolesť a opuch. Studený obklad neprikladajte priamo na pokožku, najprv ju prekryte kuchynskou utierkou, inak by ste si koledovali o drobné omrzliny. Po desiatich, pätnástich minútach zafixujte členok elastickým obväzom. Začnite pri prstoch, obväz dvakrát obtočte, pokračujte cez členok, vráťte sa k prstom a obväzovanie ukončite nad ním.'),
+('first-aid', '', 'vyron', 'Vyvrtnutie členka / výron', 'Postup viackrát zopakujte. Obväz neuťahujte príliš napevno, nesmie vás tlačiť. Potom si nohu vyložte do zvýšenej polohy, v noci si ju nemusíte preväzovať. „Najdôležitejšie je poranenú nohu minimálne desať dní nezaťažovať a nedošliapovať na ňu, musí byť obviazaná,“ hovorí MUDr. Viliam Dobiáš, PhD., hlavný lekár zo záchrannej zdravotnej služby v Bratislave. „Postihnutí tieto rady málokedy dodržia, hoci sú nevyhnutné, lebo pri podvrtnutí si človek natiahne väzy v členku a kĺbové puzdro, ktoré drží kĺb pokope. Musí sa zahojiť, preto je nutný pokoj.“'),
+('first-aid', '', 'narazene-rebra', 'Narazené rebrá', 'Zväčša nemusíte ísť k lekárovi, nielen narazené, ale aj zlomené rebro by ratoval spôsobom, ktorý zvládnete aj vy. Potrebujete na to niečiu pomoc a široký elastický obväz. „Poranenému treba dať lieky proti bolesti a obviazať hrudník, aby sa čiastočne znehybnil. Rebrá sa vtedy rýchlejšie hoja a aj bolesť je slabšia. Pred obviazaním sa musí človek poriadne nadýchnuť a vydýchnuť. Vo výdychovej fáze treba chvíľu vydržať, aby zvládol ovinutie hrudného koša v dolnej časti tri až štyrikrát po obvode.'),
+('first-aid', '', 'narazene-rebra', 'Narazené rebrá', 'Práve tam sa rebrá lámu najčastejšie. Netreba obviazať celý hrudník, stačí na šírku obväzu,“ radí odborník. Nechajte si ho obviazaný aspoň štyri dni vrátane nocí. Spite radšej v polosede, vo vodorovnej polohe rebrá väčšmi bolia. Ak predsa chcete ležať, ľahnite si na poranenú stranu. Aj to vám paradoxne uľaví od ťažkostí a zmiernite zároveň rozsah dýchacích pohybov. Narazené alebo zlomené rebro môže pri prudšom pohybe pobolievať dva aj tri mesiace.'),
+('first-aid', '', 'rozbite-koleno', 'Rozbité koleno', 'Predovšetkým zastavte krvácanie. Miesto si pritlačte a bez pohybu podržte desať až pätnásť minút'),
+('first-aid', '', 'rozbite-koleno', 'Rozbité koleno', 'Za ten čas sa krvné doštičky postarajú o vznik zrazeniny. Ranu vzápätí očistite. Nezháňajte drahé dezinfekčné prípravky, na neveľké rany postačí voda a mydlo, ktorými ich môžete poumývať celé.'),
+('first-aid', '', 'rozbite-koleno', 'Rozbité koleno', 'Rana sa môže vydezinfikovať aj prípravkami z lekárne, nesmú však vniknúť priamo do rany, hoci mnohí majú vžité, že ich treba naliať na krvácajúce miesto.'),
+('first-aid', '', 'rozbite-koleno', 'Rozbité koleno', 'Okrem poriadneho štípania takáto záplava narobí aj inú neplechu. Na rozdiel od mydla dezinfekčné prípravky narúšajú telesné bielkoviny. Rana sa vyčistí aj sama tým, že krváca,“ objasňuje lekár. Odreninu neprelepujte, vďaka vzduchu sa zahojí rýchlejšie. Rýchloobväzom si ranu zakryte len pri krvácaní. Ak sa premočí, vymeňte ho za suchý, inak hrozí, že sa rana zapáli.'),
+('first-aid', '', 'natiahnuty-sval', 'Natiahnutý sval', 'Len čo pocítite prudkú bolesť svalu, priložte si na boľavé miesto vrecúško s ľadom a stiahnite ho elastickým obväzom. Zabránite tak opuchu z unikajúcej bunkovej tekutiny, ktorá sa uvoľňuje z popraskaných svalových buniek, aj následnej silnej bolesti.'),
+('first-aid', '', 'natiahnuty-sval', 'Natiahnutý sval', 'Užite analgetiká alebo si miesto trikrát denne natierajte protizápalovými gélmi, Fastumom, Veralom alebo Ibalginom. Dožičte si tri, štyri dni pokoj a ak sa budete cítiť lepšie, sval začnite pomaly zaťažovať. Určite sa nevrhnite hneď na hodinový džoging! Ak sa bolesť nezmierni ani po dvadsiatich štyroch hodinách, zájdite za lekárom'),
+('first-aid', '', 'natiahnuty-sval', 'Vyrazený dych', 'Postihnutého posaďte a upokojte, opakujte mu, že o chvíľu to pominie.'),
+('first-aid', '', 'natiahnuty-sval', 'Vyrazený dych', 'Dobre mu urobí masírovanie prednej strany hrudníka, v oblasti uhla medzi rebrami. Potom len čakajte, kým nepríjemnosť nepominie. Udieranie po chrbte nepomôže, dýchanie sa tým nenaštartuje!'),
+('first-aid', '', 'natiahnuty-sval', 'Vyrazený dych', 'Nechajte to na samotný organizmus, má vyvinutý zázračný mechanizmus, ktorý zapracuje, keď sa človek začne naozaj dusiť. Pre telo je to veľký stres, ktorý však dýchanie nanovo prebudí'),
+('first-aid', '', 'natiahnuty-sval', 'Vyrazený dych', 'Existuje ešte jeden spôsob prvej pomoci. Poskytnúť ju treba vtedy, ak sa postihnutý nenadýchne zo tri, štyri minúty, zrazu mu modrajú pery a upadá do bezvedomia. Vtedy je nevyhnutné umelé dýchanie, stačí niekoľko vdychov a mal by sa znovu rozdýchať.'),
+('first-aid', '', 'popalenie', 'Popálenie', 'V prípade popálenia je jednoduchá. Rozhorúčené miesto v prvom rade ochlaďte! Poranenú končatinu dajte na desať až dvadsať minút pod prúd studenej vody'),
+('first-aid', '', 'popalenie', 'Popálenie', 'Máte popálenú ruku plnú prsteňov a náramkov? Okamžite s nimi dolu, ale až pod tečúcou vodou. Čo robiť, keď na postihnutom horel odev a priškvaril sa? Nestrhávajte ho! Ak je to nevyhnutné, len ho obstrihajte. Popálenú oblasť aj vtedy najprv ochlaďte.'),
+('first-aid', '', 'popalenie', 'Popálenie', 'Ak sa šaty dajú vyzliecť, urobte to, no napríklad tričko na postihnutom môžete nechať. Záchranca by ho mal iba namočiť. Keď má popálený na sebe hrubý kabát, musí preč, inak hrozí, že teplo sa pod ním ešte dlho udrží a výsledkom bude popálenie tretieho či štvrtého stupňa'),
+('first-aid', '', 'popalenie', 'Popálenie', 'Ak ide o nenáročnú popáleninu, poranené miesto si po prvom ošetrení ďalšie dva až tri dni preväzujte čistým obväzom'),
+('first-aid', '', 'popalenie', 'Popálenie', 'K lekárovi zájdite, ak je popálenina väčšia ako dlaň'),
+('first-aid', '', 'dusenie', 'Dusenie', 'Vynechajte udieranie päsťou medzi lopatky, hrudník to nerozhýbe tak, aby predmet z dýchacích ciest vyletel.'),
+('first-aid', '', 'dusenie', 'Dusenie', 'Pomôže iba Heimlichov manéver. Nešťastnicu objímte zozadu a zatvorenú päsť jednej ruky priložte na vrchol žalúdka, kde sa končí hrudná kosť'),
+('first-aid', '', 'dusenie', 'Dusenie', 'Druhú ruku priložte na prvú, dusiacu sa mierne predkloňte a rukami prudko zatlačte dovnútra a hore'),
+('first-aid', '', 'dusenie', 'Dusenie', 'Opakujte aspoň päťkrát.'),
+('first-aid', '', 'zlomenina', 'Zlomenina', 'Vytvorenie opory na poranenej končatine podložením rúk pod a nad miestom zlomeniny'),
+('first-aid', '', 'zlomenina', 'Zlomenina', 'Znehybnenie tak, aby bol znehybnený jeden kĺb pod aj nad zlomeninou'),
+('first-aid', '', 'zlomenina', 'Zlomenina', 'Horná končatina: Zlomenú hornú končatinu dáme buď do závesu z trojrohej šatky alebo znehybníme priamo v rukáve odevu. Zlomenina kľúčnej kosti sa ošetruje ako zlomenina hornej končatiny'),
+('first-aid', '', 'zlomenina', 'Zlomenina', 'Dolná končatina: Pri zlomenine dolnej končatiny priložíme zdravú končatinu k postihnutej tak, aby sme s postihnutou nehýbali a priviažeme. Pri veľkej deformácii možno využiť rôzne druhy obloženia na znehybnenie (vankúš, deku, noviny)')

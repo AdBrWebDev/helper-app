@@ -57,21 +57,27 @@ app.get('/getInfo', (req, res) => {
     })
 })
 
+app.post('/forumUserInfo', (req, res) => {
+    dbcon.query("SELECT name, surname, country, avatar FROM users WHERE id_user =?", [req.body.id], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.get('/products', (req, res) => {
     dbcon.query("SELECT * FROM e_shop", (err, result) => {
         res.send(result)
     })
 })
 
-app.get('/pathPlus', (req, res) => {
-    const SelectPlus = "SELECT DISTINCT(header) FROM pathfinder_plus";
-    dbcon.query(SelectPlus, (err, result) => {
+app.post('/pathPlus', (req, res) => {
+    const SelectPlus = "SELECT DISTINCT(header) FROM pathfinder_plus WHERE theme = ?";
+    dbcon.query(SelectPlus, [req.body.search], (err, result) => {
         res.send(result)
     })
 })
 
 app.post('/forumItems', (req, res) => {
-    dbcon.query("SELECT title FROM forum WHERE theme = ?", [req.body.theme], (err, result) => {
+    dbcon.query("SELECT DISTINCT title FROM forum WHERE theme = ?", [req.body.theme], (err, result) => {
         res.send(result)
     })
 })

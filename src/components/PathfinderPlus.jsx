@@ -18,7 +18,7 @@ export default function PathfinderPlus(props){
     const openF = () => {
         openWindow(!window);
         function getData(){
-            Axios.get('http://localhost:3001/pathPlus').then(result => {
+            Axios.post('http://localhost:3001/pathPlus', {search: props.theme}).then(result => {
             setResult(result.data)
         })
         }
@@ -56,7 +56,7 @@ export default function PathfinderPlus(props){
                 <Button variant="outlined" color="error" onClick={() => openWindow(!window)}>x</Button>
                 </Box>
                 <Box>
-                    {result.map((res, index) => <Button index={index} variant="outlined" color="info" onClick={()=> openDetails(res.header)}>{res.header}</Button>)}
+                    {result.map((res, index) => <Button index={index} variant="outlined" color="info" onClick={()=> openDetails('first-aid')}>{res.header}</Button>)}
                 </Box>
             </Card>
         </Box>}

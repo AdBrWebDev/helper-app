@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, lazy} from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
@@ -8,6 +8,7 @@ import Pagination from '@mui/material/Pagination'
 import '../App.css'
 import MainImageOfPage from '../components/MainImageOfPage'
 import Axios from 'axios'
+const ForumItems = lazy(() => import('../components/ForumItems'))
 
 export default function Forum(props){
     const [newTheme, NewTheme] = useState(false)
@@ -16,6 +17,7 @@ export default function Forum(props){
     const [items, setItems] = useState([])
     const [window, oWindow] = useState(false)
     const [forumItems, setForumItems] = useState([])
+    const [sign, setSign] = useState('')
     let user = localStorage.getItem('userId')
 
     const createNewItem = () => {
@@ -35,6 +37,7 @@ export default function Forum(props){
             Axios.post('http://localhost:3001/findItems', {txt: txt}).then((response) => {
                 console.log(response.data)
                 setForumItems(response.data)
+                setSign(txt)
             })
         }
         findThemes();
@@ -69,8 +72,11 @@ export default function Forum(props){
         </Box>}
         {window && <Box id="dark-background">
             <Card className="bg-dark container text-center border border-info border-2 text-white p-5 shadow w-75" id="shadow">
-                <Button variant="outlined" color="error" onClick={() => openWindow(!window)} style={{'top': -10, 'left': 10, 'position': 'relative', 'float': 'right'}}>x</Button>
-                    {forumItems.map((fItems, index) => <Typography index={index} className="text-white">{fItems.text}</Typography>)}
+                <Button variant="outlined" color="error" onClick={() => openWindow(!window)}>x</Button> 
+                    <Typography variant="h3" className="text-white mt-2">{sign}</Typography>
+                    <Box className="p-5">
+                    {forumItems.map((fItems, index) => <ForumItems index={index} data={fItems} />)}
+                    </Box>
                 </Card>
             </Box>}
     </Box>)

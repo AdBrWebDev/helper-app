@@ -46,7 +46,7 @@ export default function PathfinderPlus(props){
         </Grid>
         <Grid item xs={12} sm={12} md={6} xl={6} lg={6} style={{'height': '700px'}}>
             <Button id="card" className="align-middle position-relative" variant="outlined" onClick={openF} color="info" style={{'transform': 'scale(4)', 'marginTop': '300px'}}>
-                <i className="material-icons text-info">pedal_bike</i>
+                <i className="material-icons text-info">{props.icon}</i>
             </Button>
         </Grid>
     </Grid>

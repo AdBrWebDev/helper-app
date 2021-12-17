@@ -10,7 +10,7 @@ import Footer from '../../components/Footer';
 const Nature = lazy(() => import('../Nature'))
 const MainPage = lazy(() => import('./MainPage'))
 const ArticlesData = lazy(() => import('./ArticlesData'))
-const BikeHelper = lazy(() => import('./BikeHelper'))
+const HikeHelper = lazy(() => import('./HikeHelper'))
 const ForumData = lazy(() => import('./ForumData'))
 const Map = lazy(() => import('../Map'))
 const Eshop = lazy(() => import('../Eshop'))
@@ -36,7 +36,7 @@ export default function CyclingMNPG(){
                 <Link className="navbar-item" to="/Map">Mapa</Link>
                 <Link className="navbar-item" to="/ArticlesData">Články</Link>
                 <Link className="navbar-item" to="/Nature">Príroda</Link>
-                <Link className="navbar-item" to="/BikeHelper">Pomocník</Link>
+                <Link className="navbar-item" to="/HikeHelper">Pomocník</Link>
                 </Box>
             </Box>
             <Box className="navbar-end">
@@ -52,7 +52,7 @@ export default function CyclingMNPG(){
           <Route path="/Map" component={Map} />
           <Route path="/ArticlesData" component={ArticlesData} />
           <Route path="/Nature" component={Nature} />
-          <Route path="/BikeHelper" component={BikeHelper} />
+          <Route path="/HikeHelper" component={HikeHelper} />
       </Switch>
     </Router>
     <Footer />

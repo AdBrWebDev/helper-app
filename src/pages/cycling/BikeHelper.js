@@ -1,5 +1,5 @@
 import React, {lazy} from 'react';
 const PathfinderPlus = lazy(() => import('../../components/PathfinderPlus'))
 export default function BikeHelper(){
-    return(<PathfinderPlus theme="cycling" />)
+    return(<PathfinderPlus theme="cycling" icon="pedal_bike" />)
 }

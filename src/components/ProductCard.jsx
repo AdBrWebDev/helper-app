@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Axios from 'axios'
 import '../App.css'
+import Card from '@mui/material/Card'
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
@@ -13,15 +14,13 @@ export default function ProductCard(props){
     const openInfo = () => {
         infoOpened(!iWindow)
         function getInfo() {
-                Axios.get('http://localhost:3001/getInfo', {product: props.id}).then((response) => {
+                Axios.post('http://localhost:3001/getInfo', {product: props.id}).then((response) => {
                     setInfo(response)
                     console.log(response)
                 })
         }
         getInfo()
-    }
-
-    console.log(props.id)     
+    }    
 
     return(<Grid key={props.index} item xs={6} sm={6} lg={3} xl={3} md={4}>
         <Box className="card bg-dark border border-info border-2" id="card" key={props.index}>
@@ -45,7 +44,19 @@ export default function ProductCard(props){
                     </Box>
                 </Box>
                 {iWindow && <Box id="dark-background">
+                        <Card className="container bg-dark text-center text-white border border-2 border-info">
+                        <Box className="my-4">
+                            <Button variant="outlined" color="error" onClick={() => openInfo(!iWindow)}>x</Button>
+                        </Box>
+                        <Box>
+                            <img style={{'height': 300}} src={props.img} alt={props.title} />
+                        </Box>
+                        <Box className="p-5">
+                            <Typography variant="h3">{props.title}</Typography>
+                            <Typography variant="h4">{props.price} €</Typography>
 
+                        </Box>
+                        </Card>
                     </Box>}
     </Grid>);
 }

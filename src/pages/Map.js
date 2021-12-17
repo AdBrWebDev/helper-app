@@ -1,29 +1,25 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {withScriptjs, withGoogleMap ,GoogleMap, Marker} from 'react-google-maps'
 import Box from '@mui/material/Box'
 
 export default function Map(){
+  const [lat, setLat] = useState(null)
+  const [lon, setLon] = useState(null)
 
-    window.addEventListener('load', getLocation)
-
-    function getLocation() {
-      if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition((cords)=> {
-            console.log(cords.latitude, cords.longitude)
-        })
-      }
-      else{
-        alert('I cannot find your location.')
-      }
-    }
+    useEffect(() =>{
+        navigator.geolocation.getCurrentPosition((pos)=> {
+            setLat(pos.coords.latitude)
+            setLon(pos.coords.longitude)
+            console.log(pos.coords.latitude, pos.coords.longitude)});
+    })
 
     const MapWithAMarker = withScriptjs(withGoogleMap(props =>
         <GoogleMap
           defaultZoom={8}
-          defaultCenter={{ lat: -34.397, lng: 150.644 }}
+          defaultCenter={{ lat: lat, lng: lon }}
         >
           <Marker
-            position={{ lat: -34.397, lng: 150.644 }}
+            position={{ lat: lat, lng: lon }}
           />
         </GoogleMap>
       ))

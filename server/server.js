@@ -44,15 +44,8 @@ app.post('/findDetails', (req, res) => {
     })
 })
 
-/*app.get('/api/get-user', (req, res) => {
-    const sqlSelect = "SELECT * FROM users";
-    dbcon.query(sqlSelect, (err, result) => {
-        res.send(result)
-    })
-})*/
-
-app.get('/getInfo', (req, res) => {
-    dbcon.query("SELECT * FROM eshop_product_image", (err, result) => {
+app.post('/getInfo', (req, res) => {
+    dbcon.query("SELECT * FROM eshop_product_image WHERE id_product = ?", [req.body.product], (err, result) => {
         res.send(result)
     })
 })

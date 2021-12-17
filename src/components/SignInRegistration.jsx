@@ -87,7 +87,7 @@ export default function SignInRegistration(){
         </Menu>
         </Box> :
         <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia {user}</Button>}   
-        {profile &&<Box id="dark-background"> <Card className="container text-center bg-dark text-white">
+        {profile &&<Box id="dark-background"> <Card className="container text-center bg-dark text-white p-5 border border-info">
             <Button variant="outlined" color="error" className="my-3" onClick={() => openProfile(!profile)}>x</Button>
                 <Grid container>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
@@ -95,26 +95,26 @@ export default function SignInRegistration(){
                 <Typography>{localStorage.getItem("userName")}</Typography>
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-                    <Paper>
-                <Typography>Vaše objednávky</Typography>
+                    <Paper className="bg-dark text-white">
+                <Typography variant="h4">Vaše objednávky</Typography>
                 <List>
-                    <ListItem>
+                    <ListItem className="text-center">
                         <ListItemText primary="žiadne objednávky" />
                     </ListItem>
             </List>
                 </Paper>
-                <Paper>
-                <Typography>Vaše članky</Typography>
+                <Paper className="bg-dark text-white">
+                <Typography className="bg-dark text-white" variant="h4">Vaše članky</Typography>
                 <List>
-                    <ListItem>
+                    <ListItem className="text-center">
                         <ListItemText primary="žiadne aktivity" />
                     </ListItem>
             </List>
                 </Paper>
-                <Paper>
-                <Typography>Vaše aktivity vo fóre</Typography>
+                <Paper className="bg-dark text-white">
+                <Typography className="bg-dark text-white" variant="h4">Vaše aktivity vo fóre</Typography>
                 <List>
-                    <ListItem>
+                    <ListItem className="text-center">
                         <ListItemText primary="žiadne aktivity" />
                     </ListItem>
             </List>
@@ -138,7 +138,7 @@ export default function SignInRegistration(){
                 <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setCity(e.target.value)}} label="mesto" name="city" />
                 <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setStreet(e.target.value)}} label="ulica" name="street" />
                 <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setAge(e.target.value)}} label="roky" name="age" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setPassword(e.target.value)}} label="roky" name="password" />
+                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setPassword(e.target.value)}} label="heslo" type="password" name="password" />
                 <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setEmail(e.target.value)}} label="e-mail" name="e_mail" />
                 <Button type="submit" variant="outlined" color="primary" onClick={() => submit()}>Registrovať</Button>
                 </Box>
@@ -147,7 +147,7 @@ export default function SignInRegistration(){
                 <Typography>Registrácia</Typography>
                 <Box component="form" className="text-center mx-auto">
                 <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setLoginEmail(e.target.value)}} label="loginEmail" name="loginEmail" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setLoginPassword(e.target.value)}} label="loginPassword" name="loginPassword" />
+                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setLoginPassword(e.target.value)}} type="password" label="loginPassword" name="loginPassword" />
                 <Button type="submit" variant="outlined" color="primary" onClick={(e) => signUp(e.preventDefault())}>Prihlásiť</Button>
                 </Box>
             </Card>

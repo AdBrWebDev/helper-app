@@ -11,8 +11,6 @@ const Device = lazy(() => import('./Device'))
 
 export default function AppInDevices(){
     const [download, openDownload] = useState(false)
-    let date = new Date('September 25 2022 00:00:00');
-
     const devices = [
         {icon: 'smartphone', typography: 'smartphone', terms: [{os: 'Android'}, {minVersion: '8.0'}, {ram: 2}, {memory: 32}, {cpu: 2}, {minDisplaySize: '5'}]},
         {icon: 'laptop', typography: 'PC', terms: [{os: 'Windows'}, {minVersion: 'Windows 10'}, {ram: 4}, {memory: 120}, {cpu: 2}]},

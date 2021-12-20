@@ -30,7 +30,7 @@ export default function Forum(props){
             console.log(response.data)
             setItems(response.data)
         });
-    }, []);
+    }, [props.title]);
 
     const openWindow = (txt) => {
         function findThemes(){

@@ -9,7 +9,6 @@ import Button from '@mui/material/Button'
 import CardContent from '@mui/material/CardContent'
 import TableContainer from '@mui/material/TableContainer'
 import Table from '@mui/material/Table'
-import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import Paper from '@mui/material/Paper'
@@ -21,7 +20,7 @@ export default function Device(props){
     let importantParts = ['os', 'minVersion','ram','memory', 'cpu', 'minDisplaySize'];
 
     return(
-        <Grid item className="py-5 my-5" index={props.index} onClick={() => openDevice(!device)} xs={12} sm={6} md={6} lg={3} xl={3} style={{"cursor": "pointer"}}>
+        <Grid item className="py-5 my-5" key={props.index} onClick={() => openDevice(!device)} xs={12} sm={6} md={6} lg={3} xl={3} style={{"cursor": "pointer"}}>
             <i id="devices" className="material-icons my-5">{props.icon}</i>
             <Typography>{props.text}</Typography>
             {device && <Box id="dark-background">

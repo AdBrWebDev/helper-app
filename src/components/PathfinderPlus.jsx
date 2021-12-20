@@ -6,6 +6,7 @@ import '../App.css'
 import Card from '@mui/material/Card'
 import Axios from 'axios'
 import Typography from '@mui/material/Typography'
+import Avatar from '@mui/material/Avatar'
 const Health = lazy(() => import('./Health')) 
 
 export default function PathfinderPlus(props){
@@ -51,13 +52,17 @@ export default function PathfinderPlus(props){
         </Grid>
     </Grid>
     {window && <Box id="dark-background">
-            <Card className="container my-5 p-3 bg-dark border border-info">
+            <Card className="container my-5 p-3 bg-dark border border-info text-white">
                 <Box>
                 <Button variant="outlined" color="error" onClick={() => openWindow(!window)}>x</Button>
                 </Box>
                 <Box>
-                    {result.map((res, index) => <Button index={index} variant="outlined" color="info" onClick={()=> openDetails('first-aid')}>{res.header}</Button>)}
+                    <Avatar src="/images/pathfinder.jpg" className="mx-auto my-5" style={{'transform': 'scale(2)'}} />
+                    <Typography variant="h4">Aký je tvoj problém?</Typography>
                 </Box>
+                <Grid container>
+                    {result.map((res, index) => <Grid className="my-3" key={index} item xs={12} sm={12} md={4} xl={3} lg={3}><Button className="p-3 w-75 h-100" variant="outlined" color="info" onClick={()=> openDetails(res.header)}>{res.header}</Button></Grid>)}
+                </Grid>
             </Card>
         </Box>}
         {detailWin && <Box id="dark-background">

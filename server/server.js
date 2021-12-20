@@ -69,8 +69,15 @@ app.post('/pathPlus', (req, res) => {
     })
 })
 
+app.post('/fUserData', (req, res) => {
+    const SelectPlus = "SELECT name, avatar, surname, country FROM users WHERE id_user = ?";
+    dbcon.query(SelectPlus, [req.body.user], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.post('/forumItems', (req, res) => {
-    dbcon.query("SELECT DISTINCT title FROM forum WHERE theme = ?", [req.body.theme], (err, result) => {
+    dbcon.query("SELECT DISTINCT(title) FROM forum WHERE theme = ?", [req.body.theme], (err, result) => {
         res.send(result)
     })
 })

@@ -6,6 +6,7 @@ import Card from '@mui/material/Card'
 import Axios from 'axios'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
+import Avatar from '@mui/material/Avatar'
 
 export default function Health(){
     const [health, openHealth] = useState(false)
@@ -41,13 +42,17 @@ export default function Health(){
             <i className="material-icons text-info">health_and_safety</i>
         </Button>
         {health && <Box id="dark-background">
-        <Card className="container my-5 p-3 bg-dark border border-info">
+        <Card className="container my-5 p-3 bg-dark border border-info text-white">
                 <Box>
                 <Button variant="outlined" color="error" onClick={openF}>x</Button>
                 </Box>
                 <Box>
-                    {data.map((res, index) => <Button index={index} variant="outlined" color="info" onClick={()=> openDetails(res.header)}>{res.header}</Button>)}
+                    <Avatar src="/images/pathfinder.jpg" className="mx-auto my-5" style={{'transform': 'scale(2)'}} />
+                    <Typography variant="h4">Aký je tvoj problém?</Typography>
                 </Box>
+                <Grid container>
+                    {data.map((res, index) => <Grid key={index} item className="my-3" xs={12} sm={12} md={4} xl={3} lg={3}><Button className="p-3 w-75 h-100" variant="outlined" color="info" onClick={()=> openDetails(res.header)}>{res.header}</Button></Grid>)}
+                </Grid>
             </Card>
         </Box>}
         {detailWin && <Box id="dark-background">

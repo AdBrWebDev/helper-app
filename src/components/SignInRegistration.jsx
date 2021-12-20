@@ -123,33 +123,54 @@ export default function SignInRegistration(){
                 </Grid>
                 
             </Card></Box>}
-        {form && <Box id="dark-background">
+        {form && <Box id="dark-background" style={{'overflowY': 'scroll'}}>
         <Container>
-            <Card>
+            <Card className="p-3 text-center bg-dark text-white border border-info border-2">
                 <Box>
-                <Button color="error" variant="outlined" onClick={() => openForm(!form)}>x</Button>
+                <Button className="mx-auto my-3" color="error" variant="outlined" onClick={() => openForm(!form)}>x</Button>
                 </Box>
-                <Typography>Registrácia</Typography>
-                <Box component="form" className="text-center mx-auto">
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setName(e.target.value)}} label="meno" name="name" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setSurname(e.target.value)}} label="priezvisko" name="surname" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setPhone(e.target.value)}} label="telefon" name="phone" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setCountry(e.target.value)}} label="krajina" name="country" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setCity(e.target.value)}} label="mesto" name="city" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setStreet(e.target.value)}} label="ulica" name="street" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setAge(e.target.value)}} label="roky" name="age" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setPassword(e.target.value)}} label="heslo" type="password" name="password" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setEmail(e.target.value)}} label="e-mail" name="e_mail" />
-                <Button type="submit" variant="outlined" color="primary" onClick={() => submit()}>Registrovať</Button>
-                </Box>
+                <Typography variant="h3">Registrácia</Typography>
+                <Grid container component="form" className="text-center mx-auto">
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
+                    <TextField variant="outlined" onChange={(e) => {setName(e.target.value)}} label="meno" name="name" />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
+                    <TextField variant="outlined" onChange={(e) => {setSurname(e.target.value)}} label="priezvisko" name="surname" />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
+                    <TextField variant="outlined" onChange={(e) => {setPhone(e.target.value)}} label="telefon" name="phone" />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
+                    <TextField variant="outlined" onChange={(e) => {setCountry(e.target.value)}} label="krajina" name="country" />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
+                    <TextField variant="outlined" onChange={(e) => {setCity(e.target.value)}} label="mesto" name="city" />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
+                    <TextField variant="outlined" onChange={(e) => {setStreet(e.target.value)}} label="ulica" name="street" />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
+                    <TextField variant="outlined" onChange={(e) => {setAge(e.target.value)}} label="vek" name="age" />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
+                    <TextField variant="outlined" onChange={(e) => {setPassword(e.target.value)}} label="heslo" type="password" name="password" />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                <TextField variant="outlined" onChange={(e) => {setEmail(e.target.value)}} label="e-mail" name="e_mail" />
+                </Grid>
+                <Button className="mx-auto" type="submit" variant="outlined" color="primary" onClick={() => submit()}>Registrovať</Button>
+                </Grid>
             </Card>
-            <Card className="my-3">
-                <Typography>Registrácia</Typography>
-                <Box component="form" className="text-center mx-auto">
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setLoginEmail(e.target.value)}} label="loginEmail" name="loginEmail" />
-                <TextField id="outlined-basic" variant="outlined" onChange={(e) => {setLoginPassword(e.target.value)}} type="password" label="loginPassword" name="loginPassword" />
-                <Button type="submit" variant="outlined" color="primary" onClick={(e) => signUp(e.preventDefault())}>Prihlásiť</Button>
+            <Card className="my-3 bg-dark text-white text-center border border-info border-2">
+                <Typography variant="h3" className="my-3">Registrácia</Typography>
+                <Grid container component="form" className="text-center mx-auto">
+                    <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><TextField variant="outlined" onChange={(e) => {setLoginEmail(e.target.value)}} type="text" label="loginEmail" name="loginEmail" /></Grid>
+                    <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><TextField variant="outlined" onChange={(e) => {setLoginPassword(e.target.value)}} type="password" label="loginPassword" name="loginPassword" /></Grid>
+                </Grid>
+                <Box>
+                <Button variant="outlined" color="error">Ešte niesom registrovaný</Button>
                 </Box>
+                <Button type="submit" variant="outlined" color="primary" onClick={(e) => signUp(e.preventDefault())}>Prihlásiť</Button>
             </Card>
             <h1>{user}</h1>
         </Container>

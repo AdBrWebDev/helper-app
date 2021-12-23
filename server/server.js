@@ -47,10 +47,12 @@ app.post('/findDetails', (req, res) => {
 })
 
 app.post('/getInfo', (req, res) => {
-    dbcon.query("SELECT * FROM eshop_product_image WHERE id_product = ?", [req.body.product], (err, result) => {
+    dbcon.query("SELECT * FROM eshop_product_image, eshop_product_text WHERE eshop_product_image.id_product = ?", [req.body.product], (err, result) => {
         res.send(result)
     })
 })
+
+//eshop_product_image.img, eshop_product_text.text LEFT JOIN eshop_product_text ON eshop_product_image.id_product=eshop_product_image.id_product
 
 app.post('/forumUserInfo', (req, res) => {
     dbcon.query("SELECT name, surname, country, avatar FROM users WHERE id_user =?", [req.body.id], (err, result) => {
@@ -67,6 +69,28 @@ app.get('/products', (req, res) => {
 app.post('/pathPlus', (req, res) => {
     const SelectPlus = "SELECT DISTINCT(header) FROM pathfinder_plus WHERE theme = ?";
     dbcon.query(SelectPlus, [req.body.search], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/addComment', (req, res) => {
+    const insertComment = "INSERT INTO forum (id_item, id_user, dateOfPublic, title, text, image, theme) VALUES (?,?,?,?,?,?,?)";
+    let date = new Date();
+    dbcon.query(insertComment, ['', req.body.id_user, date ,req.body.txt, req.body.text, req.body.img, req.body.theme], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/articles', (req, res) => {
+    const SelectPlus = "SELECT * FROM articles WHERE theme = ?";
+    dbcon.query(SelectPlus, [req.body.title], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/articlesData', (req, res) => {
+    const SelectPlus = "SELECT * FROM articlesData WHERE id = ?";
+    dbcon.query(SelectPlus, [req.body.id], (err, result) => {
         res.send(result)
     })
 })

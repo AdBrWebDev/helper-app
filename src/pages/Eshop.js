@@ -19,9 +19,9 @@ export default function Eshop(){
 }, []);
         console.log(products)
 
-    return(<Box className="text-white p-5 my-5">
+    return(<Box className="text-white">
         <MainImageOfPage id="main-image" img="gps-tracker.png" text="Pridaj sa k nám" href="" />
-        <Box className="container">
+        <Box className="container p-5 my-5">
         <Box className="message is-info mt-3">
             <Typography className="message-body">Začiatok predaja 22.11.2022</Typography>
         </Box>

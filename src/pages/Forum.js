@@ -18,6 +18,7 @@ export default function Forum(props){
     const [window, oWindow] = useState(false)
     const [forumItems, setForumItems] = useState([])
     const [sign, setSign] = useState('')
+    const [img, setImg] = useState('')
     let user = localStorage.getItem('userId')
 
     const createNewItem = () => {
@@ -44,6 +45,12 @@ export default function Forum(props){
         oWindow(!window)
     }
 
+    const addComment = (txt, theme) => {
+        Axios.post('http://localhost:3001/addComment', {txt: txt, id_user: localStorage.getItem('userId'), text:text, img: img, theme: theme}).then((response) => {
+                console.log(response.data)
+            })
+    }
+
     return (<Box>
         <MainImageOfPage img={props.img} text={props.text} />
         <Box className="container p-3 rounded bg-dark shadow my-5">
@@ -52,7 +59,7 @@ export default function Forum(props){
             </Box>
             <Box>
                 {items.map((item, index) => <Card key={index} className="p-3 my-2 px-5 border border-info bg-dark text-info border-2 shadow">
-                    <Typography onClick={() => openWindow(item.title)} style={{'cursor': 'pointer'}}>{item.title}</Typography>
+                    <Typography onClick={() => openWindow(item.title)} style={{'cursor': 'pointer'}}><i className="material-icons mr-5">forum</i>{item.title}</Typography>
                 </Card>)}
             </Box>
         </Box>
@@ -69,14 +76,20 @@ export default function Forum(props){
                         <Button variant="outlined" color="info" onClick={createNewItem}>Pridať</Button>
                 </Card>
             </Container>
-        </Box>}
+        </Box>} 
         {window && <Box id="dark-background">
-            <Card className="bg-dark container text-center border border-info border-2 text-white p-5 shadow w-75" id="shadow">
+            <Card className="bg-dark container text-center border border-info border-2 text-white p-5 shadow w-75 h-100" id="shadow" style={{'overflowY': 'scroll'}}>
                 <Button variant="outlined" color="error" onClick={() => openWindow(!window)}>x</Button> 
                     <Typography variant="h3" className="text-white mt-2">{sign}</Typography>
                     <Box className="p-5">
                     {forumItems.map((fItems, index) => <ForumItems index={index} data={fItems} />)}
                     </Box>
+                    <Card className="bg-dark container text-center border border-info border-2 text-white p-5 shadow w-75" id="shadow">
+                    <Typography variant="h3">Pridať komentar</Typography>
+                        <textarea cols="80" placeholder="Váš text" name="comment" rows="10" onChange={(e) => setText(e.target.value)}></textarea>
+                        <input type="file" name="file" onChange={(e) => setImg(e.target.value)} />
+                        <Button variant="outlined" color="info" onClick={() => addComment(sign, props.title)}>Pridať</Button>
+                </Card>
                 </Card>
             </Box>}
     </Box>)

@@ -6,23 +6,25 @@ import Grid from '@mui/material/Grid'
 import Axios from 'axios'
 import '../App.css'
 import Card from '@mui/material/Card'
+import TextField from '@mui/material/TextField'
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
     const [info, setInfo] = useState([])
 
-    const openInfo = () => {
+    const openInfo = (id) => {
         infoOpened(!iWindow)
+        console.log(id)
         function getInfo() {
-                Axios.post('http://localhost:3001/getInfo', {product: props.id}).then((response) => {
-                    setInfo(response)
-                    console.log(response)
+                Axios.post('http://localhost:3001/getInfo', {product: id}).then((response) => {
+                    setInfo(response.data)
+                    console.log(response.data[0])
                 })
         }
         getInfo()
     }    
 
-    return(<Grid key={props.index} item xs={6} sm={6} lg={3} xl={3} md={4}>
+    return(<Grid key={props.index} item xs={12} sm={12} lg={4} xl={3} md={6}>
         <Box className="card bg-dark border border-info border-2" id="card">
                     <Box className="card-image">
                         <figure className="image is 4by3 m-2">
@@ -54,7 +56,13 @@ export default function ProductCard(props){
                         <Box className="p-5">
                             <Typography variant="h3">{props.title}</Typography>
                             <Typography variant="h4">{props.price} €</Typography>
-
+                            <Box>
+                            <Box className="message is-success mt-3 w-25 mx-auto my-3 "><Typography className="message-body">Skladom {props.contain} ks</Typography></Box>
+                            </Box>
+                            <Box>
+                                <TextField type="number" className="text-white" style={{'width': 100}} />
+                                <Button variant="outlined" color="success"><i className="material-icons">shopping_cart</i></Button>
+                            </Box>
                         </Box>
                         </Card>
                     </Box>}

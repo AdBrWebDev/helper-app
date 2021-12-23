@@ -287,3 +287,15 @@ prikrytím postihnutého vlhkou plachtou.'),
 ('first-aid', '', 'zlomenina', 'Zlomenina', 'Znehybnenie tak, aby bol znehybnený jeden kĺb pod aj nad zlomeninou'),
 ('first-aid', '', 'zlomenina', 'Zlomenina', 'Horná končatina: Zlomenú hornú končatinu dáme buď do závesu z trojrohej šatky alebo znehybníme priamo v rukáve odevu. Zlomenina kľúčnej kosti sa ošetruje ako zlomenina hornej končatiny'),
 ('first-aid', '', 'zlomenina', 'Zlomenina', 'Dolná končatina: Pri zlomenine dolnej končatiny priložíme zdravú končatinu k postihnutej tak, aby sme s postihnutou nehýbali a priviažeme. Pri veľkej deformácii možno využiť rôzne druhy obloženia na znehybnenie (vankúš, deku, noviny)')
+
+/*articles*/
+CREATE TABLE articles
+(
+	id_user INT,
+    id_article INT PRIMARY KEY AUTO_INCREMENT,
+    mainImg VARCHAR(100) NOT NULL,
+    title VARCHAR(50),
+    rating DOUBLE,
+    likes INT
+)
+ENGINE=INNODB

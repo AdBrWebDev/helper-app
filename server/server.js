@@ -47,12 +47,10 @@ app.post('/findDetails', (req, res) => {
 })
 
 app.post('/getInfo', (req, res) => {
-    dbcon.query("SELECT * FROM eshop_product_image, eshop_product_text WHERE eshop_product_image.id_product = ?", [req.body.product], (err, result) => {
+    dbcon.query("SELECT * FROM e_shop_products WHERE id_product = ?", [req.body.product], (err, result) => {
         res.send(result)
     })
 })
-
-//eshop_product_image.img, eshop_product_text.text LEFT JOIN eshop_product_text ON eshop_product_image.id_product=eshop_product_image.id_product
 
 app.post('/forumUserInfo', (req, res) => {
     dbcon.query("SELECT name, surname, country, avatar FROM users WHERE id_user =?", [req.body.id], (err, result) => {

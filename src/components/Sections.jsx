@@ -12,8 +12,7 @@ export default function Sections(props){
         tl.from('imgSrc', {y: 200, opacity: 0, ease: Power3.zoomIn, delay: .5});
     })
 
-    return(<Box className="my-5 py-2">
-        <Grid container key={props.index}>
+    return(<Grid className="my-5 py-2" container key={props.index}>
             <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                 {props.index % 2 === 0 ? <img src={`/images/${props.img}`} alt={props.title} style={{'maxHeight': 500}} /> : <Box className="p-5 aling-middle">
                     <Typography variant="h3" className="mt-5 pt-5 text-white">{props.title}</Typography>
@@ -26,6 +25,5 @@ export default function Sections(props){
                     <Typography variant="h5" className="pt-4 text-white w-75 mx-auto">{props.text}</Typography>
                     </Box>}
             </Grid>
-        </Grid>
-    </Box>)
+        </Grid>)
 }

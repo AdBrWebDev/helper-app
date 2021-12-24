@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, lazy} from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
@@ -7,6 +7,7 @@ import Axios from 'axios'
 import '../App.css'
 import Card from '@mui/material/Card'
 import TextField from '@mui/material/TextField'
+const Sections = lazy(() => import('./Sections'))
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
@@ -18,11 +19,11 @@ export default function ProductCard(props){
         function getInfo() {
                 Axios.post('http://localhost:3001/getInfo', {product: id}).then((response) => {
                     setInfo(response.data)
-                    console.log(response.data[0])
+                    console.log(response.data)
                 })
         }
         getInfo()
-    }    
+    } 
 
     return(<Grid key={props.index} item xs={12} sm={12} lg={4} xl={3} md={6}>
         <Box className="card bg-dark border border-info border-2" id="card">
@@ -40,13 +41,13 @@ export default function ProductCard(props){
                             <Box style={{'height': 60}}>
                             {props.contain > 0 ? <Box><Button variant="outlined" color="info" className="mr-1"><i className="material-icons">shopping_cart</i></Button>
                             <Button variant="outlined" color="info" className="ml-1"><i className="material-icons" onClick={() => openInfo(props.id)}>info</i></Button></Box> : 
-                            <Box className="message is-danger mt-3"><Typography className="message-body">Vypredané</Typography></Box>}
+                            <Box className="message is-danger mt-3"><Typography className="message-body">Nedostupné</Typography></Box>}
                             </Box>
                         </Box>
                     </Box>
                 </Box>
                 {iWindow && <Box id="dark-background">
-                        <Card className="container bg-dark text-center text-white border border-2 border-info">
+                        <Card className="container bg-dark text-center text-white border border-2 border-info h-100" style={{'overflowY': 'scroll'}}>
                         <Box className="my-4">
                             <Button variant="outlined" color="error" onClick={() => openInfo(!iWindow)}>x</Button>
                         </Box>
@@ -62,6 +63,9 @@ export default function ProductCard(props){
                             <Box>
                                 <TextField type="number" className="text-white" style={{'width': 100}} />
                                 <Button variant="outlined" color="success"><i className="material-icons">shopping_cart</i></Button>
+                            </Box>
+                            <Box>
+                                {info.map((info, index) => <Sections index={index} img={info.img} text={info.text} title={info.title} />)}
                             </Box>
                         </Box>
                         </Card>

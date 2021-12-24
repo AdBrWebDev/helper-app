@@ -33,30 +33,13 @@ export default function AppInDevices(){
                         <Typography className="message-body">Aplikacie budú dostupné od: 11.11.2022</Typography>
                     </Box>
                         <Grid container>
-                            <Grid className="my-4" item xs={12} sm={12} md={6} lg={3} xl={3}>
-                                <Box>
-                                <i className="material-icons py-5" id="devices">smartphone</i>
-                                </Box>
-                                <Button color="info" variant="outlined" className="mt-3">Stiahnuť Pathfinder</Button>
-                            </Grid>
-                            <Grid className="my-4" item xs={12} sm={12} md={6} lg={3} xl={3}>
-                                <Box>
-                                <i className="material-icons py-5" id="devices">laptop</i>
-                                </Box>
-                                <Button color="info" variant="outlined" className="mt-3">Stiahnuť Pathfinder</Button>
-                            </Grid>
-                            <Grid className="my-4" item xs={12} sm={12} md={6} lg={3} xl={3}>
-                                <Box>
-                                <i className="material-icons py-5" id="devices">tv</i>
-                                </Box>
-                                <Button color="info" variant="outlined" className="mt-3">Stiahnuť Pathfinder</Button>
-                            </Grid>
-                            <Grid className="my-4" item xs={12} sm={12} md={6} lg={3} xl={3}>
-                                <Box>
-                                <i className="material-icons py-5" id="devices">watch</i>
-                                </Box>
-                                <Button color="info" variant="outlined" className="mt-3">Stiahnuť Pathfinder</Button>
-                            </Grid>
+                            {devices.map((device, index) => <Grid key={index} className="my-4" item xs={12} sm={12} md={6} lg={3} xl={3}>
+                                    <Box>
+                                        <i className="material-icons py-5" id="devices">{device.icon}</i>
+                                    </Box>
+                                    <Button color="info" variant="outlined" className="mt-3">Stiahnuť Pathfinder</Button>
+                                </Grid>
+                            )}
                         </Grid>
                     </CardContent>
                 </Card>

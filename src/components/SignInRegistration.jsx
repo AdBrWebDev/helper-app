@@ -16,7 +16,6 @@ import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid'
 
-
 export default function SignInRegistration(){
     const [form, openForm] = useState(false)
     const [name, setName] = useState('')
@@ -56,7 +55,6 @@ export default function SignInRegistration(){
                 setUser(response.data.massage)
             }else{
                 setUser(response.data[0].name)
-                console.log(response)
                 localStorage.setItem("userId", response.data[0].id_user)
                 localStorage.setItem("userName", response.data[0].name)
                 localStorage.setItem("email", response.data[0].e_mail)
@@ -72,9 +70,9 @@ export default function SignInRegistration(){
         })
     }, [])
 
-    const logout = () => {
-        Axios.get("http://localhost:3001/logout").then(localStorage.removeItem("username") && localStorage.removeItem("id_user"))
-    }
+    const logout = () => {localStorage.removeItem("userName");
+     localStorage.removeItem("userId") ;
+     window.location.reload()}
 
     return(<Box>
         {localStorage.getItem("userName") != null ? <Box>

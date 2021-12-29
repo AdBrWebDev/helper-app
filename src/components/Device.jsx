@@ -25,7 +25,7 @@ export default function Device(props){
             <Typography>{props.text}</Typography>
             {device && <Box id="dark-background">
                 <Container>
-                    <Card className="bg-dark p-5 rounded text-white container border border-info">
+                    <Card className="p-5 rounded text-white container border border-dark" id="card">
                         <CardActions>
                             <Button variant="outlined" className="mx-auto mb-4" onClick={() => openDevice(!device)} color="error">x</Button>
                         </CardActions>
@@ -34,9 +34,9 @@ export default function Device(props){
                             <Typography variant="h5" className="mt-2">{props.text}</Typography>
                             <TableContainer component={Paper} style={{'backgroundColor': 'transparent'}}>
                                 <Typography variant="h4" className="text-white my-3 mt-4">Minimálne hardvérové požiadavky</Typography>
-                                <Table className="text-white table table-striped table-dark table bordered">
+                                <Table className="text-white table table-striped bg-transparent table-bordered">
                                     <TableBody>
-                                        {(props.terms).map((term, index) => <TableRow index={index}>
+                                        {(props.terms).map((term, index) => <TableRow key={index}>
                                             <TableCell className="text-white py-4">{importantText[index]}</TableCell>
                                             <TableCell className="text-white py-4">{term[importantParts[index]]}</TableCell>
                                         </TableRow>

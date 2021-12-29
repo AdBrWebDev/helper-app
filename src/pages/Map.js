@@ -11,8 +11,7 @@ export default function Map(){
         navigator.geolocation.getCurrentPosition((pos)=> {
             setLat(pos.coords.latitude)
             setLon(pos.coords.longitude)
-            console.log(pos.coords.latitude, pos.coords.longitude)});
-    });
+    })});
 
     const MyMapComponent = compose(
       withProps({

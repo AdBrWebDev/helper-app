@@ -6,12 +6,15 @@ import Grid from '@mui/material/Grid'
 import Axios from 'axios'
 import '../App.css'
 import Card from '@mui/material/Card'
-import TextField from '@mui/material/TextField'
+import Rating from '@mui/material/Rating'
+import Divider from '@mui/material/Divider'
+import StarIcon from '@mui/icons-material/Star'
 const Sections = lazy(() => import('./Sections'))
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
     const [info, setInfo] = useState([])
+    const [rating, setRating] = useState(null)
 
     const openInfo = (id) => {
         infoOpened(!iWindow)
@@ -26,7 +29,7 @@ export default function ProductCard(props){
     } 
 
     return(<Grid key={props.index} item xs={12} sm={12} lg={4} xl={3} md={6}>
-        <Box className="card bg-dark border border-info border-2" id="card">
+        <Box className="card border border-dark" id="cardh">
                     <Box className="card-image">
                         <figure className="image is 4by3 m-2">
                             <img style={{"height": 250, 'width': 250, 'margin': 'auto'}} src={`${props.img}`} alt={props.title} />
@@ -47,27 +50,34 @@ export default function ProductCard(props){
                     </Box>
                 </Box>
                 {iWindow && <Box id="dark-background">
-                        <Card className="container bg-dark text-center text-white border border-2 border-info h-100" style={{'overflowY': 'scroll'}}>
-                        <Box className="my-4">
-                            <Button variant="outlined" color="error" onClick={() => openInfo(!iWindow)}>x</Button>
+                <Box className="mb-5 mx-auto text-center">
+                            <Button variant="contained" color="error" onClick={() => openInfo(!iWindow)}>x</Button>
                         </Box>
-                        <Box>
-                            <img style={{'height': 300}} src={props.img} alt={props.title} />
-                        </Box>
-                        <Box className="p-5">
-                            <Typography variant="h3">{props.title}</Typography>
-                            <Typography variant="h4">{props.price} €</Typography>
+                        <Card className="container text-center text-white border p-5 border-dark" id="card" style={{'marginTop': 30, 'overflowY': 'scroll'}}>
+                            <Grid container>
+                                <Grid item xs={12} sm={12} md={5} xl={5} lg={5}>
+                                <img style={{'height': 350, 'marginTop': 50}} src={props.img} alt={props.title} />
+                                </Grid>
+                                <Grid item xs={12} sm={12} md={7} xl={7} lg={7}>
+                                    <Card id="card" className="border p-5 h-100 border-dark">
+                                <Typography variant="h3">{props.title}</Typography>
+                                <Divider className="w-75 mx-auto my-3 bg-dark" />
+                                <Box>
+                                    <Typography className="my-2" variant="h5" style={{'text-align': 'left'}}>Prevedenie:</Typography>
+                                    <Typography className="my-2" variant="h5" style={{'text-align': 'left'}}>Veľkosti:</Typography>
+                                </Box>
+                                <Button variant="contained" color="info">Info o produkte</Button>
                             <Box>
-                            <Box className="message is-success mt-3 w-25 mx-auto my-3 "><Typography className="message-body">Skladom {props.contain} ks</Typography></Box>
+                            <Typography variant="h2" style={{'text-align': 'left'}}>{props.price} €</Typography>
+                             </Box>
+                            <Box className="d-flex">
+                            <Rating className="my-auto" value={3} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />} />
+                            <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box>
+                            <Button variant="contained" color="success"><i className="material-icons">shopping_cart</i></Button>
                             </Box>
-                            <Box>
-                                <TextField type="number" className="text-white" style={{'width': 100}} />
-                                <Button variant="outlined" color="success"><i className="material-icons">shopping_cart</i></Button>
-                            </Box>
-                            <Box>
-                                {info.map((info, index) => <Sections index={index} img={info.img} text={info.text} title={info.title} />)}
-                            </Box>
-                        </Box>
+                            </Card>
+                                </Grid>
+                            </Grid>
                         </Card>
                     </Box>}
     </Grid>);

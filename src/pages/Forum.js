@@ -49,7 +49,7 @@ export default function Forum(props){
         Axios.post('http://localhost:3001/addComment', {txt: txt, id_user: localStorage.getItem('userId'), text:text, img: img, theme: theme}).then((response) => {
                 console.log(response.data)
             })
-    }
+        }
 
     return (<Box>
         <MainImageOfPage img={props.img} text={props.text} />
@@ -58,37 +58,42 @@ export default function Forum(props){
             <Button variant="outlined" color="info" onClick={() => NewTheme(!newTheme)}>Pridať tému</Button>
             </Box>
             <Box>
-                {items.map((item, index) => <Card key={index} className="p-3 my-2 px-5 border border-info bg-dark text-info border-2 shadow">
+                {items.map((item, index) => <Card id="card" key={index} className="p-3 my-2 px-5 border border-dark text-info border-2 shadow">
                     <Typography onClick={() => openWindow(item.title)} style={{'cursor': 'pointer'}}><i className="material-icons mr-5">forum</i>{item.title}</Typography>
                 </Card>)}
             </Box>
         </Box>
         <Box className="text-center w-25 mx-auto">
-                <Pagination style={{'background': 'transparent'}} className="my-5" size="large" variant="outlined" count={2} color="info" />
+                <Pagination style={{'background': 'transparent'}} className="my-5" size="large" count={2} color="info" />
         </Box>
         {newTheme && <Box id="dark-background">
             <Container>  
-                <Card className="bg-dark container text-center border border-info border-2 text-white p-5 shadow w-75" id="shadow">
-                    <Button variant="outlined" color="info" onClick={() => NewTheme(!newTheme)} style={{'top': -10, 'left': 10, 'position': 'relative', 'float': 'right'}}>x</Button>
+                <Card className="container text-center border border-dark border-2 text-white p-5 shadow w-75" id="card">
+                    <Button variant="contained" color="error" onClick={() => NewTheme(!newTheme)} style={{'top': -10, 'left': 10, 'position': 'relative', 'float': 'right'}}>x</Button>
                     <Typography variant="h3">Pridať novú tému</Typography>
                         <input type="text" placeholder="Názov témy" className="form-control mb-4 text-center text-info" name="title" onChange={(e) => setTitle(e.target.value)} />
                         <textarea cols="80" placeholder="Váš text" name="text" rows="10" onChange={(e) => setText(e.target.value)}></textarea>
-                        <Button variant="outlined" color="info" onClick={createNewItem}>Pridať</Button>
+                        <Button variant="contained" color="info" onClick={createNewItem}>Pridať</Button>
                 </Card>
             </Container>
         </Box>} 
         {window && <Box id="dark-background">
-            <Card className="bg-dark container text-center border border-info border-2 text-white p-5 shadow w-75 h-100" id="shadow" style={{'overflowY': 'scroll'}}>
-                <Button variant="outlined" color="error" onClick={() => openWindow(!window)}>x</Button> 
+        <Box className="text-center">
+        <Button variant="contained" className="my-2" color="error" onClick={() => openWindow(!window)}>x</Button>
+        </Box>
+            <Card className="container text-center border border-info border-2 text-white p-5 shadow" id="card" style={{'overflowY': 'scroll', 'height': "90%"}}> 
                     <Typography variant="h3" className="text-white mt-2">{sign}</Typography>
                     <Box className="p-5">
                     {forumItems.map((fItems, index) => <ForumItems index={index} data={fItems} />)}
                     </Box>
-                    <Card className="bg-dark container text-center border border-info border-2 text-white p-5 shadow w-75" id="shadow">
+                    <Pagination style={{'background': 'transparent'}} className="my-5" size="large" count={2} color="info" />
+                    <Card className="container text-center text-white p-5 shadow w-100" id="card">
                     <Typography variant="h3">Pridať komentar</Typography>
-                        <textarea cols="80" placeholder="Váš text" name="comment" rows="10" onChange={(e) => setText(e.target.value)}></textarea>
-                        <input type="file" name="file" onChange={(e) => setImg(e.target.value)} />
-                        <Button variant="outlined" color="info" onClick={() => addComment(sign, props.title)}>Pridať</Button>
+                        <textarea cols="10" placeholder="Váš text" name="comment" rows="15" onChange={(e) => setText(e.target.value)}></textarea>
+                        
+                        <Box className="my-3">
+                        <Button variant="contained" color="info" onClick={() => addComment(sign, props.title)}>Pridať</Button>
+                        </Box>
                 </Card>
                 </Card>
             </Box>}

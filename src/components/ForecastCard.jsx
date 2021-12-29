@@ -1,10 +1,11 @@
 import React, {useState, lazy} from 'react';
-import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import '../App.css';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
 const HourForecast = lazy(() => import('./HourForecast'));
 
 export default function ForecastCard(props){
@@ -20,10 +21,11 @@ export default function ForecastCard(props){
         <Typography><i className="material-icons text-info">thermostat</i>{props.forecast.day.mintemp_c} °C</Typography>
         <Typography><i className="material-icons text-info">opacity</i>{props.forecast.day.totalprecip_mm} mm</Typography>
         </Paper>
-        {(showWeather) ? <Container id="dark-background" className="bg-dark text-white mt-5 p-5 shadow-lg rounded text-center" style={{height: '90%', overflow: 'auto'}}>
-        <Button variant="outlined" color="info" onClick={()=> openWeather(!showWeather)} style={{position: 'relative', float: 'right'}}>x</Button>
+        {(showWeather) ? <Box id="dark-background">
+            <Card style={{'height': '90%', 'overflow': 'scroll'}} id="card" className="text-white mt-5 p-5 shadow-lg text-center">
+        <Button variant="contained" color="info" onClick={()=> openWeather(!showWeather)} style={{position: 'relative', float: 'right'}}>x</Button>
         <Typography variant="h6" className="mb-1">{props.forecast.date}</Typography>
-        <img src={conditionIcon} alt="icon" />
+        <img style={{transform: "scale(1.8)"}} src={conditionIcon} alt="icon" />
         <Typography>{props.forecast.day.condition.text}</Typography>
         <Grid container className="mt-2">
         <Grid item xs={6}>
@@ -50,6 +52,7 @@ export default function ForecastCard(props){
         <Grid>
             {props.forecast.hour.map((hourF) => <HourForecast forecast={hourF} />)}
         </Grid>
-        </Container>: null}
+        </Card>
+        </Box>: null}
     </Grid>)
 }

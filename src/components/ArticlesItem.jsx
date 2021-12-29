@@ -27,11 +27,11 @@ export default function ArticlesItem(props){
     console.log(data)
 
     return(<Grid key={props.index} item xs={12} sm={6} md={4} lg={3} xl={3}>
-            <Card className="text-center bg-dark border border-info text-white border-2 pb-2" id="card">
+            <Card className="text-center border border-dark text-white pb-2" id="cardh">
                 <CardContent>
                     <Box className="card-image mb-5">
                         <figure className="image is-4by3">
-                            <img src={`${props.data[0].mainImg}`} alt="sliezsky dom" />
+                            <img src={`${props.data[0].mainImg}`} alt={props.data[0].title} />
                         </figure>
                         <button className="btn-floating halfway-fab btn-large waves-effect info" onClick={() => openArticle(props.data[0].id_article)}><i class="material-icons">auto_stories</i></button>
                     </Box>

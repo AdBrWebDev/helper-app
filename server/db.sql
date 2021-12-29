@@ -299,3 +299,23 @@ CREATE TABLE articles
     likes INT
 )
 ENGINE=INNODB
+
+/*sponsors*/
+CREATE TABLE sponsors
+(
+	title VARCHAR(60),
+    img VARCHAR(60)
+)
+ENGINE=INNODB
+
+/*sponsors*/
+INSERT INTO sponsors(title, img)
+VALUES
+('mtbiker', 'mtbiker.png'),
+('strava', 'strava.png'),
+('xiaomi', 'xiaomi.png'),
+('sony', 'sony.png'),
+('expres', 'expres.png'),
+('northwave', 'northwave.png'),
+('poc', 'poc.png'),
+('birell', 'birell.png')

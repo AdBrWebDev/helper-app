@@ -79,6 +79,12 @@ app.post('/addComment', (req, res) => {
     })
 })
 
+app.get('/sponsors', (req, res) => {
+    dbcon.query("SELECT * FROM sponsors", (err, result) => {
+        res.send(result)
+    })
+})
+
 app.post('/articles', (req, res) => {
     const SelectPlus = "SELECT * FROM articles WHERE theme = ?";
     dbcon.query(SelectPlus, [req.body.title], (err, result) => {

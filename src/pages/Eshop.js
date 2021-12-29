@@ -17,17 +17,16 @@ export default function Eshop(){
             setProducts(response.data)
     });
 }, []);
-        console.log(products)
 
     return(<Box className="text-white">
-        <MainImageOfPage id="main-image" img="gps-tracker.png" text="Pridaj sa k nám" href="" />
+        <MainImageOfPage id="main-image" img="gps.png" text="Pridaj sa k nám" href="" />
         <Box className="container p-5 my-5">
         <Box className="message is-info mt-3">
             <Typography className="message-body">Začiatok predaja 22.11.2022</Typography>
         </Box>
         <Container>
         <Typography variant="h3" className="my-4 mt-5">GPS zariadenia a oblečenie</Typography>
-        <Grid container spacing={1}>
+        <Grid container spacing={3}>
                 {products.map((product, index) => <ProductCard index={index} id={product.id_product} contain={product.contain_in_warehouse} img={product.mainImg} title={product.title} price={product.price} />)}
         </Grid>
         </Container>

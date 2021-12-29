@@ -8,7 +8,7 @@ const Sections = lazy(() => import('../../components/Sections'))
 const Sponsors = lazy(() => import('../../components/Sponsors'))
 
 export default function MainPage(){
-    const sections = [{img: 'gps-tracker.png', title: 'E-shop', link: '../Eshop.js', text: "Chceš sa k nám pridať"},
+    const sections = [{img: 'gps.png', title: 'E-shop', link: '../Eshop.js', text: "Chceš sa k nám pridať?"},
     {img: 'forum-img.jpg', title: 'Fórum', link: './Forum', text: "Potrebuješ pomôcť?"},
     {img: 'maps.png', title: 'Mapa', link: '../Map.js', text: "So mnou sa nestratíš"},
     {img: 'slDom.jpg', title: 'Články', link: './Articles', text: "Spoznávaj nové miesta"},
@@ -21,6 +21,5 @@ export default function MainPage(){
         <LinearProgress className="container bg-transparent" />
         <Typography variant="h2" color="white" className="my-5 pt-5">Prečo pathfinder</Typography>
         {sections.map((section, index) => <Sections index={index} img={section.img} title={section.title} link={section.link} text={section.text}/>)}
-        <Sponsors />
     </Box>)
 }

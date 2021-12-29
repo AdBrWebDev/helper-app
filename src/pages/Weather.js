@@ -10,6 +10,7 @@ import ForecastCard from '../components/ForecastCard';
 
 export default function Weather(){
     const [weather, openWeather] = useState(false);
+    const [details, showDetails] = useState(false);
     const [town, setTown] = useState('');
     const [curWeather, setCurrentWeather] = useState([]);
     const [forecast, setForecast] = useState([]);
@@ -32,19 +33,20 @@ export default function Weather(){
         setLocation(data.location);
         setCondition(data.current.condition);
     })
+    showDetails(true)
     }
     return(
         <>
         <Button variant="contained" className="btn-floating pulse btn-info btn-waves waves-light" onClick={() => openWeather(!weather)} style={{bottom: 30, right: 30, position: 'fixed'}}><i className="material-icons">wb_sunny</i></Button>
       {(weather) ? 
         (<Box id="dark-background">
-            <Container className="bg-dark text-white mt-5 p-5 shadow-lg rounded border border-info border-2" style={{height: '90%', overflow: 'auto'}}>
-            <Button variant="outlined" color="info" onClick={()=> openWeather(!weather)} style={{position: 'relative', float: 'right'}}>x</Button>
+            <Container className="text-white mt-5 p-5 shadow-lg border border-dark border-2" id="card" style={{height: '90%', overflow: 'auto'}}>
+            <Button variant="contained" color="info" onClick={()=> openWeather(!weather)} style={{position: 'relative', float: 'right'}}>x</Button>
                 <Box noValidate autoComplete="off" className="p-5 mt-5 text-center" >
                     <InputBase className="mx-3 text-center text-white" value={town} onChange={(e) => setTown(e.target.value)} />
                     <Button disabled={town.length === 0} onClick={() => searchWeather()} variant="contained" color="info"><i className="material-icons" on>search</i></Button>
                 </Box>
-                {(town) ?
+                {(details) ?
                 (<Box className="text-center">
                     <Typography variant="h2">{town}</Typography>
                     <img src={condition.icon} className="my-4" style={{transform: "scale(1.8)"}} alt={condition.text} />

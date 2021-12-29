@@ -1,10 +1,11 @@
-import * as React from 'react'
+import React, {lazy} from 'react'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import '../App.css';
 import Avatar from '@mui/material/Avatar'
+const Sponsors = lazy(() => import('./Sponsors')) 
 
 export default function Footer(){
     let status;
@@ -12,9 +13,9 @@ export default function Footer(){
     window.addEventListener('online', () => CheckStatus())
     function CheckStatus(){
         if(navigator.onLine){
-            status = <Box class='py-1 bg-success'><i className="material-icons my-auto mx-1">wifi</i>online</Box>;
+            status = <Box className='py-1 notification is-success'><i className="material-icons my-auto mx-1">wifi</i>online</Box>;
         }else{
-            status = <Box class='bg-danger'><i className="material-icons my-auto">wifi_off</i>offline</Box>;
+            status = <Box className='py-1 notification is-danger'><i className="material-icons my-auto">wifi_off</i>offline</Box>;
         }
         return status;
     }
@@ -22,6 +23,7 @@ export default function Footer(){
     return(
         <Box className="bg-dark" style={{'bottom': 0}}>
             <Typography className="text-center text-white">{CheckStatus()}</Typography>
+            <Sponsors />
             <Box className="p-5">
             <Grid container className="container py-5">
                 <Grid item className=" my-4 text-center container" xs={12} sm={12} md={4} lg={4} xl={4}>

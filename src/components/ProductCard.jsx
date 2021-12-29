@@ -1,4 +1,4 @@
-import React, {useState, lazy} from 'react'
+import React, {useState} from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
@@ -9,7 +9,6 @@ import Card from '@mui/material/Card'
 import Rating from '@mui/material/Rating'
 import Divider from '@mui/material/Divider'
 import StarIcon from '@mui/icons-material/Star'
-const Sections = lazy(() => import('./Sections'))
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
@@ -71,7 +70,7 @@ export default function ProductCard(props){
                             <Typography variant="h2" style={{'text-align': 'left'}}>{props.price} €</Typography>
                              </Box>
                             <Box className="d-flex">
-                            <Rating className="my-auto" value={3} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />} />
+                            <Rating className="my-auto" value={rating} onChange={(e) => setRating(e.target.value)} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />} />
                             <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box>
                             <Button variant="contained" color="success"><i className="material-icons">shopping_cart</i></Button>
                             </Box>

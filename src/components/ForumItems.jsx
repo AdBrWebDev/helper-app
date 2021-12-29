@@ -36,6 +36,7 @@ export default function ForumItems(props){
             </Grid>
             <Grid item xs={12} sm={12} md={9} xl={10} lg={10}>
                 <Typography>{props.data.text}</Typography>
+                {props.data.image == null || props.data.image == '' ? '' : <img src={props.data.image} height="250" alt="fourmImg"/>}
             </Grid>
         </Grid>
         <Box className="d-flex">

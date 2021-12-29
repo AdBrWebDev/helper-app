@@ -17,7 +17,7 @@ function App() {
     <Suspense fallback={'loading....'}>
       <Router>
         <Box className="bg-dark">
-        <nav>
+        <nav className="bg-dark">
           <ul>
             <li>
               <Link to="/">logo</Link>

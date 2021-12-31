@@ -89,8 +89,8 @@ export default function Forum(props){
                     <Pagination style={{'background': 'transparent'}} className="my-5" size="large" count={2} color="info" />
                     <Card className="container text-center text-white p-5 shadow w-100" id="card">
                     <Typography variant="h3">Pridať komentar</Typography>
-                        <textarea cols="10" placeholder="Váš text" name="comment" rows="15" onChange={(e) => setText(e.target.value)}></textarea>
-                        
+                        <textarea cols="10" placeholder="Váš komentár" className="text-center" name="comment" rows="15" onChange={(e) => setText(e.target.value)}></textarea>
+                        <input className="form-control w-75 bg-transparent mx-auto my-1" type="file" />
                         <Box className="my-3">
                         <Button variant="contained" color="info" onClick={() => addComment(sign, props.title)}>Pridať</Button>
                         </Box>

@@ -49,7 +49,7 @@ export default function Weather(){
                 {(details) ?
                 (<Box className="text-center">
                     <Typography variant="h2">{town}</Typography>
-                    <img src={condition.icon} className="my-4" style={{transform: "scale(1.8)"}} alt={condition.text} />
+                    <amp-img src={condition.icon} className="my-4" style={{transform: "scale(1.8)"}} alt={condition.text} />
                     <Typography>{condition.text}</Typography>
                     <Typography variant="h2">{curWeather.temp_c} °C</Typography>
                     <Grid container className="text-left">

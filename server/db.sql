@@ -319,3 +319,20 @@ VALUES
 ('northwave', 'northwave.png'),
 ('poc', 'poc.png'),
 ('birell', 'birell.png')
+
+/*skiing data*/
+INSERT INTO pathfinderplus(theme, image, header, text)
+VALUES
+('skiing', 'broken-knee.jpg', 'Zranenia kolena', 'Poranenia predného a zadného skríženého väzu (ACL/PCL) : Ide o poranenia väzov, ktoré stabilizujú koleno, a často sa vyskytujú s náhlym skrútením, kým sú nohy zasadené. Poranenia ACL sa často liečia konzervatívne, ale v prípade úplného roztrhnutia môže byť potrebná operácia a rekonštrukcia.'),
+('skiing', 'broken-knee2.jpg', 'Zranenie kolena', 'Meniskus sa trhá : Meniskus je chrupavka v kolene, ktorá umožňuje plynulý pohyb. Pri náhlych krútivých pohyboch môže dôjsť k roztrhnutiu. Liečba je zvyčajne konzervatívna, ale veľké slzy môžu vyžadovať chirurgický zákrok.'),
+('skiing', 'injuredHead.jpg','Zranenia hlavy, krku a ramien','Otras mozgu : Pády pri lyžovaní alebo snowboarde môžu mať za následok zranenie mozgu. Kým otras mozgu je mierne traumatické poranenie mozgu, každý úder do hlavy je potrebné starostlivo sledovať. Otrasom mozgu najlepšie predídete nasadením prilby.'),
+('skiing', 'injuredHead2.jpg','Zranenia hlavy, krku a ramien','Whiplash : Whiplash je poranenie krku mäkkými tkanivami, často sa označuje ako napätie alebo podvrtnutie krku. Náhle zastavenie môže spôsobiť toto zranenie hyperextenzie, ktoré by mal posúdiť lekár, aby poskytol správny liečebný plán.'),
+('skiing', 'injuredHead3.jpg','Zranenia hlavy, krku a ramien','Zlomenina kľúčnej kosti : Pri páde sa môže stať zlomenina kľúčnej kosti. Obvykle sa lieči nosením popruhu, ktorý zabraňuje pohybu ramena a ramena a súčasne umožňuje uzdravenie kosti.'),
+('skiing', 'injuredHead4.jpg','Zranenia hlavy, krku a ramien','Roztrhnutá rotátorová manžeta : Toto zranenie ramena, pri ktorom dochádza k roztrhnutiu šľachy, môže nastať v dôsledku opakujúceho sa namáhania alebo pri páde.'),
+('skiing', 'injuredHead5.jpg','Zranenia hlavy, krku a ramien','Oddelenie ramien : K tomuto zraneniu môže dôjsť pri páde na vystretú ruku alebo priamo na špičku ramena. Obvykle sa konzervatívne ošetruje odpočinkom, ľadom a závesom.'),
+('skiing', 'injuredHead6.jpg','Zranenia hlavy, krku a ramien','Vykĺbenie ramena : Toto zranenie je v inej oblasti kĺbu ako oddelenie a vyžaduje si zmenšenie. Potom môže byť v závislosti od stupňa poranenia potrebná buď konzervatívna liečba, alebo chirurgický zákrok.'),
+('skiing', 'injuredHands.jpg','Zranenia rúk','palec lyžiara : Ide o akútne zranenie väzov, ktoré sa často stáva pri páde ruky do popruhu lyžiarskej palice. Váš palec sa môže zachytiť a odtiahnuť od ruky. To môže spôsobiť natrhnutie väziva, čo má za následok ťažkosti s uchopením. Liečba je často sádrou alebo dlahou, ale môže byť potrebná operácia.'),
+('skiing', 'injuredHands.jpg2','Zranenia rúk','Vyvrtnutie zápästia : Pri pádoch môže dôjsť k vyvrtnutiu, ktoré sa zvyčajne konzervatívne ošetruje odpočinkom, ľadom, kompresiou, vyvýšením a nesteroidnými protizápalovými liekmi (NSAID), ako je ibuprofén.'),
+('skiing', 'injuredHands.jpg3','Zranenia rúk','Zlomeniny prstov : Môžu sa vyskytnúť aj pri páde. Liečba je zvyčajne s dlahou, ale môže byť potrebná redukcia alebo chirurgický zákrok. Bez vhodnej liečby môže postihnutý prst zostať stuhnutý a bolestivý.'),
+('skiing', 'injuredBack.jpg','Zranenia chrbta','Bolesť krížov : Silné pohyby sú jednou z príčin bolestí krížov a môžete si spôsobiť zranenie z nadmerného používania, pádov alebo nepríjemného vstávania po páde.'),
+('skiing', 'injuredBack2.jpg','Zranenia chrbta','Herniované disky : Pri páde môže dôjsť k zraneniu, pri ktorom vám praskne disk v chrbtici a vytečie tekutina podobná želé. To môže podráždiť vaše nervy a spôsobiť bolesť chrbta. Toto zranenie sa často bude liečiť konzervatívne, ale môže sa odporučiť chirurgický zákrok.')

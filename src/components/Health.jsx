@@ -64,7 +64,7 @@ export default function Health(){
                 {details.map((detail, index) => <Box className="my-5" key={index}>
                     <Grid container>
                         <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>
-                        {detail.image == null || detail.image == '' ? <Skeleton variant="rectangular" width="300" height="100" /> : <img src={detail.image} alt="help" loading="lazy" />}
+                        {detail.image == null || detail.image == '' ? <Skeleton variant="rectangular" width="300" height="100" /> : <amp-img src={detail.image} alt="help" loading="lazy" />}
                         </Grid>
                         <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>
                         <Typography variant="h1">{index+1}</Typography>

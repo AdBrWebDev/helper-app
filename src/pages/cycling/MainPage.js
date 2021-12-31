@@ -5,7 +5,6 @@ import LinearProgress from '@mui/material/LinearProgress'
 const AppInDevices = lazy(() => import('../../components/AppInDevices'))
 const MainImageOfPage = lazy(() => import('../../components/MainImageOfPage'))
 const Sections = lazy(() => import('../../components/Sections'))
-const Sponsors = lazy(() => import('../../components/Sponsors'))
 
 export default function MainPage(){
     const sections = [{img: 'gps.png', title: 'E-shop', link: '../Eshop.js', text: "Chceš sa k nám pridať?"},

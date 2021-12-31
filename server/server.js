@@ -41,7 +41,7 @@ app.get('/signs', (req, res) => {
 
 app.post('/findDetails', (req, res) => {
     const header = req.body.search;
-    dbcon.query(`SELECT * FROM pathfinder_plus WHERE header = ?`, [header], (err, result) => {
+    dbcon.query(`SELECT * FROM pathfinderplus WHERE header = ?`, [header], (err, result) => {
         res.send(result)
     })
 })
@@ -53,7 +53,7 @@ app.post('/getInfo', (req, res) => {
 })
 
 app.post('/forumUserInfo', (req, res) => {
-    dbcon.query("SELECT name, surname, country, avatar FROM users WHERE id_user =?", [req.body.id], (err, result) => {
+    dbcon.query("SELECT nickname, avatar FROM users WHERE id_user =?", [req.body.id], (err, result) => {
         res.send(result)
     })
 })
@@ -65,7 +65,7 @@ app.get('/products', (req, res) => {
 })
 
 app.post('/pathPlus', (req, res) => {
-    const SelectPlus = "SELECT DISTINCT(header) FROM pathfinder_plus WHERE theme = ?";
+    const SelectPlus = "SELECT DISTINCT(header) FROM pathfinderplus WHERE theme = ?";
     dbcon.query(SelectPlus, [req.body.search], (err, result) => {
         res.send(result)
     })

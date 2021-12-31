@@ -67,7 +67,7 @@ export default function ProductCard(props){
                                 </Box>
                                 <Button variant="contained" color="info">Info o produkte</Button>
                             <Box>
-                            <Typography variant="h2" style={{'text-align': 'left'}}>{props.price} €</Typography>
+                            <Typography variant="h2" style={{'textAlign': 'left'}}>{props.price} €</Typography>
                              </Box>
                             <Box className="d-flex">
                             <Rating className="my-auto" value={rating} onChange={(e) => setRating(e.target.value)} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />} />

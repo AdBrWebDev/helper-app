@@ -74,7 +74,7 @@ export default function Nature(){
                 <Card className="my-5 container p-5 bg-dark border border-success" id='nature-border'>
                 <Button variant="outlined" color="error" onClick={() => openForm(!form)}>x</Button>
                 <Box className="w-25 h-25 mx-auto my-3">
-                    <img src="/images/sEarth.png" alt="save nature" />
+                    <amp-img src="/images/sEarth.png" alt="save nature" />
                     </Box>
                     <Typography variant="h5" color="white">Pomôcť zelenšej budúcnosti, môžeš aj ty. Stačí jeden klik.</Typography>
                     <Button variant='outlined' color='success' className="my-4" onClick={submitNatureForm}>Podpisať</Button>

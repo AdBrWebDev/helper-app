@@ -12,7 +12,7 @@ export default function Sponsors(){
 
     return(
         <Grid container className="container mt-5">
-            {sponsors.map((sponsor, index) => <Grid className="my-auto p-5" xs={6} sm={6} md={3} lg={2} xl={2} item key={index}><img src={`pathfinderImages/${sponsor.img}`} alt={sponsor.title} /></Grid>)}
+            {sponsors.map((sponsor, index) => <Grid className="my-auto p-5" xs={6} sm={4} md={3} lg={2} xl={2} item key={index}><img src={`pathfinderImages/${sponsor.img}`} alt={sponsor.title} /></Grid>)}
         </Grid>
     )
 }

@@ -149,12 +149,13 @@ app.post('/register', (req, res) => {
     const age = req.body.age;
     const e_mail = req.body.e_mail;
     const password = req.body.password;
+    const nick = req.body.nick;
     bcrypt.hash(password, rounds, (err, hash) => {
         if(err){
             console.log(err)
         }
-        dbcon.query("INSERT INTO users (id_user, name, surname, phone, country, city, street, age, is_admin, avatar, e_mail, password) VALUES(?,?,?,?,?,?,?,?,?,?,?, ?)", 
-            ['',name, surname, phone, country, city, street,age, '', '', e_mail, hash], (err, result) => {
+        dbcon.query("INSERT INTO users (id_user, name, surname, phone, country, city, street, age, is_admin, avatar, e_mail, password, nick) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", 
+            ['',name, surname, phone, country, city, street,age, '', '', e_mail, hash, nick], (err, result) => {
             console.log(err)
         })
     })

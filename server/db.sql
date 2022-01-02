@@ -45,26 +45,6 @@ CREATE TABLE e_shop
 )
 ENGINE=INNODB
 
-
-/*e-shop product image*/
-CREATE TABLE eshop_product_image
-(
-	id_product INT NOT NULL,
-    img MEDIUMBLOB,
-    alt VARCHAR(20),
-    FOREIGN KEY (id_product) REFERENCES e_shop(id_product)
-)
-ENGINE=INNODB
-
-/*e-shop product text*/
-CREATE TABLE eshop_product_text
-(
-	id_product INT,
-    text TEXT(5000),
-    FOREIGN KEY (id_product) REFERENCES e_shop(id_product)
-)
-ENGINE=INNODB
-
 /*orders*/
 CREATE TABLE orders
 (
@@ -107,7 +87,7 @@ CREATE TABLE forum
     dateOfPublic DATETIME,
     title VARCHAR(70) NOT NULL,
     text MEDIUMTEXT,
-    image MEDIUMBLOB,
+    image VARCHAR(100),
     theme VARCHAR(30),
     FOREIGN KEY (id_user) REFERENCES users(id_user)
 )
@@ -122,15 +102,6 @@ VALUES
 ('cycling', '', 'oprava-defektu','Oprava defektu','Miesto defektu zdrsnite jemným brúsnym papierom (často býva súčasťou balenia), záplata bude lepšie držať. Potom zbavte miesto mastnoty a nečistôt, najlepšie liehom alebo technickým benzínom. Naneste tenkú vrstvu lepidla na dušu. Nechajte približne 2 až 5 minút odvetrať alebo postupujte podľa návodu na obale od lepidla. Pripravte si záplatu podľa veľkosti defektu a odstráňte hliníkovú fóliu. Akonáhle zaschne lepidlo priložte záplatu a pevne stlačte proti sebe. Spoj sa za niekoľko sekúnd stáva pevným. Nakoniec už len očistite zbytky lepidla, aby sa duša neprilepila na plášť.'),
 ('cycling', '', 'oprava-defektu','Oprava defektu','Kontrola plášťa je veľmi dôležitou časťou na ktorú nikdy nezabúdajte. Zistite či nemáte niečo pichnuté v plášti, napr. kúsok drôtu alebo sklo, ktoré by mohlo opätovným osadením a nafúknutím dušu prepichnúť. Tak isto skontrolujte spoj, či je pevný, nikde neuniká vzduch alebo kontrola ďalších defektov. V prípade, že nájde ďalší defekt vám odporúčame rovno vymeniť celý plášť. Ak ho nemáte po ruke, tak ďalšie plátanie dier je len nevyhnutnosťou dojazdu do vášho cieľa.'),
 ('cycling', '', 'oprava-defektu','Oprava defektu','Priložte zalepenú dušu do ráfiku a umiestnite ventil na správne miesto. Ďalej už môžete postupovať tak, že nahodíte dušu a plášť na ráfik kolesa pomocou montpáky. Odporúčame vám používať zásadne montpáku, kľúče a skrutkovač sa nepoužívajú, pretože by mohlo prísť k trvalému poškodeniu ráfika. Dušu dofúkajte asi na polovicu a z každej strany ju po obvode pobúchajte, aby dobre sadla. Potom ju nafúkajte na požadovanú tuhosť podľa parametru, ktorý je uvedený na každom plášti v psi. Nakoniec skontrolujte správne osadenie v ráfiku a môžete pokračovať v jazde.')
-
-/*product image*/
-INSERT INTO eshop_product_image (id_product, img, alt)
-VALUES
-(1, '/images/gps.jpg', 'mainImage'),
-(2, '/images/gps.jpg', 'mainImage'),
-(3, '/images/jacket.png', 'mainImage'),
-(4, '/images/jacket.png', 'mainImage'),
-(5, '/images/jacket.png', 'mainImage')
 
 /*pathPlus cycling insert*/
 INSERT INTO pathfinder_plus(theme, image, title, header, text)

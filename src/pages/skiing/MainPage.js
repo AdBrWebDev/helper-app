@@ -9,14 +9,14 @@ const Sponsors = lazy(() => import('../../components/Sponsors'))
 
 export default function MainPage(){
     const sections = [{img: 'gps-tracker.png', title: 'E-shop', link: '../Eshop.js', text: "Chceš sa k nám pridať"},
-    {img: 'forum-img.jpg', title: 'Fórum', link: './Forum', text: "Potrebuješ pomôcť?"},
+    {img: 'skiForum.jpg', title: 'Fórum', link: './Forum', text: "Potrebuješ pomôcť?"},
     {img: 'maps.png', title: 'Mapa', link: '../Map.js', text: "So mnou sa nestratíš"},
-    {img: 'slDom.jpg', title: 'Články', link: './Articles', text: "Spoznávaj nové miesta"},
+    {img: 'skiingArticles.png', title: 'Články', link: './Articles', text: "Spoznávaj nové miesta"},
     {img: 'forest.jpg', title: 'Príroda', link: './Nature', text: "Pomôž zachrániť prírodu"},
-    {img: 'cyclingMain.jpg', title: 'Pathfinder plus', link: './BikeHelper', text:"Tu najdeš pomoc pri tvojich problémoch"}]
+    {img: 'skiingMain.jpg', title: 'Pathfinder plus', link: './BikeHelper', text:"Tu najdeš pomoc pri tvojich problémoch"}]
 
     return(<Box className="w-100 text-center">
-        <MainImageOfPage img="cyclingMain.jpg" text="Vitaj! Chceš vedieť čo tu nájdeš?" href="" />
+        <MainImageOfPage img="skiingMain.jpg" text="Vitaj! Chceš vedieť čo tu nájdeš?" href="" />
         <AppInDevices />
         <LinearProgress className="container bg-transparent" />
         <Typography variant="h2" color="white" className="my-5 pt-5">Prečo pathfinder</Typography>

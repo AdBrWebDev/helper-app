@@ -31,7 +31,7 @@ export default function ProductCard(props){
         <Box className="card border border-dark" id="cardh">
                     <Box className="card-image">
                         <figure className="image is 4by3 m-2">
-                            <img style={{"height": 250, 'width': 250, 'margin': 'auto'}} src={`${props.img}`} alt={props.title} />
+                            <img style={{"height": 250, 'width': 250, 'margin': 'auto'}} src={`/images/${props.img}`} alt={props.title} />
                         </figure>
                     </Box>
                     <Box className="card-content text-center">
@@ -55,7 +55,7 @@ export default function ProductCard(props){
                         <Card className="container text-center text-white border p-5 border-dark" id="card" style={{'marginTop': 30, 'overflowY': 'scroll'}}>
                             <Grid container>
                                 <Grid item xs={12} sm={12} md={5} xl={5} lg={5}>
-                                <img style={{'height': 350, 'marginTop': 50}} src={props.img} alt={props.title} />
+                                <img style={{'height': 350, 'marginTop': 50}} src={`/images/${props.img}`} alt={props.title} />
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={7} xl={7} lg={7}>
                                     <Card id="card" className="border p-5 h-100 border-dark">

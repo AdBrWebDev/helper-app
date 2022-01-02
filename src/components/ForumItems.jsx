@@ -15,7 +15,7 @@ export default function ForumItems(props){
 
     const date  = (date) => {
         let d = new Date(date)
-        return(`${d.getDate()}:${d.getMonth()}:${d.getFullYear()}`)
+        return(`${d.getDate()}.${d.getMonth()}.${d.getFullYear()}`)
     }
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export default function ForumItems(props){
             <Grid item xs={12} sm={12} md={9} xl={10} lg={10}>
                 <Grid item xs={12} style={{'minHeight': 100}}>
                 <Typography>{props.data.text}</Typography>
-                {props.data.image == null || props.data.image === '' ? '' : <img src={props.data.image} height="250" alt="fourmImg"/>}
+                {props.data.image == null || props.data.image === "" ? '' : <img src={props.data.image} height="250" alt="fourmImg"/>}
                 </Grid>
                 <Grid item xs={12}>
                 <Divider className="w-75 mx-auto" />
@@ -43,7 +43,7 @@ export default function ForumItems(props){
         <Typography>Pridané: {date(props.data.dateOfPublic)}</Typography>
         <Button className="ml-5" variant="contained" color="error"><i className="material-icons">favorite</i></Button>
         </Box>
-                </Grid>
+        </Grid>
         </Grid>
         </Grid>
     </Card>)

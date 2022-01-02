@@ -32,6 +32,7 @@ export default function SignInRegistration(){
     const [user, setUser] = useState('')
     const [anchor, setAnchor] = useState(null)
     const [profile, openProfile] = useState(false)
+    const [nick, setNick] = useState('')
     const open = Boolean(anchor)
     const openMenu = (e) => {
         setAnchor(e.currentTarget)
@@ -45,7 +46,7 @@ export default function SignInRegistration(){
 
     Axios.defaults.withCredentials = true;
     const submit = () => {
-        Axios.post('http://localhost:3001/register', {name: name, surname: surname, phone: phone, country: country, city: city, street: street, age: age, e_mail: e_mail, password: password}).then(() => {alert("insert successful")})
+        Axios.post('http://localhost:3001/register', {name: name, surname: surname, phone: phone, country: country, city: city, street: street, age: age, e_mail: e_mail, password: password, nick: nick}).then(() => {alert("insert successful")})
     }
 
     const signUp = () => {
@@ -71,8 +72,7 @@ export default function SignInRegistration(){
     }, [])
 
     const logout = () => {localStorage.removeItem("userName");
-     localStorage.removeItem("userId") ;
-     window.location.reload()}
+     localStorage.removeItem("userId")}
 
     return(<Box>
         {localStorage.getItem("userName") != null ? <Box>
@@ -155,6 +155,9 @@ export default function SignInRegistration(){
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                 <TextField variant="outlined" onChange={(e) => {setEmail(e.target.value)}} label="e-mail" name="e_mail" />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                <TextField variant="outlined" onChange={(e) => {setNick(e.target.value)}} label="nick" name="nick" />
                 </Grid>
                 <Button className="mx-auto" type="submit" variant="outlined" color="primary" onClick={() => submit()}>Registrovať</Button>
                 </Grid>

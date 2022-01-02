@@ -37,7 +37,7 @@ function App() {
           </ul>
         </nav>
         <Switch>
-            <Route exact path="/" component={Cycling} />
+            {/*<Route exact path="/" component={Cycling} />*/}
             <Route path="/cycling" component={Cycling} />
             <Route path="/hiking" component={Hiking} />
             <Route path="/running" component={Running} />

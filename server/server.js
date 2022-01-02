@@ -100,7 +100,7 @@ app.post('/articlesData', (req, res) => {
 })
 
 app.post('/fUserData', (req, res) => {
-    const SelectPlus = "SELECT name, avatar, surname, country FROM users WHERE id_user = ?";
+    const SelectPlus = "SELECT nickname,avatar FROM users WHERE id_user = ?";
     dbcon.query(SelectPlus, [req.body.user], (err, result) => {
         res.send(result)
     })

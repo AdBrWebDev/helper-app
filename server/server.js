@@ -5,7 +5,6 @@ const mysql = require('mysql');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const store = new session.MemoryStore();
 const bcrypt = require('bcrypt');
 const rounds = 10;
 
@@ -29,8 +28,7 @@ app.use(session({
     secret: "subscribe",
     resave: false,
     saveUninitialized: false,
-    cookie: { expires: 1000*60*60*24},
-    store
+    cookie: { expires: 1000*60*60*24}
 }))
 
 app.get('/signs', (req, res) => {

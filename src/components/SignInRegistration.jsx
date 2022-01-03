@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, lazy} from 'react';
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -15,6 +15,8 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid'
+import Cookies from 'js-cookie'
+const ShoppingCart = lazy(() => import('./ShoppingCart'))
 
 export default function SignInRegistration(){
     const [form, openForm] = useState(false)
@@ -56,9 +58,8 @@ export default function SignInRegistration(){
                 setUser(response.data.massage)
             }else{
                 setUser(response.data[0].name)
-                localStorage.setItem("userId", response.data[0].id_user)
-                localStorage.setItem("userName", response.data[0].name)
-                localStorage.setItem("email", response.data[0].e_mail)
+                Cookies.set("id", response.data[0].id_user, {expires: 2, secure: true})
+                Cookies.set("user", response.data[0].nickname, {expires: 2, secure: true})
             }
         })
     }
@@ -71,12 +72,12 @@ export default function SignInRegistration(){
         })
     }, [])
 
-    const logout = () => {localStorage.removeItem("userName");
-     localStorage.removeItem("userId")}
+    const logout = () => {Cookies.remove("id");
+    Cookies.remove("user");}
 
     return(<Box>
-        {localStorage.getItem("userName") != null ? <Box>
-        <Button id="userOptions" aria-controls="userOptions" aria-haspopup="true" aria-expanded={open ? 'true': undefined} onClick={openMenu}>{localStorage.getItem("userName")}</Button>
+        {Cookies.get("id") != null ? <Box>
+        <Button id="userOptions" aria-controls="userOptions" aria-haspopup="true" aria-expanded={open ? 'true': undefined} onClick={openMenu}>{Cookies.get("user")}</Button>
         <Menu id="userOptions" anchorEl={anchor} open={open} onClose={closeMenu} MenuListProps={{
             'aria-labelledby': 'userOptions',
         }}>
@@ -90,7 +91,7 @@ export default function SignInRegistration(){
                 <Grid container>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
                     <Avatar className="mx-auto my-5" sx={{width: 86, height: 86}} src={avatar == null ? "/images/alien.png" : 'avatar'} />
-                <Typography>{localStorage.getItem("userName")}</Typography>
+                    <Typography variant="h5" className="text-white">{Cookies.get("user")}</Typography>
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
                     <Paper className="bg-dark text-white">
@@ -119,7 +120,7 @@ export default function SignInRegistration(){
                 </Paper>
                     </Grid>
                 </Grid>
-                
+                <ShoppingCart />
             </Card></Box>}
         {form && <Box id="dark-background" style={{'overflowY': 'scroll'}}>
         <Container>

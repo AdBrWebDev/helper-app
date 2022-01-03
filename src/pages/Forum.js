@@ -8,6 +8,7 @@ import Pagination from '@mui/material/Pagination'
 import '../App.css'
 import MainImageOfPage from '../components/MainImageOfPage'
 import Axios from 'axios'
+import Cookies from 'js-cookie'
 const ForumItems = lazy(() => import('../components/ForumItems'))
 
 export default function Forum(props){
@@ -19,11 +20,9 @@ export default function Forum(props){
     const [forumItems, setForumItems] = useState([])
     const [sign, setSign] = useState('')
     const [img, setImg] = useState('')
-    let user = localStorage.getItem('userId')
 
     const createNewItem = () => {
-        let date = new Date()
-        Axios.post('http://localhost:3001/forumNewItem', {id_user: user, dateOfPublic: date, title: title, text: text, theme: props.title})
+        Axios.post('http://localhost:3001/forumNewItem', {id_user: Cookies.get('id'), dateOfPublic: new Date(), title: title, text: text, theme: props.title})
     }
 
     useEffect(() => {
@@ -46,16 +45,18 @@ export default function Forum(props){
     }
 
     const addComment = (txt, theme) => {
-        Axios.post('http://localhost:3001/addComment', {txt: txt, id_user: localStorage.getItem('userId'), text:text, img: img, theme: theme}).then((response) => {
+        if(!Cookies.get("id")) console.log("nie ste prihlásený")
+        else{
+        Axios.post('http://localhost:3001/addComment', {txt: txt, id_user: Cookies.get('id'), text:text, img: img, theme: theme}).then((response) => {
                 console.log(response.data)
-            })
+            })}
         }
 
     return (<Box>
         <MainImageOfPage img={props.img} text={props.text} />
         <Box className="container p-3 rounded bg-dark shadow my-5">
             <Box className="text-end mb-5">
-            <Button variant="outlined" color="info" onClick={() => NewTheme(!newTheme)}>Pridať tému</Button>
+            <Button variant="outlined" color="info" onClick={() => Cookies.get("id") ? NewTheme(!newTheme) : console.log("nie ste prihlásený")}>Pridať tému</Button>
             </Box>
             <Box>
                 {items.map((item, index) => <Card id="card" key={index} className="p-3 my-2 px-5 border border-dark text-info border-2 shadow">

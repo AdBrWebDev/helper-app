@@ -9,11 +9,15 @@ import Card from '@mui/material/Card'
 import Rating from '@mui/material/Rating'
 import Divider from '@mui/material/Divider'
 import StarIcon from '@mui/icons-material/Star'
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
     const [info, setInfo] = useState([])
     const [rating, setRating] = useState(null)
+    const cart = useSelector((state) => state)
+    console.log(cart)
+    const dispatch = useDispatch();
 
     const openInfo = (id) => {
         infoOpened(!iWindow)
@@ -41,7 +45,7 @@ export default function ProductCard(props){
                             </Box>
                             <Typography className="text-white" variant="h4">{props.price} €</Typography>
                             <Box style={{'height': 60}}>
-                            {props.contain > 0 ? <Box><Button variant="outlined" color="info" className="mr-1"><i className="material-icons">shopping_cart</i></Button>
+                            {props.contain > 0 ? <Box><Button variant="outlined" color="info" className="mr-1" onClick={() =>dispatch({type: "ADD", payload: props.product})}><i className="material-icons">shopping_cart</i></Button>
                             <Button variant="outlined" color="info" className="ml-1"><i className="material-icons" onClick={() => openInfo(props.id)}>info</i></Button></Box> : 
                             <Box className="message is-danger mt-3"><Typography className="message-body">Nedostupné</Typography></Box>}
                             </Box>

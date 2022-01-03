@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import '../App.css'
 import Axios from 'axios';
+import Cookies from 'js-cookie'
 const Sections = lazy(() => import('../components/Sections')) 
 const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 
@@ -38,8 +39,10 @@ export default function Nature(){
     const goals = ['36% zníženie tažby dreva', 'Vysadba 17 miliónov stromov ročne', '10% zníženie lovu zveri', 'Viac ako 100 km nových cyklotrás každý rok', 'Zvýšenie dotácii pre kupu elektromobilov', '10% zníženie ťažby nerastných surovín', 'zrušenie uhoľných elektrární']
 
     const submitNatureForm = () => {
+        if(!Cookies.get("id")) console.log("prihláste sa!")  
+        else{
         let date = new Date()
-        Axios.post('http://localhost:3001/natureForm', {user: user, date: date})
+        Axios.post('http://localhost:3001/natureForm', {user: user, date: date})}
     }
 
     return(

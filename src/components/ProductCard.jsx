@@ -76,7 +76,7 @@ export default function ProductCard(props){
                             <Box className="d-flex">
                             <Rating className="my-auto" value={rating} onChange={(e) => setRating(e.target.value)} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />} />
                             <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box>
-                            <Button variant="contained" color="success"><i className="material-icons">shopping_cart</i></Button>
+                            <Button variant="contained" color="success"><i className="material-icons" onClick={() =>dispatch({type: "ADD", payload: props.product})}>shopping_cart</i></Button>
                             </Box>
                             </Card>
                                 </Grid>

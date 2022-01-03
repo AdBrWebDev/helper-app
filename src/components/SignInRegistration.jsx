@@ -86,7 +86,7 @@ export default function SignInRegistration(){
         </Menu>
         </Box> :
         <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia {user}</Button>}   
-        {profile &&<Box id="dark-background"> <Card className="container text-center bg-dark text-white p-5 border border-info">
+        {profile &&<Box id="dark-background"> <Card style={{'overflowY': 'scroll', 'height': '90%'}} className="container text-center bg-dark text-white p-5 border border-info">
             <Button variant="outlined" color="error" className="my-3" onClick={() => openProfile(!profile)}>x</Button>
                 <Grid container>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>

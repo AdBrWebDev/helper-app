@@ -82,7 +82,7 @@ export default function Forum(props){
         <Box className="text-center">
         <Button variant="contained" className="my-2" color="error" onClick={() => openWindow(!window)}>x</Button>
         </Box>
-            <Card className="container text-center border border-info border-2 text-white p-5 shadow" id="card" style={{'overflowY': 'scroll', 'height': "90%"}}> 
+            <Card className="container text-center border border-dark text-white p-5" id="card" style={{'overflowY': 'scroll', 'height': "90%"}}> 
                     <Typography variant="h3" className="text-white mt-2">{sign}</Typography>
                     <Box className="p-5">
                     {forumItems.map((fItems, index) => <ForumItems index={index} data={fItems} />)}

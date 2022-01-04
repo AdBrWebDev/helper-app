@@ -137,6 +137,13 @@ app.post('/natureForm', (req, res) => {
     })
 })
 
+app.post('/publicate', (req, res) => {
+    const PublicInsert = "INSERT INTO articles(id_user, id_article, mainImg, title, rating, likes, text, theme) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    dbcon.query(PublicInsert, [req.body.id_user, '', req.body.mainImg, req.body.sign, req.body.rating, 0, req.body.text, req.body.theme], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.post('/register', (req, res) => {
     const name = req.body.name;
     const surname = req.body.surname;

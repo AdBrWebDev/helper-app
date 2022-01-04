@@ -31,7 +31,7 @@ export default function ArticlesItem(props){
                 <CardContent>
                     <Box className="card-image mb-5">
                         <figure className="image is-4by3">
-                            <img src={`${props.data[0].mainImg}`} alt={props.data[0].title} />
+                            <img src={`/images/${props.data[0].mainImg}`} alt={props.data[0].title} />
                         </figure>
                         <button className="btn-floating halfway-fab btn-large waves-effect info" onClick={() => openArticle(props.data[0].id_article)}><i class="material-icons">auto_stories</i></button>
                     </Box>

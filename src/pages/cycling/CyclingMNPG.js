@@ -7,6 +7,7 @@ import 'bulma/css/bulma.min.css'
 import '../../App.css'
 import Box from '@mui/material/Box'
 import Footer from '../../components/Footer';
+import Cookies from 'js-cookie'
 const Nature = lazy(() => import('../Nature'))
 const MainPage = lazy(() => import('./MainPage'))
 const ArticlesData = lazy(() => import('./ArticlesData'))
@@ -15,6 +16,7 @@ const ForumData = lazy(() => import('./ForumData'))
 const Map = lazy(() => import('../Map'))
 const Eshop = lazy(() => import('../Eshop'))
 const SignInRegistration = lazy(() => import('../../components/SignInRegistration'))
+const ShoppingCart = lazy(() => import('../../components/ShoppingCart'))
 
 export default function CyclingMNPG(){
     return(<Suspense fallback={'loading....'}>
@@ -41,6 +43,7 @@ export default function CyclingMNPG(){
             </Box>
             <Box className="navbar-end">
                 <Box className="navbar-item">
+                    {Cookies.get("id") ? <ShoppingCart />: ''}
                     <SignInRegistration />
                 </Box>
             </Box>

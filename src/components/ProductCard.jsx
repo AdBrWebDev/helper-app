@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
-    const [info, setInfo] = useState([])
+    const [info,  setInfo] = useState([])
     const [rating, setRating] = useState(null)
     const cart = useSelector((state) => state)
     console.log(cart)

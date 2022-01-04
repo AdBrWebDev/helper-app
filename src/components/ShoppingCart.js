@@ -1,10 +1,13 @@
+import {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
+import '../App.css'
 
 const Cart = () => {
+    const [form, openForm] = useState(false)
     const cart = useSelector((state) => state);
     console.log(cart)
     const dispatch = useDispatch();
@@ -15,6 +18,10 @@ const Cart = () => {
 
     return(
         <Box>
+            <Button onClick={() => openForm(!form)}><span className="material-icons text-white">shopping_cart</span></Button>
+            {form && <Box id="dark-background" className="mb-5 mx-auto text-center">
+            <Button variant="contained" color="error" onClick={() => openForm(!form)}>x</Button>
+            <Card id="card" className="mt-4 p-5 container">
             {cart.map((cart, index) => <Card key={index} className="card text-white p-2 bg-dark">
                 <Typography>{cart.title}</Typography> 
                 <Typography>{cart.price}</Typography>
@@ -26,6 +33,7 @@ const Cart = () => {
                 }}>-</Button>
                 </Card>)}
                 <Typography className="text-white" variant="h5">Cena spolu: {total} €</Typography>
+                </Card></Box>}
         </Box>
     )
 }

@@ -15,6 +15,7 @@ const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 export default function Nature(){
     const [form, openForm] = useState(false);
     const [signs, setSigns] = useState([]);
+    const [error, showError] = useState(false)
     let user = localStorage.getItem('userId')
 
     function Signs() {
@@ -39,7 +40,10 @@ export default function Nature(){
     const goals = ['36% zníženie tažby dreva', 'Vysadba 17 miliónov stromov ročne', '10% zníženie lovu zveri', 'Viac ako 100 km nových cyklotrás každý rok', 'Zvýšenie dotácii pre kupu elektromobilov', '10% zníženie ťažby nerastných surovín', 'zrušenie uhoľných elektrární']
 
     const submitNatureForm = () => {
-        if(!Cookies.get("id")) console.log("prihláste sa!")  
+        if(!Cookies.get("id")){
+            showError(true)
+            setTimeout(() => showError(false), 6000)
+        }
         else{
         let date = new Date()
         Axios.post('http://localhost:3001/natureForm', {user: user, date: date})}
@@ -81,6 +85,11 @@ export default function Nature(){
                     </Box>
                     <Typography variant="h5" color="white">Pomôcť zelenšej budúcnosti, môžeš aj ty. Stačí jeden klik.</Typography>
                     <Button variant='outlined' color='success' className="my-4" onClick={submitNatureForm}>Podpisať</Button>
+                    {error && <Box class="message is-danger">
+  <Typography class="message-body">
+    Pre úspešné podpísanie sa musíte prihlásiť!
+  </Typography>
+</Box>}
                 </Card></Box>}
             </Container>
             <Typography variant="h3" className="my-3 mt-5 pt-5">Top 10 ako pomôcť prírode</Typography>

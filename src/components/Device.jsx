@@ -27,7 +27,7 @@ export default function Device(props){
                 <Container>
                     <Card className="p-5 rounded text-white container border border-dark" id="card">
                         <CardActions>
-                            <Button variant="outlined" className="mx-auto mb-4" onClick={() => openDevice(!device)} color="error">x</Button>
+                            <Button variant="contained" className="mx-auto mb-4" onClick={() => openDevice(!device)} color="error">x</Button>
                         </CardActions>
                         <CardContent>
                             <i id="devices" className="material-icons my-4">{props.icon}</i>

@@ -26,8 +26,8 @@ export default function AppInDevices(){
         <Button variant="outlined" color="info" className="my-5 p-4" onClick={() => openDownload(!download)}>stiahnuť pathfinder <i className="material-icons mx-1">download</i></Button>
         {download && <Box id="dark-background">
             <Container>
-                <Card className="bg-dark p-5 rounded text-center text-white container border border-info">
-                        <Box><Button variant="outlined" color="error" onClick={() => openDownload(!download)}>x</Button></Box>
+                <Card id="card" className="p-5 rounded text-center text-white container border border-dark">
+                        <Box><Button variant="contained" color="error" onClick={() => openDownload(!download)}>x</Button></Box>
                     <CardContent>
                     <Box className="message is-info">
                         <Typography className="message-body">Aplikacie budú dostupné od: 11.11.2022</Typography>
@@ -37,7 +37,7 @@ export default function AppInDevices(){
                                     <Box>
                                         <i className="material-icons py-5" id="devices">{device.icon}</i>
                                     </Box>
-                                    <Button color="info" variant="outlined" className="mt-3">Stiahnuť Pathfinder</Button>
+                                    <Button color="info" variant="contained" className="mt-3">Stiahnuť Pathfinder</Button>
                                 </Grid>
                             )}
                         </Grid>

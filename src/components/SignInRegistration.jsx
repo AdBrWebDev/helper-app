@@ -35,6 +35,7 @@ export default function SignInRegistration(){
     const [anchor, setAnchor] = useState(null)
     const [profile, openProfile] = useState(false)
     const [nick, setNick] = useState('')
+    const [userData, setUserData] = useState([])
     const open = Boolean(anchor)
     const openMenu = (e) => {
         setAnchor(e.currentTarget)
@@ -72,6 +73,14 @@ export default function SignInRegistration(){
         })
     }, [])
 
+    const userProfile = () => {
+        openProfile(!profile)
+        Axios.post("http://localhost:3001/user", {user_id: Cookies.get("id")}).then((response) => {
+            console.log(response.data)
+            setUserData(response.data)
+        })
+    }
+
     const logout = () => {Cookies.remove("id");
     Cookies.remove("user");}
 
@@ -81,20 +90,32 @@ export default function SignInRegistration(){
         <Menu id="userOptions" anchorEl={anchor} open={open} onClose={closeMenu} MenuListProps={{
             'aria-labelledby': 'userOptions',
         }}>
-            <MenuItem onClick={() => openProfile(!profile)}>Môj profil</MenuItem>
+            <MenuItem onClick={userProfile}>Môj profil</MenuItem>
             <MenuItem onClick={logout}>Odhlásenie</MenuItem>
         </Menu>
         </Box> :
         <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia {user}</Button>}   
-        {profile &&<Box id="dark-background"> <Card style={{'overflowY': 'scroll', 'height': '90%'}} className="container text-center bg-dark text-white p-5 border border-info">
-            <Button variant="outlined" color="error" className="my-3" onClick={() => openProfile(!profile)}>x</Button>
+        {profile &&<Box id="dark-background"> 
+        <Box className="text-center">
+        <Button variant="outlined" color="error" className="my-3" onClick={() => openProfile(!profile)}>x</Button>
+        </Box>
+        <Card style={{'overflowY': 'scroll', 'height': '90%'}} className="container text-center text-white p-5 border border-dark" id="card">
                 <Grid container>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
                     <Avatar className="mx-auto my-5" sx={{width: 86, height: 86}} src={avatar == null ? "/images/alien.png" : 'avatar'} />
                     <Typography variant="h5" className="text-white">{Cookies.get("user")}</Typography>
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-                    <Paper className="bg-dark text-white">
+                    <Typography>Užívatel: {userData[0].name} {userData[0].surname}</Typography>
+                    <Typography>Vek: {userData[0].age}</Typography>
+                    <Typography>E-mail: {userData[0].e_mail}</Typography>
+                    <Typography>Tel. č:{userData[0].phone}</Typography>
+                    <Typography>Krajina: {userData[0].country}</Typography>
+                    <Typography>Mesto: {userData[0].city}</Typography>
+                    <Typography>Adresa: {userData[0].street}</Typography>
+                    </Grid>
+                </Grid>
+                <Paper className="bg-dark text-white">
                 <Typography variant="h4">Vaše objednávky</Typography>
                 <List>
                     <ListItem className="text-center">
@@ -118,8 +139,6 @@ export default function SignInRegistration(){
                     </ListItem>
             </List>
                 </Paper>
-                    </Grid>
-                </Grid>
                 <ShoppingCart />
             </Card></Box>}
         {form && <Box id="dark-background" style={{'overflowY': 'scroll'}}>

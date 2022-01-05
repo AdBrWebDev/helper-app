@@ -31,6 +31,12 @@ app.use(session({
     cookie: { expires: 1000*60*60*24}
 }))
 
+app.post("/user", (req, res) => {
+    dbcon.query("SELECT * FROM users WHERE id_user = ?", [req.body.user_id], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.get('/signs', (req, res) => {
     dbcon.query("SELECT COUNT(id_user) AS sum FROM nature_form", (err, result) => {
         res.send(result)
@@ -38,8 +44,7 @@ app.get('/signs', (req, res) => {
 })
 
 app.post('/findDetails', (req, res) => {
-    const header = req.body.search;
-    dbcon.query(`SELECT * FROM pathfinderplus WHERE header = ?`, [header], (err, result) => {
+    dbcon.query(`SELECT * FROM pathfinderplus WHERE header = ?`, [req.body.search], (err, result) => {
         res.send(result)
     })
 })
@@ -97,13 +102,6 @@ app.post('/articlesData', (req, res) => {
     })
 })
 
-app.post('/fUserData', (req, res) => {
-    const SelectPlus = "SELECT nickname,avatar FROM users WHERE id_user = ?";
-    dbcon.query(SelectPlus, [req.body.user], (err, result) => {
-        res.send(result)
-    })
-})
-
 app.post('/forumItems', (req, res) => {
     dbcon.query("SELECT DISTINCT(title) FROM forum WHERE theme = ?", [req.body.theme], (err, result) => {
         res.send(result)
@@ -129,10 +127,8 @@ app.post('/forumNewItem', (req, res) => {
 })
 
 app.post('/natureForm', (req, res) => {
-    const userId = req.body.user;
-    const date = req.body.date;
     const pushToDb = "INSERT INTO nature_form (id_user, date) VALUES (?, ?)";
-    dbcon.query(pushToDb, [userId, date], (err, result) => {
+    dbcon.query(pushToDb, [req.body.user, req.body.date], (err, result) => {
         res.send(result)
     })
 })
@@ -167,15 +163,13 @@ app.post('/register', (req, res) => {
     })
 
 app.post('/login', (req, res) => {
-    const loginEmail = req.body.loginEmail;
-    const loginPassword = req.body.loginPassword;
-    dbcon.query("SELECT * FROM users WHERE e_mail = ?", [loginEmail], (err, result) => {
+    dbcon.query("SELECT * FROM users WHERE e_mail = ?", [req.body.loginEmail], (err, result) => {
         console.log(result)
         if(err){
             res.send({err: err})
         }
         if(result.length > 0){
-            bcrypt.compare(loginPassword, result[0].password, (error, response) => {
+            bcrypt.compare(req.body.loginPassword, result[0].password, (error, response) => {
                 if(response){
                     req.session.user = result;
                     console.log(req.session.user)

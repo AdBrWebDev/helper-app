@@ -18,12 +18,13 @@ export default function ArticlesItem(props){
 
     const openArticle = (id) => {
         Axios.post('http://localhost:3001/articlesData', {id: id}).then((response) => { 
-            getData(response.data)
+            getData(response.data[0])
+            console.log(response.data[0])
     });
     openWindow(!window)
     }
 
-    console.log(data)
+    console.log(data.likes)
 
     return(<Grid key={props.index} item xs={12} sm={6} md={4} lg={3} xl={3}>
             <Card className="text-center border border-dark text-white pb-2" id="cardh">
@@ -58,8 +59,8 @@ export default function ArticlesItem(props){
                             <Typography color="white" variant="h2">{props.data[0].title}</Typography>
                         </Box>
                     </LazyHero>
-                    <Box className="text-white">
-                    <Typography>{data[0].text}</Typography>
+                    <Box className="text-white container">
+                    <Typography>{data.text}</Typography>
                     <Typography variant="h2">Galeria</Typography>
                     </Box>
                 </Card>  

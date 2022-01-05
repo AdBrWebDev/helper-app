@@ -18,7 +18,6 @@ export default function ArticlesItem(props){
 
     const openArticle = (id) => {
         Axios.post('http://localhost:3001/articlesData', {id: id}).then((response) => { 
-            console.log(response.data)
             getData(response.data)
     });
     openWindow(!window)
@@ -54,11 +53,15 @@ export default function ArticlesItem(props){
             {window && <Box id="dark-background">
             <Button variant="outlined" className="my-2" color="error" onClick={() => openWindow(!window)}>x</Button>
                 <Card className="container border border-info border-2 bg-dark" style={{'overflowY': 'scroll', 'height': '92%'}}>
-                    <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={props.data[0].mainImg}>
+                    <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/images/${props.data[0].mainImg}`}>
                         <Box>
                             <Typography color="white" variant="h2">{props.data[0].title}</Typography>
                         </Box>
                     </LazyHero>
+                    <Box className="text-white">
+                    <Typography>{data[0].text}</Typography>
+                    <Typography variant="h2">Galeria</Typography>
+                    </Box>
                 </Card>  
                 </Box>}
         </Grid>)

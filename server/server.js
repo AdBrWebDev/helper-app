@@ -91,7 +91,7 @@ app.post('/articles', (req, res) => {
 })
 
 app.post('/articlesData', (req, res) => {
-    const SelectPlus = "SELECT * FROM articlesData WHERE id = ?";
+    const SelectPlus = "SELECT likes, text FROM articles WHERE id_article = ?";
     dbcon.query(SelectPlus, [req.body.id], (err, result) => {
         res.send(result)
     })

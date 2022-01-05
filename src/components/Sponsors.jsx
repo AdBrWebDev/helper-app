@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import Grid from '@mui/material/Grid'
 import Axios from 'axios'
-
+import Box from '@mui/material/Box'
+import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 export default function Sponsors(){
     const [sponsors, setSponsors] = useState([])
 
@@ -10,9 +12,22 @@ export default function Sponsors(){
         setSponsors(response.data)
     }), [])
 
+    const settings = {
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        speed: 2000,
+        autoplaySpeed: 2000,
+        cssEase: "linear"
+      };
+
     return(
-        <Grid container className="container mt-5">
-            {sponsors.map((sponsor, index) => <Grid className="my-auto p-5" xs={6} sm={4} md={3} lg={2} xl={2} item key={index}><img src={`pathfinderImages/${sponsor.img}`} alt={sponsor.title} /></Grid>)}
-        </Grid>
+        <Box>
+    <Slider {...settings}>
+    {sponsors.map((sponsor, index) => <Box key={index} className="my-auto"><img height="150" width="150"src={`pathfinderImages/${sponsor.img}`} alt={sponsor.title} /></Box>)}
+    </Slider>
+    </Box>
     )
 }

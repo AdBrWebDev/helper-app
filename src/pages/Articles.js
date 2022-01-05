@@ -32,8 +32,6 @@ const publicArticle = () => {
     Axios.post('http://localhost:3001/publicate', {id_user: Cookies.get("id"), mainImg: MainImg, sign: title, rating: rating, text: text, theme: props.title})
 }
 
-console.log(articles)
-
     return(<Box className="bg-dark text-center">
         <MainImageOfPage img={props.img} text={props.text} href="" />
         <Box className="container py-5 text-center">

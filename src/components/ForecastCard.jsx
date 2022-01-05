@@ -21,8 +21,8 @@ export default function ForecastCard(props){
         <Typography><i className="material-icons text-info">thermostat</i>{props.forecast.day.mintemp_c} °C</Typography>
         <Typography><i className="material-icons text-info">opacity</i>{props.forecast.day.totalprecip_mm} mm</Typography>
         </Paper>
-        {(showWeather) ? <Box id="dark-background">
-            <Card style={{'height': '90%', 'overflow': 'scroll'}} id="card" className="text-white mt-5 p-5 shadow-lg text-center">
+        {(showWeather) ? <Box id="dark-background" className="position-fixed">
+            <Card style={{'height': '90%', 'overflowY': 'scroll'}} id="card" className="text-white mt-5 p-5 border border-dark text-center">
         <Button variant="contained" color="info" onClick={()=> openWeather(!showWeather)} style={{position: 'relative', float: 'right'}}>x</Button>
         <Typography variant="h6" className="mb-1">{props.forecast.date}</Typography>
         <img style={{transform: "scale(1.8)"}} src={conditionIcon} alt="icon" />
@@ -54,5 +54,5 @@ export default function ForecastCard(props){
         </Grid>
         </Card>
         </Box>: null}
-    </Grid>)
+        </Grid>)
 }

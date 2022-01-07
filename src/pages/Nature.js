@@ -9,6 +9,7 @@ import Divider from '@mui/material/Divider';
 import '../App.css'
 import Axios from 'axios';
 import Cookies from 'js-cookie'
+import { useEffect } from 'react';
 const Sections = lazy(() => import('../components/Sections')) 
 const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 
@@ -16,7 +17,7 @@ export default function Nature(){
     const [form, openForm] = useState(false);
     const [signs, setSigns] = useState([]);
     const [error, showError] = useState(false)
-    let user = localStorage.getItem('userId')
+    const [user, setUser] = useState('')
 
     function Signs() {
         Axios.get('http://localhost:3001/signs').then(result => setSigns(result.data[0].sum)
@@ -39,16 +40,22 @@ export default function Nature(){
 
     const goals = ['36% zníženie tažby dreva', 'Vysadba 17 miliónov stromov ročne', '10% zníženie lovu zveri', 'Viac ako 100 km nových cyklotrás každý rok', 'Zvýšenie dotácii pre kupu elektromobilov', '10% zníženie ťažby nerastných surovín', 'zrušenie uhoľných elektrární']
 
+    useEffect(() => {
+        if(Cookies.get('id')){
+        Axios.post('http://localhost:3001/natureUser', {user: Cookies.get('id')}).then((response) => {
+                    setUser(response.data[0].id_user) 
+            })}
+    })
+
     const submitNatureForm = () => {
         if(!Cookies.get("id")){
             showError(true)
             setTimeout(() => showError(false), 6000)
         }
         else{
-        let date = new Date()
-        Axios.post('http://localhost:3001/natureForm', {user: user, date: date})}
+            let date = new Date()
+            Axios.post('http://localhost:3001/natureForm', {user: Cookies.get('id'), date: date})}
     }
-
     return(
         <Box className="text-white text-center">
             <MainImageOfPage img="forest.jpg" text="Pomôž nám ochrániť prírodu" href="" />
@@ -73,13 +80,17 @@ export default function Nature(){
                         {goals.map((goal, index) => <Typography variant="h6" key={index} className="py-3">{goal}</Typography>)}
                     </Box>
                     <Divider className="m-5" />
-                    <Typography variant="h5" className="py-2">Chceš nám pomôcť? <Button onClick={() => openForm(!form)} className="ml-5"variant="outlined" color="success"><i className="material-icons">park</i></Button></Typography>
+                    <Typography variant="h5" className="py-2">Chceš nám pomôcť? {(user === parseInt(Cookies.get("id"))) ? <Box class="message is-primary my-3">
+  <Typography class="message-body">
+      Ďakujeme za vašu podporu <i className="material-icons text-success">done</i>
+  </Typography>
+</Box> : <Button onClick={() => openForm(!form)} className="ml-5"variant="contained" color="success"><i className="material-icons">park</i></Button>}</Typography>
                     <Typography className="mt-4" style={{'opacity': .3, 'fontSize': '12px'}}>Platí pre územie slovenskej republiky</Typography>
                 </Card>
                 {form && 
                 <Box id="dark-background">
                 <Card className="my-5 container p-5 bg-dark border border-success" id='nature-border'>
-                <Button variant="outlined" color="error" onClick={() => openForm(!form)}>x</Button>
+                <Button variant="contained" color="error" onClick={() => openForm(!form)}>x</Button>
                 <Box className="w-25 h-25 mx-auto my-3">
                     <amp-img src="/images/sEarth.png" alt="save nature" />
                     </Box>

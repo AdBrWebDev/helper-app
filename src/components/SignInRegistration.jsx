@@ -36,6 +36,11 @@ export default function SignInRegistration(){
     const [profile, openProfile] = useState(false)
     const [nick, setNick] = useState('')
     const [userData, setUserData] = useState([])
+    const [orders, setOrders] = useState([])
+    const [forumItems, setForumItems] = useState([])
+    const [articles, setArticles] = useState([])
+    const [nature, setForm] = useState([])
+
     const open = Boolean(anchor)
     const openMenu = (e) => {
         setAnchor(e.currentTarget)
@@ -46,38 +51,44 @@ export default function SignInRegistration(){
 
     let avatar = null
 
-
     Axios.defaults.withCredentials = true;
     const submit = () => {
         Axios.post('http://localhost:3001/register', {name: name, surname: surname, phone: phone, country: country, city: city, street: street, age: age, e_mail: e_mail, password: password, nick: nick}).then(() => {alert("insert successful")})
     }
 
     const signUp = () => {
-        console.log(loginEmail, loginPassword)
         Axios.post('http://localhost:3001/login', {loginEmail: loginEmail, loginPassword: loginPassword}).then((response) => {
             if(response.data.massage){
                 setUser(response.data.massage)
+                console.log(response.data.massage)
             }else{
-                setUser(response.data[0].name)
                 Cookies.set("id", response.data[0].id_user, {expires: 2, secure: true})
                 Cookies.set("user", response.data[0].nickname, {expires: 2, secure: true})
             }
         })
     }
 
-    useEffect(() => {
-        Axios.get("http://localhost:3001/login").then((response) => {
-            if(response.data.loggedIn === true){
-            setUser(response.data.user[0].name)
-            }
-        })
-    }, [])
-
     const userProfile = () => {
         openProfile(!profile)
         Axios.post("http://localhost:3001/user", {user_id: Cookies.get("id")}).then((response) => {
+            console.log(response.data[0])
+            setUserData(response.data[0])
+        })
+        Axios.post("http://localhost:3001/profileForum", {user_id: Cookies.get("id")}).then((response) =>{
+            setForumItems(response.data[0])
+            console.log(response.data[0])
+        })
+        Axios.post("http://localhost:3001/profileForm", {user_id: Cookies.get("id")}).then((response) =>{
+            setForm(response.data[0])
+            console.log(response.data[0])
+        })
+        Axios.post("http://localhost:3001/profileOrders", {user_id: Cookies.get("id")}).then((response) =>{
+            setOrders(response.data)
             console.log(response.data)
-            setUserData(response.data)
+        })
+        Axios.post("http://localhost:3001/profileArticles", {user_id: Cookies.get("id")}).then((response) =>{
+            setArticles(response.data[0])
+            console.log(response.data[0])
         })
     }
 
@@ -97,7 +108,7 @@ export default function SignInRegistration(){
         <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia {user}</Button>}   
         {profile &&<Box id="dark-background"> 
         <Box className="text-center">
-        <Button variant="outlined" color="error" className="my-3" onClick={() => openProfile(!profile)}>x</Button>
+        <Button variant="contained" color="error" className="my-3" onClick={() => openProfile(!profile)}>x</Button>
         </Box>
         <Card style={{'overflowY': 'scroll', 'height': '90%'}} className="container text-center text-white p-5 border border-dark" id="card">
                 <Grid container>
@@ -106,13 +117,29 @@ export default function SignInRegistration(){
                     <Typography variant="h5" className="text-white">{Cookies.get("user")}</Typography>
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-                    <Typography>Užívatel: {userData[0].name} {userData[0].surname}</Typography>
-                    <Typography>Vek: {userData[0].age}</Typography>
-                    <Typography>E-mail: {userData[0].e_mail}</Typography>
-                    <Typography>Tel. č:{userData[0].phone}</Typography>
-                    <Typography>Krajina: {userData[0].country}</Typography>
-                    <Typography>Mesto: {userData[0].city}</Typography>
-                    <Typography>Adresa: {userData[0].street}</Typography>
+                    <Typography>Užívatel: {userData.name} {userData.surname}</Typography>
+                    <Typography>Vek: {userData.age}</Typography>
+                    <Typography>E-mail: {userData.e_mail}</Typography>
+                    <Typography>Tel. č:{userData.phone}</Typography>
+                    <Typography>Krajina: {userData.country}</Typography>
+                    <Typography>Mesto: {userData.city}</Typography>
+                    <Typography>Adresa: {userData.street}</Typography>
+                    </Grid>
+                </Grid>
+                <Grid container>
+                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Paper  className="card p-5" id="card">
+                                <Typography>Vaše objednávky</Typography>
+                                {orders.map((order, index) => {<Typography key={index}>{order[0].status}</Typography>})}
+                            </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+
                     </Grid>
                 </Grid>
                 <Paper className="bg-dark text-white">

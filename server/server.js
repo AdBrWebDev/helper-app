@@ -37,6 +37,30 @@ app.post("/user", (req, res) => {
     })
 })
 
+app.post('/profileOrders', (req, res) => {
+    dbcon.query("SELECT id_order, status, total_price, order_created FROM orders WHERE id_user = ?", [req.body.user_id], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/profileArticles', (req, res) => {
+    dbcon.query("SELECT title, likes FROM articles WHERE id_user = ?", [req.body.user_id], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/profileForum', (req, res) => {
+    dbcon.query("SELECT DISTINCT(title) FROM forum WHERE id_user = ?", [req.body.user_id], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/profileForm', (req, res) => {
+    dbcon.query("SELECT id_user FROM nature_form WHERE id_user = ?", [req.body.user_id], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.get('/signs', (req, res) => {
     dbcon.query("SELECT COUNT(id_user) AS sum FROM nature_form", (err, result) => {
         res.send(result)
@@ -184,14 +208,11 @@ app.post('/login', (req, res) => {
     }); 
 });
 
-app.get("/login", (res, req) => {
-    if(req.session.user){
-        res.send({loggedIn: true, user: req.session.user})
-    }else{
-        res.send({loggedIn: false, user: req.session.user})
-    }
+app.post('/natureUser', (req, res) => {
+    dbcon.query("SELECT id_user from nature_form WHERE id_user = ?", [req.body.user], (err, result) => {
+        res.send(result)
+    })
 })
-
 
 app.listen(3001, () => {
     console.log("Server running on 3001")

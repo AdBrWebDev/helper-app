@@ -45,7 +45,7 @@
     left: 0;
     position: fixed;
     padding-top: 3%; 
-    z-index: 1000;
+    z-index: 900;
   }
 
   #pathPlus{
@@ -85,6 +85,9 @@
     box-shadow: 0 0 30px 5px rgba(50, 153, 55, 0.5);
   }
 
-  TextField:hover{
-    border: none;
+  #circle{
+    background: rgba(255,255,255,.8) !important;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
   }

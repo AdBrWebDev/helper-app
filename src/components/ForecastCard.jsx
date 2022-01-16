@@ -12,7 +12,8 @@ export default function ForecastCard(props){
     const [showWeather, openWeather] = useState(false);
     const conditionIcon = props.forecast.day.condition.icon;
     console.log(props);
-    return(<Grid key={props.index} xs={12} sm={12} md={6} xl={4} lg={4}>
+    return(<>
+        <Grid key={props.index} xs={12} sm={12} md={6} xl={4} lg={4}>
         <Paper id="forItem" elevation={3} className="p-5 m-3 text-center" onClick={() => openWeather(!showWeather)}>
         <Typography variant="h6" className="mb-1">{props.forecast.date}</Typography>
         <img src={conditionIcon} alt="icon" />
@@ -21,7 +22,8 @@ export default function ForecastCard(props){
         <Typography><i className="material-icons text-info">thermostat</i>{props.forecast.day.mintemp_c} °C</Typography>
         <Typography><i className="material-icons text-info">opacity</i>{props.forecast.day.totalprecip_mm} mm</Typography>
         </Paper>
-        {(showWeather) ? <Box id="dark-background" className="position-fixed">
+        </Grid>
+        {(showWeather) ? <Box id="dark-background">
             <Card style={{'height': '90%', 'overflowY': 'scroll'}} id="card" className="text-white mt-5 p-5 border border-dark text-center">
         <Button variant="contained" color="info" onClick={()=> openWeather(!showWeather)} style={{position: 'relative', float: 'right'}}>x</Button>
         <Typography variant="h6" className="mb-1">{props.forecast.date}</Typography>
@@ -53,6 +55,5 @@ export default function ForecastCard(props){
             {props.forecast.hour.map((hourF) => <HourForecast forecast={hourF} />)}
         </Grid>
         </Card>
-        </Box>: null}
-        </Grid>)
+        </Box>: null}</>)
 }

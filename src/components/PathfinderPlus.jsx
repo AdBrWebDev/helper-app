@@ -57,7 +57,7 @@ export default function PathfinderPlus(props){
     <Box>
                 <Button variant="contained" color="error" onClick={() => openWindow(!window)}>x</Button>
                 </Box>
-            <Card className="container my-5 p-5 border border-dark text-white" id="card">
+            <Card className="container my-5 p-5 border border-dark text-white" id="card" style={{'overflowY': 'scroll', 'maxHeight': '90%'}}>
                 <Box>
                     <Avatar src="/images/pathfinder.jpg" className="mx-auto my-5" style={{'transform': 'scale(2)'}} />
                     <Typography variant="h4">Aký je tvoj problém?</Typography>
@@ -76,7 +76,7 @@ export default function PathfinderPlus(props){
                 {details.map((detail, index) => <Box className="my-5" key={index}>
                     <Grid container>
                         <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>
-                            {detail.image == null || detail.image === '' ? <Skeleton variant="rectangular" width="300" height="100" /> : <amp-img src={`pathfinderImages/${detail.image}`} alt="help" loading="lazy" />}
+                            {detail.image == null || detail.image === '' ? <Skeleton variant="rectangular" width="300" height="100" /> : <img src={`pathPlus/${detail.image}`} alt="help" loading="lazy" />}
                         </Grid>
                         <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>
                         <Typography variant="h1">{index+1}</Typography>

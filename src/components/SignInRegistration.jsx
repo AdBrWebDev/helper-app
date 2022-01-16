@@ -1,4 +1,4 @@
-import React, {useState, useEffect, lazy} from 'react';
+import React, {useState} from 'react';
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -11,12 +11,8 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Avatar from '@mui/material/Avatar'
 import Paper from '@mui/material/Paper'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid'
 import Cookies from 'js-cookie'
-const ShoppingCart = lazy(() => import('./ShoppingCart'))
 
 export default function SignInRegistration(){
     const [form, openForm] = useState(false)
@@ -39,8 +35,6 @@ export default function SignInRegistration(){
     const [orders, setOrders] = useState([])
     const [forumItems, setForumItems] = useState([])
     const [articles, setArticles] = useState([])
-    const [nature, setForm] = useState([])
-
     const open = Boolean(anchor)
     const openMenu = (e) => {
         setAnchor(e.currentTarget)
@@ -75,20 +69,16 @@ export default function SignInRegistration(){
             setUserData(response.data[0])
         })
         Axios.post("http://localhost:3001/profileForum", {user_id: Cookies.get("id")}).then((response) =>{
-            setForumItems(response.data[0])
-            console.log(response.data[0])
-        })
-        Axios.post("http://localhost:3001/profileForm", {user_id: Cookies.get("id")}).then((response) =>{
-            setForm(response.data[0])
-            console.log(response.data[0])
+            setForumItems(response.data)
+            console.log(response.data)
         })
         Axios.post("http://localhost:3001/profileOrders", {user_id: Cookies.get("id")}).then((response) =>{
             setOrders(response.data)
             console.log(response.data)
         })
         Axios.post("http://localhost:3001/profileArticles", {user_id: Cookies.get("id")}).then((response) =>{
-            setArticles(response.data[0])
-            console.log(response.data[0])
+            setArticles(response.data)
+            console.log(response.data)
         })
     }
 
@@ -110,7 +100,7 @@ export default function SignInRegistration(){
         <Box className="text-center">
         <Button variant="contained" color="error" className="my-3" onClick={() => openProfile(!profile)}>x</Button>
         </Box>
-        <Card style={{'overflowY': 'scroll', 'height': '90%'}} className="container text-center text-white p-5 border border-dark" id="card">
+        <Card style={{'overflowY': 'scroll', 'height': '90%'}} className="text-center text-white p-5 border border-dark" id="card">
                 <Grid container>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
                     <Avatar className="mx-auto my-5" sx={{width: 86, height: 86}} src={avatar == null ? "/images/alien.png" : 'avatar'} />
@@ -127,46 +117,31 @@ export default function SignInRegistration(){
                     </Grid>
                 </Grid>
                 <Grid container>
-                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4} className="p-1">
+                    <Paper  className="card p-5 text-center" id="card">
+                        <Typography variant="h4">Aktivity vo fore</Typography>
+                            {forumItems.map((fItem, index) => <Typography>{fItem.title}</Typography>)}
+                        </Paper>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4} className="p-1">
                     <Paper  className="card p-5" id="card">
-                                <Typography>Vaše objednávky</Typography>
-                                {orders.map((order, index) => {<Typography key={index}>{order[0].status}</Typography>})}
+                                <Typography variant="h4">Objednávky</Typography>
+                                {orders.map((order, index) => <Grid container>
+                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6} key={index}>Vytvorená: {new Date(order.order_created).getDate()}.{new Date(order.order_created).getMonth()+1}.{new Date(order.order_created).getFullYear()}</Grid>
+                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6} key={index}>Stav: {order.status}</Grid>
+                                </Grid>)}
                             </Paper>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
-
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
-
+                    <Paper  className="card p-5" id="card">
+                                <Typography variant="h4">Články</Typography>
+                                {articles.map((article, index) => <Grid container>
+                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6} key={index}>Stav: {article.title}</Grid>
+                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6} key={index}>Stav: {article.likes}</Grid>
+                                </Grid>)}
+                            </Paper>
                     </Grid>
                 </Grid>
-                <Paper className="bg-dark text-white">
-                <Typography variant="h4">Vaše objednávky</Typography>
-                <List>
-                    <ListItem className="text-center">
-                        <ListItemText primary="žiadne objednávky" />
-                    </ListItem>
-            </List>
-                </Paper>
-                <Paper className="bg-dark text-white">
-                <Typography className="bg-dark text-white" variant="h4">Vaše članky</Typography>
-                <List>
-                    <ListItem className="text-center">
-                        <ListItemText primary="žiadne aktivity" />
-                    </ListItem>
-            </List>
-                </Paper>
-                <Paper className="bg-dark text-white">
-                <Typography className="bg-dark text-white" variant="h4">Vaše aktivity vo fóre</Typography>
-                <List>
-                    <ListItem className="text-center">
-                        <ListItemText primary="žiadne aktivity" />
-                    </ListItem>
-            </List>
-                </Paper>
-                <ShoppingCart />
             </Card></Box>}
         {form && <Box id="dark-background" style={{'overflowY': 'scroll'}}>
         <Container>

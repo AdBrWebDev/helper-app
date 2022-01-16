@@ -6,6 +6,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+const multer = require('multer')
+const path = require('path');
 const rounds = 10;
 
 const dbcon = mysql.createPool({
@@ -38,7 +40,7 @@ app.post("/user", (req, res) => {
 })
 
 app.post('/profileOrders', (req, res) => {
-    dbcon.query("SELECT id_order, status, total_price, order_created FROM orders WHERE id_user = ?", [req.body.user_id], (err, result) => {
+    dbcon.query("SELECT status, total_price, order_created FROM orders WHERE id_user = ?", [req.body.user_id], (err, result) => {
         res.send(result)
     })
 })
@@ -68,7 +70,7 @@ app.get('/signs', (req, res) => {
 })
 
 app.post('/findDetails', (req, res) => {
-    dbcon.query(`SELECT * FROM pathfinderplus WHERE header = ?`, [req.body.search], (err, result) => {
+    dbcon.query(`SELECT * FROM pathfinder_plus WHERE header = ?`, [req.body.search], (err, result) => {
         res.send(result)
     })
 })
@@ -92,18 +94,40 @@ app.get('/products', (req, res) => {
 })
 
 app.post('/pathPlus', (req, res) => {
-    const SelectPlus = "SELECT DISTINCT(header) FROM pathfinderplus WHERE theme = ?";
+    const SelectPlus = "SELECT DISTINCT(header) FROM pathfinder_plus WHERE theme = ?";
     dbcon.query(SelectPlus, [req.body.search], (err, result) => {
         res.send(result)
     })
 })
 
+const storage = multer.diskStorage({
+    destination: path.join(__dirname, "../public/", "uploads"),
+    filename: function (req, file, cb) {
+        cb(null, Date.now()+"-"+file.originalname)
+    }
+})
+
 app.post('/addComment', (req, res) => {
-    const insertComment = "INSERT INTO forum (id_item, id_user, dateOfPublic, title, text, image, theme) VALUES (?,?,?,?,?,?,?)";
+    try{
+        let upload = multer({storage: storage}).single('image')
+        upload(req, res, function(err){
+            if(!req.file){
+                return res.send('please select an image')
+            }else if(err instanceof multer.MulterError){
+                return res.send(err);
+            }else if(err){
+                return res.send(err)
+            }
+            const classifiedsadd = {
+                image: req.file.filename
+            }
+            const insertComment = "INSERT INTO forum (id_item, id_user, dateOfPublic, title, text, image, theme) VALUES (?,?,?,?,?,?,?)";
     let date = new Date();
-    dbcon.query(insertComment, ['', req.body.id_user, date ,req.body.txt, req.body.text, req.body.img, req.body.theme], (err, result) => {
+    dbcon.query(insertComment, ['', req.body.id_user, date ,req.body.txt, req.body.text, classifiedsadd, req.body.theme], (err, result) => {
         res.send(result)
     })
+        })
+}catch(err) {console.log(err)}
 })
 
 app.get('/sponsors', (req, res) => {

@@ -36,7 +36,7 @@ export default function CyclingMNPG(){
                 <Link className="navbar-item" to="/Map">Mapa</Link>
                 <Link className="navbar-item" to="/ArticlesData">Články</Link>
                 <Link className="navbar-item" to="/Nature">Príroda</Link>
-                <Link className="navbar-item" to="/SkyHelper">Pomocník</Link>
+                <Link className="navbar-item" to="/SkyHelper">Pathfinder plus</Link>
                 </Box>
             </Box>
             <Box className="navbar-end">

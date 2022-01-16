@@ -3,7 +3,6 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import '../App.css'
 import Axios from 'axios'
-import Pagination from '@mui/material/Pagination'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import Rating from '@mui/material/Rating'
@@ -42,7 +41,6 @@ const publicArticle = () => {
             {articles.map((article, index) => <ArticlesItem index={index} data={articles} />)}
             </Grid>
             <Box className="text-center w-25 mx-auto">
-                <Pagination style={{'background': 'transparent'}} className="my-5" size="large" variant="outlined" count={2} color="info" />
             </Box>
         </Box>
         {openArticle && <Box id="dark-background">

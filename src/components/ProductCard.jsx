@@ -6,15 +6,12 @@ import Grid from '@mui/material/Grid'
 import Axios from 'axios'
 import '../App.css'
 import Card from '@mui/material/Card'
-import Rating from '@mui/material/Rating'
 import Divider from '@mui/material/Divider'
-import StarIcon from '@mui/icons-material/Star'
 import { useSelector, useDispatch } from 'react-redux'
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
     const [info,  setInfo] = useState([])
-    const [rating, setRating] = useState(null)
     const cart = useSelector((state) => state)
     console.log(cart)
     const dispatch = useDispatch();
@@ -69,12 +66,10 @@ export default function ProductCard(props){
                                     <Typography className="my-2" variant="h5" style={{'text-align': 'left'}}>Prevedenie:</Typography>
                                     <Typography className="my-2" variant="h5" style={{'text-align': 'left'}}>Veľkosti:</Typography>
                                 </Box>
-                                <Button variant="contained" color="info">Info o produkte</Button>
                             <Box>
                             <Typography variant="h2" style={{'textAlign': 'left'}}>{props.price} €</Typography>
                              </Box>
                             <Box className="d-flex">
-                            <Rating className="my-auto" value={rating} onChange={(e) => setRating(e.target.value)} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />} />
                             <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box>
                             <Button variant="contained" color="success"><i className="material-icons" onClick={() =>dispatch({type: "ADD", payload: props.product})}>shopping_cart</i></Button>
                             </Box>

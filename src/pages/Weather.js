@@ -44,12 +44,12 @@ export default function Weather(){
             <Button variant="contained" color="info" onClick={()=> openWeather(!weather)} style={{position: 'relative', float: 'right'}}>x</Button>
                 <Box noValidate autoComplete="off" className="p-5 mt-5 text-center" >
                     <InputBase className="mx-3 text-center text-white" value={town} onChange={(e) => setTown(e.target.value)} />
-                    <Button disabled={town.length === 0} onClick={() => searchWeather()} variant="contained" color="info"><i className="material-icons" on>search</i></Button>
+                    <Button disabled={town.length === 0} onClick={() => searchWeather()} variant="contained" color="info"><i className="material-icons">search</i></Button>
                 </Box>
                 {(details) ?
                 (<Box className="text-center">
                     <Typography variant="h2">{town}</Typography>
-                    <amp-img src={condition.icon} className="my-4" style={{transform: "scale(1.8)"}} alt={condition.text} />
+                    <img src={condition.icon} className="my-4" style={{transform: "scale(1.8)"}} alt={condition.text} />
                     <Typography>{condition.text}</Typography>
                     <Typography variant="h2">{curWeather.temp_c} °C</Typography>
                     <Grid container className="text-left">
@@ -71,6 +71,7 @@ export default function Weather(){
                         </Grid>
                     </Box>
                     <Typography className="pt-2">GPS: {location.lat}, {location.lon}</Typography>
+                    <Typography className="pt-2">Naposledy aktualizované: {curWeather.last_updated}</Typography>
                 </Box>) : null}
             </Container>
         </Box>) : null}

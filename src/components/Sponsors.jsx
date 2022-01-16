@@ -13,7 +13,6 @@ export default function Sponsors(){
     }), [])
 
     const settings = {
-        dots: true,
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
@@ -26,7 +25,7 @@ export default function Sponsors(){
     return(
         <Box>
     <Slider {...settings}>
-    {sponsors.map((sponsor, index) => <Box key={index} className="my-auto"><img height="150" width="150"src={`pathfinderImages/${sponsor.img}`} alt={sponsor.title} /></Box>)}
+    {sponsors.map((sponsor, index) => <Box key={index} className="my-auto"><img height="150" width="150"src={`sponsors/${sponsor.img}`} alt={sponsor.title} /></Box>)}
     </Slider>
     </Box>
     )

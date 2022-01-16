@@ -28,7 +28,7 @@ export default function Eshop(){
         <Typography variant="h3" className="my-4 mt-5">GPS zariadenia a oblečenie</Typography>
         <Grid container spacing={3}>
                 {products.map((product, index) => { product.quantity = 1; 
-                    return (<ProductCard index={index} product={product} id={product.id_product} contain={product.contain_in_warehouse} img={product.image} title={product.title} price={product.price} />)})}
+                    return (<ProductCard index={index} product={product} id={product.id_product} img={product.image} color={product.color} contain={product.contain} title={product.title} price={product.price} />)})}
         </Grid>
         </Container>
         </Box>

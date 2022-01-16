@@ -15,7 +15,7 @@ export default function ForumItems(props){
 
     const date  = (date) => {
         let d = new Date(date)
-        return(`${d.getDate()}.${d.getMonth()}.${d.getFullYear()}`)
+        return(`${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`)
     }
 
     useEffect(() => {

@@ -18,9 +18,6 @@ export default function Forum(props){
     const [window, oWindow] = useState(false)
     const [forumItems, setForumItems] = useState([])
     const [sign, setSign] = useState('')
-    const [img, setImg] = useState({
-        file: [],
-    })
 
     const createNewItem = () => {
         Axios.post('http://localhost:3001/forumNewItem', {id_user: Cookies.get('id'), dateOfPublic: new Date(), title: title, text: text, theme: props.title})
@@ -45,21 +42,11 @@ export default function Forum(props){
         oWindow(!window)
     }
 
-    const setImage = (e) => {
-        setImg({
-            ...img,
-            file: e.target.files[0]
-        })
-    }
-
     const addComment = async (txt, theme) => {
         if(!Cookies.get("id")) console.log("nie ste prihlásený")
         else{
-        const form = new FormData();
-        form.append('image', img.file)
-        Axios.post('http://localhost:3001/addComment', {txt: txt, id_user: Cookies.get('id'), text:text, form, theme: theme},
-        {headers: {'Content-Type': 'multipart/form-data'}}).then((response) => {
-                console.log(response.data)
+        Axios.post('http://localhost:3001/addComment', {txt: txt, id_user: Cookies.get('id'), text:text, theme: theme}).then((response) => {
+                console.log(response)
             })}
         } 
 
@@ -98,7 +85,6 @@ export default function Forum(props){
                     <Card className="container text-center text-white p-5 shadow w-100" id="card">
                     <Typography variant="h3">Pridať komentar</Typography>
                         <textarea cols="10" placeholder="Váš komentár" className="text-center form-control bg-transparent text-white" name="comment" rows="15" onChange={(e) => setText(e.target.value)}></textarea>
-                        <input name="image" className="form-control w-75 bg-transparent mx-auto my-1" onChange={setImage} type="file" />
                         <Box className="my-3">
                         <Button variant="contained" color="info" onClick={() => addComment(sign, props.title)}>Pridať</Button>
                         </Box>

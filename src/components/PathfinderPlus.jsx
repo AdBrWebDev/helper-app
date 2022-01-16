@@ -73,16 +73,9 @@ export default function PathfinderPlus(props){
                 </Box>
                 <Card className="container text-white h-75 p-5 mb-5 border border-dark" id="card" style={{'overflowY': 'scroll'}}>
                 <Typography variant="h3">{SEARCH}</Typography>
-                {details.map((detail, index) => <Box className="my-5" key={index}>
-                    <Grid container>
-                        <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>
-                            {detail.image == null || detail.image === '' ? <Skeleton variant="rectangular" width="300" height="100" /> : <img src={`pathPlus/${detail.image}`} alt="help" loading="lazy" />}
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>
+                {details.map((detail, index) => <Box className="my-5 w-75 mx-auto" key={index}>
                         <Typography variant="h1">{index+1}</Typography>
-                        <Typography>{detail.text}</Typography>
-                        </Grid>
-                    </Grid>
+                        <Typography className="mb-5">{detail.text}</Typography>
                 </Box>)}
                 </Card>
             </Box>}

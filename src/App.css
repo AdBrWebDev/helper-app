@@ -66,6 +66,7 @@
     transition: .7s;
     background-color: rgba(250,250,250,.15);
     border-radius: 15px;
+    cursor: pointer;
   }
 
   #shadow{

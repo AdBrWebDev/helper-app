@@ -13,6 +13,7 @@ import Select from '@mui/material/Select';
 export default function Map(){
   const [lat, setLat] = useState(null)
   const [lon, setLon] = useState(null)
+  const [type, setType] = useState('restaurants')
 
     useEffect(() =>{
         navigator.geolocation.getCurrentPosition((pos)=> {
@@ -40,18 +41,17 @@ export default function Map(){
       
       return(<Grid container>
         <Grid item xs={12} sm={12} md={12} xl={3} lg={3}>
-          <Card id="card" className="m-4 p-3">
+          <Card id="card" className="m-3 p-3 py-5 border border-dark">
           <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+      <FormControl fullWidth variant="filled">
+        <InputLabel className="text-white" id="demo-simple-select-label">{type}</InputLabel>
         <Select
           labelId="demo-simple-select-label"
-          id="card"
-          label="Age"
+          label={type}
+          onChange={(e) => setType(e.target.value)}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={'restaurants'}>Reštaurácie</MenuItem>
+          <MenuItem value={'hotels'}>Hotely</MenuItem>
         </Select>
       </FormControl>
     </Box>

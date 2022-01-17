@@ -30,7 +30,7 @@ export default function AppInDevices(){
                         <Box><Button variant="contained" color="error" onClick={() => openDownload(!download)}>x</Button></Box>
                     <CardContent>
                     <Box className="message is-info">
-                        <Typography className="message-body">Aplikacie budú dostupné od: 11.11.2022</Typography>
+                        <Typography className="message-body">Dostupnosť aplikácii od: 11.11.2022</Typography>
                     </Box>
                         <Grid container>
                             {devices.map((device, index) => <Grid key={index} className="my-4" item xs={12} sm={12} md={6} lg={3} xl={3}>

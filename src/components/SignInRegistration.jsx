@@ -13,6 +13,9 @@ import Avatar from '@mui/material/Avatar'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
 import Cookies from 'js-cookie'
+import Modal from '@mui/material/Modal'
+import BottomNavigation from '@mui/material/BottomNavigation'
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 
 export default function SignInRegistration(){
     const [form, openForm] = useState(false)
@@ -95,12 +98,9 @@ export default function SignInRegistration(){
             <MenuItem onClick={logout}>Odhlásenie</MenuItem>
         </Menu>
         </Box> :
-        <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia {user}</Button>}   
-        {profile &&<Box id="dark-background"> 
-        <Box className="text-center">
-        <Button variant="contained" color="error" className="my-3" onClick={() => openProfile(!profile)}>x</Button>
-        </Box>
-        <Card style={{'overflowY': 'scroll', 'height': '90%'}} className="text-center text-white p-5 border border-dark" id="card">
+        <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>}   
+        <Modal open={profile} onClose={() => userProfile(false)}>
+        <Card style={{'overflowY': 'scroll', 'height': '90%'}} className="text-center text-white p-5 border container border-dark" id="card">
                 <Grid container>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
                     <Avatar className="mx-auto my-5" sx={{width: 86, height: 86}} src={avatar == null ? "/images/alien.png" : 'avatar'} />
@@ -142,13 +142,10 @@ export default function SignInRegistration(){
                             </Paper>
                     </Grid>
                 </Grid>
-            </Card></Box>}
-        {form && <Box id="dark-background" style={{'overflowY': 'scroll'}}>
+            </Card></Modal>
+            <Modal open={form} onClose={() => openForm(!form)}>
         <Container>
             <Card className="p-3 text-center bg-dark text-white border border-info border-2">
-                <Box>
-                <Button className="mx-auto my-3" color="error" variant="outlined" onClick={() => openForm(!form)}>x</Button>
-                </Box>
                 <Typography variant="h3">Registrácia</Typography>
                 <Grid container component="form" className="text-center mx-auto">
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
@@ -190,12 +187,9 @@ export default function SignInRegistration(){
                     <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><TextField variant="outlined" onChange={(e) => {setLoginEmail(e.target.value)}} type="text" label="loginEmail" name="loginEmail" /></Grid>
                     <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><TextField variant="outlined" onChange={(e) => {setLoginPassword(e.target.value)}} type="password" label="loginPassword" name="loginPassword" /></Grid>
                 </Grid>
-                <Box>
-                <Button variant="outlined" color="error">Ešte niesom registrovaný</Button>
-                </Box>
                 <Button type="submit" variant="outlined" color="primary" onClick={(e) => signUp(e.preventDefault())}>Prihlásiť</Button>
             </Card>
             <h1>{user}</h1>
         </Container>
-    </Box>}</Box>);
+    </Modal></Box>);
 }

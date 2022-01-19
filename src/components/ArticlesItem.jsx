@@ -11,6 +11,7 @@ import StarIcon from '@mui/icons-material/Star'
 import Axios from 'axios'
 import '../App.css'
 import LazyHero from 'react-lazy-hero'
+import Modal from '@mui/material/Modal'
 
 export default function ArticlesItem(props){
     const [data, getData] =  useState([])
@@ -51,8 +52,7 @@ export default function ArticlesItem(props){
                     </Grid>
                 </CardActions>
             </Card>
-            {window && <Box id="dark-background">
-            <Button variant="outlined" className="my-2" color="error" onClick={() => openWindow(!window)}>x</Button>
+            <Modal open={window} onClose={() => openWindow(false)}>
                 <Card className="container border border-info border-2 bg-dark" style={{'overflowY': 'scroll', 'height': '92%'}}>
                     <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/images/${props.data[0].mainImg}`}>
                         <Box>
@@ -64,6 +64,6 @@ export default function ArticlesItem(props){
                     <Typography variant="h2">Galeria</Typography>
                     </Box>
                 </Card>  
-                </Box>}
+                </Modal>
         </Grid>)
 }

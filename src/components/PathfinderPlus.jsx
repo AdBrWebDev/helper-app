@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
 import {gsap, TweenMax} from 'gsap'
 import Skeleton from '@mui/material/Skeleton'
+import Modal from '@mui/material/Modal'
 const Health = lazy(() => import('./Health')) 
 
 export default function PathfinderPlus(props){
@@ -53,11 +54,8 @@ export default function PathfinderPlus(props){
             </Button>
         </Grid>
     </Grid>
-    {window && <Box id="dark-background">
-    <Box>
-                <Button variant="contained" color="error" onClick={() => openWindow(!window)}>x</Button>
-                </Box>
-            <Card className="container my-5 p-5 border border-dark text-white" id="card" style={{'overflowY': 'scroll', 'maxHeight': '90%'}}>
+    <Modal open={window} onClose={() => openWindow(!window)}>
+            <Card className="container my-5 p-5 border border-dark text-white text-center" id="card" style={{'overflowY': 'scroll', 'maxHeight': '90%'}}>
                 <Box>
                     <Avatar src="/images/pathfinder.jpg" className="mx-auto my-5" style={{'transform': 'scale(2)'}} />
                     <Typography variant="h4">Aký je tvoj problém?</Typography>
@@ -66,18 +64,15 @@ export default function PathfinderPlus(props){
                     {result.map((res, index) => <Grid className="my-3" key={index} item xs={12} sm={12} md={4} xl={3} lg={3}><Button className="p-3 w-75 h-100" variant="contained" color="info" onClick={()=> openDetails(res.header)}>{res.header}</Button></Grid>)}
                 </Grid>
             </Card>
-        </Box>}
-        {detailWin && <Box id="dark-background">
-                <Box>
-                    <Button variant="contained" color="error" className="mb-5" onClick={() => openDetailWin(!detailWin)}>x</Button>
-                </Box>
-                <Card className="container text-white h-75 p-5 mb-5 border border-dark" id="card" style={{'overflowY': 'scroll'}}>
+        </Modal>
+        <Modal open={detailWin} onClose={() => openDetailWin(!detailWin)}>
+                <Card className="container text-white text-center h-75 p-5 mb-5 border border-dark" id="card" style={{'overflowY': 'scroll'}}>
                 <Typography variant="h3">{SEARCH}</Typography>
                 {details.map((detail, index) => <Box className="my-5 w-75 mx-auto" key={index}>
                         <Typography variant="h1">{index+1}</Typography>
                         <Typography className="mb-5">{detail.text}</Typography>
                 </Box>)}
                 </Card>
-            </Box>}
+                </Modal>
 </Box>)
 }

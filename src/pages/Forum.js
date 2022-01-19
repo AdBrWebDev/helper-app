@@ -8,6 +8,7 @@ import '../App.css'
 import MainImageOfPage from '../components/MainImageOfPage'
 import Axios from 'axios'
 import Cookies from 'js-cookie'
+import Modal from '@mui/material/Modal'
 const ForumItems = lazy(() => import('../components/ForumItems'))
 
 export default function Forum(props){
@@ -62,21 +63,15 @@ export default function Forum(props){
                 </Card>)}
             </Box>
         </Box>
-        {newTheme && <Box id="dark-background">
-            <Container>  
+        <Modal open={newTheme} onClose={() => NewTheme(false)}>
                 <Card className="container text-center border border-dark border-2 text-white p-5 shadow w-75" id="card">
-                    <Button variant="contained" color="error" onClick={() => NewTheme(!newTheme)} style={{'top': -10, 'left': 10, 'position': 'relative', 'float': 'right'}}>x</Button>
                     <Typography variant="h3">Pridať novú tému</Typography>
                         <input type="text" placeholder="Názov témy" className="form-control mb-4 text-center text-info" name="title" onChange={(e) => setTitle(e.target.value)} />
                         <textarea cols="80" placeholder="Váš text" name="text" className="form-control mb-4 text-info bg-transparent" rows="10" onChange={(e) => setText(e.target.value)}></textarea>
                         <Button variant="contained" color="info" onClick={createNewItem}>Pridať</Button>
                 </Card>
-            </Container>
-        </Box>} 
-        {window && <Box id="dark-background">
-        <Box className="text-center">
-        <Button variant="contained" className="my-2" color="error" onClick={() => openWindow(!window)}>x</Button>
-        </Box>
+                </Modal>  
+        <Modal open={window} onClose={() => openWindow(false)}>
             <Card className="container text-center border border-dark text-white p-5" id="card" style={{'overflowY': 'scroll', 'height': "90%"}}> 
                     <Typography variant="h3" className="text-white mt-2">{sign}</Typography>
                     <Box className="p-5">
@@ -90,6 +85,6 @@ export default function Forum(props){
                         </Box>
                 </Card>
                 </Card>
-            </Box>}
+                </Modal>
     </Box>)
 }

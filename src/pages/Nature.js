@@ -10,6 +10,7 @@ import '../App.css'
 import Axios from 'axios';
 import Cookies from 'js-cookie'
 import { useEffect } from 'react';
+import Modal from '@mui/material/Modal';
 const Sections = lazy(() => import('../components/Sections')) 
 const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 
@@ -87,12 +88,10 @@ export default function Nature(){
 </Box> : <Button onClick={() => openForm(!form)} className="ml-5"variant="contained" color="success"><i className="material-icons">park</i></Button>}</Typography>
                     <Typography className="mt-4" style={{'opacity': .3, 'fontSize': '12px'}}>Platí pre územie slovenskej republiky</Typography>
                 </Card>
-                {form && 
-                <Box id="dark-background">
-                <Card className="my-5 container p-5 bg-dark border border-success" id='nature-border'>
-                <Button variant="contained" color="error" onClick={() => openForm(!form)}>x</Button>
+                <Modal open={form} onClose={() => openForm(!form)}>
+                <Card className="my-5 container p-5 bg-dark border text-center border-success" id='nature-border'>
                 <Box className="w-25 h-25 mx-auto my-3">
-                    <amp-img src="/images/sEarth.png" alt="save nature" />
+                    <img src="/images/sEarth.png" alt="save nature" />
                     </Box>
                     <Typography variant="h5" color="white">Pomôcť zelenšej budúcnosti, môžeš aj ty. Stačí jeden klik.</Typography>
                     <Button variant='outlined' color='success' className="my-4" onClick={submitNatureForm}>Podpisať</Button>
@@ -101,7 +100,7 @@ export default function Nature(){
     Pre úspešné podpísanie sa musíte prihlásiť!
   </Typography>
 </Box>}
-                </Card></Box>}
+                </Card></Modal>
             </Container>
             <Typography variant="h3" className="my-3 mt-5 pt-5">Top 10 ako pomôcť prírode</Typography>
             <Box>

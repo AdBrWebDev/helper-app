@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid'
 import '../App.css';
 import React, {useState} from 'react';
 import ForecastCard from '../components/ForecastCard';
+import Modal from '@mui/material/Modal';
 
 export default function Weather(){
     const [weather, openWeather] = useState(false);
@@ -17,8 +18,8 @@ export default function Weather(){
     const [location, setLocation] = useState([]);
     const [condition, setCondition] = useState([]);
 
-    function searchWeather(){
-        fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${town}&days=3`, {
+    async function searchWeather(){
+       await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${town}&days=3`, {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-key": "759d3832c5msh709ed715aa8fe85p19ce62jsn5a971bf5878d",
@@ -39,8 +40,7 @@ export default function Weather(){
         <>
         <Button variant="contained" className="btn-floating pulse btn-info btn-waves waves-light" onClick={() => openWeather(!weather)} style={{bottom: 30, right: 30, position: 'fixed'}}><i className="material-icons">wb_sunny</i></Button>
       {(weather) ? 
-        (<Box id="dark-background">
-            <Box className="text-center"><Button variant="contained" color="info" onClick={()=> openWeather(!weather)}>x</Button></Box>
+        (<Modal open={weather} onClose={()=> openWeather(false)}>
             <Container className="text-white mt-3 p-5 shadow-lg border border-dark border-2" id="card" style={{height: '90%', overflow: 'auto'}}>
             
                 <Box noValidate autoComplete="off" className="p-5 mt-5 text-center" >
@@ -75,7 +75,7 @@ export default function Weather(){
                     <Typography className="pt-2">Naposledy aktualizované: {curWeather.last_updated}</Typography>
                 </Box>) : null}
             </Container>
-        </Box>) : null}
+        </Modal>) : null}
         </>
     )
 }

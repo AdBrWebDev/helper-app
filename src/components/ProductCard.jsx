@@ -8,6 +8,7 @@ import '../App.css'
 import Card from '@mui/material/Card'
 import Divider from '@mui/material/Divider'
 import { useSelector, useDispatch } from 'react-redux'
+import Modal from '@mui/material/Modal'
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
@@ -47,11 +48,8 @@ export default function ProductCard(props){
                         </Box>
                     </Box>
                 </Box>
-                {iWindow && <Box id="dark-background">
-                <Box className="mb-5 mx-auto text-center">
-                            <Button variant="contained" color="error" onClick={() => openInfo(!iWindow)}>x</Button>
-                        </Box>
-                        <Card className="container text-center text-white border p-5 border-dark" id="card" style={{'marginTop': 30, 'overflowY': 'scroll'}}>
+                <Modal open={iWindow} onClose={() => infoOpened(false)}>
+                    <Card className="container text-center text-white border p-5 border-dark" id="card" style={{'marginTop': 30, 'overflowY': 'scroll'}}>
                             <Grid container>
                                 <Grid item xs={12} sm={12} md={5} xl={5} lg={5}>
                                 <img style={{'height': 350, 'marginTop': 50}} src={`/images/${props.img}`} alt={props.title} />
@@ -68,13 +66,13 @@ export default function ProductCard(props){
                             <Typography variant="h2" style={{'textAlign': 'left'}}>{props.price} €</Typography>
                              </Box>
                             <Box className="d-flex">
-                            <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box>
-                            <Button variant="contained" color="success"><i className="material-icons" onClick={() =>dispatch({type: "ADD", payload: props.product})}>shopping_cart</i></Button>
+                            {props.contain > 0 ? <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box> : 
+                            <Box className="message is-danger w-50 mx-auto my-auto"><Typography className="message-body">Nedostupné</Typography></Box>}
+                            <Button disabled={props.contain < 1} variant="contained" color="success"><i className="material-icons" onClick={() => dispatch({type: "ADD", payload: props.product})}>shopping_cart</i></Button>
                             </Box>
                             </Card>
                                 </Grid>
-                            </Grid>
-                        </Card>
-                    </Box>}
+                            </Grid></Card>
+                        </Modal>
     </Grid>);
 }

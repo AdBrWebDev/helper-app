@@ -9,6 +9,7 @@ import Rating from '@mui/material/Rating'
 import StarIcon from '@mui/icons-material/Star'
 import Typography from '@mui/material/Typography'
 import Cookies from 'js-cookie'
+import Modal from '@mui/material/Modal'
 const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 const ArticlesItem = lazy(() => import('../components/ArticlesItem'))
 
@@ -32,7 +33,7 @@ const publicArticle = () => {
 }
 
     return(<Box className="bg-dark text-center">
-        <MainImageOfPage img={props.img} text={props.text} href="" />
+        <MainImageOfPage img={props.img} text={props.text} />
         <Box className="container py-5 text-center">
             <Box>
                 <Button variant="outlined" color="info" onClick={() => openAddArticle(!openArticle)}>Pridať nový článok</Button>
@@ -43,11 +44,8 @@ const publicArticle = () => {
             <Box className="text-center w-25 mx-auto">
             </Box>
         </Box>
-        {openArticle && <Box id="dark-background">
-                <Box className="mb-5 mx-auto text-center">
-                    <Button variant="contained" color="error" onClick={() => openAddArticle(!openArticle)}>x</Button>
-                </Box>
-                <Card id="card" className="p-5 border border-dark">
+        <Modal open={openArticle} onClose={() => openAddArticle(false)}>
+                <Card id="card" className="p-5 border container border-dark">
                     <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder="názov článku" />
                     <Typography>náročnosť trasy</Typography>
                     <Rating value={0}  onChange={(e) => setRating(e.target.value)} precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />}/>
@@ -55,6 +53,6 @@ const publicArticle = () => {
                     <textarea  onChange={(e) => setText(e.target.value)} cols="80" rows="80" placeholder="obsah článku"></textarea>
                     <Button variant="contained" color="success" onClick={publicArticle}>Zverejniť článok</Button>
                 </Card> 
-            </Box>}
+            </Modal>
     </Box>)
 }

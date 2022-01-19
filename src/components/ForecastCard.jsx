@@ -1,4 +1,4 @@
-import React, {useState, lazy} from 'react';
+import React, {useState, lazy, useEffect} from 'react';
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -6,14 +6,31 @@ import Grid from '@mui/material/Grid';
 import '../App.css';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
+import Modal from '@mui/material/Modal';
+import Swiper from 'react-id-swiper';
 const HourForecast = lazy(() => import('./HourForecast'));
 
 export default function ForecastCard(props){
     const [showWeather, openWeather] = useState(false);
     const conditionIcon = props.forecast.day.condition.icon;
     console.log(props);
+
+    
+        const params = {
+          effect: 'cube',
+          grabCursor: true,
+          cubeEffect: {
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 20,
+            shadowScale: 0.94,
+          },
+          pagination: {
+            el: '.swiper-pagination',
+          }}
+
     return(<>
-        <Grid key={props.index} xs={12} sm={12} md={6} xl={4} lg={4}>
+        <Grid item key={props.index} xs={12} sm={12} md={6} xl={4} lg={4}>
         <Paper id="forItem" elevation={3} className="p-5 m-3 text-center" onClick={() => openWeather(!showWeather)}>
         <Typography variant="h6" className="mb-1">{props.forecast.date}</Typography>
         <img src={conditionIcon} alt="icon" />
@@ -23,9 +40,8 @@ export default function ForecastCard(props){
         <Typography><i className="material-icons text-info">opacity</i>{props.forecast.day.totalprecip_mm} mm</Typography>
         </Paper>
         </Grid>
-        {(showWeather) ? <Box id="dark-background">
-            <Card style={{'height': '90%', 'overflowY': 'scroll'}} id="card" className="text-white mt-5 p-5 border border-dark text-center">
-        <Button variant="contained" color="info" onClick={()=> openWeather(!showWeather)} style={{position: 'relative', float: 'right'}}>x</Button>
+        <Modal open={showWeather} onClose={()=> openWeather(false)}>
+        <Card style={{'height': '90%', 'overflowY': 'scroll'}} id="card" className="text-white container mt-5 p-5 border border-dark text-center">
         <Typography variant="h6" className="mb-1">{props.forecast.date}</Typography>
         <img style={{transform: "scale(1.8)"}} src={conditionIcon} alt="icon" />
         <Typography>{props.forecast.day.condition.text}</Typography>
@@ -51,9 +67,9 @@ export default function ForecastCard(props){
                 <Typography variant="h4"><i className="material-icons">south</i><i className="material-icons">wb_sunny</i>{props.forecast.astro.sunset}</Typography>
             </Grid>
         </Grid>
-        <Grid>
+        <Swiper {...params}>
             {props.forecast.hour.map((hourF) => <HourForecast forecast={hourF} />)}
-        </Grid>
+        </Swiper>
         </Card>
-        </Box>: null}</>)
+        </Modal></>)
 }

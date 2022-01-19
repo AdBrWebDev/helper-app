@@ -5,9 +5,10 @@ import Button from '@mui/material/Button';
 import InputBase from '@mui/material/InputBase';
 import Grid from '@mui/material/Grid'
 import '../App.css';
-import React, {useState} from 'react';
-import ForecastCard from '../components/ForecastCard';
-import Modal from '@mui/material/Modal';
+import React, {useState, lazy} from 'react';
+import Modal from '@mui/material/Modal'
+const ForecastCard = lazy(() => import('../components/ForecastCard'))
+const WeatherCharts = lazy(() => import('../components/WeatherCharts'))
 
 export default function Weather(){
     const [weather, openWeather] = useState(false);
@@ -17,6 +18,7 @@ export default function Weather(){
     const [forecast, setForecast] = useState([]);
     const [location, setLocation] = useState([]);
     const [condition, setCondition] = useState([]);
+    const [day24hours, set24Hours] = useState([]);
 
     async function searchWeather(){
        await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${town}&days=3`, {
@@ -33,14 +35,17 @@ export default function Weather(){
         setForecast(data.forecast.forecastday);
         setLocation(data.location);
         setCondition(data.current.condition);
+        set24Hours(data.forecast.forecastday[0].hour)
     })
     showDetails(true)
     }
+
+    console.log(day24hours)
+
     return(
         <>
         <Button variant="contained" className="btn-floating pulse btn-info btn-waves waves-light" onClick={() => openWeather(!weather)} style={{bottom: 30, right: 30, position: 'fixed'}}><i className="material-icons">wb_sunny</i></Button>
-      {(weather) ? 
-        (<Modal open={weather} onClose={()=> openWeather(false)}>
+    <Modal open={weather} onClose={() => openWeather(false)}>
             <Container className="text-white mt-3 p-5 shadow-lg border border-dark border-2" id="card" style={{height: '90%', overflow: 'auto'}}>
             
                 <Box noValidate autoComplete="off" className="p-5 mt-5 text-center" >
@@ -71,11 +76,14 @@ export default function Weather(){
                         {forecast.map((forecast) => <ForecastCard forecast={forecast} />)}
                         </Grid>
                     </Box>
+                    <Box>
+                        <WeatherCharts hours={day24hours} />
+                    </Box>
                     <Typography className="pt-2">GPS: {location.lat}, {location.lon}</Typography>
                     <Typography className="pt-2">Naposledy aktualizované: {curWeather.last_updated}</Typography>
-                </Box>) : null}
+                    </Box>): null}
             </Container>
-        </Modal>) : null}
+        </Modal>)
         </>
     )
 }

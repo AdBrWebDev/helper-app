@@ -1,4 +1,4 @@
-import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {Link, BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import React, {Suspense, lazy} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'material-icons/iconfont/material-icons.css'
@@ -19,35 +19,32 @@ const Skiing = lazy(() => import('./pages/skiing/SkiingMNPG'))
 function App() {
   return (
     <Suspense fallback={"loading..."}>
-      {<Router>
+      <Router>
         <Box className="bg-dark">
           {/*<Box style={{'paddingTop': '20%'}}>
           <Grid container >
               <Grid className="text-center my-4" item xs={6} sm={6} md={3} lg={3} xl={3}>
                 <Box id="circle" className="mx-auto">
-                <Link to="/cycling">
-                  <Button>Cyklistika</Button>
-                </Link>
+                <Link to="/cycling">Cyklistika</Link>
                 </Box>
               </Grid>
               <Grid className="text-center my-4" item xs={6} sm={6} md={3} lg={3} xl={3}>
                 <Box id="circle" className="mx-auto">
-                <Link to="/hiking">Turistika</Link>
+                <Link to="/cycling">Cyklistika</Link>
                 </Box>
               </Grid>
               <Grid className="text-center my-4" item xs={6} sm={6} md={3} lg={3} xl={3}>
                 <Box id="circle" className="mx-auto">
-                  <Link to="/running">Beh</Link>
+                <Link to="/cycling">Cyklistika</Link>
                 </Box>
               </Grid>
               <Grid className="text-center my-4"  item xs={6} sm={6} md={3} lg={3} xl={3}>
                 <Box id="circle" className="mx-auto">
-                  <Link to="/skiing">Lyžovanie</Link>
+                <Link to="/cycling">Cyklistika</Link>
                 </Box>
               </Grid>
-          </Grid>
-      </Box>*/}
-        {<nav className="bg-dark">
+  </Grid>*/}
+        <nav className="bg-dark">
           <ul>
             <li>
               <Link className="nav-item" to="/">logo</Link>
@@ -65,7 +62,7 @@ function App() {
               <Link className="nav-item" to="/skiing">Lyžovanie</Link>
             </li>
           </ul>
-      </nav>}
+      </nav>
         <Switch>
             {<Route exact path="/" component={Cycling} />}
             <Route path="/cycling" component={Cycling} />
@@ -74,8 +71,9 @@ function App() {
             <Route path="/skiing" component={Skiing} />
         </Switch>
         </Box>
-        </Router>}
-      <Weather />  </Suspense>);
+        </Router>
+      <Weather />
+      </Suspense>);
 }
 
 export default App;

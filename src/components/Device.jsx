@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import Paper from '@mui/material/Paper'
 import TableBody from '@mui/material/TableBody'
+import Modal from '@mui/material/Modal'
 
 export default function Device(props){
     const [device, openDevice] = useState(false)
@@ -23,12 +24,8 @@ export default function Device(props){
         <Grid item className="py-5 my-5" key={props.index} onClick={() => openDevice(!device)} xs={12} sm={6} md={6} lg={3} xl={3} style={{"cursor": "pointer"}}>
             <i id="devices" className="material-icons my-5">{props.icon}</i>
             <Typography>{props.text}</Typography>
-            {device && <Box id="dark-background">
-                <Container>
-                    <Card className="p-5 rounded text-white container border border-dark" id="card">
-                        <CardActions>
-                            <Button variant="contained" className="mx-auto mb-4" onClick={() => openDevice(!device)} color="error">x</Button>
-                        </CardActions>
+            <Modal open={device} onClose={() => openDevice(false)}>
+                    <Card className="p-5 rounded text-center text-white container border border-dark" id="card">
                         <CardContent>
                             <i id="devices" className="material-icons my-4">{props.icon}</i>
                             <Typography variant="h5" className="mt-2">{props.text}</Typography>
@@ -46,8 +43,7 @@ export default function Device(props){
                             </TableContainer>
                         </CardContent>
                     </Card>
-                </Container>
-            </Box>}
+                    </Modal>
         </Grid>
     )
 }

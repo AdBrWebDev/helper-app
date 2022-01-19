@@ -6,6 +6,7 @@ import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import Container from '@mui/material/Container'
 import CardContent from '@mui/material/CardContent'
+import Modal from '@mui/material/Modal'
 import '../App.css'
 const Device = lazy(() => import('./Device'))
 
@@ -24,10 +25,8 @@ export default function AppInDevices(){
             {devices.map((device, index) => <Device terms={device.terms} index={index} icon={device.icon} text={device.typography}/>)}
         </Grid>
         <Button variant="outlined" color="info" className="my-5 p-4" onClick={() => openDownload(!download)}>stiahnuť pathfinder <i className="material-icons mx-1">download</i></Button>
-        {download && <Box id="dark-background">
-            <Container>
+        <Modal open={download} onClose={() => openDownload(false)}>
                 <Card id="card" className="p-5 rounded text-center text-white container border border-dark">
-                        <Box><Button variant="contained" color="error" onClick={() => openDownload(!download)}>x</Button></Box>
                     <CardContent>
                     <Box className="message is-info">
                         <Typography className="message-body">Dostupnosť aplikácii od: 11.11.2022</Typography>
@@ -43,7 +42,6 @@ export default function AppInDevices(){
                         </Grid>
                     </CardContent>
                 </Card>
-            </Container>
-            </Box>}
+                </Modal>
     </Box>)
 }

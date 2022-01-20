@@ -53,13 +53,13 @@ export default function ArticlesItem(props){
                 </CardActions>
             </Card>
             <Modal open={window} onClose={() => openWindow(false)}>
-                <Card className="container border border-info border-2 bg-dark" style={{'overflowY': 'scroll', 'height': '92%'}}>
+                <Card className="container border text-center border-dark p-5" id="card" style={{'overflowY': 'scroll', 'height': '92%'}}>
                     <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/images/${props.data[0].mainImg}`}>
                         <Box>
                             <Typography color="white" variant="h2">{props.data[0].title}</Typography>
                         </Box>
                     </LazyHero>
-                    <Box className="text-white container">
+                    <Box className="text-white container mx-auto">
                     <Typography>{data.text}</Typography>
                     <Typography variant="h2">Galeria</Typography>
                     </Box>

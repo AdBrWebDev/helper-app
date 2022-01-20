@@ -145,7 +145,7 @@ export default function SignInRegistration(){
             </Card></Modal>
             <Modal open={form} onClose={() => openForm(!form)}>
         <Container>
-            <Card className="p-3 text-center bg-dark text-white border border-info border-2">
+            <Card className="p-5 text-center bg-dark text-white border border-info border-2">
                 <Typography variant="h3">Registrácia</Typography>
                 <Grid container component="form" className="text-center mx-auto">
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
@@ -181,7 +181,7 @@ export default function SignInRegistration(){
                 <Button className="mx-auto" type="submit" variant="outlined" color="primary" onClick={() => submit()}>Registrovať</Button>
                 </Grid>
             </Card>
-            <Card className="my-3 bg-dark text-white text-center border border-info border-2">
+            <Card className="my-3 p-5 bg-dark text-white text-center border border-info border-2">
                 <Typography variant="h3" className="my-3">Registrácia</Typography>
                 <Grid container component="form" className="text-center mx-auto">
                     <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><TextField variant="outlined" onChange={(e) => {setLoginEmail(e.target.value)}} type="text" label="loginEmail" name="loginEmail" /></Grid>

@@ -32,6 +32,15 @@ const publicArticle = () => {
     Axios.post('http://localhost:3001/publicate', {id_user: Cookies.get("id"), mainImg: MainImg, sign: title, rating: rating, text: text, theme: props.title})
 }
 
+const setImg = (e) => {
+    setMainImg(e.target.files[0]);
+    console.log(e.target.files[0])
+}
+
+const setMultipleImg = (e) => {
+    console.log(e.target.files)
+}
+
     return(<Box className="bg-dark text-center">
         <MainImageOfPage img={props.img} text={props.text} />
         <Box className="container py-5 text-center">
@@ -49,7 +58,8 @@ const publicArticle = () => {
                     <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder="názov článku" />
                     <Typography>náročnosť trasy</Typography>
                     <Rating value={0}  onChange={(e) => setRating(e.target.value)} precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />}/>
-                    <input  onChange={(e) => setMainImg(e.target.value)} type="file" placeholder="Hlavný obrázok" />
+                    <input  onChange={(e) => setImg(e)} type="file" placeholder="Hlavný obrázok" />
+                    <input  onChange={(e) => setMultipleImg(e)} type="file" multiple placeholder="Hlavný obrázok" />
                     <textarea  onChange={(e) => setText(e.target.value)} cols="80" rows="80" placeholder="obsah článku"></textarea>
                     <Button variant="contained" color="success" onClick={publicArticle}>Zverejniť článok</Button>
                 </Card> 

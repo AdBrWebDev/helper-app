@@ -3,7 +3,6 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
-import Container from '@mui/material/Container'
 import '../App.css'
 import MainImageOfPage from '../components/MainImageOfPage'
 import Axios from 'axios'
@@ -64,7 +63,7 @@ export default function Forum(props){
             </Box>
         </Box>
         <Modal open={newTheme} onClose={() => NewTheme(false)}>
-                <Card className="container text-center border border-dark border-2 text-white p-5 shadow w-75" id="card">
+                <Card className="container text-center border border-dark border-2 text-white p-5 shadow w-75 align-middle mt-5" id="card">
                     <Typography variant="h3">Pridať novú tému</Typography>
                         <input type="text" placeholder="Názov témy" className="form-control mb-4 text-center text-info" name="title" onChange={(e) => setTitle(e.target.value)} />
                         <textarea cols="80" placeholder="Váš text" name="text" className="form-control mb-4 text-info bg-transparent" rows="10" onChange={(e) => setText(e.target.value)}></textarea>
@@ -72,7 +71,7 @@ export default function Forum(props){
                 </Card>
                 </Modal>  
         <Modal open={window} onClose={() => openWindow(false)}>
-            <Card className="container text-center border border-dark text-white p-5" id="card" style={{'overflowY': 'scroll', 'height': "90%"}}> 
+            <Card className="container text-center border border-dark text-white p-5 mt-5" id="card" style={{'overflowY': 'scroll', 'height': "90%"}}> 
                     <Typography variant="h3" className="text-white mt-2">{sign}</Typography>
                     <Box className="p-5">
                     {forumItems.map((fItems, index) => <ForumItems index={index} data={fItems} />)}

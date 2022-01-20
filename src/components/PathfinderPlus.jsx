@@ -1,4 +1,4 @@
-import React, {useState, useEffect, lazy} from 'react'
+import React, {useState, lazy} from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -7,8 +7,7 @@ import Card from '@mui/material/Card'
 import Axios from 'axios'
 import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
-import {gsap, TweenMax} from 'gsap'
-import Skeleton from '@mui/material/Skeleton'
+//import {gsap, TweenMax} from 'gsap'
 import Modal from '@mui/material/Modal'
 const Health = lazy(() => import('./Health')) 
 

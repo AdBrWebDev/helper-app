@@ -387,7 +387,46 @@ Na záver treba povedať, že ani využitie služieb horského vodcu nie sú han
 CREATE TABLE product_properties
 (
 	id_product INT,
-    contain INT,
-    color VARCHAR(15)
+    text TEXT(50000),
+    title VARCHAR(100),
 )
 ENGINE=INNODB
+
+/*product properties data*/
+INSERT INTO product_properties(id_product, text, title)
+VALUES
+(1, 'Vojenská certifikácia mil-std-810g vydrží v hlbke 100m fungovať bez problémov po dobu 18 hodín a odolnosť voči pádu do 8 metrov.', 'Vodeodolnosť do 100m'),
+(1, 'V prípade nepriaznivého počasia budete včas varovaný. Dáta sú zbierané priamo zo satelitov každé 2 minúty.', 'Varovanie pred nepriaznivým počasím'),
+(1, 'Batéria s kapacitou 600 mAh, vydrží na jedno nabitie 1 mesiac. Je to dosiahnuté aj použitím úsporných čipov. Odporúčané rozmedzi teplôt je od -40°C do 80°C', '1 mesiace na jedno nabitie'),
+(1, 'Prostredníctvom tohto zariadenia vás horská služba môže ľahšie nájsť. Nezáleží na tom či spadla lavína, ste hlboko v lese, vďaka vysoko presným čipom od sony vás záchranári nájdu všade. !!Je potrebné si zakúpiť aj aktivačný čip, viac informácii na stránke horskej služby!!', 'Funkcia horskej služby'),
+(2, 'Vojenská certifikácia mil-std-810g vydrží v hlbke 200m fungovať bez problémov po dobu 18 hodín a odolnosť voči pádu do 8 metrov.', 'Vodeodolnosť do 200m'),
+(2, 'V prípade nepriaznivého počasia budete včas varovaný. Dáta sú zbierané priamo zo satelitov každé 2 minúty.', 'Varovanie pred nepriaznivým počasím'),
+(2, 'Batéria s kapacitou 600 mAh, vydrží na jedno nabitie 2 mesiace. Je to dosiahnuté aj použitím úsporných čipov. Odporúčané rozmedzi teplôt je od -40°C do 80°C', '2 mesiace na jedno nabitie'),
+(2, 'Vďaka odľahčenému púzdru vyrobeného z polykarbonátu bolo možné dosiahnúť nízku hmotnosť, ktorú ani nepocítite.', 'Hmotnosť len 43 gramov'),
+(2, 'Prostredníctvom tohto zariadenia vás horská služba môže ľahšie nájsť. Nezáleží na tom či spadla lavína, ste hlboko v lese, vďaka vysoko presným čipom od sony vás záchranári nájdu všade. !!Je potrebné si zakúpiť aj aktivačný čip, viac informácii na stránke horskej služby!!', 'Funkcia horskej služby')
+
+/*product color and size*/
+CREATE TABLE product_color_size
+(
+	id_product INT,
+    size VARCHAR(3),
+    color VARCHAR(12)
+)
+ENGINE=INNODB
+
+/*product color size data*/
+INSERT INTO product_color_size(id_product, size, color)
+VALUES
+(1, '40mmx62mm', 'čierna'),
+(2, '40mmx62mm', 'čierna'),
+(3, 'S', 'biela'),
+(3, 'M', 'biela'),
+(3, 'L', 'Biela'),
+(3, 'XL', 'Biela'),
+(4, 'S', 'čierna'),
+(4, 'M', 'čierna'),
+(4, 'L', 'čierna'),
+(4, 'XL', 'čierna'),
+(5, '52-56', 'čierna'),
+(5, '54-58', 'čierna'),
+(5, '54-60', 'čierna')

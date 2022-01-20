@@ -23,7 +23,6 @@ export default function ProductCard(props){
         function getInfo() {
                 Axios.post('http://localhost:3001/getInfo', {product: id}).then((response) => {
                     setInfo(response.data)
-                    console.log(response.data)
                 })
         }
         getInfo()
@@ -49,7 +48,7 @@ export default function ProductCard(props){
                     </Box>
                 </Box>
                 <Modal open={iWindow} onClose={() => infoOpened(false)}>
-                    <Card className="container text-center text-white border p-5 border-dark" id="card" style={{'marginTop': 30, 'overflowY': 'scroll'}}>
+                    <Card className="container text-center text-white border p-5 border-dark" id="card" style={{'marginTop': 30, 'overflowY': 'scroll', 'height': '90%'}}>
                             <Grid container>
                                 <Grid item xs={12} sm={12} md={5} xl={5} lg={5}>
                                 <img style={{'height': 350, 'marginTop': 50}} src={`/images/${props.img}`} alt={props.title} />
@@ -65,14 +64,27 @@ export default function ProductCard(props){
                             <Box>
                             <Typography variant="h2" style={{'textAlign': 'left'}}>{props.price} €</Typography>
                              </Box>
-                            <Box className="d-flex">
+                            <Box className="d-flex mt-5">
                             {props.contain > 0 ? <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box> : 
                             <Box className="message is-danger w-50 mx-auto my-auto"><Typography className="message-body">Nedostupné</Typography></Box>}
                             <Button disabled={props.contain < 1} variant="contained" color="success"><i className="material-icons" onClick={() => dispatch({type: "ADD", payload: props.product})}>shopping_cart</i></Button>
                             </Box>
                             </Card>
+                            </Grid>
+                        </Grid>
+                            <Box>
+                                <Typography variant="h4" className="my-4 mt-5">Viac o produkte</Typography>
+                                <Grid container>
+                                    {info.map((info, index) => <Grid key={index} item xs={12} sm={12} md={6} xl={6} lg={6}>
+                                        <Box id="card" style={{'minHeight': 230}} className="text-dark p-5 m-2">
+                                                <Typography variant="h4">{info.title}</Typography>
+                                                <Divider className="my-1" />
+                                                <Typography>{info.text}</Typography>
+                                        </Box>
+                                        </Grid>)}
                                 </Grid>
-                            </Grid></Card>
-                        </Modal>
+                            </Box>
+                        </Card>
+                    </Modal>
     </Grid>);
 }

@@ -74,7 +74,7 @@ app.post('/findDetails', (req, res) => {
 })
 
 app.post('/getInfo', (req, res) => {
-    dbcon.query("SELECT * FROM e_shop_products WHERE id_product = ?", [req.body.product], (err, result) => {
+    dbcon.query("SELECT * FROM product_properties WHERE id_product = ?", [req.body.product], (err, result) => {
         res.send(result)
     })
 })

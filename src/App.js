@@ -1,4 +1,4 @@
-import {Link, BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import React, {Suspense, lazy} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'material-icons/iconfont/material-icons.css'
@@ -73,7 +73,7 @@ function App() {
         </Box>
         </Router>
       <Weather />
-      </Suspense>);
-}
+      </Suspense>
+  )}
 
 export default App;

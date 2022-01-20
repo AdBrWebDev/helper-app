@@ -77,13 +77,12 @@ export default function Weather(){
                         </Grid>
                     </Box>
                     <Box>
-                        <WeatherCharts hours={day24hours} />
                     </Box>
                     <Typography className="pt-2">GPS: {location.lat}, {location.lon}</Typography>
                     <Typography className="pt-2">Naposledy aktualizované: {curWeather.last_updated}</Typography>
                     </Box>): null}
             </Container>
-        </Modal>)
+        </Modal>
         </>
     )
 }

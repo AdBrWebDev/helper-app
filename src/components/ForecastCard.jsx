@@ -7,27 +7,12 @@ import '../App.css';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Modal from '@mui/material/Modal';
-import Swiper from 'react-id-swiper';
 const HourForecast = lazy(() => import('./HourForecast'));
 
 export default function ForecastCard(props){
     const [showWeather, openWeather] = useState(false);
     const conditionIcon = props.forecast.day.condition.icon;
     console.log(props);
-
-    
-        const params = {
-          effect: 'cube',
-          grabCursor: true,
-          cubeEffect: {
-            shadow: true,
-            slideShadows: true,
-            shadowOffset: 20,
-            shadowScale: 0.94,
-          },
-          pagination: {
-            el: '.swiper-pagination',
-          }}
 
     return(<>
         <Grid item key={props.index} xs={12} sm={12} md={6} xl={4} lg={4}>
@@ -67,9 +52,7 @@ export default function ForecastCard(props){
                 <Typography variant="h4"><i className="material-icons">south</i><i className="material-icons">wb_sunny</i>{props.forecast.astro.sunset}</Typography>
             </Grid>
         </Grid>
-        <Swiper {...params}>
             {props.forecast.hour.map((hourF) => <HourForecast forecast={hourF} />)}
-        </Swiper>
         </Card>
         </Modal></>)
 }

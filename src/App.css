@@ -37,17 +37,6 @@
     transform: scale(3);
   }
 
-  #dark-background{
-    height: 100%;
-    width: 100%;
-    background-color: rgba(1,1,1,.7);
-    top: 0;
-    left: 0;
-    position: fixed;
-    padding-top: 3%; 
-    z-index: 900;
-  }
-
   #pathPlus{
     box-shadow: 0 0 20px 5px rgba(30, 135, 177,.6);
     transform: scale(4);
@@ -78,12 +67,12 @@
     box-shadow: 0 0 20px 15px rgba(255,255,255,.5);
   }
 
-  Button:focus{
-    background: transparent !important;
-  }
-
   #nature-border{
     box-shadow: 0 0 30px 5px rgba(50, 153, 55, 0.5);
+  }
+
+  Button:focus{
+    background: transparent !important;
   }
 
   #circle{

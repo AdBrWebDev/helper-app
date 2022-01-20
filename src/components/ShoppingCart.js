@@ -7,6 +7,7 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import '../App.css'
 import Divider from '@mui/material/Divider'
+import Modal from '@mui/material/Modal'
 import {Radio} from 'antd'
 
 const Cart = () => {
@@ -23,9 +24,8 @@ const Cart = () => {
     return(
         <Box>
             <Button onClick={() => openForm(!form)}><span className="material-icons text-white">shopping_cart</span></Button>
-            {form && <Box id="dark-background" className="mb-5 mx-auto text-center">
-            <Button variant="contained" color="error" onClick={() => openForm(!form)}>x</Button>
-            <Card id="card" className="mt-4 p-5 container" style={{'height': '90%', 'overflowY': 'scroll'}}>
+            <Modal open={form} onClose={() => openForm(false)}>
+            <Card id="card" className="mt-4 p-5 container text-center mt-5" style={{'height': '90%', 'overflowY': 'scroll'}}>
             <Typography variant="h3" className="text-white">Nákupný košík</Typography>
             <Divider className="my-3" />
             { total > 0 ?
@@ -65,8 +65,7 @@ const Cart = () => {
                 <Divider className="my-5" /><Typography className="text-white my-4" variant="h5">Cena spolu: {(total+delivery).toFixed(2)} €</Typography>
                 <Typography variant="h5" className="text-white">Dokončiť objednávku s povinnosťou platby</Typography>
                 <Button disabled={total < 1} variant="contained" color="success">Dokončiť objednávku</Button></Box>}
-                </Card></Box>}
-        </Box>
+                </Card></Modal></Box>
     )
 }
 

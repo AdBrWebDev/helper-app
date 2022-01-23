@@ -7,8 +7,15 @@ import Grid from '@mui/material/Grid'
 import '../App.css';
 import React, {useState, lazy} from 'react';
 import Modal from '@mui/material/Modal'
+import BottomNavigation from '@mui/material/BottomNavigation'
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 const ForecastCard = lazy(() => import('../components/ForecastCard'))
 const WeatherCharts = lazy(() => import('../components/WeatherCharts'))
+const HourForecast = lazy(() => import('../components/HourForecast'))
+
 
 export default function Weather(){
     const [weather, openWeather] = useState(false);
@@ -19,6 +26,11 @@ export default function Weather(){
     const [location, setLocation] = useState([]);
     const [condition, setCondition] = useState([]);
     const [day24hours, set24Hours] = useState([]);
+    const [selectedForm, selectForm] = useState('forecast3days');
+
+    const ChangeForm = (event, newValue) => {
+        selectForm(newValue)
+    }
 
     async function searchWeather(){
        await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${town}&days=3`, {
@@ -42,12 +54,47 @@ export default function Weather(){
 
     console.log(day24hours)
 
+    const settings = {
+        className: "center",
+        centerMode: true,
+        infinite: true,
+        centerPadding: "60px",
+        slidesToShow: 3,
+        speed: 500,
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                initialSlide: 2
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
+      };
+
     return(
         <>
         <Button variant="contained" className="btn-floating pulse btn-info btn-waves waves-light" onClick={() => openWeather(!weather)} style={{bottom: 30, right: 30, position: 'fixed'}}><i className="material-icons">wb_sunny</i></Button>
     <Modal open={weather} onClose={() => openWeather(false)}>
-            <Container className="text-white mt-3 p-5 shadow-lg border border-dark border-2" id="card" style={{height: '90%', overflow: 'auto'}}>
-            
+            <Container className="text-white mt-3 p-5 shadow-lg border border-dark border-2" id="card" style={{height: '90%', overflowY: 'scroll'}}>
+            <WeatherCharts hours={day24hours} />
                 <Box noValidate autoComplete="off" className="p-5 mt-5 text-center" >
                     <InputBase className="mx-3 text-center text-white" value={town} onChange={(e) => setTown(e.target.value)} />
                     <Button disabled={town.length === 0} onClick={() => searchWeather()} variant="contained" color="info"><i className="material-icons">search</i></Button>
@@ -55,7 +102,7 @@ export default function Weather(){
                 {(details) ?
                 (<Box className="text-center">
                     <Typography variant="h2">{town}</Typography>
-                    <img src={condition.icon} className="my-4" style={{transform: "scale(1.8)"}} alt={condition.text} />
+                    <img src={condition.icon} className="my-4" style={{transform: "scale(2)"}} alt={condition.text} />
                     <Typography>{condition.text}</Typography>
                     <Typography variant="h2">{curWeather.temp_c} °C</Typography>
                     <Grid container className="text-left">
@@ -71,12 +118,27 @@ export default function Weather(){
                         </Grid>
                     </Grid>
                     <Box className="mx-auto mt-3">
-                    <Typography variant="h3">3-dňová predpoveď</Typography>
+                    <BottomNavigation sx={{ width: 600 }} className="mx-auto border border-dark mb-5" id="card" style={{'marginTop': 100}}value={selectedForm} onChange={ChangeForm}>
+      <BottomNavigationAction className="text-white"
+        label="3 dňová predpoveď"
+        value="forecast3days"
+        icon={<i>3 days</i>}
+      />
+      <BottomNavigationAction className="text-white"
+        label="Predpoveď na 24 hodín"
+        value="forecast24hours"
+        icon={<i>24 h</i>}
+      />
+    </BottomNavigation>
+    <Box className="container">{(selectedForm === 'forecast3days') ? <Box><Typography variant="h3">3-dňová predpoveď</Typography>
                         <Grid container className="text-center">
                         {forecast.map((forecast) => <ForecastCard forecast={forecast} />)}
-                        </Grid>
+                        </Grid></Box> : <Slider {...settings}>
+                            {day24hours.map((hour) => <HourForecast forecast={hour} />)}    
+                        </Slider>}</Box>
                     </Box>
-                    <Box>
+                    <Box className="my-4">
+                        
                     </Box>
                     <Typography className="pt-2">GPS: {location.lat}, {location.lon}</Typography>
                     <Typography className="pt-2">Naposledy aktualizované: {curWeather.last_updated}</Typography>

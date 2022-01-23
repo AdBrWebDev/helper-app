@@ -3,12 +3,9 @@ import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
-import TextField from '@mui/material/TextField'
 import '../App.css'
 import Axios from 'axios'
 import Button from '@mui/material/Button'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 import Avatar from '@mui/material/Avatar'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
@@ -16,6 +13,11 @@ import Cookies from 'js-cookie'
 import Modal from '@mui/material/Modal'
 import BottomNavigation from '@mui/material/BottomNavigation'
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
 
 export default function SignInRegistration(){
     const [form, openForm] = useState(false)
@@ -38,13 +40,8 @@ export default function SignInRegistration(){
     const [orders, setOrders] = useState([])
     const [forumItems, setForumItems] = useState([])
     const [articles, setArticles] = useState([])
-    const open = Boolean(anchor)
-    const openMenu = (e) => {
-        setAnchor(e.currentTarget)
-    }
-    const closeMenu = () => {
-        setAnchor(null)
-    }
+    const [selectedForm, selectForm] = useState('SinUp')
+    const [openOptions, setOpenOptions] = useState(false)
 
     let avatar = null
 
@@ -85,18 +82,31 @@ export default function SignInRegistration(){
         })
     }
 
+    const ChangeForm = (e, newValue) => {
+        selectForm(newValue)
+    }
+
     const logout = () => {Cookies.remove("id");
     Cookies.remove("user");}
 
     return(<Box>
         {Cookies.get("id") != null ? <Box>
-        <Button id="userOptions" aria-controls="userOptions" aria-haspopup="true" aria-expanded={open ? 'true': undefined} onClick={openMenu}>{Cookies.get("user")}</Button>
-        <Menu id="userOptions" anchorEl={anchor} open={open} onClose={closeMenu} MenuListProps={{
-            'aria-labelledby': 'userOptions',
-        }}>
-            <MenuItem onClick={userProfile}>Môj profil</MenuItem>
-            <MenuItem onClick={logout}>Odhlásenie</MenuItem>
-        </Menu>
+        <Button id="userOptions" aria-controls="userOptions" aria-haspopup="true" onClick={() => setOpenOptions(!openOptions)}>{Cookies.get("user")}</Button>
+        <Dialog
+        open={openOptions}
+        onClose={() => setOpenOptions(false)}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <Box className="text-center">
+        <DialogTitle>Menu</DialogTitle>
+        <DialogContent>
+            <List>
+            <ListItem style={{'cursor': 'pointer'}} onClick={() => {userProfile(); setOpenOptions(false)}}>Môj profil</ListItem>
+            <ListItem style={{'cursor': 'pointer'}} onClick={() => {logout(); setOpenOptions(false)}}>Odhlásenie</ListItem>
+            </List>
+        </DialogContent>
+        </Box>
+      </Dialog>
         </Box> :
         <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>}   
         <Modal open={profile} onClose={() => userProfile(false)}>
@@ -145,50 +155,62 @@ export default function SignInRegistration(){
             </Card></Modal>
             <Modal open={form} onClose={() => openForm(!form)}>
         <Container>
-            <Card className="p-5 text-center bg-dark text-white border border-info border-2">
+        <BottomNavigation sx={{ width: 500 }} className="mx-auto border border-dark" id="card" style={{'marginTop': 100, 'transform': 'scale(1.1)'}}value={selectedForm} onChange={ChangeForm}>
+      <BottomNavigationAction className="text-white"
+        label="Prihlásenie"
+        value="SignUp"
+        icon={<i className="material-icons">person</i>}
+      />
+      <BottomNavigationAction className="text-white"
+        label="Registrácia"
+        value="SignIn"
+        icon={<i className="material-icons">person_add</i>}
+      />
+    </BottomNavigation>
+            {(selectedForm === 'SignIn') ?<Card className="p-5 text-center mt-5 text-white border border-dark bg-dark" id="card">
                 <Typography variant="h3">Registrácia</Typography>
                 <Grid container component="form" className="text-center mx-auto">
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <TextField variant="outlined" onChange={(e) => {setName(e.target.value)}} label="meno" name="name" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="meno" onChange={(e) => {setName(e.target.value)}} name="name" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <TextField variant="outlined" onChange={(e) => {setSurname(e.target.value)}} label="priezvisko" name="surname" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="priezvisko" onChange={(e) => {setSurname(e.target.value)}} name="surname" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <TextField variant="outlined" onChange={(e) => {setPhone(e.target.value)}} label="telefon" name="phone" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="telefon" onChange={(e) => {setPhone(e.target.value)}} name="phone" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <TextField variant="outlined" onChange={(e) => {setCountry(e.target.value)}} label="krajina" name="country" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="krajina" onChange={(e) => {setCountry(e.target.value)}} name="country" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <TextField variant="outlined" onChange={(e) => {setCity(e.target.value)}} label="mesto" name="city" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="mesto" onChange={(e) => {setCity(e.target.value)}} name="city" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <TextField variant="outlined" onChange={(e) => {setStreet(e.target.value)}} label="ulica" name="street" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="ulica" onChange={(e) => {setStreet(e.target.value)}} name="street" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <TextField variant="outlined" onChange={(e) => {setAge(e.target.value)}} label="vek" name="age" />
+                    <input type="number" className="form-control w-50 text-center mx-auto" placeholder="vek" onChange={(e) => {setAge(e.target.value)}} name="age" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <TextField variant="outlined" onChange={(e) => {setPassword(e.target.value)}} label="heslo" type="password" name="password" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="heslo" onChange={(e) => {setPassword(e.target.value)}} type="password" name="password" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                <TextField variant="outlined" onChange={(e) => {setEmail(e.target.value)}} label="e-mail" name="e_mail" />
+                <input className="form-control w-50 text-center mx-auto text-white" placeholder="e-mail" onChange={(e) => {setEmail(e.target.value)}} name="e_mail" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                <TextField variant="outlined" onChange={(e) => {setNick(e.target.value)}} label="nick" name="nick" />
+                <input className="form-control w-50 text-center mx-auto text-white" placeholder="nick" onChange={(e) => {setNick(e.target.value)}} name="nick" />
                 </Grid>
-                <Button className="mx-auto" type="submit" variant="outlined" color="primary" onClick={() => submit()}>Registrovať</Button>
+                <Button className="mx-auto mt-3" type="submit" variant="contained" color="primary" onClick={() => submit()}>Registrovať</Button>
                 </Grid>
-            </Card>
-            <Card className="my-3 p-5 bg-dark text-white text-center border border-info border-2">
-                <Typography variant="h3" className="my-3">Registrácia</Typography>
+            </Card> :
+            <Card className="mt-5 p-5 text-white text-center border border-dark bg-dark" id="card">
+                <Typography variant="h3" className="my-3">Prihlásenie</Typography>
                 <Grid container component="form" className="text-center mx-auto">
-                    <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><TextField variant="outlined" onChange={(e) => {setLoginEmail(e.target.value)}} type="text" label="loginEmail" name="loginEmail" /></Grid>
-                    <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><TextField variant="outlined" onChange={(e) => {setLoginPassword(e.target.value)}} type="password" label="loginPassword" name="loginPassword" /></Grid>
+                    <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><input placeholder="E-mail" className="form-control w-50 text-center text-white mx-auto" onChange={(e) => {setLoginEmail(e.target.value)}} type="text" name="loginEmail" /></Grid>
+                    <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><input placeholder="Heslo" className="form-control w-50 text-center text-white mx-auto" onChange={(e) => {setLoginPassword(e.target.value)}} type="password" name="loginPassword" /></Grid>
                 </Grid>
-                <Button type="submit" variant="outlined" color="primary" onClick={(e) => signUp(e.preventDefault())}>Prihlásiť</Button>
-            </Card>
+                <Button type="submit" variant="contained" color="primary" onClick={(e) => signUp(e.preventDefault())}>Prihlásiť</Button>
+            </Card>}
             <h1>{user}</h1>
         </Container>
     </Modal></Box>);

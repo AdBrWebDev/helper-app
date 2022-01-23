@@ -39,9 +39,8 @@ export default function ForumItems(props){
                 </Grid>
                 <Grid item xs={12}>
                 <Divider className="w-75 mx-auto" />
-        <Box className="text-center d-flex mt-2">
-        <Typography>Pridané: {date(props.data.dateOfPublic)}</Typography>
-        <Button className="ml-5" variant="contained" color="error"><i className="material-icons">favorite</i></Button>
+        <Box className="mt-2">
+        <Typography className="right-0">Pridané: {date(props.data.dateOfPublic)}</Typography>
         </Box>
         </Grid>
         </Grid>

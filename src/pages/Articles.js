@@ -9,6 +9,7 @@ import Rating from '@mui/material/Rating'
 import StarIcon from '@mui/icons-material/Star'
 import Typography from '@mui/material/Typography'
 import Cookies from 'js-cookie'
+import Stack from '@mui/material/Stack'
 import Modal from '@mui/material/Modal'
 const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 const ArticlesItem = lazy(() => import('../components/ArticlesItem'))
@@ -54,14 +55,19 @@ const setMultipleImg = (e) => {
             </Box>
         </Box>
         <Modal open={openArticle} onClose={() => openAddArticle(false)}>
-                <Card id="card" className="p-5 border container border-dark">
-                    <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder="názov článku" />
-                    <Typography>náročnosť trasy</Typography>
-                    <Rating value={0}  onChange={(e) => setRating(e.target.value)} precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />}/>
-                    <input  onChange={(e) => setImg(e)} type="file" placeholder="Hlavný obrázok" />
-                    <input  onChange={(e) => setMultipleImg(e)} type="file" multiple placeholder="Hlavný obrázok" />
-                    <textarea  onChange={(e) => setText(e.target.value)} cols="80" rows="80" placeholder="obsah článku"></textarea>
-                    <Button variant="contained" color="success" onClick={publicArticle}>Zverejniť článok</Button>
+                <Card id="card" className="p-5 border container text-center border-dark text-white mt-5" style={{'overflowY': 'scroll', 'height': '95%'}}>
+                    <Typography variant="h2">{title}</Typography>
+                    <input type="text" className="w-75 mx-auto text-center text-white" onChange={(e) => setTitle(e.target.value)} placeholder="názov článku" />
+                    <Typography className="text-white mr-3" variant="h6">náročnosť trasy</Typography>
+                    <input type="number" className="w-25" min={0} max={5} onChange={(e) => setRating(e.target.value)}/>
+                    <Typography variant="h6" className="mt-4">Nahrať hlavný obrázok</Typography>
+                    <input className="form-control mx-auto w-75" onChange={(e) => setImg(e)} type="file" placeholder="Hlavný obrázok" />
+                    <Typography variant="h6" className="mt-4">Nahrať galériu obrázkov</Typography>
+                    <input className="form-control mx-auto w-75"  onChange={(e) => setMultipleImg(e)} type="file" multiple placeholder="Hlavný obrázok" />
+                    <Box>
+                    <textarea style={{'minHeight': '500px'}} className="my-3 form-control text-white bg-transparent" onChange={(e) => setText(e.target.value)} cols="10" rows="10" placeholder="obsah článku"></textarea>
+                    </Box>
+                    <Button variant="contained" color="info" onClick={publicArticle}>Zverejniť článok</Button>
                 </Card> 
             </Modal>
     </Box>)

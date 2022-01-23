@@ -120,7 +120,7 @@ app.post('/articles', (req, res) => {
 })
 
 app.post('/articlesData', (req, res) => {
-    const SelectPlus = "SELECT likes, text FROM articles WHERE id_article = ?";
+    const SelectPlus = "SELECT likes, text, date FROM articles WHERE id_article = ?";
     dbcon.query(SelectPlus, [req.body.id], (err, result) => {
         res.send(result)
     })
@@ -158,8 +158,8 @@ app.post('/natureForm', (req, res) => {
 })
 
 app.post('/publicate', (req, res) => {
-    const PublicInsert = "INSERT INTO articles(id_user, id_article, mainImg, title, rating, likes, text, theme) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    dbcon.query(PublicInsert, [req.body.id_user, '', req.body.mainImg, req.body.sign, req.body.rating, 0, req.body.text, req.body.theme], (err, result) => {
+    const PublicInsert = "INSERT INTO articles(id_user, id_article, mainImg, title, rating, likes, text, theme, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    dbcon.query(PublicInsert, [req.body.id_user, '', req.body.mainImg, req.body.sign, req.body.rating, 0, req.body.text, req.body.theme, new Date()], (err, result) => {
         res.send(result)
     })
 })

@@ -67,18 +67,18 @@ export default function ProductCard(props){
                             <Box className="d-flex mt-5">
                             {props.contain > 0 ? <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box> : 
                             <Box className="message is-danger w-50 mx-auto my-auto"><Typography className="message-body">Nedostupné</Typography></Box>}
-                            <Button disabled={props.contain < 1} variant="contained" color="success"><i className="material-icons" onClick={() => dispatch({type: "ADD", payload: props.product})}>shopping_cart</i></Button>
+                            <Button disabled={props.contain < 1} variant="contained" className="mr-5" color="success"><i className="material-icons" onClick={() => dispatch({type: "ADD", payload: props.product})}>shopping_cart</i></Button>
                             </Box>
                             </Card>
                             </Grid>
                         </Grid>
                             <Box>
-                                <Typography variant="h4" className="my-4 mt-5">Viac o produkte</Typography>
+                                <Typography variant="h4" className="my-4 mt-5">Informácie o produkte</Typography>
                                 <Grid container>
                                     {info.map((info, index) => <Grid key={index} item xs={12} sm={12} md={6} xl={6} lg={6}>
                                         <Box id="card" style={{'minHeight': 230}} className="text-dark p-5 m-2">
                                                 <Typography variant="h4">{info.title}</Typography>
-                                                <Divider className="my-1" />
+                                                <Divider className="my-1 mb-3" />
                                                 <Typography>{info.text}</Typography>
                                         </Box>
                                         </Grid>)}

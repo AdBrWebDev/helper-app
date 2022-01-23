@@ -23,8 +23,8 @@ export default function Map(){
             setCoordinates({lat: pos.coords.latitude, lng: pos.coords.longitude})
     })}, []);
 
-    /*useEffect(() => {
-   fetch(`https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary??bl_latitude=11.847676&tr_latitude=12.838442&bl_longitude=109.095887&tr_longitude=109.149359&restaurant_tagcategory_standalone=10591&restaurant_tagcategory=10591&limit=30&currency=USD&open_now=false&lunit=km&lang=en_US`, {
+    useEffect(() => {
+   fetch(`https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary??bl_latitude=${lat+0.01}&tr_latitude=${lat-0.01}&bl_longitude=${lon+0.01}&tr_longitude=${lon-0.01}&restaurant_tagcategory_standalone=10591&restaurant_tagcategory=10591&limit=30&currency=USD&open_now=false&lunit=km&lang=en_US`, {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "travel-advisor.p.rapidapi.com",
@@ -38,7 +38,7 @@ export default function Map(){
 .catch(err => {
 	console.error(err);
 });
-    }, [])*/
+    }, [])
 
     const MyMapComponent = compose(
       withProps({

@@ -12,6 +12,7 @@ import Axios from 'axios'
 import '../App.css'
 import LazyHero from 'react-lazy-hero'
 import Modal from '@mui/material/Modal'
+import Cookies from 'js-cookie'
 
 export default function ArticlesItem(props){
     const [data, getData] =  useState([])
@@ -24,8 +25,6 @@ export default function ArticlesItem(props){
     });
     openWindow(!window)
     }
-
-    console.log(data.likes)
 
     return(<Grid key={props.index} item xs={12} sm={6} md={4} lg={3} xl={3}>
             <Card className="text-center border border-dark text-white pb-2" id="cardh">
@@ -45,22 +44,22 @@ export default function ArticlesItem(props){
                         <Rating value={props.data[0].rating} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />}></Rating>
                     </Grid>
                     <Grid item className="d-flex text-center">
-                    <Button variant="outlined" color="info" className="mx-1"><i className="material-icons">thumb_up</i></Button>
-                    <Button variant="outlined" color="info" className="mx-1"><i className="material-icons">favorite</i></Button>
-                    <Button variant="outlined" color="info" className="mx-1"><i className="material-icons">star</i></Button>
+                    <Button variant="outlined" disabled={!Cookies.get("id")} color="info" className="mx-1"><i className="material-icons">thumb_up</i></Button>
+                    <Button variant="outlined" disabled={!Cookies.get("id")} color="info" className="mx-1"><i className="material-icons">favorite</i></Button>
+                    <Button variant="outlined" disabled={!Cookies.get("id")} color="info" className="mx-1"><i className="material-icons">star</i></Button>
                     </Grid>
                     </Grid>
                 </CardActions>
             </Card>
             <Modal open={window} onClose={() => openWindow(false)}>
-                <Card className="container border text-center border-dark p-5" id="card" style={{'overflowY': 'scroll', 'height': '92%'}}>
+                <Card className="container border text-center border-dark mt-5" id="card" style={{'overflowY': 'scroll', 'height': '95%'}}>
                     <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/images/${props.data[0].mainImg}`}>
                         <Box>
                             <Typography color="white" variant="h2">{props.data[0].title}</Typography>
                         </Box>
                     </LazyHero>
                     <Box className="text-white container mx-auto">
-                    <Typography>{data.text}</Typography>
+                    <Typography style={{'font-size': '18px'}} className="w-75 mx-auto">{data.text}</Typography>
                     <Typography variant="h2">Galeria</Typography>
                     </Box>
                 </Card>  

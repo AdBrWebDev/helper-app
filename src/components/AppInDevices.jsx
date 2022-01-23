@@ -25,9 +25,9 @@ export default function AppInDevices(){
         </Grid>
         <Button variant="outlined" color="info" className="my-5 p-4" onClick={() => openDownload(!download)}>stiahnuť pathfinder <i className="material-icons mx-1">download</i></Button>
         <Modal open={download} onClose={() => openDownload(false)}>
-                <Card id="card" className="p-5 rounded text-center text-white container border border-dark">
+                <Card id="card" className="p-5 rounded text-center text-white container border border-dark" style={{'top': '10%'}}>
                     <CardContent>
-                    <Box className="message is-info">
+                    <Box className="message is-info mb-5">
                         <Typography className="message-body">Dostupnosť aplikácii od: 11.11.2022</Typography>
                     </Box>
                         <Grid container>

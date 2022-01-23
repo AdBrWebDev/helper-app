@@ -21,7 +21,7 @@ export default function Device(props){
             <i id="devices" className="material-icons my-5">{props.icon}</i>
             <Typography>{props.text}</Typography>
             <Modal open={device} onClose={() => openDevice(false)}>
-                    <Card className="p-5 rounded text-center text-white container border border-dark" id="card">
+                    <Card className="p-5 rounded text-center text-white container border border-dark" style={{'top': '10%'}} id="card">
                         <CardContent>
                             <i id="devices" className="material-icons my-4">{props.icon}</i>
                             <Typography variant="h5" className="mt-2">{props.text}</Typography>

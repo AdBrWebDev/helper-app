@@ -42,7 +42,7 @@ export default function Health(){
             <i className="material-icons text-info">health_and_safety</i>
         </Button>
         <Modal open={health} onClose={openF}>
-        <Card className="container text-center my-5 p-5 border border-dark text-white" id="card">
+        <Card style={{'marginTop': '10%'}} className="container text-center p-5 border border-dark text-white" id="card">
                 <Box>
                     <Avatar src="/images/pathfinder.jpg" className="mx-auto my-5" style={{'transform': 'scale(2)'}} />
                     <Typography variant="h4">Aký je tvoj problém?</Typography>

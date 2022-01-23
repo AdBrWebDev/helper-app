@@ -8,6 +8,8 @@ import '../../App.css'
 import Box from '@mui/material/Box'
 import Footer from '../../components/Footer';
 import Cookies from 'js-cookie'
+import CircularProgress from '@mui/material/CircularProgress';
+import Backdrop from '@mui/material/Backdrop';
 const Nature = lazy(() => import('../Nature'))
 const MainPage = lazy(() => import('./MainPage'))
 const ArticlesData = lazy(() => import('./ArticlesData'))
@@ -19,7 +21,12 @@ const SignInRegistration = lazy(() => import('../../components/SignInRegistratio
 const ShoppingCart = lazy(() => import('../../components/ShoppingCart'))
 
 export default function CyclingMNPG(){
-    return(<Suspense fallback={'loading....'}>
+    return(<Suspense fallback={<Backdrop
+        sx={{ color: 'rgba(1,1,1,1)', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={true}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>}>
     {<Router>
         <nav className="navbar is-dark px-5 shadow position-fixed top-0">
             <Box className="navbar-brand">

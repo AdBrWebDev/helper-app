@@ -39,7 +39,7 @@ export default function CyclingMNPG(){
             </Box>
             <Box id="navbar" className="navbar-menu">
                 <Box className="navbar-start">
-                <Link className="navbar-item" to="/mainPage">Hlavná stránka</Link>
+                <Link className="navbar-item" to="/">Hlavná stránka</Link>
                 <Link className="navbar-item" to="/eshop">E-shop</Link>
                 <Link className="navbar-item" to="/ForumData">Forum</Link>
                 <Link className="navbar-item" to="/Map">Mapa</Link>
@@ -56,7 +56,7 @@ export default function CyclingMNPG(){
             </Box>
         </nav>
       <Switch>
-          <Route exact path="/mainPage" component={MainPage} />
+          <Route exact path="/" component={MainPage} />
           <Route path="/eshop" component={Eshop} />
           <Route path="/ForumData" component={ForumData} />
           <Route path="/Map" component={Map} />

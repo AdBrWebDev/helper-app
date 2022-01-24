@@ -1,4 +1,4 @@
-import React, {useState, lazy, useEffect} from 'react';
+import React, {useState, lazy} from 'react';
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -6,14 +6,16 @@ import '../App.css';
 import Card from '@mui/material/Card';
 import Modal from '@mui/material/Modal';
 import Slider from "react-slick";
+import Box from '@mui/material/Box'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 const HourForecast = lazy(() => import('./HourForecast'));
+const WeatherCharts = lazy(() => import('./WeatherCharts'));
 
 export default function ForecastCard(props){
     const [showWeather, openWeather] = useState(false);
     const conditionIcon = props.forecast.day.condition.icon;
-    console.log(props);
+    console.log(props.forecast.hour);
 
     const settings = {
         className: "center",
@@ -91,6 +93,9 @@ export default function ForecastCard(props){
             <Slider {...settings}>
             {props.forecast.hour.map((hourF) => <HourForecast forecast={hourF} />)}
             </Slider>
+          <Box>
+            <WeatherCharts hours={props.forecast.hour} />
+          </Box>
         </Card>
         </Modal></>)
 }

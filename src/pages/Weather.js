@@ -93,7 +93,7 @@ export default function Weather(){
         <>
         <Button variant="contained" className="btn-floating pulse btn-info btn-waves waves-light" onClick={() => openWeather(!weather)} style={{bottom: 30, right: 30, position: 'fixed'}}><i className="material-icons">wb_sunny</i></Button>
     <Modal open={weather} onClose={() => openWeather(false)}>
-            <Container className="text-white mt-3 p-5 shadow-lg border border-dark border-2" id="card" style={{height: '90%', overflowY: 'scroll'}}>
+            <Container className="text-white mt-5 p-5 shadow-lg border border-dark border-2" id="card" style={{height: '90%', overflowY: 'scroll'}}>
                 <Box noValidate autoComplete="off" className="p-5 mt-5 text-center" >
                     <InputBase className="mx-3 text-center text-white" value={town} onChange={(e) => setTown(e.target.value)} />
                     <Button disabled={town.length === 0} onClick={() => searchWeather()} variant="contained" color="info"><i className="material-icons">search</i></Button>

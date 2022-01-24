@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, lazy} from 'react';
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -18,6 +18,9 @@ import ListItem from '@mui/material/ListItem';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
 export default function SignInRegistration(){
     const [form, openForm] = useState(false)
@@ -33,7 +36,6 @@ export default function SignInRegistration(){
     const [loginEmail, setLoginEmail] = useState('')
     const [loginPassword, setLoginPassword] = useState('')
     const [user, setUser] = useState('')
-    const [anchor, setAnchor] = useState(null)
     const [profile, openProfile] = useState(false)
     const [nick, setNick] = useState('')
     const [userData, setUserData] = useState([])
@@ -42,6 +44,7 @@ export default function SignInRegistration(){
     const [articles, setArticles] = useState([])
     const [selectedForm, selectForm] = useState('SinUp')
     const [openOptions, setOpenOptions] = useState(false)
+    const [portfolioForm, setPForm] = useState('favArticles')
 
     let avatar = null
 
@@ -86,6 +89,10 @@ export default function SignInRegistration(){
         selectForm(newValue)
     }
 
+    const setportfolioForm = (e, FORM) => {
+        setPForm(FORM);
+    }
+
     const logout = () => {Cookies.remove("id");
     Cookies.remove("user");}
 
@@ -110,11 +117,12 @@ export default function SignInRegistration(){
         </Box> :
         <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>}   
         <Modal open={profile} onClose={() => userProfile(false)}>
-        <Card style={{'overflowY': 'scroll', 'height': '90%'}} className="text-center text-white p-5 border container border-dark" id="card">
+        <Card style={{'overflowY': 'scroll', 'overflowX': 'auto', 'height': '90%', 'marginTop': '2%'}} className="text-center text-white p-5 border container border-dark" id="card">
                 <Grid container>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
                     <Avatar className="mx-auto my-5" sx={{width: 86, height: 86}} src={avatar == null ? "/images/alien.png" : 'avatar'} />
                     <Typography variant="h5" className="text-white">{Cookies.get("user")}</Typography>
+                    <Typography variant="h6">{userData.is_admin ? 'admin': 'užívatel'}</Typography>
                     </Grid>
                     <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
                     <Typography>Užívatel: {userData.name} {userData.surname}</Typography>
@@ -126,36 +134,90 @@ export default function SignInRegistration(){
                     <Typography>Adresa: {userData.street}</Typography>
                     </Grid>
                 </Grid>
-                <Grid container>
-                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4} className="p-1">
+                <BottomNavigation sx={{ width: 700 }} className="mx-auto border border-dark p-3" id="card" style={{'marginTop': 30}} value={portfolioForm} onChange={setportfolioForm}>
+      <BottomNavigationAction className="text-white"
+        label="Aktivity vo fóre"
+        value="forumItems"
+        icon={<i className="material-icons">forum</i>}
+      />
+      <BottomNavigationAction className="text-white"
+        label="Objednávky"
+        value="orders"
+        icon={<i className="material-icons">local_shipping</i>}
+      />
+      <BottomNavigationAction className="text-white"
+        label="Napísané články"
+        value="usersArticles"
+        icon={<i className="material-icons">auto_stories</i>}
+      />
+      <BottomNavigationAction className="text-white"
+        label="Oblúbené články"
+        value="favArticles"
+        icon={<i className="material-icons">auto_stories</i>}
+      />
+      <BottomNavigationAction className="text-white"
+        label="Aktivity"
+        value="activities"
+        icon={<i className="material-icons">person_add</i>}
+      />
+    </BottomNavigation>
+                {(portfolioForm === 'forumItems') ?
                     <Paper  className="card p-5 text-center" id="card">
                         <Typography variant="h4">Aktivity vo fore</Typography>
-                            {forumItems.map((fItem, index) => <Typography>{fItem.title}</Typography>)}
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4} className="p-1">
+            <List>
+              {forumItems.map((fItem, index) =>
+                <ListItem className="text-white" style={{'cursor': 'pointer'}} key={index}>
+                  <ListItemAvatar>
+                      <Avatar>
+                      <i className="material-icons">forum</i>
+                      </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={fItem.title}
+                  />
+                </ListItem>,
+              )}
+            </List>
+                        </Paper> : (portfolioForm === 'orders') ?
                     <Paper  className="card p-5" id="card">
                                 <Typography variant="h4">Objednávky</Typography>
-                                {orders.map((order, index) => <Grid container>
-                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6} key={index}>Vytvorená: {new Date(order.order_created).getDate()}.{new Date(order.order_created).getMonth()+1}.{new Date(order.order_created).getFullYear()}</Grid>
-                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6} key={index}>Stav: {order.status}</Grid>
-                                </Grid>)}
-                            </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+                                {orders.map((order, index) => <Grid key={index} container>
+                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6}>Vytvorená: {new Date(order.order_created).getDate()}.{new Date(order.order_created).getMonth()+1}.{new Date(order.order_created).getFullYear()}</Grid>
+                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6}>Stav: {order.status}</Grid></Grid>)}
+                            </Paper> : (portfolioForm === 'usersArticles') ?
                     <Paper  className="card p-5" id="card">
                                 <Typography variant="h4">Články</Typography>
-                                {articles.map((article, index) => <Grid container>
-                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6} key={index}>Stav: {article.title}</Grid>
-                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6} key={index}>Stav: {article.likes}</Grid>
-                                </Grid>)}
+                                    <List>
+              {articles.map((article, index) =>
+                <ListItem className="text-white" style={{'cursor': 'pointer'}} key={index}>
+                  <ListItemAvatar>
+                      <Avatar>
+                      <i className="material-icons">auto_stories</i>
+                      </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={article.title}
+                    secondary={article.likes}
+                  />
+                </ListItem>,
+              )}
+            </List>
                             </Paper>
-                    </Grid>
-                </Grid>
+                    : (portfolioForm === 'favArticles') ?
+                    <Paper  className="card p-5" id="card">
+                                <Typography variant="h4">Oblúbené články</Typography>
+                                
+                            </Paper> :
+                    <Paper  className="card p-5" id="card">
+                                <Typography variant="h4">Aktivity</Typography>
+                                <Box class="message is-info">
+                                    <Typography class="message-body">Údaje sa synchronizujú prostredníctvom aplikácie strava</Typography>
+                                </Box>
+                            </Paper>}
             </Card></Modal>
             <Modal open={form} onClose={() => openForm(!form)}>
         <Container>
-        <BottomNavigation sx={{ width: 500 }} className="mx-auto border border-dark" id="card" style={{'marginTop': 100, 'transform': 'scale(1.1)'}}value={selectedForm} onChange={ChangeForm}>
+        <BottomNavigation sx={{ width: 500 }} className="mx-auto border border-dark" id="card" style={{'marginTop': 100, 'transform': 'scale(1.1)'}} value={selectedForm} onChange={ChangeForm}>
       <BottomNavigationAction className="text-white"
         label="Prihlásenie"
         value="SignUp"

@@ -65,7 +65,7 @@ export default function PathfinderPlus(props){
             </Card>
         </Modal>
         <Modal open={detailWin} onClose={() => openDetailWin(!detailWin)}>
-                <Card className="container text-white text-center h-75 p-5 mb-5 border border-dark" id="card" style={{'overflowY': 'scroll'}}>
+                <Card className="container text-white text-center h-75 p-5 mb-5 border border-dark" id="card" style={{'overflowY': 'scroll','marginTop': '5%'}}>
                 <Typography variant="h3">{SEARCH}</Typography>
                 {details.map((detail, index) => <Box className="my-5 w-75 mx-auto" key={index}>
                         <Typography variant="h1">{index+1}</Typography>

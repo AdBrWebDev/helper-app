@@ -63,10 +63,10 @@ export default function Forum(props){
             </Box>
         </Box>
         <Modal open={newTheme} onClose={() => NewTheme(false)}>
-                <Card className="container text-center border border-dark border-2 text-white p-5 shadow w-75 align-middle mt-5" id="card">
+                <Card className="container text-center border border-dark border-2 text-white p-5 shadow w-75 align-middle" style={{'marginTop': '5%'}} id="card">
                     <Typography variant="h3">Pridať novú tému</Typography>
                         <input type="text" placeholder="Názov témy" className="form-control mb-4 text-center text-info" name="title" onChange={(e) => setTitle(e.target.value)} />
-                        <textarea cols="80" placeholder="Váš text" name="text" className="form-control mb-4 text-info bg-transparent" rows="10" onChange={(e) => setText(e.target.value)}></textarea>
+                        <textarea cols="80" placeholder="Váš text" name="text" className="form-control mb-4 text-info bg-transparent" style={{'minHeight': '100px'}} rows="10" onChange={(e) => setText(e.target.value)}></textarea>
                         <Button variant="contained" color="info" onClick={createNewItem}>Pridať</Button>
                 </Card>
                 </Modal>  
@@ -78,7 +78,7 @@ export default function Forum(props){
                     </Box>
                     <Card className="container text-center text-white p-5 shadow w-100" id="card">
                     <Typography variant="h3">Pridať komentar</Typography>
-                        <textarea cols="10" placeholder="Váš komentár" className="text-center form-control bg-transparent text-white" name="comment" rows="15" onChange={(e) => setText(e.target.value)}></textarea>
+                        <textarea cols="10" placeholder="Váš komentár" className="text-center form-control bg-transparent text-white" style={{'minHeight': '100px'}} name="comment" rows="80" onChange={(e) => setText(e.target.value)}></textarea>
                         <Box className="my-3">
                         <Button variant="contained" color="info" onClick={() => addComment(sign, props.title)}>Pridať</Button>
                         </Box>

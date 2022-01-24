@@ -53,7 +53,7 @@ export default function Health(){
             </Card>
         </Modal>
         <Modal open={detailWin} onClose={() => openDetailWin(!detailWin)}>
-                <Card className="container text-center text-white h-75 p-5 mb-5 border border-dark" id="card" style={{'overflowY': 'scroll', 'maxHeight': '90%'}}>
+                <Card className="container text-center text-white h-75 p-5 mb-5 border border-dark" id="card" style={{'overflowY': 'scroll', 'maxHeight': '90%','marginTop': '5%'}}>
                 <Typography variant="h3">{SEARCH}</Typography>
                 {details.map((detail, index) => <Box className="my-5 w-75 mx-auto" key={index}>
                         <Typography variant="h1">{index+1}</Typography>

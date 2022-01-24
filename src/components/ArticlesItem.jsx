@@ -33,7 +33,7 @@ export default function ArticlesItem(props){
                         <figure className="image is-4by3">
                             <img src={`/images/${props.data[0].mainImg}`} alt={props.data[0].title} />
                         </figure>
-                        <button className="btn-floating halfway-fab btn-large waves-effect info" onClick={() => openArticle(props.data[0].id_article)}><i class="material-icons">auto_stories</i></button>
+                        <button className="btn-floating halfway-fab btn-large waves-effect btn-info" onClick={() => openArticle(props.data[0].id_article)}><i class="material-icons">auto_stories</i></button>
                     </Box>
                     <Typography variant="h4">{props.data[0].title}</Typography>
                 </CardContent>
@@ -43,10 +43,9 @@ export default function ArticlesItem(props){
                         <Typography variant="h6">Náročnosť:</Typography>
                         <Rating value={props.data[0].rating} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />}></Rating>
                     </Grid>
-                    <Grid item className="d-flex text-center">
-                    <Button variant="outlined" disabled={!Cookies.get("id")} color="info" className="mx-1"><i className="material-icons">thumb_up</i></Button>
-                    <Button variant="outlined" disabled={!Cookies.get("id")} color="info" className="mx-1"><i className="material-icons">favorite</i></Button>
-                    <Button variant="outlined" disabled={!Cookies.get("id")} color="info" className="mx-1"><i className="material-icons">star</i></Button>
+                    <Grid item className="d-flex text-center mx-auto mt-2">
+                    <Button variant="outlined" disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">thumb_up</i></Button>
+                    <Button variant="outlined" disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">favorite</i></Button>
                     </Grid>
                     </Grid>
                 </CardActions>

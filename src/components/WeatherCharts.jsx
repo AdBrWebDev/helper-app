@@ -43,7 +43,7 @@ export default function WeatherCharts(props) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line name="Teplota v °C" type="monotene" dataKey="temp_f" stroke="#D16D6A" strokeWidth={3} />
+          <Line name="Teplota v °C" type="monotene" dataKey="temp_c" stroke="#D16D6A" strokeWidth={3} />
           <Line name="Pocitová teplota °C" type="monotone" dataKey="windchill_c" stroke="#2E9ACB" strokeWidth={3} />
         </LineChart>
       </ResponsiveContainer>

@@ -5,11 +5,8 @@ import '../App.css'
 import Axios from 'axios'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
-import Rating from '@mui/material/Rating'
-import StarIcon from '@mui/icons-material/Star'
 import Typography from '@mui/material/Typography'
 import Cookies from 'js-cookie'
-import Stack from '@mui/material/Stack'
 import Modal from '@mui/material/Modal'
 const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 const ArticlesItem = lazy(() => import('../components/ArticlesItem'))
@@ -30,7 +27,9 @@ export default function Articles(props){
 }, [props.title]);
 
 const publicArticle = () => {
-    Axios.post('http://localhost:3001/publicate', {id_user: Cookies.get("id"), mainImg: MainImg, sign: title, rating: rating, text: text, theme: props.title})
+    const formData = new FormData();
+    formData.append('mainImg', MainImg)
+    Axios.post('http://localhost:3001/publicate', {id_user: Cookies.get("id"), mainImg: formData, sign: title, rating: rating, text: text, theme: props.title})
 }
 
 const setImg = (e) => {
@@ -61,7 +60,7 @@ const setMultipleImg = (e) => {
                     <Typography className="text-white mr-3" variant="h6">náročnosť trasy</Typography>
                     <input type="number" className="w-25" min={0} max={5} onChange={(e) => setRating(e.target.value)}/>
                     <Typography variant="h6" className="mt-4">Nahrať hlavný obrázok</Typography>
-                    <input className="form-control mx-auto w-75" onChange={(e) => setImg(e)} type="file" placeholder="Hlavný obrázok" />
+                    <input className="form-control mx-auto w-75" onChange={(e) => setImg(e)} type="file" name="mainImg" placeholder="Hlavný obrázok" />
                     <Typography variant="h6" className="mt-4">Nahrať galériu obrázkov</Typography>
                     <input className="form-control mx-auto w-75"  onChange={(e) => setMultipleImg(e)} type="file" multiple placeholder="Hlavný obrázok" />
                     <Box>

@@ -19,15 +19,14 @@ const Running = lazy(() => import('./pages/running/RunningMNPG'))
 const Skiing = lazy(() => import('./pages/skiing/SkiingMNPG'))
 
 function App() {
-  return (
-    <Suspense fallback={<Backdrop
+  return (<Suspense fallback={<Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={true}
     >
       <CircularProgress color="inherit" />
     </Backdrop>}>
-      <Router>
-        <Box className="bg-dark">
+    <Router>
+    <Box className="bg-dark">
           {/*<Box style={{'paddingTop': '20%'}}>
           <Grid container >
               <Grid className="text-center my-4" item xs={6} sm={6} md={3} lg={3} xl={3}>
@@ -50,17 +49,18 @@ function App() {
                 <Link to="/cycling">Cyklistika</Link>
                 </Box>
               </Grid>
-  </Grid>*/}
+    </Grid>*/}
         <nav className="bg-dark">
           <ul>
             <li>
               <Link className="nav-item" to="/">logo</Link>
             </li>
             <li>
+              
               <Link className="nav-item" to="/cycling">Cyklistika</Link>
             </li>
             <li>
-              <Link className="nav-item" to="/hiking">Turistika</Link>
+               <Link className="nav-item" to="/hiking">Turistika</Link>
             </li>
             <li>
               <Link className="nav-item" to="/running">Beh</Link>
@@ -77,10 +77,10 @@ function App() {
             <Route path="/running" component={Running} />
             <Route path="/skiing" component={Skiing} />
         </Switch>
-        </Box>
+  </Box>
         </Router>
       <Weather />
-      </Suspense>
+        </Suspense>
   )}
 
 export default App;

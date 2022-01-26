@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const rounds = 10;
+const multer = require('multer');
 
 const dbcon = mysql.createPool({
     host: 'localhost',
@@ -30,6 +31,17 @@ app.use(session({
     saveUninitialized: false,
     cookie: { expires: 1000*60*60*24}
 }))
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'upload')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now()+ '-'+file.originalname)
+    }
+})
+
+const upload = multer({ dest: '/public/uploads' })
 
 app.post("/user", (req, res) => {
     dbcon.query("SELECT * FROM users WHERE id_user = ?", [req.body.user_id], (err, result) => {
@@ -112,12 +124,6 @@ app.post('/addComment', (req, res) => {
     })
         })
 
-app.post('/getProperties', (req, res) => {
-    dbcon.query("SELECT size,color FROM product_color_size WHERE id_product = ?", [req.body.id], (err, result) => {
-        res.send(result)
-    })
-})
-
 app.get('/sponsors', (req, res) => {
     dbcon.query("SELECT * FROM sponsors", (err, result) => {
         res.send(result)
@@ -170,7 +176,7 @@ app.post('/natureForm', (req, res) => {
     })
 })
 
-app.post('/publicate', (req, res) => {
+app.post('/publicate', upload.single('mainImg'), (req, res) => {
     const PublicInsert = "INSERT INTO articles(id_user, id_article, mainImg, title, rating, likes, text, theme, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     dbcon.query(PublicInsert, [req.body.id_user, '', req.body.mainImg, req.body.sign, req.body.rating, 0, req.body.text, req.body.theme, new Date()], (err, result) => {
         res.send(result)
@@ -181,7 +187,7 @@ app.post('/register', (req, res) => {
     const name = req.body.name;
     const surname = req.body.surname;
     const phone = req.body.phone;
-    const country = req.body.country;
+    const country = req.body.country; 
     const city = req.body.city;
     const street = req.body.street;
     const age = req.body.age;

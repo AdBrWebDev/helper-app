@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
@@ -9,10 +9,15 @@ import Card from '@mui/material/Card'
 import Divider from '@mui/material/Divider'
 import { useSelector, useDispatch } from 'react-redux'
 import Modal from '@mui/material/Modal'
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
     const [info,  setInfo] = useState([])
+    const [properties, setProperties] = useState([])
     const cart = useSelector((state) => state)
     console.log(cart)
     const dispatch = useDispatch();
@@ -24,9 +29,14 @@ export default function ProductCard(props){
                 Axios.post('http://localhost:3001/getInfo', {product: id}).then((response) => {
                     setInfo(response.data)
                 })
+                Axios.post('http://localhost:3001/getProperties', {id: id}).then((response) => {
+                    setProperties(response.data)
+                })
         }
         getInfo()
     } 
+
+    console.log(properties)
 
     return(<Grid key={props.index} item xs={12} sm={12} lg={4} xl={3} md={6}>
         <Box className="card border border-dark" id="cardh" onClick={() => openInfo(props.id)}>
@@ -58,8 +68,29 @@ export default function ProductCard(props){
                                 <Typography variant="h3">{props.title}</Typography>
                                 <Divider className="w-75 mx-auto my-3 bg-dark" />
                                 <Box>
-                                    <Typography className="my-2" variant="h5" style={{'text-align': 'left'}}>Prevedenie:</Typography>
-                                    <Typography className="my-2" variant="h5" style={{'text-align': 'left'}}>Veľkosti:</Typography>
+                                    <Typography className="my-2" variant="h5" style={{'text-align': 'left'}}>Prevedenie:
+                                                    <FormControl>
+                                                    <RadioGroup
+                                                      row
+                                                      aria-labelledby="demo-row-radio-buttons-group-label"
+                                                      name="row-radio-buttons-group"
+                                                    >
+                                                        {properties.map((property, index) =>
+                                                      <FormControlLabel key={index} value={property.color} control={<Radio />} label={property.color} />)}
+                                                    </RadioGroup>
+                                                  </FormControl>
+                                    </Typography>
+                                    <Typography className="my-2" variant="h5" style={{'text-align': 'left'}}>Veľkosti:
+                                    <FormControl>
+                                                    <RadioGroup
+                                                      row
+                                                      aria-labelledby="demo-row-radio-buttons-group-label"
+                                                      name="row-radio-buttons-group"
+                                                    >
+                                                        {properties.map((property, index) =>
+                                                      <FormControlLabel key={index} value={property.size} control={<Radio />} label={property.size} />)}
+                                                    </RadioGroup>
+                                                  </FormControl></Typography>
                                 </Box>
                             <Box>
                             <Typography variant="h2" style={{'textAlign': 'left'}}>{props.price} €</Typography>

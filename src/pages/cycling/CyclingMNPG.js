@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'material-icons/iconfont/material-icons.css';
 import 'materialize-css/dist/css/materialize.css';
 import 'bulma/css/bulma.min.css'
+import 'bootstrap/dist/js/bootstrap'
 import '../../App.css'
 import Box from '@mui/material/Box'
 import Footer from '../../components/Footer';
@@ -28,7 +29,7 @@ export default function CyclingMNPG(){
         <CircularProgress color="inherit" />
       </Backdrop>}>
     {<Router>
-        <nav className="navbar is-dark px-5 shadow position-fixed top-0">
+        {/*<nav className="navbar is-dark px-5 shadow position-fixed top-0">
             <Box className="navbar-brand">
                 <Link className="navbar-item" href="#"></Link>
                 <Box className="navbar-burger" data-target="navbar">
@@ -54,7 +55,31 @@ export default function CyclingMNPG(){
                     <SignInRegistration />
                 </Box>
             </Box>
-        </nav>
+    </nav>*/}
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark position-fixed top-0">
+  <button class="navbar-toggler bg-white my-auto top-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+
+  <Box class="collapse navbar-collapse bg-dark text-cetnter" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto text-center">
+      <Link className="text-white" to="/">Hlavná stránka</Link>
+      <Link className="text-white" to="/eshop">E-shop</Link>
+      <Link className="text-white" to="/ForumData">Forum</Link>
+      <Link className="text-white" to="/Map">Mapa</Link>
+      <Link className="text-white" to="/ArticlesData">Články</Link>
+      <Link className="text-white" to="/Nature">Príroda</Link>
+      <Link className="text-white" to="/BikeHelper">Pathfinder plus</Link>
+    </ul>
+    <Box className="navbar-end">
+                <Box className="navbar-item text-center">
+                    {Cookies.get("id") ? <ShoppingCart />: ''}
+                    <SignInRegistration />
+                </Box>
+            </Box>
+  </Box>
+</nav>
       <Switch>
           <Route exact path="/" component={MainPage} />
           <Route path="/eshop" component={Eshop} />

@@ -1,4 +1,4 @@
-import React, {useState, lazy} from 'react';
+import React, {useState} from 'react';
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -19,8 +19,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import Badge from '@mui/material/Badge';
 
 export default function SignInRegistration(){
     const [form, openForm] = useState(false)
@@ -55,9 +55,9 @@ export default function SignInRegistration(){
 
     const signUp = () => {
         Axios.post('http://localhost:3001/login', {loginEmail: loginEmail, loginPassword: loginPassword}).then((response) => {
-            if(response.data.massage){
-                setUser(response.data.massage)
-                console.log(response.data.massage)
+            if(response.data.message){
+                setUser(response.data.message)
+                console.log(response.data.message)
             }else{
                 Cookies.set("id", response.data[0].id_user, {expires: 2, secure: true})
                 Cookies.set("user", response.data[0].nickname, {expires: 2, secure: true})
@@ -117,14 +117,17 @@ export default function SignInRegistration(){
         </Box> :
         <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>}   
         <Modal open={profile} onClose={() => userProfile(false)}>
-        <Card style={{'overflowY': 'scroll', 'overflowX': 'auto', 'height': '90%', 'marginTop': '2%'}} className="text-center text-white p-5 border container border-dark" id="card">
-                <Grid container>
-                    <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+        <Card style={{'overflowY': 'scroll', 'overflowX': 'auto', 'height': '90%', 'marginTop': '2%'}} className="text-center text-dark p-5 border container border-white" id="card">
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={12} md={12} lg={3} xl={3} id="card" className="bg-white border border-dark py-5" >
+                    <Badge color="error" badgeContent={<i className="material-icons" variant="dot" anchorOrigin={{
+    vertical: 'bottom',
+    horizontal: 'right',
+  }}>edit</i>}>
                     <Avatar className="mx-auto my-5" sx={{width: 86, height: 86}} src={avatar == null ? "/images/alien.png" : 'avatar'} />
-                    <Typography variant="h5" className="text-white">{Cookies.get("user")}</Typography>
+                    </Badge>
+                    <Typography variant="h5">{Cookies.get("user")}</Typography>
                     <Typography variant="h6">{userData.is_admin ? 'admin': 'užívatel'}</Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
                     <Typography>Užívatel: {userData.name} {userData.surname}</Typography>
                     <Typography>Vek: {userData.age}</Typography>
                     <Typography>E-mail: {userData.e_mail}</Typography>
@@ -133,50 +136,49 @@ export default function SignInRegistration(){
                     <Typography>Mesto: {userData.city}</Typography>
                     <Typography>Adresa: {userData.street}</Typography>
                     </Grid>
-                </Grid>
-                <BottomNavigation sx={{ width: 700 }} className="mx-auto border border-dark p-3" id="card" style={{'marginTop': 30}} value={portfolioForm} onChange={setportfolioForm}>
-      <BottomNavigationAction className="text-white"
+                <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
+                <BottomNavigation sx={{ width: 700 }} className="mx-auto border border-dark p-3 bg-white" id="card" style={{'marginTop': 30}} value={portfolioForm} onChange={setportfolioForm}>
+      <BottomNavigationAction className="text-dark"
         label="Aktivity vo fóre"
         value="forumItems"
         icon={<i className="material-icons">forum</i>}
       />
-      <BottomNavigationAction className="text-white"
+      <BottomNavigationAction className="text-dark"
         label="Objednávky"
         value="orders"
         icon={<i className="material-icons">local_shipping</i>}
       />
-      <BottomNavigationAction className="text-white"
+      <BottomNavigationAction className="text-dark"
         label="Napísané články"
         value="usersArticles"
         icon={<i className="material-icons">auto_stories</i>}
       />
-      <BottomNavigationAction className="text-white"
+      <BottomNavigationAction className="text-dark"
         label="Oblúbené články"
         value="favArticles"
         icon={<i className="material-icons">auto_stories</i>}
       />
-      <BottomNavigationAction className="text-white"
+      <BottomNavigationAction className="text-dark"
         label="Aktivity"
         value="activities"
         icon={<i className="material-icons">person_add</i>}
       />
     </BottomNavigation>
                 {(portfolioForm === 'forumItems') ?
-                    <Paper  className="card p-5 text-center" id="card">
+                    <Paper  className="card p-5 text-center bg-white" id="card">
                         <Typography variant="h4">Aktivity vo fore</Typography>
             <List>
-              {forumItems.map((fItem, index) =>
-                <ListItem className="text-white" style={{'cursor': 'pointer'}} key={index}>
+              {forumItems.map((fItem, index) => 
+                <ListItem style={{'cursor': 'pointer'}} key={index}>
                   <ListItemAvatar>
                       <Avatar>
                       <i className="material-icons">forum</i>
                       </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={fItem.title}
+                    primary={fItem.title ? fItem.title : 'žiadne aktivity vo fóre'}
                   />
-                </ListItem>,
-              )}
+                </ListItem>)}
             </List>
                         </Paper> : (portfolioForm === 'orders') ?
                     <Paper  className="card p-5" id="card">
@@ -210,11 +212,11 @@ export default function SignInRegistration(){
                             </Paper> :
                     <Paper  className="card p-5" id="card">
                                 <Typography variant="h4">Aktivity</Typography>
-                                <Box class="message is-info">
-                                    <Typography class="message-body">Údaje sa synchronizujú prostredníctvom aplikácie strava</Typography>
+                                <Box class="message is-info mt-3">
+                                    <Typography class="message-body">Údaje sa synchronizujú prostredníctvom aplikácie strava. Táto služba bude dostupná od 1.10.2022</Typography>
                                 </Box>
                             </Paper>}
-            </Card></Modal>
+                    </Grid></Grid></Card></Modal>
             <Modal open={form} onClose={() => openForm(!form)}>
         <Container>
         <BottomNavigation sx={{ width: 500 }} className="mx-auto border border-dark" id="card" style={{'marginTop': 100, 'transform': 'scale(1.1)'}} value={selectedForm} onChange={ChangeForm}>

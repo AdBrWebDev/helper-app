@@ -26,6 +26,10 @@ export default function ArticlesItem(props){
     openWindow(!window)
     }
 
+    function addToFavorite(id){
+        Axios.post('http://localhost:3001/addToFav', {id: id, user: Cookies.get("id")})
+    }
+
     return(<Grid key={props.index} item xs={12} sm={6} md={4} lg={3} xl={3}>
             <Card className="text-center border border-dark text-white pb-2" id="cardh">
                 <CardContent>
@@ -45,7 +49,7 @@ export default function ArticlesItem(props){
                     </Grid>
                     <Grid item className="d-flex text-center mx-auto mt-2">
                     <Button variant="outlined" disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">thumb_up</i></Button>
-                    <Button variant="outlined" disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">favorite</i></Button>
+                    <Button variant="outlined" onClick={() => addToFavorite(props.data[0].id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">favorite</i></Button>
                     </Grid>
                     </Grid>
                 </CardActions>

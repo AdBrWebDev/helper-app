@@ -415,18 +415,27 @@ CREATE TABLE product_color_size
 ENGINE=INNODB
 
 /*product color size data*/
-INSERT INTO product_color_size(id_product, size, color)
+INSERT INTO product_color_size
 VALUES
-(1, '40mmx62mm', 'čierna'),
-(2, '40mmx62mm', 'čierna'),
+(1, '40x55mm', 'čierna'),
+(2, '40x55mm', 'čierna'),
 (3, 'S', 'biela'),
 (3, 'M', 'biela'),
-(3, 'L', 'Biela'),
-(3, 'XL', 'Biela'),
+(3, 'L', 'biela'),
+(3, 'XL', 'biela'),
+(3, 'XXL', 'biela'),
 (4, 'S', 'čierna'),
 (4, 'M', 'čierna'),
 (4, 'L', 'čierna'),
 (4, 'XL', 'čierna'),
-(5, '52-56', 'čierna'),
-(5, '54-58', 'čierna'),
-(5, '54-60', 'čierna')
+(4, 'XXL', 'čierna'),
+(5, '54-58cm', 'čierna'),
+(5, '54-60cm', 'čierna')
+
+/*favorite articles*/
+CREATE TABLE favArticles
+(
+	id_user INT,
+    article_id INT
+)
+ENGINE=INNODB

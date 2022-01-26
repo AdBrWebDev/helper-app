@@ -6,10 +6,10 @@ import 'materialize-css/dist/css/materialize.css'
 import 'bulma/css/bulma.min.css'
 import './App.css'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+/*import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-import Avatar from '@mui/material/Avatar'
+import Avatar from '@mui/material/Avatar'*/
 import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop from '@mui/material/Backdrop';
 const Weather = lazy(() => import('./pages/Weather'))

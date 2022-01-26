@@ -106,8 +106,20 @@ app.post('/addComment', (req, res) => {
     })
         })
 
+app.post('/getProperties', (req, res) => {
+    dbcon.query("SELECT size,color FROM product_color_size WHERE id_product = ?", [req.body.id], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.get('/sponsors', (req, res) => {
     dbcon.query("SELECT * FROM sponsors", (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/addToFav', (req, res) => {
+    dbcon.query("INSERT INTO favarticles (id_user ,article_id) VALUES (?, ?)", [req.body.user, req.body.id], (err, result) => {
         res.send(result)
     })
 })
@@ -139,13 +151,8 @@ app.post('/findItems', (req, res) => {
 })
 
 app.post('/forumNewItem', (req, res) => {
-    const id_user = req.body.id_user;
-    const dateOfPublic = req.body.dateOfPublic;
-    const title = req.body.title;
-    const text = req.body.text;
-    const theme = req.body.theme;
     const newForumItem = "INSERT INTO forum (id_item ,id_user, dateOfPublic, title, text, image, theme) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    dbcon.query(newForumItem, ['',id_user, dateOfPublic, title, text, '', theme], (err, result) => {
+    dbcon.query(newForumItem, ['',req.body.id_user, req.body.dateOfPublic, req.body.title, req.body.text, '', req.body.theme], (err, result) => {
         res.send(result)
     })
 })
@@ -195,15 +202,15 @@ app.post('/login', (req, res) => {
         if(result.length > 0){
             bcrypt.compare(req.body.loginPassword, result[0].password, (error, response) => {
                 if(response){
-                    req.session.user = result;
-                    console.log(req.session.user)
+                    /*req.session.user = result;
+                    console.log(req.session.user)*/
                     res.send(result)
                 }else{
-                    res.send({message: "Wrong users email or password!!"})
+                    res.send({message: "Nesprávne meno alebo heslo!"})
                 }
             })
         }else{
-            res.send({message: "User doesn't exit!"})
+            res.send({message: "Užívatel neexistuje!"})
         }
     }); 
 });

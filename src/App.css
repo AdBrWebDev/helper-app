@@ -38,9 +38,8 @@
   }
 
   #pathPlus{
-    box-shadow: 0 0 20px 5px rgba(30, 135, 177,.6);
-    transform: scale(4);
     margin-top: 300px;
+    box-shadow: 0 0 20px 5px rgba(30, 135, 177,.6);
   }
 
   #card{
@@ -80,4 +79,13 @@
     height: 120px;
     width: 120px;
     border-radius: 50%;
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }

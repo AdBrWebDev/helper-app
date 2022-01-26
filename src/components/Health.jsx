@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import '../App.css'
@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Avatar from '@mui/material/Avatar'
 import Modal from '@mui/material/Modal'
+import { TimelineLite, Expo, Elastic } from 'gsap/all';
 
 export default function Health(){
     const [health, openHealth] = useState(false)
@@ -26,6 +27,13 @@ export default function Health(){
         getData();
     }
 
+    let tl = new TimelineLite()
+
+    useEffect(() => {
+        tl.fromTo('#pathPlus', {transform: 'scale(3)', y: -500}, {transform: 'scale(4)', y:0, ease: Elastic.easeOut, duration: 2})
+        tl.fromTo('#icon', {transform: 'scale(0)'}, {transform: 'scale(1)', ease: Expo.easeOut}, '+=.1')
+    })
+
     const openDetails = (search) => {
         openDetailWin(!detailWin)
         function sendDetails(){
@@ -39,7 +47,7 @@ export default function Health(){
 
     return(<Box>
         <Button className="align-middle position-relative" onClick={openF} variant="outlined" color="info" id="pathPlus">
-            <i className="material-icons text-info">health_and_safety</i>
+            <i className="material-icons text-info" id="icon">health_and_safety</i>
         </Button>
         <Modal open={health} onClose={openF}>
         <Card style={{'marginTop': '10%'}} className="container text-center p-5 border border-dark text-white" id="card">

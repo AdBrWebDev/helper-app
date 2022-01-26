@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {compose, withProps} from 'recompose'
-import {withScriptjs, withGoogleMap ,GoogleMap, Marker} from 'react-google-maps'
+/*import {compose, withProps} from 'recompose'
+import {withScriptjs, withGoogleMap ,GoogleMap, Marker} from 'react-google-maps'*/
 import GoogleMapReact from 'google-map-react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -17,20 +17,22 @@ export default function Map(){
   const [places, setPlaces] = useState([])
   const [coordinates, setCoordinates] = useState({})
   const [bounds, setBounds] = useState(null)
+  //const coordinates = {lat: 0, lng: 0}
 
-    useEffect(() =>{
-        navigator.geolocation.getCurrentPosition((pos)=> {
+    useEffect((e) =>{
+      console.log(e)
+        /*navigator.geolocation.getCurrentPosition((pos)=> {
             setCoordinates({lat: pos.coords.latitude, lng: pos.coords.longitude})
-    })}, []);
+    })*/}, []);
 
     useEffect(() => {
-   fetch(`https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary??bl_latitude=${lat+0.01}&tr_latitude=${lat-0.01}&bl_longitude=${lon+0.01}&tr_longitude=${lon-0.01}&restaurant_tagcategory_standalone=10591&restaurant_tagcategory=10591&limit=30&currency=USD&open_now=false&lunit=km&lang=en_US`, {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "travel-advisor.p.rapidapi.com",
-		"x-rapidapi-key": "66557737b7msh9c3b3ea04efb717p1d1d66jsnc48da6576447"
-	}
-}).then(response => response.json())
+      fetch("https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary?bl_latitude=11.847676&tr_latitude=12.838442&bl_longitude=109.095887&tr_longitude=109.149359&restaurant_tagcategory_standalone=10591&restaurant_tagcategory=10591&limit=30&currency=USD&open_now=false&lunit=km&lang=en_US", {
+        "method": "GET",
+        "headers": {
+          "x-rapidapi-host": "travel-advisor.p.rapidapi.com",
+          "x-rapidapi-key": "66557737b7msh9c3b3ea04efb717p1d1d66jsnc48da6576447"
+        }
+      }).then(response => response.json())
 .then(response => {
 	console.log(response.data);
   setPlaces(response.data)
@@ -40,7 +42,7 @@ export default function Map(){
 });
     }, [])
 
-    const MyMapComponent = compose(
+    /*const MyMapComponent = compose(
       withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyAclgJeVn1JwTJjNzeMB559-HGUkTHR-Eo&v=3.exp&libraries=geometry,drawing,places",
         loadingElement: <div style={{ height: `100%` }} />,
@@ -56,12 +58,12 @@ export default function Map(){
       >
         {props.isMarkerShown && <Marker position={{ lat: lat, lng: lon }} />}
       </GoogleMap>
-    )
+    )*/
 
     console.log(coordinates)
   
-      return(<Box><Grid container>
-        <Grid item xs={12} sm={12} md={12} xl={3} lg={3}>
+      return(<Box className="h-100"><Grid container className="h-100">
+        <Grid item xs={12} sm={12} md={12} xl={3} lg={3} style={{'height': '90vh'}}>
           <Card id="card" className="m-3 p-3 py-5 border border-dark">
           <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth variant="filled">
@@ -79,7 +81,22 @@ export default function Map(){
           </Card>
         </Grid>
         <Grid item xs={12} sm={12} md={12} xl={9} lg={9}>
-          <MyMapComponent isMarkerShown />
+          {/*<MyMapComponent isMarkerShown />*/}
+          <GoogleMapReact
+            bootstrapURLKeys={{key: 'AIzaSyB3M2PdaOCMvXQeigigv80Rze_vBceltvE'}}
+            defaultCenter={coordinates}
+            center={coordinates}
+            defaultZoom={14}
+            margin={[50,50,50,50]}
+            options={''}
+            onChange={(e) => {
+              console.log(e)
+              setCoordinates({lat: e.center.lat, lng: e.center.lng})
+            }}
+            onChildClick={''}
+          >
+
+          </GoogleMapReact>
         </Grid>
       </Grid></Box>
       )}

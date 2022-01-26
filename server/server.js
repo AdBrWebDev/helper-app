@@ -61,6 +61,12 @@ app.post('/profileForm', (req, res) => {
     })
 })
 
+app.post('/profileFavArticles', (req, res) => {
+    dbcon.query("SELECT * FROM favarticles WHERE id_user = ?", [req.body.user_id], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.get('/signs', (req, res) => {
     dbcon.query("SELECT COUNT(id_user) AS sum FROM nature_form", (err, result) => {
         res.send(result)

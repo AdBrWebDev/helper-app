@@ -16,7 +16,6 @@ const MainPage = lazy(() => import('./MainPage'))
 const ArticlesData = lazy(() => import('./ArticlesData'))
 const BikeHelper = lazy(() => import('./BikeHelper'))
 const ForumData = lazy(() => import('./ForumData'))
-const Map = lazy(() => import('../Map'))
 const Eshop = lazy(() => import('../Eshop'))
 const SignInRegistration = lazy(() => import('../../components/SignInRegistration'))
 const ShoppingCart = lazy(() => import('../../components/ShoppingCart'))
@@ -28,34 +27,7 @@ export default function CyclingMNPG(){
       >
         <CircularProgress color="inherit" />
       </Backdrop>}>
-    {<Router>
-        {/*<nav className="navbar is-dark px-5 shadow position-fixed top-0">
-            <Box className="navbar-brand">
-                <Link className="navbar-item" href="#"></Link>
-                <Box className="navbar-burger" data-target="navbar">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </Box>
-            </Box>
-            <Box id="navbar" className="navbar-menu">
-                <Box className="navbar-start">
-                <Link className="navbar-item" to="/">Hlavná stránka</Link>
-                <Link className="navbar-item" to="/eshop">E-shop</Link>
-                <Link className="navbar-item" to="/ForumData">Forum</Link>
-                <Link className="navbar-item" to="/Map">Mapa</Link>
-                <Link className="navbar-item" to="/ArticlesData">Články</Link>
-                <Link className="navbar-item" to="/Nature">Príroda</Link>
-                <Link className="navbar-item" to="/BikeHelper">Pathfinder plus</Link>
-                </Box>
-            </Box>
-            <Box className="navbar-end">
-                <Box className="navbar-item">
-                    {Cookies.get("id") ? <ShoppingCart />: ''}
-                    <SignInRegistration />
-                </Box>
-            </Box>
-    </nav>*/}
+    <Router>
     <nav class="navbar navbar-expand-lg navbar-light bg-dark position-fixed top-0">
   <button class="navbar-toggler bg-white my-auto top-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -67,7 +39,6 @@ export default function CyclingMNPG(){
       <Link className="text-white" to="/">Hlavná stránka</Link>
       <Link className="text-white" to="/eshop">E-shop</Link>
       <Link className="text-white" to="/ForumData">Forum</Link>
-      <Link className="text-white" to="/Map">Mapa</Link>
       <Link className="text-white" to="/ArticlesData">Články</Link>
       <Link className="text-white" to="/Nature">Príroda</Link>
       <Link className="text-white" to="/BikeHelper">Pathfinder plus</Link>
@@ -84,12 +55,11 @@ export default function CyclingMNPG(){
           <Route exact path="/" component={MainPage} />
           <Route path="/eshop" component={Eshop} />
           <Route path="/ForumData" component={ForumData} />
-          <Route path="/Map" component={Map} />
           <Route path="/ArticlesData" component={ArticlesData} />
           <Route path="/Nature" component={Nature} />
           <Route path="/BikeHelper" component={BikeHelper} />
       </Switch>
-    </Router>}
+    </Router>
     <Footer />
     </Suspense>)
 }

@@ -12,7 +12,6 @@ const MainPage = lazy(() => import('./MainPage'))
 const ArticlesData = lazy(() => import('./ArticlesData'))
 const RunHelper = lazy(() => import('./RunHelper'))
 const ForumData = lazy(() => import('./ForumData'))
-const Map = lazy(() => import('../Map'))
 const Eshop = lazy(() => import('../Eshop'))
 const SignInRegistration = lazy(() => import('../../components/SignInRegistration'))
 
@@ -33,7 +32,6 @@ export default function CyclingMNPG(){
                 <Link className="navbar-item" to="/">Hlavná stránka</Link>
                 <Link className="navbar-item" to="/eshop">E-shop</Link>
                 <Link className="navbar-item" to="/ForumData">Forum</Link>
-                <Link className="navbar-item" to="/Map">Mapa</Link>
                 <Link className="navbar-item" to="/ArticlesData">Články</Link>
                 <Link className="navbar-item" to="/Nature">Príroda</Link>
                 <Link className="navbar-item" to="/RunHelper">Pathfinder plus</Link>
@@ -49,7 +47,6 @@ export default function CyclingMNPG(){
           <Route exact path="/" component={MainPage} />
           <Route path="/eshop" component={Eshop} />
           <Route path="/ForumData" component={ForumData} />
-          <Route path="/Map" component={Map} />
           <Route path="/ArticlesData" component={ArticlesData} />
           <Route path="/Nature" component={Nature} />
           <Route path="/RunHelper" component={RunHelper} />

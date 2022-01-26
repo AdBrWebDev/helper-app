@@ -44,7 +44,7 @@ export default function PathfinderPlus(props){
 
     useEffect(() => {
         tl.fromTo('#pathPlus', {transform: 'scale(3)', y: -500}, {transform: 'scale(4)', y:0, ease: Elastic.easeOut, duration: 2})
-        tl.fromTo('#icon', {transform: 'scale(0)'}, {transform: 'scale(1)', ease: Expo.easeOut}, '+=.1')
+        tl.fromTo('#icon', {transform: 'scale(0)'}, {transform: 'scale(1)', ease: Expo.easeOut})
     })
 
     return(<Box className="text-center align-middle">

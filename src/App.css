@@ -49,6 +49,11 @@
     backdrop-filter: blur(8px);
   }
 
+  .form-control:hover,
+  .form-control:focus{
+    background-color: transparent !important;
+  }
+
   #cardh{
     box-shadow: 0 0 15px 2px rgba(255,255,255,.3);
     transition: .7s;

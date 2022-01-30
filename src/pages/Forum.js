@@ -54,7 +54,7 @@ export default function Forum(props){
         <MainImageOfPage img={props.img} text={props.text} />
         <Box className="container p-3 rounded bg-dark shadow my-5">
             <Box className="text-end mb-5">
-            <Button variant="outlined" color="info" onClick={() => Cookies.get("id") ? NewTheme(!newTheme) : console.log("nie ste prihlásený")}>Pridať tému</Button>
+            <Button variant="outlined" color="info" disabled={!Cookies.get("id")} onClick={() => Cookies.get("id") ? NewTheme(!newTheme) : console.log("nie ste prihlásený")}>Pridať tému</Button>
             </Box>
             <Box>
                 {items.map((item, index) => <Card id="card" key={index} className="p-3 my-2 px-5 border border-dark text-white border-2 shadow">
@@ -63,15 +63,15 @@ export default function Forum(props){
             </Box>
         </Box>
         <Modal open={newTheme} onClose={() => NewTheme(false)}>
-                <Card className="container text-center border border-dark border-2 text-white p-5 shadow w-75 align-middle" style={{'marginTop': '5%'}} id="card">
+                <Card className="container text-center border border-dark bg-dark border-2 text-white p-5 w-75 align-middle" style={{'marginTop': '5%'}} id="card">
                     <Typography variant="h3">Pridať novú tému</Typography>
-                        <input type="text" placeholder="Názov témy" className="form-control mb-4 text-center text-info" name="title" onChange={(e) => setTitle(e.target.value)} />
-                        <textarea cols="80" placeholder="Váš text" name="text" className="form-control mb-4 text-info bg-transparent" style={{'minHeight': '100px'}} rows="10" onChange={(e) => setText(e.target.value)}></textarea>
+                        <input type="text" placeholder="Názov témy" className="form-control mb-4 text-center text-info text-white" name="title" onChange={(e) => setTitle(e.target.value)} />
+                        <textarea cols="80" placeholder="Váš text" name="text" className="form-control mb-4 text-white bg-transparent" style={{'minHeight': '100px'}} rows="10" onChange={(e) => setText(e.target.value)}></textarea>
                         <Button variant="contained" color="info" onClick={createNewItem}>Pridať</Button>
                 </Card>
                 </Modal>  
         <Modal open={window} onClose={() => openWindow(false)}>
-            <Card className="container text-center border border-dark text-white p-5 mt-5" id="card" style={{'overflowY': 'scroll', 'height': "90%"}}> 
+            <Card className="container text-center border border-dark text-white bg-dark p-5 mt-5" id="card" style={{'overflowY': 'scroll', 'height': "90%"}}> 
                     <Typography variant="h3" className="text-white mt-2">{sign}</Typography>
                     <Box className="p-5">
                     {forumItems.map((fItems, index) => <ForumItems index={index} data={fItems} />)}
@@ -80,7 +80,7 @@ export default function Forum(props){
                     <Typography variant="h3">Pridať komentar</Typography>
                         <textarea cols="10" placeholder="Váš komentár" className="text-center form-control bg-transparent text-white" style={{'minHeight': '100px'}} name="comment" rows="80" onChange={(e) => setText(e.target.value)}></textarea>
                         <Box className="my-3">
-                        <Button variant="contained" color="info" onClick={() => addComment(sign, props.title)}>Pridať</Button>
+                        <Button variant="contained" color="info" disabled={!Cookies.get("id")} onClick={() => addComment(sign, props.title)}>Pridať</Button>
                         </Box>
                 </Card>
                 </Card>

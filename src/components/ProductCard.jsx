@@ -9,15 +9,15 @@ import Card from '@mui/material/Card'
 import Divider from '@mui/material/Divider'
 import { useSelector, useDispatch } from 'react-redux'
 import Modal from '@mui/material/Modal'
+import Cookies from 'js-cookie'
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
     const [info,  setInfo] = useState([])
     const cart = useSelector((state) => state)
-    console.log(cart)
     const dispatch = useDispatch();
+    console.log(cart)
     console.log(props.product.color)
-    let color = props.product.color
 
     const openInfo = (id) => {
         infoOpened(!iWindow)
@@ -68,7 +68,7 @@ export default function ProductCard(props){
                             <Box className="d-flex mt-5">
                             {props.contain > 0 ? <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box> : 
                             <Box className="message is-danger w-50 mx-auto my-auto"><Typography className="message-body">Nedostupné</Typography></Box>}
-                            <Button disabled={props.contain < 1} variant="contained" className="mr-5" color="success"><i className="material-icons" onClick={() => dispatch({type: "ADD", payload: props.product})}>shopping_cart</i></Button>
+                            <Button disabled={props.contain < 1 || !Cookies.get("id")} variant="contained" className="mr-5" color="success"><i className="material-icons" onClick={() => dispatch({type: "ADD", payload: props.product})}>shopping_cart</i></Button>
                             </Box>
                             </Card>
                             </Grid>

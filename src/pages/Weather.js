@@ -16,7 +16,6 @@ const ForecastCard = lazy(() => import('../components/ForecastCard'))
 const WeatherCharts = lazy(() => import('../components/WeatherCharts'))
 const HourForecast = lazy(() => import('../components/HourForecast'))
 
-
 export default function Weather(){
     const [weather, openWeather] = useState(false);
     const [details, showDetails] = useState(false);
@@ -27,7 +26,6 @@ export default function Weather(){
     const [condition, setCondition] = useState([]);
     const [day24hours, set24Hours] = useState([]);
     const [selectedForm, selectForm] = useState('forecast3days');
-
     const ChangeForm = (event, newValue) => {
         selectForm(newValue)
     }
@@ -101,7 +99,7 @@ export default function Weather(){
                 {(details) ?
                 (<Box className="text-center">
                     <Typography variant="h2">{town}</Typography>
-                    <img src={condition.icon} className="my-4" style={{transform: "scale(2)"}} alt={condition.text} />
+                    <img src={condition.icon} className="my-5" style={{transform: "scale(2)"}} alt={condition.text} />
                     <Typography>{condition.text}</Typography>
                     <Typography variant="h2">{curWeather.temp_c} °C</Typography>
                     <Grid container className="text-left">
@@ -141,7 +139,7 @@ export default function Weather(){
                     </Box>
                     <Typography className="pt-2">GPS: {location.lat}, {location.lon}</Typography>
                     <Typography className="pt-2">Naposledy aktualizované: {curWeather.last_updated}</Typography>
-                    </Box>): null}
+                    </Box>): <Box className="text-center" id="sun" style={{'marginTop': '15%'}}><i className="material-icons" style={{'transform': 'scale(8)'}}>light_mode</i></Box>}
             </Container>
         </Modal>
         </>

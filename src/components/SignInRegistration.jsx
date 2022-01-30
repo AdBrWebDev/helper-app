@@ -20,6 +20,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
+import LazyHero from 'react-lazy-hero'
 
 export default function SignInRegistration(){
     const [form, openForm] = useState(false)
@@ -34,7 +35,7 @@ export default function SignInRegistration(){
     const [password, setPassword] = useState('')
     const [loginEmail, setLoginEmail] = useState('')
     const [loginPassword, setLoginPassword] = useState('')
-    const [user, setUser] = useState('')
+    const [/*user*/, setUser] = useState('')
     const [profile, openProfile] = useState(false)
     const [nick, setNick] = useState('')
     const [userData, setUserData] = useState([])
@@ -49,6 +50,15 @@ export default function SignInRegistration(){
     const [UArticles, openUArticles] = useState(false)
     const [FArticles, openFArticles] = useState(false)
     const [UEdit, editData] = useState(false)
+    const [Uedit, openUEdit] = useState(false)
+    const [edit, setEdit] = useState([])
+    const [editedT, setEdited] = useState('')
+    const [oFavArticle, openFavArticle] = useState(false)
+    const [InfoAOrder, getInfoAOrder] = useState([])
+    const [selectedOrder, openSelectedOrder] = useState(false)
+    const [EditUArticle ,openEditUArticle] = useState(false)
+    const [articletext, setArticleText] = useState('')
+    const [articlerating, setArticleRating] = useState(0)
 
     let avatar = null
 
@@ -58,8 +68,11 @@ export default function SignInRegistration(){
     }
 
     const uploadSubmitedData = () => {
-      Axios.post('http://localhost:3001/editData', {name: name, surname: surname, phone: phone, country: country, city: city, street: street, age: age, e_mail: e_mail, password: password, nick: nick}).then(() => {alert("insert successful")})
+      Axios.post('http://localhost:3001/editData', {name: name || userData.name, surname: surname || userData.surname, phone: phone || userData.phone, country: country || userData.country, city: city || userData.city, street: street || userData.street, age: age || userData.age, e_mail: e_mail || userData.email, nick: nick || userData.nickname, id_user: Cookies.get("id")}).then(() => {alert("edit successful")})
+        
     }
+
+    console.log(favArticles)
 
     const signUp = () => {
         Axios.post('http://localhost:3001/login', {loginEmail: loginEmail, loginPassword: loginPassword}).then((response) => {
@@ -104,14 +117,33 @@ export default function SignInRegistration(){
       selectForm(form)
     }
 
-    return(<Box>
-        {Cookies.get("id") != null ? <Box>
-        <Button id="userOptions" aria-controls="userOptions" aria-haspopup="true" onClick={() => setOpenOptions(!openOptions)}>{Cookies.get("user")}</Button>
-        <Dialog
-        open={openOptions}
-        onClose={() => setOpenOptions(false)}
-        aria-describedby="alert-dialog-slide-description"
-      >
+    const EditFItems = (id, txt) => {
+        Axios.post("http://localhost:3001/EditProfileFItem", {id: id, text: txt}).then((response) =>{
+            getFavArticles(response.data)
+            console.log(response.data)
+        })
+        setEdited('')
+    }
+
+    const openOrder = (specialId) => {
+        Axios.post("http://localhost:3001/getInfoAOrder", {specialId: specialId}).then((response) =>{
+            getInfoAOrder(response.data)
+            console.log(response.data)
+        })
+        openSelectedOrder(true)
+    }
+
+    const deleteOrder = (id) => {
+        Axios.post("http://localhost:3001/deleteOrder", {id: id})
+    }
+
+    const editMyArticle = (id) => {
+        Axios.post("http://localhost:3001/editMyArticle", {id: id, text: articletext, rating: articlerating})
+    }
+
+    return(<Box>{Cookies.get("id") != null ? <Box>
+        <Button color="info" id="userOptions" aria-controls="userOptions" aria-haspopup="true" onClick={() => setOpenOptions(!openOptions)}><i className="material-icons mr-1">person</i> {Cookies.get("user")}</Button>
+        <Dialog open={openOptions} onClose={() => setOpenOptions(false)}>
         <Box className="text-center">
         <DialogTitle>Menu</DialogTitle>
         <DialogContent>
@@ -119,11 +151,8 @@ export default function SignInRegistration(){
             <ListItem style={{'cursor': 'pointer'}} onClick={() => {userProfile(); setOpenOptions(false)}}>Môj profil</ListItem>
             <ListItem style={{'cursor': 'pointer'}} onClick={() => {logout(); setOpenOptions(false)}}>Odhlásenie</ListItem>
             </List>
-        </DialogContent>
-        </Box>
-      </Dialog>
-        </Box> :
-        <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>}   
+        </DialogContent></Box></Dialog>
+        </Box> : <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>}   
         <Modal open={profile} onClose={() => userProfile(false)}>
         <Card style={{'overflowY': 'scroll', 'overflowX': 'auto', 'height': '90%', 'marginTop': '2%', 'borderRadius': '30px'}} className="text-center text-white w-75 bg-dark text-dark p-5 border container border-dark" id="card">
                     <Avatar className="mx-auto my-4" sx={{width: 86, height: 86}} src={avatar == null ? "/images/alien.png" : 'avatar'} />
@@ -131,121 +160,180 @@ export default function SignInRegistration(){
                     <Typography variant="h6">{userData.is_admin ? 'admin': 'užívatel'}</Typography>
                     <Typography><i className="material-icons">person</i> {userData.name} {userData.surname}</Typography>
                     <Typography><i className="material-icons">location_on</i>{userData.country}, {userData.city}</Typography>
-                    <Button className="mt-2" onClick={() => {editData(true)}} variant="contained" color="error"><i className="material-icons">edit</i></Button>
+                    <Button className="mt-2" onClick={() => {editData(true)}} variant="outlined" color="error"><i className="material-icons">edit</i></Button>
                     <Grid container className="my-5" spacing={2}>
                         <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                          <Card onClick={() => openFItems(true)} id="card" className="p-5 text-white" style={{'cursor': 'pointer'}}>
+                          <Card onClick={() => openFItems(true)} id="card" className="p-4 text-white" style={{'cursor': 'pointer'}}>
                               <Typography variant="h6">Príspevky vo fóre</Typography>
-                              <Typography className="mt-5 mb-2" variant="h4"><i className="material-icons">forum</i></Typography>
-                              <Typography variant="h2"> {forumItems.length}</Typography>
-                          </Card>
+                              <Typography sx={{transform: 'scale(1.4)'}} className="my-5" variant="h4"><i className="material-icons">forum</i></Typography>
+                              <Typography variant="h2"> {forumItems.length}</Typography></Card>
                           </Grid>
                           <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                          <Card onClick={() => openUOrders(true)} id="card" className="p-5 text-white" style={{'cursor': 'pointer'}}>
+                          <Card onClick={() => openUOrders(true)} id="card" className="p-4 text-white" style={{'cursor': 'pointer'}}>
                               <Typography variant="h6">Objednávky</Typography>
-                              <Typography className="mt-5 mb-2" variant="h4"><i className="material-icons">local_shipping</i></Typography>
-                              <Typography variant="h2"> {orders.length}</Typography>
-                          </Card>
+                              <Typography sx={{transform: 'scale(1.4)'}} className="my-5" variant="h4"><i className="material-icons">local_shipping</i></Typography>
+                              <Typography variant="h2"> {orders.length}</Typography></Card>
                         </Grid>
                         <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
-                          <Card onClick={() => openUArticles(true)} id="card" className="p-5 text-white" style={{'cursor': 'pointer'}}>
+                          <Card onClick={() => openUArticles(true)} id="card" className="p-4 text-white" style={{'cursor': 'pointer'}}>
                               <Typography variant="h6">Vaše články</Typography>
-                              <Typography className="mt-5 mb-2" variant="h4"><i className="material-icons">auto_stories</i></Typography>
-                              <Typography variant="h2"> {articles.length}</Typography>
-                          </Card>
+                              <Typography sx={{transform: 'scale(1.4)'}} className="my-5" variant="h4"><i className="material-icons">auto_stories</i></Typography>
+                              <Typography variant="h2"> {articles.length}</Typography></Card>
                         </Grid>
-                        <Grid onClick={() => openFArticles(true)} item xs={12} sm={6} md={4} lg={3} xl={3}>
-                          <Card id="card" className="p-5 text-white" style={{'cursor': 'pointer'}}>
+                        <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+                          <Card onClick={() => openFavArticle(true)} id="card" className="p-4 text-white" style={{'cursor': 'pointer'}}>
                               <Typography variant="h6">Oblúbené články</Typography>
-                              <Typography className="mt-5 mb-2" variant="h4"><i className="material-icons">favorite</i></Typography>
-                              <Typography variant="h2"> {favArticles.length}</Typography>
-                          </Card>
+                              <Typography sx={{transform: 'scale(1.4)'}} className="my-5" variant="h4"><i className="material-icons">favorite</i></Typography>
+                              <Typography variant="h2"> {favArticles.length}</Typography></Card>
                         </Grid>
                     </Grid>
                     <Modal open={UEdit} onClose={() => editData(false)}>
                     <Card className="p-5 text-center mt-5 text-white border border-dark bg-dark container" id="card">
-                <Typography variant="h3">Registrácia</Typography>
+                <Typography variant="h3">Informácie o užívateľovi</Typography>
                 <Grid container component="form" className="text-center mx-auto">
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="meno" value={userData.name} onChange={(e) => {setName(e.target.value)}} name="name" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="meno" value={name === '' ? userData.name : name} onChange={(e) => {setName(e.target.value)}} name="name" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="priezvisko" value={userData.surname} onChange={(e) => {setSurname(e.target.value)}} name="surname" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="priezvisko" value={surname === '' ? userData.surname: surname} onChange={(e) => {setSurname(e.target.value)}} name="surname" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="telefon" value={userData.phone} onChange={(e) => {setPhone(e.target.value)}} name="phone" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="telefon" value={phone === '' ? userData.phone : phone} onChange={(e) => {setPhone(e.target.value)}} name="phone" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="krajina" value={userData.country} onChange={(e) => {setCountry(e.target.value)}} name="country" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="krajina" value={country === '' ?userData.country : country} onChange={(e) => {setCountry(e.target.value)}} name="country" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="mesto" value={userData.city} onChange={(e) => {setCity(e.target.value)}} name="city" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="mesto" value={city === '' ? userData.city : city} onChange={(e) => {setCity(e.target.value)}} name="city" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="ulica" value={userData.street} onChange={(e) => {setStreet(e.target.value)}} name="street" />
+                    <input className="form-control w-50 text-center mx-auto text-white" placeholder="ulica" value={street === '' ? userData.street : street} onChange={(e) => {setStreet(e.target.value)}} name="street" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <input type="number" className="form-control w-50 text-center text-white mx-auto" placeholder="vek" value={userData.age} onChange={(e) => {setAge(e.target.value)}} name="age" />
+                    <input type="number" className="form-control w-50 text-center text-white mx-auto" placeholder="vek" value={age === '' ? userData.age : age} onChange={(e) => {setAge(e.target.value)}} name="age" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                <input className="form-control w-50 text-center mx-auto text-white" placeholder="e-mail" value={userData.e_mail} onChange={(e) => {setEmail(e.target.value)}} name="e_mail" />
+                <input className="form-control w-50 text-center mx-auto text-white" placeholder="e-mail" value={ e_mail === '' ? userData.e_mail : e_mail } onChange={(e) => {setEmail(e.target.value)}} name="e_mail" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                <input className="form-control w-50 text-center mx-auto text-white" placeholder="nick" value={userData.nickname} onChange={(e) => {setNick(e.target.value)}} name="nick" />
+                <input className="form-control w-50 text-center mx-auto text-white" placeholder="nick" value={nick === '' ? userData.nickname : nick} onChange={(e) => {setNick(e.target.value)}} name="nick" />
                 </Grid>
                 </Grid>
-                <Button className="mx-auto mt-3" type="submit" variant="contained" color="primary" onClick={() => uploadSubmitedData()}>Upraviť údaje</Button>
-            </Card>
+                <Button className="mx-auto mt-3" type="submit" variant="contained" color="primary" onClick={() => uploadSubmitedData()}>Upraviť údaje</Button></Card>
                     </Modal>
                     <Modal open={FItems} onClose={() => openFItems(false)}>
-                    <Paper  className="card p-5 text-center bg-white" id="card">
-                        <Typography variant="h4">Aktivity vo fore</Typography>
-            <List>
-              {forumItems.map((fItem, index) => 
-                <ListItem style={{'cursor': 'pointer'}} key={index}>
-                  <ListItemAvatar>
-                      <Avatar>
-                      <i className="material-icons">forum</i>
-                      </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={fItem.title ? fItem.title : 'žiadne aktivity vo fóre'}
-                  />
+                    <Paper className="card p-5 text-center bg-dark container text-white" style={{'marginTop': '8%'}} id="card">
+                        <Typography variant="h3">Aktivity vo fóre</Typography>
+                <List>
+              {forumItems.length < 1 ? '' : forumItems.map((fItem, index) => 
+                <ListItem style={{'cursor': 'pointer'}} className="text-white" key={index}>
+                  <ListItemAvatar><Avatar sx={{background: 'transparent'}}><i className="material-icons">forum</i></Avatar></ListItemAvatar>
+                  <ListItemText primary={fItem.title} secondary={<React.Fragment>
+              <Typography
+                sx={{ display: 'inline', fontSize: '13px' }}
+                component="span"
+                variant="body2"
+                color="text.primary"
+                className="text-white"
+              >
+                {fItem.text}
+              </Typography>
+            </React.Fragment>}/>
+            <Button variant="outlined" color="error" onClick={() => {openUEdit(true); setEdit(fItem)}}><i className="material-icons">edit</i></Button>
+            <Modal open={Uedit} onClose={() => openUEdit(false)}>
+                    <Paper className="card bg-dark container text-white text-center p-5" style={{'marginTop': '8%'}} id="card">
+                        <Typography variant="h3">{edit.title}</Typography>
+                        <textarea className="form-control text-white my-5" onChange={(e) => setEdited(e.target.value)} value={editedT} sx={{minHeight: '100px'}} rows="20"></textarea>
+                        <Box className="my-5">
+                        <Button variant="outlined" color="error" onClick={() => EditFItems(edit.id_item, editedT)}><i className="material-icons">edit</i> Upraviť</Button>
+                        </Box>
+                    </Paper>
+                </Modal>
                 </ListItem>)}
-            </List></Paper>
-            </Modal>
+            </List></Paper></Modal>
             <Modal open={UOrders} onClose={() => openUOrders(false)}>
-                    <Paper  className="card p-5" id="card">
-                                <Typography variant="h4">Objednávky</Typography>
-                                {orders.map((order, index) => <Grid key={index} container>
-                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6}>Vytvorená: {new Date(order.order_created).getDate()}.{new Date(order.order_created).getMonth()+1}.{new Date(order.order_created).getFullYear()}</Grid>
-                                    <Grid item xs={12} sm={6} md={6} xl={6} lg={6}>Stav: {order.status}</Grid></Grid>)}
-                            </Paper>
-                            </Modal>
+                    <Paper  className="card p-5 bg-dark container text-white text-center" style={{'marginTop': '8%'}} id="card">
+                                <Typography variant="h4" className="mb-3">Objednávky</Typography>
+                                {orders.length < 1 ? '' : orders.map((order, index) => <Box><Grid spacing={2} style={{'cursor': 'pointer'}} className="my-2 p-5 bg-dark" id="card" key={index} container>
+                                    <Grid className="d-flex" item xs={12} sm={6} md={6} xl={6} lg={6}><Typography className="mx-auto">Dátum vytvorenia: {new Date(order.order_created).getDate()}.{new Date(order.order_created).getMonth()+1}.{new Date(order.order_created).getFullYear()}</Typography>
+                                    <Typography className="mx-auto">Suma: {order.total_price} €</Typography></Grid>
+                                    <Grid className="d-flex" item xs={12} sm={6} md={6} xl={6} lg={6}><Typography className="mx-auto">Stav: {order.status}</Typography>
+                                    <Button className="mx-auto" variant="outlined" color="error" onClick={() => openOrder(order.generatedOrderInt)}><i className="material-icons">info</i></Button></Grid></Grid>
+                                    <Modal open={selectedOrder} onClose={() => openSelectedOrder(false)}>
+                                    <Paper className="card p-5 bg-dark container text-white text-center" style={{'marginTop': '8%'}} id="card">
+                                        <Grid container spacing={2}>
+                                            <Grid item sm={12} md={6} lg={6} xl={6}>
+                                                <Typography>Číslo objednávky: {order.id_order}</Typography>
+                                                <Typography className="mx-auto">Dátum vytvorenia: {new Date(order.order_created).getDate()}.{new Date(order.order_created).getMonth()+1}.{new Date(order.order_created).getFullYear()}</Typography>
+                                                <Typography className="mx-auto">Dátum vytvorenia: {new Date(order.delivery_date).getDate()}.{new Date(order.delivery_date).getMonth()+1}.{new Date(order.delivery_date).getFullYear()}</Typography>
+                                                <Typography>Platba: {order.payment}</Typography>
+                                                <Typography>Stav: {order.status}</Typography>
+                                                <Typography>Suma: {order.total_price} €</Typography>
+                                            </Grid>
+                                            <Grid item sm={12} md={6} lg={6} xl={6}>
+                                                <Box><Button className="my-auto" variant="outlined" onClick={() => deleteOrder(order.id_order)} color="error" disabled={order.status !== 'V príprave'}><i className="material-icons">clear</i> Zrušiť objednávku</Button></Box>
+                                            </Grid>
+                                        </Grid>
+                                        {InfoAOrder.map((orderItem, index) => <Grid className="mt-5" container spacing={2}>
+                                            <Grid item sm={12} md={6} lg={4} xl={3}><img src={`images/${orderItem.image}`} alt={orderItem.title} style={{'height': '80px'}} /></Grid>
+                                            <Grid item sm={12} md={6} lg={8} xl={9} className="d-flex">
+                                            <Typography className="mx-auto my-auto">Množstvo: {orderItem.contain}</Typography>
+                                            <Typography className="mx-auto my-auto">Produkt: {orderItem.title}</Typography>
+                                            </Grid>
+                                        </Grid>)}
+                                    </Paper>
+                                    </Modal></Box>
+                                    )}
+                    </Paper>
+            </Modal>
             <Modal open={UArticles} onClose={() => openUArticles(false)}>
-                    <Paper  className="card p-5" id="card">
-                                <Typography variant="h4">Články</Typography>
+                    <Paper className="card p-5 text-white container bg-dark" style={{'marginTop': '8%'}} id="card">
+                                <Typography variant="h4" className="text-center">Články</Typography>
                                     <List>
-              {articles.map((article, index) =>
-                <ListItem className="text-white" style={{'cursor': 'pointer'}} key={index}>
+              {articles.length < 1 ? '' : articles.map((article, index) => <Box>
+                <ListItem className="text-white p-5 w-75 mx-auto" style={{'cursor': 'pointer'}} key={index}>
                   <ListItemAvatar>
-                      <Avatar>
-                      <i className="material-icons">auto_stories</i>
-                      </Avatar>
+                      <Avatar sx={{backgroundColor: 'transparent'}}><i className="material-icons">auto_stories</i></Avatar>
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={article.title}
-                    secondary={article.likes}
-                  />
+                  <ListItemText primary={article.title} secondary={<Typography className="text-white"><i className="material-icons" style={{'transform': 'scale(.8)'}}>thumb_up</i> {article.likes}</Typography>} />
+                  <Button variant="outlined" color="error" onClick={() => openEditUArticle(true)}><i className="material-icons">edit</i></Button>
                 </ListItem>
-              )}
-            </List>
+                <Modal open={EditUArticle} onClose={() => openEditUArticle(false)}>
+                <Paper className="card p-5 text-white container bg-dark text-center" style={{'marginTop': '3%'}} id="card">
+                    <Typography variant="h2">{article.title}</Typography>
+                    <Typography variant="h6">Náročnosť</Typography>
+                    <input type="number" className="form-control w-25 mx-auto mb-4 text-white" value={articlerating} onChange={(e) => setArticleRating(e.target.value)} />
+                    <Typography variant="h6">Obsah článku</Typography>
+                    <textarea className="form-control mb-4 text-white" style={{'height': '350px'}} value={articletext} onChange={(e) => setArticleText(e.target.value)} ></textarea>
+                    <Box>
+                        <Button variant="outlined" color="error" onClick={() => editMyArticle(article.id_article)}><i className="material-icons">edit</i> Upraviť článok</Button>
+                    </Box>
+                </Paper>
+                </Modal>
+                </Box>)}</List>
                             </Paper>
                             </Modal>
-            <Modal open={FArticles} onClose={() => openFArticles(false)}>
-                    <Paper  className="card p-5" id="card">
-                                <Typography variant="h4">Oblúbené články</Typography>
-                              
+            <Modal open={oFavArticle} onClose={() => openFavArticle(false)}>
+                    <Paper  className="card p-5 container bg-dark text-white" style={{'marginTop': '8%'}} id="card">
+                                <Typography className="text-center" variant="h4">Oblúbené články</Typography>
+                                <List>
+              {favArticles.length < 1 ? '' : favArticles.map((articles, index) => 
+                <ListItem style={{'cursor': 'pointer'}} className="text-white" key={index}>
+                  <ListItemAvatar><Avatar sx={{background: 'transparent'}}><i className="material-icons">forum</i></Avatar></ListItemAvatar>
+                  <ListItemText primary={articles.title} /><Button onClick={() => openFArticles(true)} variant="outlined" color="error"><i className="material-icons">auto_stories</i></Button>
+                  <Modal open={FArticles} onClose={() => openFArticles(false)}>
+                <Card className="container border text-center border-dark mt-5 bg-dark" id="card" style={{'overflowY': 'scroll', 'height': '95%'}}>
+                    <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/images/${articles.mainImg}`}>
+                        <Box>
+                            <Typography color="white" variant="h2">{articles.title}</Typography>
+                        </Box>
+                    </LazyHero>
+                    <Box className="text-white container mx-auto">
+                    <Typography style={{'font-size': '18px'}} className="w-75 mx-auto">{articles.text}</Typography>
+                    <Typography variant="h2">Galeria</Typography>
+                    </Box>
+                </Card>  
+                </Modal></ListItem>)}</List>
                             </Paper>
                             </Modal>
                                 <Typography className="my-4"variant="h3">Aktivity</Typography>
@@ -256,16 +344,8 @@ export default function SignInRegistration(){
             <Modal open={form} onClose={() => openForm(!form)}>
         <Container>
         <BottomNavigation sx={{ width: 500 }} className="mx-auto border border-dark" id="card" style={{'marginTop': 100, 'transform': 'scale(1.1)'}} value={selectedForm} onChange={ChangeForm}>
-      <BottomNavigationAction className="text-white"
-        label="Prihlásenie"
-        value="SignUp"
-        icon={<i className="material-icons">person</i>}
-      />
-      <BottomNavigationAction className="text-white"
-        label="Registrácia"
-        value="SignIn"
-        icon={<i className="material-icons">person_add</i>}
-      />
+      <BottomNavigationAction className="text-white" label="Prihlásenie" value="SignUp" icon={<i className="material-icons">person</i>} />
+      <BottomNavigationAction className="text-white" label="Registrácia" value="SignIn" icon={<i className="material-icons">person_add</i>}/>
     </BottomNavigation>
             {(selectedForm === 'SignIn') ?<Card className="p-5 text-center mt-5 text-white border border-dark bg-dark" id="card">
                 <Typography variant="h3">Registrácia</Typography>
@@ -311,7 +391,6 @@ export default function SignInRegistration(){
                 </Grid>
                 <Button type="submit" variant="contained" color="primary" onClick={(e) => signUp(e.preventDefault())}>Prihlásiť</Button>
             </Card>}
-            <h1>{user}</h1>
         </Container>
     </Modal></Box>);
 }

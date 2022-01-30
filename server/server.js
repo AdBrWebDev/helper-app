@@ -8,6 +8,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const rounds = 10;
 const multer = require('multer');
+const path = require('path');
 
 const dbcon = mysql.createPool({
     host: 'localhost',
@@ -34,14 +35,28 @@ app.use(session({
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'upload')
+        cb(null, "uploads")
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now()+ '-'+file.originalname)
+        console.log(file)
+        cb(null, Date.now()+path.extname(file.originalname))
     }
 })
 
-const upload = multer({ dest: '/public/uploads' })
+const upload = multer({storage: storage})
+
+app.post('/publicateImg', upload.single('mainImg') ,async (req, res) => {
+    const classified = {
+        image: req.file.filename
+    }
+    if(res){
+        dbcon.query("UPDATE articles SET mainImg = ? WHERE specialId = ?", [classified, req.body.specialId], (err, result) => {
+            res.send(result)
+        })
+    }else{
+        console.log('err')
+    }
+})
 
 app.post("/user", (req, res) => {
     dbcon.query("SELECT * FROM users WHERE id_user = ?", [req.body.user_id], (err, result) => {
@@ -50,7 +65,7 @@ app.post("/user", (req, res) => {
 })
 
 app.post('/profileOrders', (req, res) => {
-    dbcon.query("SELECT status, total_price, order_created FROM orders WHERE id_user = ?", [req.body.user_id], (err, result) => {
+    dbcon.query("SELECT * FROM orders WHERE id_user = ?", [req.body.user_id], (err, result) => {
         res.send(result)
     })
 })
@@ -62,7 +77,25 @@ app.post('/profileArticles', (req, res) => {
 })
 
 app.post('/profileForum', (req, res) => {
-    dbcon.query("SELECT DISTINCT(title) FROM forum WHERE id_user = ?", [req.body.user_id], (err, result) => {
+    dbcon.query("SELECT * FROM forum WHERE id_user = ?", [req.body.user_id], (err, result) => {
+        res.send(result)
+    })
+})
+ 
+app.post('/EditProfileFItem', (req, res) => {
+    dbcon.query("UPDATE forum SET text = ? WHERE id_item = ?", [req.body.text ,req.body.id], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/editMyArticle', (req, res) => {
+    dbcon.query("UPDATE articles SET text = ?, rating = ? WHERE id_article = ?", [req.body.text, req.body.rating, req.body.id], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/deleteOrder', (req, res) => {
+    dbcon.query("UPDATE orders SET status = ? WHERE id_order = ?", ['Zrušená' ,req.body.id], (err, result) => {
         res.send(result)
     })
 })
@@ -73,8 +106,22 @@ app.post('/profileForm', (req, res) => {
     })
 })
 
+app.post('/createOrder', (req, res) => {
+    dbcon.query("INSERT INTO orders (id_order, id_user, order_created, delivery_date, generatedOrderInt, payment, shipping, total_price, status) VALUES (?,?,?,?,?,?,?,?,?)", 
+    ['', req.body.id_user, req.body.created, req.body.delivery, req.body.specialId, req.body.payment, req.body.shipping, req.body.total, 'V príprave'], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/createOrderProducts', (req, res) => {
+    dbcon.query("INSERT INTO ordered_products (specialOrderId, id_product, contain, image, title) VALUES (?,?,?,?,?)", 
+    [req.body.specialId, req.body.id_product, req.body.contain, req.body.image, req.body.title], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.post('/profileFavArticles', (req, res) => {
-    dbcon.query("SELECT * FROM favarticles WHERE id_user = ?", [req.body.user_id], (err, result) => {
+    dbcon.query("SELECT articles.text, articles.mainImg, articles.title, articles.rating, articles.likes, articles.date FROM favarticles RIGHT JOIN articles ON favarticles.article_id = articles.id_article WHERE favarticles.id_user = ?", [req.body.user_id], (err, result) => {
         res.send(result)
     })
 })
@@ -91,8 +138,20 @@ app.post('/findDetails', (req, res) => {
     })
 })
 
+app.post('/getInfoAOrder', (req, res) => {
+    dbcon.query(`SELECT * FROM ordered_products WHERE specialOrderId = ?`, [req.body.specialId], (err, result) => {
+        res.send(result)
+    })
+})
+
 app.post('/getInfo', (req, res) => {
     dbcon.query("SELECT * FROM product_properties WHERE id_product = ?", [req.body.product], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/addLike', (req, res) => {
+    dbcon.query("UPDATE articles SET likes = ? WHERE id_article = ?", [req.body.like, req.body.id], (err, result) => {
         res.send(result)
     })
 })
@@ -177,11 +236,28 @@ app.post('/natureForm', (req, res) => {
 })
 
 app.post('/publicate', upload.single('mainImg'), (req, res) => {
-    const PublicInsert = "INSERT INTO articles(id_user, id_article, mainImg, title, rating, likes, text, theme, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    dbcon.query(PublicInsert, [req.body.id_user, '', req.body.mainImg, req.body.sign, req.body.rating, 0, req.body.text, req.body.theme, new Date()], (err, result) => {
+    const PublicInsert = "INSERT INTO articles (id_user, id_article, mainImg, title, rating, likes, text, theme, date, specialId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    dbcon.query(PublicInsert, [req.body.id_user, '', '', req.body.sign, req.body.rating, 0, req.body.text, req.body.theme, new Date(), req.body.specialId], (err, result) => {
         res.send(result)
     })
 })
+
+app.post('/editData', (req, res) => {
+    const name = req.body.name;
+    const surname = req.body.surname;
+    const phone = req.body.phone;
+    const country = req.body.country; 
+    const city = req.body.city;
+    const street = req.body.street;
+    const age = req.body.age;
+    const e_mail = req.body.e_mail;
+    const nick = req.body.nick;
+    const id_user = req.body.id_user;
+    dbcon.query("UPDATE users SET name = ?, surname = ?, phone = ?, country = ?, city = ?, street = ?, age = ?, avatar = ?, e_mail = ?, nickname = ? WHERE id_user = ?", 
+            [name, surname, phone, country, city, street,age, '', e_mail, nick, id_user], (err, result) => {
+            console.log(result)
+        })
+    })
 
 app.post('/register', (req, res) => {
     const name = req.body.name;
@@ -200,7 +276,7 @@ app.post('/register', (req, res) => {
         }
         dbcon.query("INSERT INTO users (id_user, name, surname, phone, country, city, street, age, is_admin, avatar, e_mail, password, nick) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", 
             ['',name, surname, phone, country, city, street,age, '', '', e_mail, hash, nick], (err, result) => {
-            console.log(err)
+            console.log(result)
         })
     })
     })

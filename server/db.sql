@@ -49,12 +49,11 @@ ENGINE=INNODB
 CREATE TABLE orders
 (
 	id_order INT AUTO_INCREMENT PRIMARY KEY,
-    id_product INT NOT NULL,
     id_user INT,
    	order_created DATETIME,
     contain INT,
     delivery_date DATE,
-    FOREIGN KEY (id_product) REFERENCES e_shop(id_product),
+    generatedOrderInt VARCHAR(40),
     FOREIGN KEY (id_user) REFERENCES users(id_user)
 )
 ENGINE=INNODB

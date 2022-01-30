@@ -11,6 +11,7 @@ import Footer from '../../components/Footer';
 import Cookies from 'js-cookie'
 import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop from '@mui/material/Backdrop';
+import Avatar from '@mui/material/Avatar'
 const Nature = lazy(() => import('../Nature'))
 const MainPage = lazy(() => import('./MainPage'))
 const ArticlesData = lazy(() => import('./ArticlesData'))
@@ -32,7 +33,7 @@ export default function CyclingMNPG(){
   <button class="navbar-toggler bg-white my-auto top-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#">Navbar</a>
+  <Avatar src="images/pathfinder.jpg" className="my-auto mx-5 " />
 
   <Box class="collapse navbar-collapse bg-dark text-cetnter" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto text-center">

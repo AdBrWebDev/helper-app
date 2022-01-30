@@ -108,7 +108,7 @@ export default function WeatherCharts(props) {
           <Line name="Rosný bod v °C" type="monotene" dataKey="dewpoint_c" stroke="#2E9ACB" strokeWidth={3} />
         </LineChart>
       </ResponsiveContainer>
-      <ResponsiveContainer width="100%" aspect={3} className="mb-5">
+      <ResponsiveContainer width="100%" aspect={3} className="mb-5 text-white">
         <BarChart
           width={500}
           height={300}
@@ -121,7 +121,7 @@ export default function WeatherCharts(props) {
           }}
         >
           <CartesianGrid strokeDasharray="1 5" />
-          <XAxis dataKey={props.hours.time} />
+          <XAxis className="text-white" dataKey={props.hours.time} />
           <YAxis />
           <Tooltip />
           <Legend />

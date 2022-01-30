@@ -5,7 +5,6 @@ import Avatar from '@mui/material/Avatar'
 import Grid from '@mui/material/Grid'
 import Axios from 'axios'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 
 export default function ForumItems(props){

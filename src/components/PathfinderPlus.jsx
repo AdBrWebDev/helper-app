@@ -7,7 +7,7 @@ import Card from '@mui/material/Card'
 import Axios from 'axios'
 import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
-import {TimelineLite, Power3, Expo, Elastic} from 'gsap'
+import {TimelineLite, Expo, Elastic} from 'gsap'
 import Modal from '@mui/material/Modal'
 const Health = lazy(() => import('./Health')) 
 
@@ -43,8 +43,8 @@ export default function PathfinderPlus(props){
     let tl = new TimelineLite();
 
     useEffect(() => {
-        tl.fromTo('#pathPlus', {transform: 'scale(3)', y: -500}, {transform: 'scale(4)', y:0, ease: Elastic.easeOut, duration: 2})
-        tl.fromTo('#icon', {transform: 'scale(0)'}, {transform: 'scale(1)', ease: Expo.easeOut})
+        tl.fromTo('#pathPlus', {transform: 'scale(3)', y: 100, opacity: 0}, {transform: 'scale(4)', y:0, opacity: 1, ease: Elastic.easeOut, duration: 3})
+        tl.fromTo('#icon', {transform: 'scale(0)'}, {transform: 'scale(1)', ease: Expo.easeOut}, '-=1')
     })
 
     return(<Box className="text-center align-middle">

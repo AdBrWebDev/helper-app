@@ -17,6 +17,7 @@ import Cookies from 'js-cookie'
 export default function ArticlesItem(props){
     const [data, getData] =  useState([])
     const [window, openWindow] = useState(false)
+    console.log(props)
 
     const openArticle = (id) => {
         Axios.post('http://localhost:3001/articlesData', {id: id}).then((response) => { 
@@ -30,39 +31,43 @@ export default function ArticlesItem(props){
         Axios.post('http://localhost:3001/addToFav', {id: id, user: Cookies.get("id")})
     }
 
+    function addLike(like, id){
+        Axios.post('http://localhost:3001/addLike', {id: id, like: like+1})
+    }
+
     return(<Grid key={props.index} item xs={12} sm={6} md={4} lg={3} xl={3}>
             <Card className="text-center border border-dark text-white pb-2" id="cardh">
                 <CardContent>
                     <Box className="card-image mb-5">
                         <figure className="image is-4by3">
-                            <img src={`/images/${props.data[0].mainImg}`} alt={props.data[0].title} />
+                            <img src={`/images/${props.article.mainImg}`} alt={props.article.title} />
                         </figure>
-                        <button className="btn-floating halfway-fab btn-large waves-effect btn-info" onClick={() => openArticle(props.data[0].id_article)}><i class="material-icons">auto_stories</i></button>
+                        <button className="btn-floating halfway-fab btn-large waves-effect btn-info" onClick={() => openArticle(props.article.id_article)}><i class="material-icons">auto_stories</i></button>
                     </Box>
-                    <Typography variant="h4">{props.data[0].title}</Typography>
+                    <Typography variant="h4">{props.article.title}</Typography>
                 </CardContent>
                 <CardActions className="px-2">
                     <Grid container>
                     <Grid item className="d-flex text-center my-1 ml-2">
                         <Typography variant="h6">Náročnosť:</Typography>
-                        <Rating value={props.data[0].rating} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />}></Rating>
+                        <Rating value={props.article.rating} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />}></Rating>
                     </Grid>
                     <Grid item className="d-flex text-center mx-auto mt-2">
-                    <Button variant="outlined" disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">thumb_up</i></Button>
-                    <Button variant="outlined" onClick={() => addToFavorite(props.data[0].id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">favorite</i></Button>
+                    <Button variant="outlined" onClick={() => addLike(props.article.likes, props.article.id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">thumb_up</i><Typography className="ml-2">{props.article.likes}</Typography></Button>
+                    <Button variant="outlined" onClick={() => addToFavorite(props.article.id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">favorite</i></Button>
                     </Grid>
                     </Grid>
                 </CardActions>
             </Card>
             <Modal open={window} onClose={() => openWindow(false)}>
-                <Card className="container border text-center border-dark mt-5" id="card" style={{'overflowY': 'scroll', 'height': '95%'}}>
-                    <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/images/${props.data[0].mainImg}`}>
+                <Card className="container border text-center border-dark mt-5 bg-dark" id="card" style={{'overflowY': 'scroll', 'height': '95%'}}>
+                    <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/images/${props.article.mainImg}`}>
                         <Box>
-                            <Typography color="white" variant="h2">{props.data[0].title}</Typography>
+                            <Typography color="white" variant="h2">{props.article.title}</Typography>
                         </Box>
                     </LazyHero>
                     <Box className="text-white container mx-auto">
-                    <Typography style={{'font-size': '18px'}} className="w-75 mx-auto">{data.text}</Typography>
+                    <Typography style={{'font-size': '18px'}} className="w-75 mx-auto mt-5">{data.text}</Typography>
                     <Typography variant="h2">Galeria</Typography>
                     </Box>
                 </Card>  

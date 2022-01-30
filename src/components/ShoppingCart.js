@@ -9,18 +9,30 @@ import '../App.css'
 import Divider from '@mui/material/Divider'
 import Modal from '@mui/material/Modal'
 import {Radio} from 'antd'
+import Axios from 'axios'
+import Cookies from 'js-cookie'
 
 const Cart = () => {
     const [form, openForm] = useState(false)
     const [payment, setPayment] = useState('')
     const [delivery, setDelivery] = useState(0)
     const cart = useSelector((state) => state);
-    console.log(cart)
     const dispatch = useDispatch();
+    console.log(cart)
     const addition = (acc, currentvalue) => {
        return acc+currentvalue.price*currentvalue.quantity;
     }
     const total = cart.reduce(addition, 0);
+
+    const sendOrder = () => {
+        const specialId = new Date() + Cookies.get("id").toString()
+        Axios.post('http://localhost:3001/createOrder', {id_user: Cookies.get("id"), created: new Date(), specialId: specialId, delivery: new Date(), payment: payment, shipping: delivery, total: total})
+        for(let o = 0; o < cart.length; o++){
+            Axios.post('http://localhost:3001/createOrderProducts', {specialId: specialId, id_product: cart[o].id_product, contain: cart[o].quantity, title: cart[o].title, image: cart[o].image})
+        }
+        cart.splice(0,cart.length)
+    }
+
     return(
         <Box>
             <Button onClick={() => openForm(!form)}><span className="material-icons text-white">shopping_cart</span></Button>
@@ -32,16 +44,17 @@ const Cart = () => {
             cart.map((cart, index) => <Card key={index} id="card" className="card p-2">
                 <Grid container >
                     <Grid item xs={12} sm={12} md={6} xl={6} lg={6} className="d-flex my-auto p-5">
-                    <Typography className="mx-5">{cart.title}</Typography> 
-                    <Typography>Cena: {cart.price} €</Typography>
+                    <img style={{'height': '80px'}} src={`images/${cart.image}`} alt={cart.title} />
+                    <Typography variant="h6" className="mx-5 my-auto mx-auto">{cart.title}</Typography> 
+                    <Typography variant="h6" className="mx-5 my-auto">Cena: {cart.price} €</Typography>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} xl={6} lg={6} className="d-flex my-auto mx-auto">
-                <Box><Box><Button variant="contained" color="success" onClick={()=> dispatch({type: "INCREASE", payload: cart})}>+</Button></Box>
-                <Typography>{cart.quantity}</Typography>
-                <Box><Button variant="contained" color="success" onClick={()=> {
+                <Box className="d-flex mx-auto"><Box><Button className="mx-5" variant="outlined" color="success" onClick={()=> dispatch({type: "INCREASE", payload: cart})}>+</Button></Box>
+                <Typography className="my-auto">{cart.quantity}</Typography>
+                <Box><Button className="mx-5" variant="outlined" color="error" onClick={()=> {
                     (cart.quantity > 1) ? dispatch({type: "DECREASE", payload: cart}) : dispatch({type: "REMOVE", payload: cart}) 
                 }}>-</Button></Box></Box>
-                <Box><Button className="mx-5 my-auto" variant="contained" color="error" onClick={() => dispatch({type: "REMOVE", payload: cart})}><i className="material-icons">delete_forever</i></Button></Box>
+                <Button className="mx-5 my-auto" variant="outlined" color="error" onClick={() => dispatch({type: "REMOVE", payload: cart})}><i className="material-icons">delete_forever</i></Button>
                 </Grid></Grid>
                 </Card>): <Box className="text-white"><i className="material-icons" style={{'transform': 'scale(7)', 'marginTop': 150, 'marginBottom': 80}}>shopping_cart</i><Typography variant="h3">Košík je prázdny</Typography></Box>}
                 {total < 1 ? null : <Box>
@@ -58,13 +71,13 @@ const Cart = () => {
                     <Radio.Group onChange={(e) => setPayment(e.target.value)} value={payment}>
                         <Radio className="text-white h3 mx-5" value={'Paypal'}>Paypal</Radio>
                         <Radio className="text-white h3 mx-5" value={'Prevod'}>Prevodom</Radio>
-                        <Radio className="text-white h3 mx-5" value={'Hotovosť'}>Hotovosť</Radio>
+                        <Radio className="text-white h3 mx-5" value={'Pri prevzatí'}>Pri prevzatí</Radio>
                     </Radio.Group>
-                    {payment}
                 </Box>
-                <Divider className="my-5" /><Typography className="text-white my-4" variant="h5">Cena spolu: {(total+delivery).toFixed(2)} €</Typography>
-                <Typography variant="h5" className="text-white">Dokončiť objednávku s povinnosťou platby</Typography>
-                <Button disabled={total < 1} variant="contained" color="success">Dokončiť objednávku</Button></Box>}
+                <Divider className="my-5" /><Typography className="text-white my-4" variant="h5">Spôsob platby: {payment}</Typography>
+                <Typography className="text-white my-4" variant="h5">Cena spolu: {(total+delivery).toFixed(2)} €</Typography>
+                <Typography variant="h5" className="text-white mb-3">Dokončiť objednávku s povinnosťou platby</Typography>
+                <Button disabled={total < 1} variant="contained" color="success" onClick={sendOrder}>Dokončiť objednávku</Button></Box>}
                 </Card></Modal></Box>
     )
 }

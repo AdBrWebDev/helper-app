@@ -8,12 +8,15 @@ import MainImageOfPage from '../components/MainImageOfPage'
 import Axios from 'axios'
 import Cookies from 'js-cookie'
 import Modal from '@mui/material/Modal'
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 const ForumItems = lazy(() => import('../components/ForumItems'))
 
 export default function Forum(props){
     const [newTheme, NewTheme] = useState(false)
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
+    const [open, setOpen] = useState(false);
     const [items, setItems] = useState([])
     const [window, oWindow] = useState(false)
     const [forumItems, setForumItems] = useState([])
@@ -21,6 +24,8 @@ export default function Forum(props){
 
     const createNewItem = () => {
         Axios.post('http://localhost:3001/forumNewItem', {id_user: Cookies.get('id'), dateOfPublic: new Date(), title: title, text: text, theme: props.title})
+        NewTheme(false)
+        handleClick()
     }
 
     useEffect(() => {
@@ -29,6 +34,22 @@ export default function Forum(props){
             setItems(response.data)
         });
     }, [props.title]);
+
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+      });
+
+    const handleClick = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
 
     const openWindow = (txt) => {
         function findThemes(){
@@ -43,11 +64,9 @@ export default function Forum(props){
     }
 
     const addComment = async (txt, theme) => {
-        if(!Cookies.get("id")) console.log("nie ste prihlásený")
-        else{
         Axios.post('http://localhost:3001/addComment', {txt: txt, id_user: Cookies.get('id'), text:text, theme: theme}).then((response) => {
                 console.log(response)
-            })}
+            })
         } 
 
     return (<Box>
@@ -85,5 +104,10 @@ export default function Forum(props){
                 </Card>
                 </Card>
                 </Modal>
+                <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={open} autoHideDuration={4000} onClose={handleClose}>
+                                            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                                                <Typography>Nová téma bola vytvorená</Typography>
+                                            </Alert>
+                                        </Snackbar>
     </Box>)
 }

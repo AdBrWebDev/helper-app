@@ -218,8 +218,8 @@ app.post('/findItems', (req, res) => {
 })
 
 app.post('/forumNewItem', (req, res) => {
-    const newForumItem = "INSERT INTO forum (id_item ,id_user, dateOfPublic, title, text, image, theme) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    dbcon.query(newForumItem, ['',req.body.id_user, req.body.dateOfPublic, req.body.title, req.body.text, '', req.body.theme], (err, result) => {
+    const newForumItem = "INSERT INTO forum (id_item ,id_user, dateOfPublic, title, text, theme) VALUES (?, ?, ?, ?, ?, ?)";
+    dbcon.query(newForumItem, ['',req.body.id_user, req.body.dateOfPublic, req.body.title, req.body.text, req.body.theme], (err, result) => {
         res.send(result)
     })
 })

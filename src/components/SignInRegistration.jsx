@@ -126,6 +126,7 @@ export default function SignInRegistration(){
     }
 
     const openOrder = (specialId) => {
+        console.log(specialId)
         Axios.post("http://localhost:3001/getInfoAOrder", {specialId: specialId}).then((response) =>{
             getInfoAOrder(response.data)
             console.log(response.data)
@@ -225,7 +226,7 @@ export default function SignInRegistration(){
                     <Paper className="card p-5 text-center bg-dark container text-white" style={{'marginTop': '8%'}} id="card">
                         <Typography variant="h3">Aktivity vo fóre</Typography>
                 <List>
-              {forumItems.length < 1 ? '' : forumItems.map((fItem, index) => 
+              {forumItems.length < 1 ? <Typography variant="h5" className="text-white mx-auto text-center my-4">Žiadne príspevky vo fóre</Typography> : forumItems.map((fItem, index) => 
                 <ListItem style={{'cursor': 'pointer'}} className="text-white" key={index}>
                   <ListItemAvatar><Avatar sx={{background: 'transparent'}}><i className="material-icons">forum</i></Avatar></ListItemAvatar>
                   <ListItemText primary={fItem.title} secondary={<React.Fragment>
@@ -254,7 +255,7 @@ export default function SignInRegistration(){
             <Modal open={UOrders} onClose={() => openUOrders(false)}>
                     <Paper  className="card p-5 bg-dark container text-white text-center" style={{'marginTop': '8%'}} id="card">
                                 <Typography variant="h4" className="mb-3">Objednávky</Typography>
-                                {orders.length < 1 ? '' : orders.map((order, index) => <Box><Grid spacing={2} style={{'cursor': 'pointer'}} className="my-2 p-5 bg-dark" id="card" key={index} container>
+                                {orders.length < 1 ? <Typography variant="h5" className="text-white mx-auto text-center my-4">Zatial žiadne objednávky</Typography> : orders.map((order, index) => <Box><Grid spacing={2} style={{'cursor': 'pointer'}} className="my-2 p-5 bg-dark" id="card" key={index} container>
                                     <Grid className="d-flex" item xs={12} sm={6} md={6} xl={6} lg={6}><Typography className="mx-auto">Dátum vytvorenia: {new Date(order.order_created).getDate()}.{new Date(order.order_created).getMonth()+1}.{new Date(order.order_created).getFullYear()}</Typography>
                                     <Typography className="mx-auto">Suma: {order.total_price} €</Typography></Grid>
                                     <Grid className="d-flex" item xs={12} sm={6} md={6} xl={6} lg={6}><Typography className="mx-auto">Stav: {order.status}</Typography>
@@ -290,7 +291,7 @@ export default function SignInRegistration(){
                     <Paper className="card p-5 text-white container bg-dark" style={{'marginTop': '8%'}} id="card">
                                 <Typography variant="h4" className="text-center">Články</Typography>
                                     <List>
-              {articles.length < 1 ? '' : articles.map((article, index) => <Box>
+              {articles.length < 1 ? <Typography variant="h5" className="text-white mx-auto text-center my-4">Žiadne napísané články</Typography> : articles.map((article, index) => <Box>
                 <ListItem className="text-white p-5 w-75 mx-auto" style={{'cursor': 'pointer'}} key={index}>
                   <ListItemAvatar>
                       <Avatar sx={{backgroundColor: 'transparent'}}><i className="material-icons">auto_stories</i></Avatar>
@@ -317,7 +318,7 @@ export default function SignInRegistration(){
                     <Paper  className="card p-5 container bg-dark text-white" style={{'marginTop': '8%'}} id="card">
                                 <Typography className="text-center" variant="h4">Oblúbené články</Typography>
                                 <List>
-              {favArticles.length < 1 ? '' : favArticles.map((articles, index) => 
+              {favArticles.length < 1 ? <Typography variant="h5" className="text-white mx-auto text-center my-4">Nemáte oblúbené články</Typography> : favArticles.map((articles, index) => 
                 <ListItem style={{'cursor': 'pointer'}} className="text-white" key={index}>
                   <ListItemAvatar><Avatar sx={{background: 'transparent'}}><i className="material-icons">forum</i></Avatar></ListItemAvatar>
                   <ListItemText primary={articles.title} /><Button onClick={() => openFArticles(true)} variant="outlined" color="error"><i className="material-icons">auto_stories</i></Button>

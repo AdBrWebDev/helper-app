@@ -37,7 +37,7 @@ export default function CyclingMNPG(){
 
   <Box class="collapse navbar-collapse bg-dark text-cetnter" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto text-center">
-      <Link className="text-white" to="/">Hlavná stránka</Link>
+      <Link className="text-white" to="/"><i className="material-icons">home</i></Link>
       <Link className="text-white" to="/eshop">E-shop</Link>
       <Link className="text-white" to="/ForumData">Forum</Link>
       <Link className="text-white" to="/ArticlesData">Články</Link>

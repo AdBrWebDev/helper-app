@@ -8,6 +8,8 @@ import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import Cookies from 'js-cookie'
 import Modal from '@mui/material/Modal'
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 const ArticlesItem = lazy(() => import('../components/ArticlesItem'))
 
@@ -17,6 +19,7 @@ export default function Articles(props){
     const [title, setTitle] = useState('')
     const [rating, setRating] = useState(0)
     const [text, setText] = useState('')
+    const [open, setOpen] = useState(false);
     const [MainImg, setMainImg] = useState({
         file: []
     })
@@ -35,6 +38,8 @@ const publicArticle = () => {
     formData.append('mainImg', MainImg.file)
     Axios.post('http://localhost:3001/publicate', {id_user: Cookies.get("id"), sign: title, rating: rating, text: text, theme: props.title, specialId: specialId, formData})
     Axios.post('http://localhost:3001/publicateImg', [formData]).then(response => {console.log(response)})
+    openAddArticle(false)
+    handleClick()
 }
 
 const setImg = (e) => {
@@ -48,6 +53,22 @@ const setImg = (e) => {
 const setMultipleImg = (e) => {
     console.log(e.target.files)
 }
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
     return(<Box className="bg-dark text-center">
         <MainImageOfPage img={props.img} text={props.text} />
@@ -81,5 +102,10 @@ const setMultipleImg = (e) => {
                     <Button variant="contained" color="info" onClick={publicArticle}>Zverejniť článok</Button>
                 </Card> 
             </Modal>
+            <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={open} autoHideDuration={4000} onClose={handleClose}>
+                                            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                                                <Typography>Produkt {props.title} bol pridaný do košíka</Typography>
+                                            </Alert>
+                                        </Snackbar>
     </Box>)
 }

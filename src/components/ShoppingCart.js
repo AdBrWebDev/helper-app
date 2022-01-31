@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -11,11 +11,14 @@ import Modal from '@mui/material/Modal'
 import {Radio} from 'antd'
 import Axios from 'axios'
 import Cookies from 'js-cookie'
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const Cart = () => {
     const [form, openForm] = useState(false)
     const [payment, setPayment] = useState('')
     const [delivery, setDelivery] = useState(0)
+    const [open, setOpen] = useState(false);
     const cart = useSelector((state) => state);
     const dispatch = useDispatch();
     console.log(cart)
@@ -24,7 +27,24 @@ const Cart = () => {
     }
     const total = cart.reduce(addition, 0);
 
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+      });
+
+    const handleClick = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+
     const sendOrder = () => {
+
         const specialId = new Date() + Cookies.get("id").toString()
         Axios.post('http://localhost:3001/createOrder', {id_user: Cookies.get("id"), created: new Date(), specialId: specialId, delivery: new Date(), payment: payment, shipping: delivery, total: total})
         for(let o = 0; o < cart.length; o++){
@@ -71,14 +91,20 @@ const Cart = () => {
                     <Radio.Group onChange={(e) => setPayment(e.target.value)} value={payment}>
                         <Radio className="text-white h3 mx-5" value={'Paypal'}>Paypal</Radio>
                         <Radio className="text-white h3 mx-5" value={'Prevod'}>Prevodom</Radio>
-                        <Radio className="text-white h3 mx-5" value={'Pri prevzatí'}>Pri prevzatí</Radio>
+                        <Radio className="text-white h3 mx-5" value={'Pri dobierke'}>Pri dobierke</Radio>
                     </Radio.Group>
                 </Box>
                 <Divider className="my-5" /><Typography className="text-white my-4" variant="h5">Spôsob platby: {payment}</Typography>
                 <Typography className="text-white my-4" variant="h5">Cena spolu: {(total+delivery).toFixed(2)} €</Typography>
                 <Typography variant="h5" className="text-white mb-3">Dokončiť objednávku s povinnosťou platby</Typography>
-                <Button disabled={total < 1} variant="contained" color="success" onClick={sendOrder}>Dokončiť objednávku</Button></Box>}
-                </Card></Modal></Box>
+                <Button disabled={total < 1} variant="contained" color="success" onClick={() => {sendOrder(); handleClick()}}>Dokončiť objednávku</Button></Box>}
+                <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={open} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          <Typography>Objednávka bola odoslaná</Typography>
+        </Alert>
+      </Snackbar>
+                </Card>
+                </Modal></Box>
     )
 }
 

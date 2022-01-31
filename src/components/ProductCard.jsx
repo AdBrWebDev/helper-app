@@ -10,10 +10,13 @@ import Divider from '@mui/material/Divider'
 import { useSelector, useDispatch } from 'react-redux'
 import Modal from '@mui/material/Modal'
 import Cookies from 'js-cookie'
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
     const [info,  setInfo] = useState([])
+    const [open, setOpen] = useState(false);
     const cart = useSelector((state) => state)
     const dispatch = useDispatch();
     console.log(cart)
@@ -29,6 +32,22 @@ export default function ProductCard(props){
         }
         getInfo()
     } 
+
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+      });
+
+    const handleClick = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
 
     return(<Grid key={props.index} item xs={12} sm={12} lg={4} xl={3} md={6}>
         <Box className="card border border-dark" id="cardh" onClick={() => openInfo(props.id)}>
@@ -68,7 +87,7 @@ export default function ProductCard(props){
                             <Box className="d-flex mt-5">
                             {props.contain > 0 ? <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box> : 
                             <Box className="message is-danger w-50 mx-auto my-auto"><Typography className="message-body">Nedostupné</Typography></Box>}
-                            <Button disabled={props.contain < 1 || !Cookies.get("id")} variant="contained" className="mr-5" color="success"><i className="material-icons" onClick={() => dispatch({type: "ADD", payload: props.product})}>shopping_cart</i></Button>
+                            <Button disabled={props.contain < 1 || !Cookies.get("id")} variant="contained" className="mr-5" color="success"><i className="material-icons" onClick={() => {dispatch({type: "ADD", payload: props.product}); handleClick()}}>shopping_cart</i></Button>
                             </Box>
                             </Card>
                             </Grid>
@@ -82,7 +101,13 @@ export default function ProductCard(props){
                                                 <Divider className="my-1 mb-3" />
                                                 <Typography>{info.text}</Typography>
                                         </Box>
-                                        </Grid>)}
+                                        <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={open} autoHideDuration={4000} onClose={handleClose}>
+                                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                                            <Typography>Produkt {props.title} bol pridaný do košíka</Typography>
+                                        </Alert>
+                                    </Snackbar>
+                                        </Grid>
+                                        )}
                                 </Grid>
                             </Box>
                         </Card>

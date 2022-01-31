@@ -67,7 +67,7 @@ export default function PathfinderPlus(props){
             </Button>
         </Grid>
     </Grid>
-    <Modal open={window} onClose={() => openWindow(!window)}>
+    <Modal open={window} onClose={(e) => openWindow(!window)}>
             <Card className="container p-5 border border-dark text-white text-center" id="card" style={{'overflowY': 'scroll', 'maxHeight': '90%', 'marginTop': '10%'}}>
                 <Box>
                     <Avatar src="/images/pathfinder.jpg" className="mx-auto my-5" style={{'transform': 'scale(2)'}} />

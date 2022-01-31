@@ -17,7 +17,6 @@ import Cookies from 'js-cookie'
 export default function ArticlesItem(props){
     const [data, getData] =  useState([])
     const [window, openWindow] = useState(false)
-    console.log(props)
 
     const openArticle = (id) => {
         Axios.post('http://localhost:3001/articlesData', {id: id}).then((response) => { 

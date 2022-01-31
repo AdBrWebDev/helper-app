@@ -34,7 +34,7 @@ const publicArticle = () => {
     formData.append("id", specialId)
     formData.append('mainImg', MainImg.file)
     Axios.post('http://localhost:3001/publicate', {id_user: Cookies.get("id"), sign: title, rating: rating, text: text, theme: props.title, specialId: specialId, formData})
-    //Axios.post('http://localhost:3001/publicateImg', [, specialId]).then(response => {console.log(response)})
+    Axios.post('http://localhost:3001/publicateImg', [formData]).then(response => {console.log(response)})
 }
 
 const setImg = (e) => {
@@ -53,7 +53,7 @@ const setMultipleImg = (e) => {
         <MainImageOfPage img={props.img} text={props.text} />
         <Box className="container py-5 text-center">
             <Box>
-                <Button variant="outlined" disabled={!Cookies.get("id")} color="info" onClick={() => openAddArticle(!openArticle)}>Pridať nový článok</Button>
+                <Button variant="outlined" className="mb-4" disabled={!Cookies.get("id")} color="info" onClick={() => openAddArticle(!openArticle)}>Pridať nový článok</Button>
             </Box>
         <Grid container>
             {articles.map((article, index) => <ArticlesItem index={index} article={article} />)}

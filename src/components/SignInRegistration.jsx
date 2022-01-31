@@ -68,7 +68,7 @@ export default function SignInRegistration(){
     }
 
     const uploadSubmitedData = () => {
-      Axios.post('http://localhost:3001/editData', {name: name || userData.name, surname: surname || userData.surname, phone: phone || userData.phone, country: country || userData.country, city: city || userData.city, street: street || userData.street, age: age || userData.age, e_mail: e_mail || userData.email, nick: nick || userData.nickname, id_user: Cookies.get("id")}).then(() => {alert("edit successful")})
+      Axios.post('http://localhost:3001/editData', {name: name || userData.name, surname: surname || userData.surname, phone: phone || userData.phone, country: country || userData.country, city: city || userData.city, street: street || userData.street, age: age || userData.age, e_mail: e_mail || userData.e_mail, nick: nick || userData.nickname, id_user: Cookies.get("id")}).then(() => {alert("edit successful")})
         
     }
 
@@ -302,9 +302,9 @@ export default function SignInRegistration(){
                 <Paper className="card p-5 text-white container bg-dark text-center" style={{'marginTop': '3%'}} id="card">
                     <Typography variant="h2">{article.title}</Typography>
                     <Typography variant="h6">Náročnosť</Typography>
-                    <input type="number" className="form-control w-25 mx-auto mb-4 text-white" value={articlerating} onChange={(e) => setArticleRating(e.target.value)} />
+                    <input type="number" className="form-control w-25 mx-auto mb-4 text-white" value={articlerating === 0 ? article.rating : articlerating} onChange={(e) => setArticleRating(e.target.value)} />
                     <Typography variant="h6">Obsah článku</Typography>
-                    <textarea className="form-control mb-4 text-white" style={{'height': '350px'}} value={articletext} onChange={(e) => setArticleText(e.target.value)} ></textarea>
+                    <textarea className="mb-4 text-white" style={{'height': '350px'}} value={articletext === '' ? article.text : articletext} onChange={(e) => setArticleText(e.target.value)} />
                     <Box>
                         <Button variant="outlined" color="error" onClick={() => editMyArticle(article.id_article)}><i className="material-icons">edit</i> Upraviť článok</Button>
                     </Box>

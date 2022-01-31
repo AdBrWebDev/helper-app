@@ -38,7 +38,6 @@ const storage = multer.diskStorage({
         cb(null, "uploads")
     },
     filename: (req, file, cb) => {
-        console.log(file)
         cb(null, Date.now()+path.extname(file.originalname))
     }
 })
@@ -46,11 +45,8 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 app.post('/publicateImg', upload.single('mainImg') ,async (req, res) => {
-    const classified = {
-        image: req.file.filename
-    }
     if(res){
-        dbcon.query("UPDATE articles SET mainImg = ? WHERE specialId = ?", [classified, req.body.specialId], (err, result) => {
+        dbcon.query("UPDATE articles SET mainImg = ? WHERE specialId = ?", [req.body.mainImg, req.body.id], (err, result) => {
             res.send(result)
         })
     }else{
@@ -71,7 +67,7 @@ app.post('/profileOrders', (req, res) => {
 })
 
 app.post('/profileArticles', (req, res) => {
-    dbcon.query("SELECT title, likes FROM articles WHERE id_user = ?", [req.body.user_id], (err, result) => {
+    dbcon.query("SELECT * FROM articles WHERE id_user = ?", [req.body.user_id], (err, result) => {
         res.send(result)
     })
 })

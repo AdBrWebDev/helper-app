@@ -29,13 +29,13 @@ export default function SignInRegistration(){
     const [country, setCountry] = useState('')
     const [city, setCity] = useState('')
     const [street, setStreet] = useState('')
-    const [age, setAge] = useState(0)
+    const [age, setAge] = useState(null)
     const [phone, setPhone] = useState('')
     const [e_mail, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loginEmail, setLoginEmail] = useState('')
     const [loginPassword, setLoginPassword] = useState('')
-    const [/*user*/, setUser] = useState('')
+    const [user, setUser] = useState('')
     const [profile, openProfile] = useState(false)
     const [nick, setNick] = useState('')
     const [userData, setUserData] = useState([])
@@ -59,8 +59,6 @@ export default function SignInRegistration(){
     const [EditUArticle ,openEditUArticle] = useState(false)
     const [articletext, setArticleText] = useState('')
     const [articlerating, setArticleRating] = useState(0)
-
-    let avatar = null
 
     Axios.defaults.withCredentials = true;
     const submit = () => {
@@ -118,10 +116,7 @@ export default function SignInRegistration(){
     }
 
     const EditFItems = (id, txt) => {
-        Axios.post("http://localhost:3001/EditProfileFItem", {id: id, text: txt}).then((response) =>{
-            getFavArticles(response.data)
-            console.log(response.data)
-        })
+        Axios.post("http://localhost:3001/EditProfileFItem", {id: id, text: txt})
         setEdited('')
     }
 
@@ -156,7 +151,7 @@ export default function SignInRegistration(){
         </Box> : <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>}   
         <Modal open={profile} onClose={() => userProfile(false)}>
         <Card style={{'overflowY': 'scroll', 'overflowX': 'auto', 'height': '90%', 'marginTop': '2%', 'borderRadius': '30px'}} className="text-center text-white w-75 bg-dark text-dark p-5 border container border-dark" id="card">
-                    <Avatar className="mx-auto my-4" sx={{width: 86, height: 86}} src={avatar == null ? "/images/alien.png" : 'avatar'} />
+                    <Avatar className="mx-auto my-4" sx={{width: 86, height: 86}} src="/images/pathfinder.jpg" />
                     <Typography variant="h5">{Cookies.get("user")}</Typography>
                     <Typography variant="h6">{userData.is_admin ? 'admin': 'užívatel'}</Typography>
                     <Typography><i className="material-icons">person</i> {userData.name} {userData.surname}</Typography>
@@ -211,7 +206,7 @@ export default function SignInRegistration(){
                     <input className="form-control w-50 text-center mx-auto text-white" placeholder="ulica" value={street === '' ? userData.street : street} onChange={(e) => {setStreet(e.target.value)}} name="street" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <input type="number" className="form-control w-50 text-center text-white mx-auto" placeholder="vek" value={age === '' ? userData.age : age} onChange={(e) => {setAge(e.target.value)}} name="age" />
+                    <input type="number" className="form-control w-50 text-center text-white mx-auto" placeholder="vek" value={age === null ? userData.age : age} onChange={(e) => {setAge(e.target.value)}} name="age" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                 <input className="form-control w-50 text-center mx-auto text-white" placeholder="e-mail" value={ e_mail === '' ? userData.e_mail : e_mail } onChange={(e) => {setEmail(e.target.value)}} name="e_mail" />
@@ -221,9 +216,10 @@ export default function SignInRegistration(){
                 </Grid>
                 </Grid>
                 <Button className="mx-auto mt-3" type="submit" variant="contained" color="primary" onClick={() => uploadSubmitedData()}>Upraviť údaje</Button></Card>
+
                     </Modal>
                     <Modal open={FItems} onClose={() => openFItems(false)}>
-                    <Paper className="card p-5 text-center bg-dark container text-white" style={{'marginTop': '8%'}} id="card">
+                    <Paper className="card p-5 text-center bg-dark container text-white" style={{'marginTop': '5%', 'minHeight': '600px'}} id="card">
                         <Typography variant="h3">Aktivity vo fóre</Typography>
                 <List>
               {forumItems.length < 1 ? <Typography variant="h5" className="text-white mx-auto text-center my-4">Žiadne príspevky vo fóre</Typography> : forumItems.map((fItem, index) => 
@@ -244,16 +240,16 @@ export default function SignInRegistration(){
             <Modal open={Uedit} onClose={() => openUEdit(false)}>
                     <Paper className="card bg-dark container text-white text-center p-5" style={{'marginTop': '8%'}} id="card">
                         <Typography variant="h3">{edit.title}</Typography>
-                        <textarea className="form-control text-white my-5" onChange={(e) => setEdited(e.target.value)} value={editedT} sx={{minHeight: '100px'}} rows="20"></textarea>
+                        <textarea className="form-control text-white my-5" onChange={(e) => setEdited(e.target.value)} value={editedT === '' ? edit.text : editedT} sx={{minHeight: '100px'}} rows="20"></textarea>
                         <Box className="my-5">
-                        <Button variant="outlined" color="error" onClick={() => EditFItems(edit.id_item, editedT)}><i className="material-icons">edit</i> Upraviť</Button>
+                        <Button variant="outlined" color="error" onClick={() => {EditFItems(edit.id_item, editedT); openUEdit(false)}}><i className="material-icons">edit</i> Upraviť</Button>
                         </Box>
                     </Paper>
                 </Modal>
                 </ListItem>)}
             </List></Paper></Modal>
             <Modal open={UOrders} onClose={() => openUOrders(false)}>
-                    <Paper  className="card p-5 bg-dark container text-white text-center" style={{'marginTop': '8%'}} id="card">
+                    <Paper  className="card p-5 bg-dark container text-white text-center" style={{'marginTop': '5%', 'minHeight': '600px'}} id="card">
                                 <Typography variant="h4" className="mb-3">Objednávky</Typography>
                                 {orders.length < 1 ? <Typography variant="h5" className="text-white mx-auto text-center my-4">Zatial žiadne objednávky</Typography> : orders.map((order, index) => <Box><Grid spacing={2} style={{'cursor': 'pointer'}} className="my-2 p-5 bg-dark" id="card" key={index} container>
                                     <Grid className="d-flex" item xs={12} sm={6} md={6} xl={6} lg={6}><Typography className="mx-auto">Dátum vytvorenia: {new Date(order.order_created).getDate()}.{new Date(order.order_created).getMonth()+1}.{new Date(order.order_created).getFullYear()}</Typography>
@@ -288,7 +284,7 @@ export default function SignInRegistration(){
                     </Paper>
             </Modal>
             <Modal open={UArticles} onClose={() => openUArticles(false)}>
-                    <Paper className="card p-5 text-white container bg-dark" style={{'marginTop': '8%'}} id="card">
+                    <Paper className="card p-5 text-white container bg-dark" style={{'marginTop': '5%', 'minHeight': '600px'}} id="card">
                                 <Typography variant="h4" className="text-center">Články</Typography>
                                     <List>
               {articles.length < 1 ? <Typography variant="h5" className="text-white mx-auto text-center my-4">Žiadne napísané články</Typography> : articles.map((article, index) => <Box>
@@ -315,7 +311,7 @@ export default function SignInRegistration(){
                             </Paper>
                             </Modal>
             <Modal open={oFavArticle} onClose={() => openFavArticle(false)}>
-                    <Paper  className="card p-5 container bg-dark text-white" style={{'marginTop': '8%'}} id="card">
+                    <Paper  className="card p-5 container bg-dark text-white" style={{'marginTop': '5%', 'minHeight': '600px'}} id="card">
                                 <Typography className="text-center" variant="h4">Oblúbené články</Typography>
                                 <List>
               {favArticles.length < 1 ? <Typography variant="h5" className="text-white mx-auto text-center my-4">Nemáte oblúbené články</Typography> : favArticles.map((articles, index) => 
@@ -390,6 +386,7 @@ export default function SignInRegistration(){
                     <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><input placeholder="E-mail" className="form-control w-50 text-center text-white mx-auto" onChange={(e) => {setLoginEmail(e.target.value)}} type="text" name="loginEmail" /></Grid>
                     <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><input placeholder="Heslo" className="form-control w-50 text-center text-white mx-auto" onChange={(e) => {setLoginPassword(e.target.value)}} type="password" name="loginPassword" /></Grid>
                 </Grid>
+                {user === null ? 'ok' : <Typography className="text-white">{user}</Typography>}
                 <Button type="submit" variant="contained" color="primary" onClick={(e) => signUp(e.preventDefault())}>Prihlásiť</Button>
             </Card>}
         </Container>

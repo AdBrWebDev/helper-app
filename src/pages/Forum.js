@@ -26,6 +26,7 @@ export default function Forum(props){
         Axios.post('http://localhost:3001/forumNewItem', {id_user: Cookies.get('id'), dateOfPublic: new Date(), title: title, text: text, theme: props.title})
         NewTheme(false)
         handleClick()
+        setTimeout(() => handleClose(), 2000)
     }
 
     useEffect(() => {
@@ -45,7 +46,7 @@ export default function Forum(props){
     
       const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
-          return;
+          return setOpen(false);
         }
     
         setOpen(false);
@@ -67,6 +68,8 @@ export default function Forum(props){
         Axios.post('http://localhost:3001/addComment', {txt: txt, id_user: Cookies.get('id'), text:text, theme: theme}).then((response) => {
                 console.log(response)
             })
+        handleClick()
+        setTimeout(() => handleClose(), 2000)
         } 
 
     return (<Box>
@@ -99,7 +102,7 @@ export default function Forum(props){
                     <Typography variant="h3">Pridať komentar</Typography>
                         <textarea cols="10" placeholder="Váš komentár" className="text-center form-control bg-transparent text-white" style={{'minHeight': '100px'}} name="comment" rows="80" onChange={(e) => setText(e.target.value)}></textarea>
                         <Box className="my-3">
-                        <Button variant="contained" color="info" disabled={!Cookies.get("id")} onClick={() => addComment(sign, props.title)}>Pridať</Button>
+                        <Button variant="contained" color="info" disabled={!Cookies.get("id")} onClick={() => {addComment(sign, props.title)}}>Pridať</Button>
                         </Box>
                 </Card>
                 </Card>

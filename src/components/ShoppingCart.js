@@ -51,6 +51,7 @@ const Cart = () => {
             Axios.post('http://localhost:3001/createOrderProducts', {specialId: specialId, id_product: cart[o].id_product, contain: cart[o].quantity, title: cart[o].title, image: cart[o].image})
         }
         cart.splice(0,cart.length)
+        setTimeout(() => openForm(false), 5000)
     }
 
     return(

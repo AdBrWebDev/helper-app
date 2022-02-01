@@ -56,7 +56,7 @@ export default function Nature(){
         else{
             let date = new Date()
             Axios.post('http://localhost:3001/natureForm', {user: Cookies.get('id'), date: date})}
-            setTimeout(() => showError(false), 2000)
+            openForm(false)  
     }
     return(
         <Box className="text-white text-center">

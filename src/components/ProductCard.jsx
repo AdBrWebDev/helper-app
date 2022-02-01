@@ -102,10 +102,10 @@ export default function ProductCard(props){
                                                 <Typography>{info.text}</Typography>
                                         </Box>
                                         <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={open} autoHideDuration={4000} onClose={handleClose}>
-                                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                                            <Typography>Produkt {props.title} bol pridaný do košíka</Typography>
-                                        </Alert>
-                                    </Snackbar>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          <Typography>{props.title} bol pridaný do košíka.</Typography>
+        </Alert>
+      </Snackbar>
                                         </Grid>
                                         )}
                                 </Grid>

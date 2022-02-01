@@ -277,27 +277,27 @@ app.post('/register', (req, res) => {
     })
     })
 
-app.post('/login', (req, res) => {
-    dbcon.query("SELECT * FROM users WHERE e_mail = ?", [req.body.loginEmail], (err, result) => {
-        console.log(result)
-        if(err){
-            res.send({err: err})
-        }
-        if(result.length > 0){
-            bcrypt.compare(req.body.loginPassword, result[0].password, (error, response) => {
-                if(response){
-                    /*req.session.user = result;
-                    console.log(req.session.user)*/
-                    res.send(result)
-                }else{
-                    res.send({message: "Nesprávne meno alebo heslo!"})
-                }
-            })
-        }else{
-            res.send({message: "Užívatel neexistuje!"})
-        }
-    }); 
-});
+    app.post('/login', (req, res) => {
+        dbcon.query("SELECT * FROM users WHERE e_mail = ?", [req.body.loginEmail], (err, result) => {
+            console.log(result)
+            if(err){
+                res.send({err: err})
+            }
+            if(result.length > 0){
+                bcrypt.compare(req.body.loginPassword, result[0].password, (error, response) => {
+                    if(response){
+                        /*req.session.user = result;
+                        console.log(req.session.user)*/
+                        res.send(result)
+                    }else{
+                        res.send({message: "Nesprávne meno alebo heslo!"})
+                    }
+                })
+            }else{
+                res.send({message: "Užívatel neexistuje!"})
+            }
+        }); 
+    });
 
 app.post('/natureUser', (req, res) => {
     dbcon.query("SELECT id_user from nature_form WHERE id_user = ?", [req.body.user], (err, result) => {

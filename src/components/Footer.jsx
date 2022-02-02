@@ -22,11 +22,11 @@ export default function Footer(){
 
     return(
         <Box className="bg-dark" style={{'bottom': 0}}>
-            <Typography className="text-center text-white">{CheckStatus()}</Typography>
-            <Typography variant="h2" className="text-center text-white mt-5">Partneri</Typography>
+            <Typography data-aos="fade-up" className="text-center text-white">{CheckStatus()}</Typography>
+            <Typography data-aos="fade-up" variant="h2" className="text-center text-white mt-5 mb-3">Partneri</Typography>
             <Sponsors />
-            <Divider className="w-75 mx-auto my-2 mt-5" />
-            <Box className="p-5">
+            <Divider data-aos="fade-up" className="w-75 mx-auto my-2 mt-5" />
+            <Box data-aos="fade-up" className="p-5">
             <Grid container className="container py-5">
                     <Grid container className="text-center">
                         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>

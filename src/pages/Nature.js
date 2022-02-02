@@ -60,8 +60,8 @@ export default function Nature(){
     }
     return(
         <Box className="text-white text-center">
-            <MainImageOfPage img="forest.jpg" text="Pomôž nám ochrániť prírodu" href="" />
-            <Box className='level is-mobile mt-5 py-3'>
+            <MainImageOfPage id="mainImg" img="forest.jpg" text="Pomôž nám ochrániť prírodu" href="" />
+            <Box className='level is-mobile mt-5 py-3' data-aos="fade-up">
                 <Box className="level-item has-text-centered">
                      <Box>
                          <Typography className="heading">Počet podpisov</Typography>
@@ -76,10 +76,10 @@ export default function Nature(){
                 </Box>
             </Box>
             <Container>
-                <Typography variant="h3">Aké sú naše ciele</Typography>
-                <Card className="border border-success bg-transparent text-white py-3 my-5" id="nature-border">
-                    <Box className="my-5 py-1">
-                        {goals.map((goal, index) => <Typography variant="h6" key={index} className="py-3">{goal}</Typography>)}
+                <Typography variant="h3" data-aos="fade-up">Aké sú naše ciele</Typography>
+                <Card className="border border-success bg-transparent text-white py-3 my-5" data-aos="fade-up" id="nature-border">
+                    <Box id="section" className="my-5 py-1">
+                        {goals.map((goal, index) => <Typography data-aos="fade-up" variant="h6" key={index} className="py-3">{goal}</Typography>)}
                     </Box>
                     <Divider className="m-5" />
                     <Typography variant="h5" className="py-2">Chceš nám pomôcť? {(user === parseInt(Cookies.get("id"))) ? <Box class="message is-primary my-3 w-75 mx-auto">
@@ -103,7 +103,7 @@ export default function Nature(){
 </Box>}
                 </Card></Modal>
             </Container>
-            <Typography variant="h3" className="my-3 mt-5 pt-5">Top 10 ako pomôcť prírode</Typography>
+            <Typography variant="h3" className="my-3 mt-5 pt-5" data-aos="fade-up">Top 10 ako pomôcť prírode</Typography>
             <Box>
                 {sections.map((section, index) => <Sections index={index} img={section.img} title={section.title} text={section.text} />)}
             </Box>

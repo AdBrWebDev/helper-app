@@ -52,8 +52,8 @@ export default function ArticlesItem(props){
                         <Rating value={props.article.rating} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />}></Rating>
                     </Grid>
                     <Grid item className="d-flex text-center mx-auto mt-2">
-                    <Button variant="outlined" onClick={() => addLike(props.article.likes, props.article.id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">thumb_up</i><Typography className="ml-2">{props.article.likes}</Typography></Button>
-                    <Button variant="outlined" onClick={() => addToFavorite(props.article.id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">favorite</i></Button>
+                    <Button variant="contained" onClick={() => addLike(props.article.likes, props.article.id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">thumb_up</i><Typography className="ml-2">{props.article.likes}</Typography></Button>
+                    <Button variant="contained" onClick={() => addToFavorite(props.article.id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">favorite</i></Button>
                     </Grid>
                     </Grid>
                 </CardActions>

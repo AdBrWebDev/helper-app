@@ -1,9 +1,11 @@
 import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import React, {Suspense, lazy} from 'react'
+import React, {Suspense, lazy, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'material-icons/iconfont/material-icons.css'
 import 'materialize-css/dist/css/materialize.css'
 import 'bulma/css/bulma.min.css'
+import Aos from "aos";
+import "aos/dist/aos.css";
 import './App.css'
 import Box from '@mui/material/Box'
 /*import Button from '@mui/material/Button'
@@ -19,6 +21,9 @@ const Running = lazy(() => import('./pages/running/RunningMNPG'))
 const Skiing = lazy(() => import('./pages/skiing/SkiingMNPG'))
 
 function App() {
+  useEffect(() => {
+    Aos.init();
+  })
   return (<Suspense fallback={<Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={true}

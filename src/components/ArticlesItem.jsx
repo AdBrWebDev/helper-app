@@ -35,13 +35,13 @@ export default function ArticlesItem(props){
     }
 
     return(<Grid key={props.index} item xs={12} sm={6} md={4} lg={3} xl={3}>
-            <Card className="text-center border border-dark text-white pb-2" id="cardh">
+            <Card className="text-center border border-dark text-white pb-2" id="cardh" data-aos="fade-up" data-aos-offset="200">
                 <CardContent>
                     <Box className="card-image mb-5">
                         <figure className="image is-4by3">
                             <img src={`/images/${props.article.mainImg}`} alt={props.article.title} />
                         </figure>
-                        <button className="btn-floating halfway-fab btn-large waves-effect btn-info" onClick={() => openArticle(props.article.id_article)}><i class="material-icons">auto_stories</i></button>
+                        <button data-aos="zoom-in" data-aos-offset="100" className="btn-floating halfway-fab btn-large waves-effect btn-info" onClick={() => openArticle(props.article.id_article)}><i class="material-icons">auto_stories</i></button>
                     </Box>
                     <Typography variant="h4">{props.article.title}</Typography>
                 </CardContent>
@@ -52,8 +52,8 @@ export default function ArticlesItem(props){
                         <Rating value={props.article.rating} readOnly precision={0.5} emptyIcon={<StarIcon style={{opacity: .55, color: "white"}} />}></Rating>
                     </Grid>
                     <Grid item className="d-flex text-center mx-auto mt-2">
-                    <Button variant="contained" onClick={() => addLike(props.article.likes, props.article.id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">thumb_up</i><Typography className="ml-2">{props.article.likes}</Typography></Button>
-                    <Button variant="contained" onClick={() => addToFavorite(props.article.id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">favorite</i></Button>
+                    <Button data-aos="fade-up-right" data-aos-offset="100" variant="contained" onClick={() => addLike(props.article.likes, props.article.id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">thumb_up</i><Typography className="ml-2">{props.article.likes}</Typography></Button>
+                    <Button data-aos="fade-up-left" data-aos-offset="100" variant="contained" onClick={() => addToFavorite(props.article.id_article)} disabled={!Cookies.get("id")} color="info" className="mx-3"><i className="material-icons">favorite</i></Button>
                     </Grid>
                     </Grid>
                 </CardActions>

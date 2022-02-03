@@ -79,7 +79,7 @@ export default function Forum(props){
             <Button variant="outlined" color="info" disabled={!Cookies.get("id")} onClick={() => Cookies.get("id") ? NewTheme(!newTheme) : console.log("nie ste prihlásený")}>Pridať tému</Button>
             </Box>
             <Box>
-                {items.map((item, index) => <Card id="card" key={index} className="p-3 my-2 px-5 border border-dark text-white border-2 shadow">
+                {items.map((item, index) => <Card data-aos="fade-up" data-aos-offset="100" id="card" key={index} className="p-3 my-2 px-5 border border-dark text-white border-2 shadow">
                     <Typography onClick={() => openWindow(item.title)} style={{'cursor': 'pointer'}}><i className="material-icons mr-5">forum</i>{item.title}</Typography>
                 </Card>)}
             </Box>

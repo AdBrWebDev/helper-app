@@ -50,7 +50,7 @@ export default function ProductCard(props){
       };
 
     return(<Grid key={props.index} item xs={12} sm={12} lg={4} xl={3} md={6}>
-        <Box className="card border border-dark" id="cardh" onClick={() => openInfo(props.id)}>
+        <Box className="card border border-dark" data-aos="fade-up" data-aos-offset="200" id="cardh" onClick={() => openInfo(props.id)}>
                     <Box className="card-image">
                         <figure className="image is 4by3 m-2">
                             <img style={{"height": 250, 'width': 250, 'margin': 'auto'}} src={`/images/${props.img}`} alt={props.title} />
@@ -62,7 +62,7 @@ export default function ProductCard(props){
                             <Typography className="text-white" variant="h3">{props.title}</Typography>
                             </Box>
                             <Typography className="text-white" variant="h4">{props.price} €</Typography>
-                            <Box style={{'height': 60}}>
+                            <Box style={{'height': 60}} data-aos="zoom-in" data-aos-offset="100">
                             {props.contain > 0 ? <Box className="message is-success mt-3"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box> : 
                             <Box className="message is-danger mt-3"><Typography className="message-body">Nedostupné</Typography></Box>}</Box>
                         </Box>

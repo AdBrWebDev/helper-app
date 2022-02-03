@@ -58,7 +58,7 @@ const Cart = () => {
         <Box>
             <Button onClick={() => openForm(!form)}><span className="material-icons text-white">shopping_cart</span></Button>
             <Modal open={form} onClose={() => openForm(false)}>
-            <Card id="card" className="mt-4 p-5 container text-center mt-5" style={{'height': '90%', 'overflowY': 'scroll'}}>
+            <Card id="card" className="mt-4 p-5 container text-center mt-5 bg-dark" style={{'height': '90%', 'overflowY': 'scroll'}}>
             <Typography variant="h3" className="text-white">Nákupný košík</Typography>
             <Divider className="my-3" />
             { total > 0 ?
@@ -70,12 +70,12 @@ const Cart = () => {
                     <Typography variant="h6" className="mx-5 my-auto">Cena: {cart.price} €</Typography>
                     </Grid>
                     <Grid item xs={12} sm={12} md={6} xl={6} lg={6} className="d-flex my-auto mx-auto">
-                <Box className="d-flex mx-auto"><Box><Button className="mx-5" variant="outlined" color="success" onClick={()=> dispatch({type: "INCREASE", payload: cart})}>+</Button></Box>
+                <Box className="d-flex mx-auto"><Box><Button className="mx-5" variant="contained" color="success" onClick={()=> dispatch({type: "INCREASE", payload: cart})}>+</Button></Box>
                 <Typography className="my-auto">{cart.quantity}</Typography>
-                <Box><Button className="mx-5" variant="outlined" color="error" onClick={()=> {
+                <Box><Button className="mx-5" variant="contained" color="error" onClick={()=> {
                     (cart.quantity > 1) ? dispatch({type: "DECREASE", payload: cart}) : dispatch({type: "REMOVE", payload: cart}) 
                 }}>-</Button></Box></Box>
-                <Button className="mx-5 my-auto" variant="outlined" color="error" onClick={() => dispatch({type: "REMOVE", payload: cart})}><i className="material-icons">delete_forever</i></Button>
+                <Button className="mx-5 my-auto" variant="contained" color="error" onClick={() => dispatch({type: "REMOVE", payload: cart})}><i className="material-icons">delete_forever</i></Button>
                 </Grid></Grid>
                 </Card>): <Box className="text-white"><i className="material-icons" style={{'transform': 'scale(7)', 'marginTop': 150, 'marginBottom': 80}}>shopping_cart</i><Typography variant="h3">Košík je prázdny</Typography></Box>}
                 {total < 1 ? null : <Box>

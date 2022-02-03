@@ -18,7 +18,7 @@ export default function MainPage(){
         <MainImageOfPage img="cyclingMain.jpg" text="Vitaj! Chceš vedieť čo tu nájdeš?" href="" />
         <AppInDevices />
         <LinearProgress className="container bg-transparent" />
-        <Typography variant="h2" color="white" className="my-5 pt-5">Prečo pathfinder</Typography>
+        <Typography variant="h2" color="white" className="my-5 pt-5" data-aos="flip-up" data-aos-offset="150">Prečo pathfinder</Typography>
         {sections.map((section, index) => <Sections index={index} img={section.img} title={section.title} link={section.link} text={section.text}/>)}
     </Box>)
 }

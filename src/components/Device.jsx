@@ -17,7 +17,7 @@ export default function Device(props){
     let importantParts = ['os', 'minVersion','ram','memory', 'cpu', 'minDisplaySize'];
 
     return(
-        <Grid item className="py-5 my-5" key={props.index} onClick={() => openDevice(!device)} xs={12} sm={6} md={6} lg={3} xl={3} style={{"cursor": "pointer"}}>
+        <Grid data-aos="fade-up" data-aos-offset="200" data-aos-duration="600" item className="py-5 my-5" key={props.index} onClick={() => openDevice(!device)} xs={12} sm={6} md={6} lg={3} xl={3} style={{"cursor": "pointer"}}>
             <i id="devices" className="material-icons my-5">{props.icon}</i>
             <Typography>{props.text}</Typography>
             <Modal open={device} onClose={() => openDevice(false)}>

@@ -33,7 +33,7 @@ export default function CyclingMNPG(){
   <button class="navbar-toggler bg-white my-auto top-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <Avatar src="images/pathfinder.jpg" className="my-auto mx-5 " />
+  <a href=""><Avatar src="images/pathfinder.jpg" className="my-auto mx-5 " /></a>
 
   <Box class="collapse navbar-collapse bg-dark text-cetnter" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto text-center">

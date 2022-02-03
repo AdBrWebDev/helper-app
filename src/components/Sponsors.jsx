@@ -23,7 +23,7 @@ export default function Sponsors(){
       };
 
     return(
-        <Box>
+        <Box data-aos="fade-up">
     <Slider {...settings}>
     {sponsors.map((sponsor, index) => <Box><img className="my-auto" height="150" width="150"src={`sponsors/${sponsor.img}`} alt={sponsor.title} /></Box>)}
     </Slider>

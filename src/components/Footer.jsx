@@ -26,14 +26,14 @@ export default function Footer(){
             <Typography data-aos="fade-up" variant="h2" className="text-center text-white mt-5 mb-3">Partneri</Typography>
             <Sponsors />
             <Divider data-aos="fade-up" className="w-75 mx-auto my-2 mt-5" />
-            <Box data-aos="fade-up" className="p-5">
+            <Box className="p-5">
             <Grid container className="container py-5">
                     <Grid container className="text-center">
-                        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                        <Grid data-aos="fade-right" item xs={12} sm={12} md={6} lg={6} xl={6}>
                             <Typography className="text-white mb-3" variant="h4">Sleduj nás na</Typography>
                             <Button id="footer-icons" variant="outlined" className="text-info"><i className="material-icons">facebook</i></Button>
                         </Grid>
-                        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                        <Grid data-aos="fade-left" item xs={12} sm={12} md={6} lg={6} xl={6}>
                             <Typography className="text-white mb-3" variant="h4">Appka aj v mobile</Typography>
                             <Button title="stiahnuť" id="footer-icons" variant="outlined" className="text-white my-auto" disabled="true"><i className="material-icons">shop</i></Button>
                         </Grid>

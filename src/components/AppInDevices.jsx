@@ -19,11 +19,11 @@ export default function AppInDevices(){
     ]
 
     return(<Box style={{"minHeight": 400}} className="container mt-5 mb-5 py-5 text-white text-center">
-        <Typography variant="h3" className="py-5 mb-5">Pathfinder už čoskoro aj v</Typography>
+        <Typography data-aos="flip-up" data-aos-offset="150" variant="h3" className="py-5 mb-5">Pathfinder už čoskoro aj v</Typography>
         <Grid container className="mb-5">
             {devices.map((device, index) => <Device terms={device.terms} index={index} icon={device.icon} text={device.typography}/>)}
         </Grid>
-        <Button variant="outlined" color="info" className="my-5 p-4" onClick={() => openDownload(!download)}>stiahnuť pathfinder <i className="material-icons mx-1">download</i></Button>
+        <Button data-aos="zoom-in" data-aos-offset="200" variant="outlined" color="info" className="my-5 p-4" onClick={() => openDownload(!download)}>stiahnuť pathfinder <i className="material-icons mx-1">download</i></Button>
         <Modal open={download} onClose={() => openDownload(false)}>
                 <Card id="card" className="p-5 rounded text-center text-white container border border-dark" style={{'top': '10%'}}>
                     <CardContent>

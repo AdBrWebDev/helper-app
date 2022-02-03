@@ -21,11 +21,11 @@ export default function Eshop(){
     return(<Box className="text-white">
         {<MainImageOfPage id="main-image" img="gps-tracker.png" text="Pridaj sa k nám" href="" />}
         <Box className="container p-5 my-5">
-        <Box className="message is-info mt-3">
+        <Box className="message is-info mt-3" data-aos="fade-up" data-aos-offset="100">
             <Typography className="message-body">Začiatok predaja 22.11.2022</Typography>
         </Box>
         <Container>
-        <Typography variant="h3" className="my-4 mt-5">GPS zariadenia a oblečenie</Typography>
+        <Typography variant="h3" className="my-4 mt-5" data-aos="flip-up" data-aos-offset="100">GPS zariadenia a oblečenie</Typography>
         <Grid container spacing={3}>
                 {products.map((product, index) => { product.quantity = 1; 
                     return (<ProductCard index={index} product={product} id={product.id_product} img={product.image} contain={product.contain} title={product.title} price={product.price} />)})}

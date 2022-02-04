@@ -10,6 +10,7 @@ import Cookies from 'js-cookie'
 import Modal from '@mui/material/Modal'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import {motion} from 'framer-motion'
 const ForumItems = lazy(() => import('../components/ForumItems'))
 
 export default function Forum(props){
@@ -72,7 +73,7 @@ export default function Forum(props){
         setTimeout(() => handleClose(), 2000)
         } 
 
-    return (<Box>
+    return (<motion.div initial={{y: 200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
         <MainImageOfPage img={props.img} text={props.text} />
         <Box className="container p-3 rounded bg-dark shadow my-5">
             <Box className="text-end mb-5">
@@ -85,15 +86,17 @@ export default function Forum(props){
             </Box>
         </Box>
         <Modal open={newTheme} onClose={() => NewTheme(false)}>
-                <Card className="container text-center border border-dark bg-dark border-2 text-white p-5 w-75 align-middle" style={{'marginTop': '5%'}} id="card">
+        <motion.div className="container" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+                <Card className="text-center border border-dark bg-dark border-2 text-white p-5 w-75 mx-auto align-middle" style={{'marginTop': '5%'}} id="card">
                     <Typography variant="h3">Pridať novú tému</Typography>
                         <input type="text" placeholder="Názov témy" className="form-control mb-4 text-center text-info text-white" name="title" onChange={(e) => setTitle(e.target.value)} />
                         <textarea cols="80" placeholder="Váš text" name="text" className="form-control mb-4 text-white bg-transparent" style={{'minHeight': '100px'}} rows="10" onChange={(e) => setText(e.target.value)}></textarea>
                         <Button variant="contained" color="info" onClick={createNewItem}>Pridať</Button>
-                </Card>
+                </Card></motion.div>
                 </Modal>  
         <Modal open={window} onClose={() => openWindow(false)}>
-            <Card className="container text-center border border-dark text-white bg-dark p-5 mt-5" id="card" style={{'overflowY': 'scroll', 'height': "90%"}}> 
+        <motion.div className="container" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+            <Card className="text-center border border-dark text-white bg-dark p-5 mt-5" id="card" style={{'overflowY': 'scroll', 'height': "90%"}}> 
                     <Typography variant="h3" className="text-white mt-2">{sign}</Typography>
                     <Box className="p-5">
                     {forumItems.map((fItems, index) => <ForumItems index={index} data={fItems} />)}
@@ -105,12 +108,12 @@ export default function Forum(props){
                         <Button variant="contained" color="info" disabled={!Cookies.get("id")} onClick={() => {addComment(sign, props.title)}}>Pridať</Button>
                         </Box>
                 </Card>
-                </Card>
+                </Card></motion.div>
                 </Modal>
                 <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={open} autoHideDuration={4000} onClose={handleClose}>
                                             <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                                                 <Typography>Nová téma bola vytvorená</Typography>
                                             </Alert>
                                         </Snackbar>
-    </Box>)
+                                        </motion.div>)
 }

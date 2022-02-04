@@ -11,6 +11,7 @@ import Axios from 'axios';
 import Cookies from 'js-cookie'
 import { useEffect } from 'react';
 import Modal from '@mui/material/Modal';
+import {motion} from 'framer-motion'
 const Sections = lazy(() => import('../components/Sections')) 
 const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 
@@ -58,7 +59,7 @@ export default function Nature(){
             Axios.post('http://localhost:3001/natureForm', {user: Cookies.get('id'), date: date})}
             openForm(false)  
     }
-    return(
+    return(<motion.div initial={{y: 200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
         <Box className="text-white text-center">
             <MainImageOfPage id="mainImg" img="forest.jpg" text="Pomôž nám ochrániť prírodu" href="" />
             <Box className='level is-mobile mt-5 py-3' data-aos="fade-up" data-aos-offset="200">
@@ -107,6 +108,6 @@ export default function Nature(){
             <Box>
                 {sections.map((section, index) => <Sections index={index} img={section.img} title={section.title} text={section.text} />)}
             </Box>
-        </Box>
+        </Box></motion.div>
     )
 }

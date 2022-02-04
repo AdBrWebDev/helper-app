@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import '../App.css'
 import Axios from 'axios'
+import {motion} from 'framer-motion'
 const ProductCard = lazy(() => import('../components/ProductCard'))
 const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 
@@ -18,7 +19,8 @@ export default function Eshop(){
     });
 }, []);
 
-    return(<Box className="text-white">
+    return(<motion.div initial={{y: 200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+        <Box className="text-white">
         {<MainImageOfPage id="main-image" img="gps-tracker.png" text="Pridaj sa k nám" href="" />}
         <Box className="container p-5 my-5">
         <Box className="message is-info mt-3" data-aos="fade-up" data-aos-offset="100">
@@ -32,5 +34,5 @@ export default function Eshop(){
         </Grid>
         </Container>
         </Box>
-    </Box>)
+    </Box></motion.div>)
 }

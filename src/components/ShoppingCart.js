@@ -13,6 +13,7 @@ import Axios from 'axios'
 import Cookies from 'js-cookie'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { motion } from 'framer-motion'
 
 const Cart = () => {
     const [form, openForm] = useState(false)
@@ -58,7 +59,8 @@ const Cart = () => {
         <Box>
             <Button onClick={() => openForm(!form)}><span className="material-icons text-white">shopping_cart</span></Button>
             <Modal open={form} onClose={() => openForm(false)}>
-            <Card id="card" className="mt-4 p-5 container text-center mt-5 bg-dark" style={{'height': '90%', 'overflowY': 'scroll'}}>
+            <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+            <Card id="card" className="mt-4 p-5 text-center mt-5 bg-dark" style={{'height': '90%', 'overflowY': 'scroll'}}>
             <Typography variant="h3" className="text-white">Nákupný košík</Typography>
             <Divider className="my-3" />
             { total > 0 ?
@@ -104,7 +106,7 @@ const Cart = () => {
           <Typography>Objednávka bola odoslaná</Typography>
         </Alert>
       </Snackbar>
-                </Card>
+                </Card></motion.div>
                 </Modal></Box>
     )
 }

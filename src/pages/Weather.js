@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import InputBase from '@mui/material/InputBase';
@@ -92,8 +91,8 @@ export default function Weather(){
         <>
         <Button variant="contained" className="btn-floating pulse btn-info btn-waves waves-light" onClick={() => openWeather(!weather)} style={{bottom: 30, right: 30, position: 'fixed'}}><i className="material-icons">wb_sunny</i></Button>
     <Modal open={weather} onClose={() => openWeather(false)}>
-    <motion.div initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
-            <Container className="text-white mt-5 p-5 shadow-lg border border-dark border-2" id="card" style={{height: '90%', overflowY: 'scroll'}}>
+    <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+            <Box className="text-white mt-5 p-5 shadow-lg border border-dark border-2" id="card" style={{height: '90%', overflowY: 'scroll'}}>
                 <Box noValidate autoComplete="off" className="p-5 mt-5 text-center" >
                     <InputBase className="mx-3 text-center text-white" placeholder="Miesto..." value={town} onChange={(e) => setTown(e.target.value)} />
                     <Button disabled={town.length === 0} onClick={() => searchWeather()} variant="contained" color="info"><i className="material-icons">search</i></Button>
@@ -142,7 +141,7 @@ export default function Weather(){
                     <Typography className="pt-2">GPS: {location.lat}, {location.lon}</Typography>
                     <Typography className="pt-2">Naposledy aktualizované: {curWeather.last_updated}</Typography>
                     </Box>): <Box className="text-center" id="sun" style={{'marginTop': '15%'}}><i className="material-icons" style={{'transform': 'scale(8)'}}>light_mode</i></Box>}
-            </Container></motion.div>
+            </Box></motion.div>
         </Modal>
         </>
     )

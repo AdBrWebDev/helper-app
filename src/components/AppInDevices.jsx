@@ -7,6 +7,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Modal from '@mui/material/Modal'
 import '../App.css'
+import {motion} from 'framer-motion'
 const Device = lazy(() => import('./Device'))
 
 export default function AppInDevices(){
@@ -25,7 +26,8 @@ export default function AppInDevices(){
         </Grid>
         <Button data-aos="zoom-in" data-aos-offset="200" variant="outlined" color="info" className="my-5 p-4" onClick={() => openDownload(!download)}>stiahnuť pathfinder <i className="material-icons mx-1">download</i></Button>
         <Modal open={download} onClose={() => openDownload(false)}>
-                <Card id="card" className="p-5 rounded text-center text-white container border border-dark" style={{'top': '10%'}}>
+        <motion.div className="container" initial={{y: 200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+                <Card id="card" className="p-5 rounded text-center text-white border border-dark" style={{'top': '10%'}}>
                     <CardContent>
                     <Box className="message is-info mb-5">
                         <Typography className="message-body">Dostupnosť aplikácii od: 11.11.2022</Typography>
@@ -40,7 +42,7 @@ export default function AppInDevices(){
                             )}
                         </Grid>
                     </CardContent>
-                </Card>
+                </Card></motion.div>
                 </Modal>
     </Box>)
 }

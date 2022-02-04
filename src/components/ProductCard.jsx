@@ -12,6 +12,7 @@ import Modal from '@mui/material/Modal'
 import Cookies from 'js-cookie'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import {motion} from 'framer-motion'
 
 export default function ProductCard(props){
     const [iWindow, infoOpened] = useState(false)
@@ -49,7 +50,8 @@ export default function ProductCard(props){
         setOpen(false);
       };
 
-    return(<Grid key={props.index} item xs={12} sm={12} lg={4} xl={3} md={6}>
+    return(
+    <Grid key={props.index} item xs={12} sm={12} lg={4} xl={3} md={6}>
         <Box className="card border border-dark" data-aos="fade-up" data-aos-offset="200" id="cardh" onClick={() => openInfo(props.id)}>
                     <Box className="card-image">
                         <figure className="image is 4by3 m-2">
@@ -69,7 +71,8 @@ export default function ProductCard(props){
                     </Box>
                 </Box>
                 <Modal open={iWindow} onClose={() => infoOpened(false)}>
-                    <Card className="container text-center text-white border p-5 border-dark" id="card" style={{'marginTop': 30, 'overflowY': 'scroll', 'height': '90%'}}>
+                <motion.div className="container h-100" initial={{y: 200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+                    <Card className="text-center text-white border p-5 border-dark" id="card" style={{'marginTop': 30, 'overflowY': 'scroll', 'height': '90%'}}>
                             <Grid container>
                                 <Grid item xs={12} sm={12} md={5} xl={5} lg={5}>
                                 <img style={{'height': 350, 'marginTop': 50}} src={`/images/${props.img}`} alt={props.title} />
@@ -110,7 +113,7 @@ export default function ProductCard(props){
                                         )}
                                 </Grid>
                             </Box>
-                        </Card>
+                        </Card></motion.div>
                     </Modal>
     </Grid>);
 }

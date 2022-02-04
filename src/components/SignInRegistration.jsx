@@ -21,6 +21,7 @@ import DialogContent from '@mui/material/DialogContent';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import LazyHero from 'react-lazy-hero'
+import {motion} from 'framer-motion'
 
 export default function SignInRegistration(){
     const [form, openForm] = useState(false)
@@ -150,7 +151,8 @@ export default function SignInRegistration(){
         </DialogContent></Box></Dialog>
         </Box> : <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>}   
         <Modal open={profile} onClose={() => userProfile(false)}>
-        <Card style={{'overflowY': 'scroll', 'overflowX': 'auto', 'height': '90%', 'marginTop': '2%', 'borderRadius': '30px'}} className="text-center text-white w-75 bg-dark text-dark p-5 border container border-dark" id="card">
+        <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+        <Card style={{'overflowY': 'scroll', 'height': '90%', 'marginTop': '2%', 'borderRadius': '30px'}} className="text-center text-white w-75 bg-dark text-dark p-5 border mx-auto border-dark" id="card">
                     <Avatar className="mx-auto my-4" sx={{width: 86, height: 86}} src="/images/pathfinder.jpg" />
                     <Typography variant="h5">{Cookies.get("user")}</Typography>
                     <Typography variant="h6">{userData.is_admin ? 'admin': 'užívatel'}</Typography>
@@ -184,6 +186,7 @@ export default function SignInRegistration(){
                         </Grid>
                     </Grid>
                     <Modal open={UEdit} onClose={() => editData(false)}>
+                    <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                     <Card className="p-5 text-center mt-5 text-white border border-dark bg-dark container" id="card">
                 <Typography variant="h3">Informácie o užívateľovi</Typography>
                 <Grid container component="form" className="text-center mx-auto">
@@ -215,10 +218,10 @@ export default function SignInRegistration(){
                 <input className="form-control w-50 text-center mx-auto text-white" placeholder="nick" value={nick === '' ? userData.nickname : nick} onChange={(e) => {setNick(e.target.value)}} name="nick" />
                 </Grid>
                 </Grid>
-                <Button className="mx-auto mt-3" type="submit" variant="contained" color="primary" onClick={() => uploadSubmitedData()}>Upraviť údaje</Button></Card>
-
-                    </Modal>
+                <Button className="mx-auto mt-3" type="submit" variant="contained" color="primary" onClick={() => uploadSubmitedData()}>Upraviť údaje</Button></Card></motion.div>
+                </Modal>
                     <Modal open={FItems} onClose={() => openFItems(false)}>
+                    <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                     <Paper className="card p-5 text-center bg-dark container text-white" style={{'marginTop': '5%', 'minHeight': '600px'}} id="card">
                         <Typography variant="h3">Aktivity vo fóre</Typography>
                 <List>
@@ -238,17 +241,19 @@ export default function SignInRegistration(){
             </React.Fragment>}/>
             <Button variant="outlined" color="error" onClick={() => {openUEdit(true); setEdit(fItem)}}><i className="material-icons">edit</i></Button>
             <Modal open={Uedit} onClose={() => openUEdit(false)}>
+            <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                     <Paper className="card bg-dark container text-white text-center p-5" style={{'marginTop': '8%'}} id="card">
                         <Typography variant="h3">{edit.title}</Typography>
                         <textarea className="form-control text-white my-5" onChange={(e) => setEdited(e.target.value)} value={editedT === '' ? edit.text : editedT} sx={{minHeight: '100px'}} rows="20"></textarea>
                         <Box className="my-5">
                         <Button variant="outlined" color="error" onClick={() => {EditFItems(edit.id_item, editedT); openUEdit(false)}}><i className="material-icons">edit</i> Upraviť</Button>
                         </Box>
-                    </Paper>
+                    </Paper></motion.div>
                 </Modal>
                 </ListItem>)}
-            </List></Paper></Modal>
+            </List></Paper></motion.div></Modal>
             <Modal open={UOrders} onClose={() => openUOrders(false)}>
+            <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                     <Paper  className="card p-5 bg-dark container text-white text-center" style={{'marginTop': '5%', 'minHeight': '600px'}} id="card">
                                 <Typography variant="h4" className="mb-3">Objednávky</Typography>
                                 {orders.length < 1 ? <Typography variant="h5" className="text-white mx-auto text-center my-4">Zatial žiadne objednávky</Typography> : orders.map((order, index) => <Box><Grid spacing={2} style={{'cursor': 'pointer'}} className="my-2 p-5 bg-dark" id="card" key={index} container>
@@ -257,6 +262,7 @@ export default function SignInRegistration(){
                                     <Grid className="d-flex" item xs={12} sm={6} md={6} xl={6} lg={6}><Typography className="mx-auto">Stav: {order.status}</Typography>
                                     <Button className="mx-auto" variant="outlined" color="error" onClick={() => openOrder(order.generatedOrderInt)}><i className="material-icons">info</i></Button></Grid></Grid>
                                     <Modal open={selectedOrder} onClose={() => openSelectedOrder(false)}>
+                                    <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                                     <Paper className="card p-5 bg-dark container text-white text-center" style={{'marginTop': '8%'}} id="card">
                                         <Grid container spacing={2}>
                                             <Grid item sm={12} md={6} lg={6} xl={6}>
@@ -278,12 +284,13 @@ export default function SignInRegistration(){
                                             <Typography className="mx-auto my-auto">Produkt: {orderItem.title}</Typography>
                                             </Grid>
                                         </Grid>)}
-                                    </Paper>
+                                    </Paper></motion.div>
                                     </Modal></Box>
                                     )}
-                    </Paper>
+                    </Paper></motion.div>
             </Modal>
             <Modal open={UArticles} onClose={() => openUArticles(false)}>
+            <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                     <Paper className="card p-5 text-white container bg-dark" style={{'marginTop': '5%', 'minHeight': '600px'}} id="card">
                                 <Typography variant="h4" className="text-center">Články</Typography>
                                     <List>
@@ -296,6 +303,7 @@ export default function SignInRegistration(){
                   <Button variant="outlined" color="error" onClick={() => openEditUArticle(true)}><i className="material-icons">edit</i></Button>
                 </ListItem>
                 <Modal open={EditUArticle} onClose={() => openEditUArticle(false)}>
+                <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                 <Paper className="card p-5 text-white container bg-dark text-center" style={{'marginTop': '3%'}} id="card">
                     <Typography variant="h2">{article.title}</Typography>
                     <Typography variant="h6">Náročnosť</Typography>
@@ -305,12 +313,13 @@ export default function SignInRegistration(){
                     <Box>
                         <Button variant="outlined" color="error" onClick={() => editMyArticle(article.id_article)}><i className="material-icons">edit</i> Upraviť článok</Button>
                     </Box>
-                </Paper>
+                </Paper></motion.div>
                 </Modal>
                 </Box>)}</List>
-                            </Paper>
+                            </Paper></motion.div>
                             </Modal>
             <Modal open={oFavArticle} onClose={() => openFavArticle(false)}>
+            <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                     <Paper  className="card p-5 container bg-dark text-white" style={{'marginTop': '5%', 'minHeight': '600px'}} id="card">
                                 <Typography className="text-center" variant="h4">Oblúbené články</Typography>
                                 <List>
@@ -319,6 +328,7 @@ export default function SignInRegistration(){
                   <ListItemAvatar><Avatar sx={{background: 'transparent'}}><i className="material-icons">forum</i></Avatar></ListItemAvatar>
                   <ListItemText primary={articles.title} /><Button onClick={() => openFArticles(true)} variant="outlined" color="error"><i className="material-icons">auto_stories</i></Button>
                   <Modal open={FArticles} onClose={() => openFArticles(false)}>
+                  <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                 <Card className="container border text-center border-dark mt-5 bg-dark" id="card" style={{'overflowY': 'scroll', 'height': '95%'}}>
                     <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/images/${articles.mainImg}`}>
                         <Box>
@@ -329,15 +339,15 @@ export default function SignInRegistration(){
                     <Typography style={{'font-size': '18px'}} className="w-75 mx-auto">{articles.text}</Typography>
                     <Typography variant="h2">Galeria</Typography>
                     </Box>
-                </Card>  
+                </Card></motion.div> 
                 </Modal></ListItem>)}</List>
-                            </Paper>
+                            </Paper></motion.div>
                             </Modal>
                                 <Typography className="my-4"variant="h3">Aktivity</Typography>
                                 <Box class="message is-info mt-3">
                                     <Typography class="message-body">Údaje sa synchronizujú prostredníctvom aplikácie Strava. Táto služba bude dostupná od 1.10.2022</Typography>
                                 </Box>
-                    </Card></Modal>
+                    </Card></motion.div></Modal>
             <Modal open={form} onClose={() => openForm(!form)}>
         <Container>
         <BottomNavigation sx={{ width: 500 }} className="mx-auto border border-dark" id="card" style={{'marginTop': 100, 'transform': 'scale(1.1)'}} value={selectedForm} onChange={ChangeForm}>

@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper'
 import TableBody from '@mui/material/TableBody'
 import Modal from '@mui/material/Modal'
 import {TimelineMax} from 'gsap'
+import {motion} from 'framer-motion'
 let tl = new TimelineMax()
 export default function Device(props){
     const [device, openDevice] = useState(false)
@@ -22,7 +23,8 @@ export default function Device(props){
             <i id="devices" className="material-icons my-5">{props.icon}</i>
             <Typography>{props.text}</Typography>
             <Modal open={device} onClose={() => openDevice(false)}>
-                    <Card className="p-5 rounded text-center text-white container border border-dark" style={{'top': '10%'}} id="card">
+            <motion.div initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+                    <Card className="p-5 rounded text-center text-white container border border-dark" style={{'marginTop': '5%'}} id="card">
                         <CardContent>
                             <i id="devices" className="material-icons my-4">{props.icon}</i>
                             <Typography variant="h5" className="mt-2">{props.text}</Typography>
@@ -39,7 +41,7 @@ export default function Device(props){
                                 </Table>
                             </TableContainer>
                         </CardContent>
-                    </Card>
+                    </Card></motion.div>
                     </Modal>
         </Grid>
     )

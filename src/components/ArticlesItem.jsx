@@ -13,6 +13,7 @@ import '../App.css'
 import LazyHero from 'react-lazy-hero'
 import Modal from '@mui/material/Modal'
 import Cookies from 'js-cookie'
+import {motion} from 'framer-motion'
 
 export default function ArticlesItem(props){
     const [data, getData] =  useState([])
@@ -59,7 +60,8 @@ export default function ArticlesItem(props){
                 </CardActions>
             </Card>
             <Modal open={window} onClose={() => openWindow(false)}>
-                <Card className="container border text-center border-dark mt-5 bg-dark" id="card" style={{'overflowY': 'scroll', 'height': '95%'}}>
+            <motion.div className="container" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+                <Card className="border text-center border-dark mt-5 bg-dark" id="card" style={{'overflowY': 'scroll', 'height': '95%'}}>
                     <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/images/${props.article.mainImg}`}>
                         <Box>
                             <Typography color="white" variant="h2">{props.article.title}</Typography>
@@ -69,7 +71,7 @@ export default function ArticlesItem(props){
                     <Typography style={{'font-size': '18px'}} className="w-75 mx-auto mt-5">{data.text}</Typography>
                     <Typography variant="h2">Galeria</Typography>
                     </Box>
-                </Card>  
+                </Card></motion.div>
                 </Modal>
         </Grid>)
 }

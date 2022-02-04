@@ -15,7 +15,7 @@ export default function MainPage(){
     {img: 'forest.jpg', title: 'Príroda', link: './Nature', text: "Pomôž zachrániť prírodu"},
     {img: 'cyclingMain.jpg', title: 'Pathfinder plus', link: './BikeHelper', text:"Tu najdeš pomoc pri tvojich problémoch"}]
 
-    return(<motion.div initial={{y: -200, x: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, x: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}><Box className="w-100 text-center">
+    return(<motion.div initial={{y: 200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}><Box className="w-100 text-center">
         <MainImageOfPage img="cyclingMain.jpg" text="Vitaj! Chceš vedieť čo tu nájdeš?" href="" />
         <AppInDevices />
         <LinearProgress className="container bg-transparent" />

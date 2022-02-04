@@ -10,6 +10,7 @@ import Cookies from 'js-cookie'
 import Modal from '@mui/material/Modal'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import {motion} from 'framer-motion'
 const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 const ArticlesItem = lazy(() => import('../components/ArticlesItem'))
 
@@ -70,7 +71,8 @@ const handleClick = () => {
     setOpen(false);
   };
 
-    return(<Box className="bg-dark text-center">
+    return(<motion.div initial={{y: 200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+    <Box className="bg-dark text-center">
         <MainImageOfPage img={props.img} text={props.text} />
         <Box className="container py-5 text-center">
             <Box>
@@ -83,7 +85,8 @@ const handleClick = () => {
             </Box>
         </Box>
         <Modal open={openArticle} onClose={() => openAddArticle(false)}>
-                <Card id="card" className="p-5 border container bg-dark text-center border-dark text-white mt-5" style={{'overflowY': 'scroll', 'height': '95%'}}>
+        <motion.div className="container" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+                <Card id="card" className="p-5 border bg-dark text-center border-dark text-white mt-5" style={{'overflowY': 'scroll', 'height': '95%'}}>
                     <Typography variant="h2">{title}</Typography>
                     <input type="text" className="w-75 mx-auto text-center text-white" onChange={(e) => setTitle(e.target.value)} placeholder="názov článku" />
                     <Typography className="text-white mr-3" variant="h6">náročnosť trasy</Typography>
@@ -100,12 +103,12 @@ const handleClick = () => {
                     <textarea style={{'minHeight': '500px'}} className="my-3 form-control text-white bg-transparent" onChange={(e) => setText(e.target.value)} cols="10" rows="10" placeholder="obsah článku"></textarea>
                     </Box>
                     <Button variant="contained" color="info" onClick={publicArticle}>Zverejniť článok</Button>
-                </Card> 
+                </Card></motion.div>
             </Modal>
             <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={open} autoHideDuration={4000} onClose={handleClose}>
                                             <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                                                 <Typography>Váš článok bol zverejnený</Typography>
                                             </Alert>
                                         </Snackbar>
-    </Box>)
+    </Box></motion.div>)
 }

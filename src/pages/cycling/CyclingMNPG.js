@@ -12,6 +12,7 @@ import Cookies from 'js-cookie'
 import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop from '@mui/material/Backdrop';
 import Avatar from '@mui/material/Avatar'
+import {AnimatePresence} from 'framer-motion'
 const Nature = lazy(() => import('../Nature'))
 const MainPage = lazy(() => import('./MainPage'))
 const ArticlesData = lazy(() => import('./ArticlesData'))
@@ -22,13 +23,15 @@ const SignInRegistration = lazy(() => import('../../components/SignInRegistratio
 const ShoppingCart = lazy(() => import('../../components/ShoppingCart'))
 
 export default function CyclingMNPG(){
-    return(<Suspense fallback={<Backdrop
+    return(
+    <Router>
+      {/*<Suspense fallback={<Backdrop
         sx={{ color: 'rgba(1,1,1,1)', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={true}
       >
         <CircularProgress color="inherit" />
-      </Backdrop>}>
-    <Router>
+    </Backdrop>}>*/}
+      <AnimatePresence>
     <nav class="navbar navbar-expand-lg navbar-light bg-dark position-fixed top-0">
   <button class="navbar-toggler bg-white my-auto top-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -60,7 +63,8 @@ export default function CyclingMNPG(){
           <Route path="/Nature" component={Nature} />
           <Route path="/BikeHelper" component={BikeHelper} />
       </Switch>
-    </Router>
-    <Footer />
-    </Suspense>)
+      <Footer />
+      </AnimatePresence>
+      {/*</Suspense>*/}
+    </Router>)
 }

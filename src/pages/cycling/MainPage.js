@@ -2,6 +2,7 @@ import React, {lazy} from 'react'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import LinearProgress from '@mui/material/LinearProgress'
+import {motion} from 'framer-motion'
 const AppInDevices = lazy(() => import('../../components/AppInDevices'))
 const MainImageOfPage = lazy(() => import('../../components/MainImageOfPage'))
 const Sections = lazy(() => import('../../components/Sections'))
@@ -14,11 +15,11 @@ export default function MainPage(){
     {img: 'forest.jpg', title: 'Príroda', link: './Nature', text: "Pomôž zachrániť prírodu"},
     {img: 'cyclingMain.jpg', title: 'Pathfinder plus', link: './BikeHelper', text:"Tu najdeš pomoc pri tvojich problémoch"}]
 
-    return(<Box className="w-100 text-center">
+    return(<motion.div initial={{y: -200, x: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, x: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}><Box className="w-100 text-center">
         <MainImageOfPage img="cyclingMain.jpg" text="Vitaj! Chceš vedieť čo tu nájdeš?" href="" />
         <AppInDevices />
         <LinearProgress className="container bg-transparent" />
         <Typography variant="h2" color="white" className="my-5 pt-5" data-aos="flip-up" data-aos-offset="150">Prečo pathfinder</Typography>
         {sections.map((section, index) => <Sections index={index} img={section.img} title={section.title} link={section.link} text={section.text}/>)}
-    </Box>)
+    </Box></motion.div>)
 }

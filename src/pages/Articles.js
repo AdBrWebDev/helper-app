@@ -34,10 +34,9 @@ export default function Articles(props){
 const publicArticle = () => {
     let specialId = new Date()+Cookies.get("id").toString()
     const formData = new FormData();
-    formData.append("id", specialId)
     formData.append('mainImg', MainImg.file)
-    Axios.post('http://localhost:3001/publicate', {id_user: Cookies.get("id"), sign: title, rating: rating, text: text, theme: props.title, specialId: specialId, formData})
-    Axios.post('http://localhost:3001/publicateImg', [formData]).then(response => {console.log(response)})
+    //Axios.post('http://localhost:3001/publicate', {id_user: Cookies.get("id"), sign: title, rating: rating, text: text, theme: props.title, specialId: specialId, formData})
+    Axios.post('http://localhost:3001/publicateImg', [formData])
     openAddArticle(false)
     handleClick()
 }
@@ -48,6 +47,7 @@ const setImg = (e) => {
         file:e.target.files[0]
     });
     console.log(e.target.files[0])
+    console.log(MainImg)
 }
 
 const setMultipleImg = (e) => {
@@ -104,7 +104,7 @@ const handleClick = () => {
             </Modal>
             <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={open} autoHideDuration={4000} onClose={handleClose}>
                                             <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                                                <Typography>Produkt {props.title} bol pridaný do košíka</Typography>
+                                                <Typography>Váš článok bol zverejnený</Typography>
                                             </Alert>
                                         </Snackbar>
     </Box>)

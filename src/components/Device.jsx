@@ -10,14 +10,15 @@ import TableCell from '@mui/material/TableCell'
 import Paper from '@mui/material/Paper'
 import TableBody from '@mui/material/TableBody'
 import Modal from '@mui/material/Modal'
-
+import {TimelineMax} from 'gsap'
+let tl = new TimelineMax()
 export default function Device(props){
     const [device, openDevice] = useState(false)
     let importantText = ['Operačný systém', 'Verzie', 'Operačná pamäť (GB)', 'Veľkosť uložiska (GB)','Počet jadier procesora', 'Veľkosť displeja'];
     let importantParts = ['os', 'minVersion','ram','memory', 'cpu', 'minDisplaySize'];
 
     return(
-        <Grid data-aos="fade-up" data-aos-offset="200" data-aos-duration="600" item className="py-5 my-5" key={props.index} onClick={() => openDevice(!device)} xs={12} sm={6} md={6} lg={3} xl={3} style={{"cursor": "pointer"}}>
+        <Grid data-aos="fade-up" data-aos-offset="250" data-aos-duration="600" data-aos-delay={150*props.index} item className="py-5 my-5" key={props.index} onClick={() => {openDevice(!device); tl.fromTo("#card", {y: 200}, {y:0, duration: 2})}} xs={12} sm={6} md={6} lg={3} xl={3} style={{"cursor": "pointer"}}>
             <i id="devices" className="material-icons my-5">{props.icon}</i>
             <Typography>{props.text}</Typography>
             <Modal open={device} onClose={() => openDevice(false)}>

@@ -250,10 +250,7 @@ app.post('/editData', (req, res) => {
     const nick = req.body.nick;
     const id_user = req.body.id_user;
     dbcon.query("UPDATE users SET name = ?, surname = ?, phone = ?, country = ?, city = ?, street = ?, age = ?, avatar = ?, e_mail = ?, nickname = ? WHERE id_user = ?", 
-            [name, surname, phone, country, city, street,age, '', e_mail, nick, id_user], (err, result) => {
-            console.log(result)
-        })
-    })
+            [name, surname, phone, country, city, street,age, '', e_mail, nick, id_user])})
 
 app.post('/register', (req, res) => {
     const name = req.body.name;
@@ -270,16 +267,21 @@ app.post('/register', (req, res) => {
         if(err){
             console.log(err)
         }
-        dbcon.query("INSERT INTO users (id_user, name, surname, phone, country, city, street, age, is_admin, avatar, e_mail, password, nick) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", 
-            ['',name, surname, phone, country, city, street,age, '', '', e_mail, hash, nick], (err, result) => {
+        dbcon.query("SELECT e_mail FROM users WHERE e_mail = ?", [e_mail], (err, result) => {
             console.log(result)
+            if(result.length > 0){
+                res.send({message: "Užívateľ už existuje!"})
+            }else if(result.length === 0){
+                dbcon.query("INSERT INTO users (id_user, name, surname, phone, country, city, street, age, is_admin, avatar, e_mail, password, nickname) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", 
+            ['',name, surname, phone, country, city, street,age, '', '', e_mail, hash, nick]);
+            res.send({message: "Registrácia bola úspešná"})
+            }
         })
     })
     })
 
     app.post('/login', (req, res) => {
         dbcon.query("SELECT * FROM users WHERE e_mail = ?", [req.body.loginEmail], (err, result) => {
-            console.log(result)
             if(err){
                 res.send({err: err})
             }
@@ -290,7 +292,7 @@ app.post('/register', (req, res) => {
                         console.log(req.session.user)*/
                         res.send(result)
                     }else{
-                        res.send({message: "Nesprávne meno alebo heslo!"})
+                        res.send({message: "Nesprávny e-mail alebo heslo!"})
                     }
                 })
             }else{

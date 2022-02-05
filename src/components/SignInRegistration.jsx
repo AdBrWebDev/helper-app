@@ -22,6 +22,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import LazyHero from 'react-lazy-hero'
 import {motion} from 'framer-motion'
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 export default function SignInRegistration(){
     const [form, openForm] = useState(false)
@@ -60,85 +62,98 @@ export default function SignInRegistration(){
     const [EditUArticle ,openEditUArticle] = useState(false)
     const [articletext, setArticleText] = useState('')
     const [articlerating, setArticleRating] = useState(0)
+    const [open, setOpen] = useState(false);
+    const [LOGOUT, setLogout] = useState(false)
+    const [alertColor, setAlertColor] = useState('')
+    const [registerUser, setRegUser] = useState('')
 
     Axios.defaults.withCredentials = true;
     const submit = () => {
-        Axios.post('http://localhost:3001/register', {name: name, surname: surname, phone: phone, country: country, city: city, street: street, age: age, e_mail: e_mail, password: password, nick: nick}).then(() => {alert("insert successful")})
-    }
+        Axios.post('http://localhost:3001/register', {name: name, surname: surname, phone: phone, country: country, city: city, street: street, age: age, e_mail: e_mail, password: password, nick: nick}).then((response) => {
+        if(response.data.message  === "Užívateľ už existuje!"){
+            console.log(response.data.message)
+            setRegUser(response.data.message)
+            setAlertColor('error')
+            setTimeout(() =>setRegUser(''), 3500)
+        }else{
+            setRegUser('Registrácia bola úspešná')
+            setAlertColor('success')
+            setTimeout(() => openForm(false), 3000)
+            setTimeout(() =>setRegUser(''), 3500)
+        }
+})}
 
-    const uploadSubmitedData = () => {
-      Axios.post('http://localhost:3001/editData', {name: name || userData.name, surname: surname || userData.surname, phone: phone || userData.phone, country: country || userData.country, city: city || userData.city, street: street || userData.street, age: age || userData.age, e_mail: e_mail || userData.e_mail, nick: nick || userData.nickname, id_user: Cookies.get("id")}).then(() => {alert("edit successful")})
-        
-    }
-
-    console.log(favArticles)
+    const uploadSubmitedData = () => {Axios.post('http://localhost:3001/editData', {name: name || userData.name, surname: surname || userData.surname, phone: phone || userData.phone, country: country || userData.country, city: city || userData.city, street: street || userData.street, age: age || userData.age, e_mail: e_mail || userData.e_mail, nick: nick || userData.nickname, id_user: Cookies.get("id")}).then(() => {alert("edit successful")})}
 
     const signUp = () => {
         Axios.post('http://localhost:3001/login', {loginEmail: loginEmail, loginPassword: loginPassword}).then((response) => {
             if(response.data.message){
                 setUser(response.data.message)
-                console.log(response.data.message)
+                setAlertColor('error')
+                setTimeout(() => setUser(''), 3000)
             }else{
                 Cookies.set("id", response.data[0].id_user, {expires: 2, secure: true})
                 Cookies.set("user", response.data[0].nickname, {expires: 2, secure: true})
+                setUser('Prihlásenie bolo úspešné')
+                setAlertColor('success')
+                setTimeout(() => openForm(false), 3000)
+                setTimeout(() => setUser(''), 3500)
             }
         })
     }
 
+    const Alert = React.forwardRef(function Alert(props, ref) {return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;});
+
+    const handleClick = () => setOpen(true);
+    
+      const handleClose = (event, reason) => {
+        if (reason === 'clickaway') return;
+    
+        setOpen(false);};
+
     const userProfile = () => {
         openProfile(!profile)
-        Axios.post("http://localhost:3001/user", {user_id: Cookies.get("id")}).then((response) => {
-            console.log(response.data[0])
-            setUserData(response.data[0])
-        })
-        Axios.post("http://localhost:3001/profileForum", {user_id: Cookies.get("id")}).then((response) =>{
-            setForumItems(response.data)
-            console.log(response.data)
-        })
-        Axios.post("http://localhost:3001/profileOrders", {user_id: Cookies.get("id")}).then((response) =>{
-            setOrders(response.data)
-            console.log(response.data)
-        })
-        Axios.post("http://localhost:3001/profileArticles", {user_id: Cookies.get("id")}).then((response) =>{
-            setArticles(response.data)
-            console.log(response.data)
-        })
-        Axios.post("http://localhost:3001/profileFavArticles", {user_id: Cookies.get("id")}).then((response) =>{
-            getFavArticles(response.data)
-            console.log(response.data)
-        })
+        Axios.post("http://localhost:3001/user", {user_id: Cookies.get("id")}).then((response) => {setUserData(response.data[0])})
+        Axios.post("http://localhost:3001/profileForum", {user_id: Cookies.get("id")}).then((response) =>{setForumItems(response.data)})
+        Axios.post("http://localhost:3001/profileOrders", {user_id: Cookies.get("id")}).then((response) =>{setOrders(response.data)})
+        Axios.post("http://localhost:3001/profileArticles", {user_id: Cookies.get("id")}).then((response) =>{setArticles(response.data)})
+        Axios.post("http://localhost:3001/profileFavArticles", {user_id: Cookies.get("id")}).then((response) =>{getFavArticles(response.data)})
     }
 
     const logout = () => {Cookies.remove("id");
-    Cookies.remove("user");}
+    Cookies.remove("user");
+    handleLogout(); setTimeout(() => setOpenOptions(false), 3000)}
 
-    const ChangeForm = (e, form) => {
-      selectForm(form)
-    }
+    const handleLogout = () => setLogout(true);
+    
+      const closeLogout = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setLogout(false);};
+
+    const ChangeForm = (e, form) => {selectForm(form)}
 
     const EditFItems = (id, txt) => {
         Axios.post("http://localhost:3001/EditProfileFItem", {id: id, text: txt})
-        setEdited('')
-    }
+        setEdited('')}
 
     const openOrder = (specialId) => {
-        console.log(specialId)
-        Axios.post("http://localhost:3001/getInfoAOrder", {specialId: specialId}).then((response) =>{
-            getInfoAOrder(response.data)
-            console.log(response.data)
-        })
-        openSelectedOrder(true)
-    }
+        Axios.post("http://localhost:3001/getInfoAOrder", {specialId: specialId}).then((response) =>{getInfoAOrder(response.data)})
+        openSelectedOrder(true)}
 
-    const deleteOrder = (id) => {
-        Axios.post("http://localhost:3001/deleteOrder", {id: id})
-    }
+    const deleteOrder = (id) => {Axios.post("http://localhost:3001/deleteOrder", {id: id})}
 
-    const editMyArticle = (id) => {
-        Axios.post("http://localhost:3001/editMyArticle", {id: id, text: articletext, rating: articlerating})
-    }
+    const editMyArticle = (id) => {Axios.post("http://localhost:3001/editMyArticle", {id: id, text: articletext, rating: articlerating})}
 
-    return(<Box>{Cookies.get("id") != null ? <Box>
+    return(<Box>
+        <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={LOGOUT} autoHideDuration={4000} onClose={closeLogout}>
+        <Alert onClose={closeLogout} severity="success" sx={{ width: '100%' }}>
+          <Typography>Boli ste odhlásený</Typography>
+        </Alert>
+      </Snackbar>
+        {Cookies.get("id") != null ? <Box>
         <Button color="info" id="userOptions" aria-controls="userOptions" aria-haspopup="true" onClick={() => setOpenOptions(!openOptions)}><i className="material-icons mr-1">person</i> {Cookies.get("user")}</Button>
         <Dialog open={openOptions} onClose={() => setOpenOptions(false)}>
         <Box className="text-center">
@@ -146,9 +161,10 @@ export default function SignInRegistration(){
         <DialogContent>
             <List>
             <ListItem style={{'cursor': 'pointer'}} onClick={() => {userProfile(); setOpenOptions(false)}}>Môj profil</ListItem>
-            <ListItem style={{'cursor': 'pointer'}} onClick={() => {logout(); setOpenOptions(false)}}>Odhlásenie</ListItem>
+            <ListItem style={{'cursor': 'pointer'}} onClick={() => logout()}>Odhlásenie</ListItem>
             </List>
-        </DialogContent></Box></Dialog>
+        </DialogContent>
+        </Box></Dialog>
         </Box> : <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>}   
         <Modal open={profile} onClose={() => userProfile(false)}>
         <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
@@ -246,12 +262,17 @@ export default function SignInRegistration(){
                         <Typography variant="h3">{edit.title}</Typography>
                         <textarea className="form-control text-white my-5" onChange={(e) => setEdited(e.target.value)} value={editedT === '' ? edit.text : editedT} sx={{minHeight: '100px'}} rows="20"></textarea>
                         <Box className="my-5">
-                        <Button variant="outlined" color="error" onClick={() => {EditFItems(edit.id_item, editedT); openUEdit(false)}}><i className="material-icons">edit</i> Upraviť</Button>
+                        <Button variant="outlined" color="error" onClick={() => {EditFItems(edit.id_item, editedT); openUEdit(false); handleClick()}}><i className="material-icons">edit</i> Upraviť</Button>
                         </Box>
                     </Paper></motion.div>
                 </Modal>
                 </ListItem>)}
-            </List></Paper></motion.div></Modal>
+            </List>
+            <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={open} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
+          <Typography>Zmeny boli uložené</Typography>
+        </Alert>
+      </Snackbar></Paper></motion.div></Modal>
             <Modal open={UOrders} onClose={() => openUOrders(false)}>
             <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                     <Paper  className="card p-5 bg-dark container text-white text-center" style={{'marginTop': '5%', 'minHeight': '600px'}} id="card">
@@ -274,7 +295,7 @@ export default function SignInRegistration(){
                                                 <Typography>Suma: {order.total_price} €</Typography>
                                             </Grid>
                                             <Grid item sm={12} md={6} lg={6} xl={6}>
-                                                <Box><Button className="my-auto" variant="outlined" onClick={() => deleteOrder(order.id_order)} color="error" disabled={order.status !== 'V príprave'}><i className="material-icons">clear</i> Zrušiť objednávku</Button></Box>
+                                                <Box><Button className="my-auto" variant="outlined" onClick={() => {deleteOrder(order.id_order); openSelectedOrder(false); handleClick()}} color="error" disabled={order.status !== 'V príprave'}><i className="material-icons">clear</i> Zrušiť objednávku</Button></Box>
                                             </Grid>
                                         </Grid>
                                         {InfoAOrder.map((orderItem, index) => <Grid className="mt-5" container spacing={2}>
@@ -287,6 +308,11 @@ export default function SignInRegistration(){
                                     </Paper></motion.div>
                                     </Modal></Box>
                                     )}
+                                    <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={open} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
+          <Typography>Objednávka bola zrušená</Typography>
+        </Alert>
+      </Snackbar>
                     </Paper></motion.div>
             </Modal>
             <Modal open={UArticles} onClose={() => openUArticles(false)}>
@@ -311,12 +337,18 @@ export default function SignInRegistration(){
                     <Typography variant="h6">Obsah článku</Typography>
                     <textarea className="mb-4 text-white" style={{'height': '350px'}} value={articletext === '' ? article.text : articletext} onChange={(e) => setArticleText(e.target.value)} />
                     <Box>
-                        <Button variant="outlined" color="error" onClick={() => editMyArticle(article.id_article)}><i className="material-icons">edit</i> Upraviť článok</Button>
+                        <Button variant="outlined" color="error" onClick={() => {editMyArticle(article.id_article); openEditUArticle(false); handleClick()}}><i className="material-icons">edit</i> Upraviť článok</Button>
                     </Box>
                 </Paper></motion.div>
                 </Modal>
                 </Box>)}</List>
-                            </Paper></motion.div>
+                <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={open} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
+          <Typography>Článok bol upravený</Typography>
+        </Alert>
+      </Snackbar>
+                            </Paper>
+                            </motion.div>
                             </Modal>
             <Modal open={oFavArticle} onClose={() => openFavArticle(false)}>
             <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
@@ -348,9 +380,9 @@ export default function SignInRegistration(){
                                     <Typography class="message-body">Údaje sa synchronizujú prostredníctvom aplikácie Strava. Táto služba bude dostupná od 1.10.2022</Typography>
                                 </Box>
                     </Card></motion.div></Modal>
-            <Modal open={form} onClose={() => openForm(!form)}>
+            <Modal open={form} onClose={() => {openForm(!form); setUser('')}}>
         <Container>
-        <BottomNavigation sx={{ width: 500 }} className="mx-auto border border-dark" id="card" style={{'marginTop': 100, 'transform': 'scale(1.1)'}} value={selectedForm} onChange={ChangeForm}>
+        <BottomNavigation sx={{ width: 500 }} className="mx-auto border border-dark" id="card" style={{'marginTop': 60, 'transform': 'scale(1.1)'}} value={selectedForm} onChange={ChangeForm}>
       <BottomNavigationAction className="text-white" label="Prihlásenie" value="SignUp" icon={<i className="material-icons">person</i>} />
       <BottomNavigationAction className="text-white" label="Registrácia" value="SignIn" icon={<i className="material-icons">person_add</i>}/>
     </BottomNavigation>
@@ -376,7 +408,7 @@ export default function SignInRegistration(){
                     <input className="form-control w-50 text-center mx-auto text-white" placeholder="ulica" onChange={(e) => {setStreet(e.target.value)}} name="street" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
-                    <input type="number" className="form-control w-50 text-center mx-auto" placeholder="vek" onChange={(e) => {setAge(e.target.value)}} name="age" />
+                    <input type="number" className="form-control w-50 text-center text-white mx-auto" placeholder="vek" onChange={(e) => {setAge(e.target.value)}} name="age" />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} className="my-2">
                     <input className="form-control w-50 text-center mx-auto text-white" placeholder="heslo" onChange={(e) => {setPassword(e.target.value)}} type="password" name="password" />
@@ -387,8 +419,9 @@ export default function SignInRegistration(){
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
                 <input className="form-control w-50 text-center mx-auto text-white" placeholder="nick" onChange={(e) => {setNick(e.target.value)}} name="nick" />
                 </Grid>
-                <Button className="mx-auto mt-3" type="submit" variant="contained" color="primary" onClick={() => submit()}>Registrovať</Button>
+                <Button className="mx-auto mt-3" type="submit" variant="contained" color="primary" onClick={(e) => submit(e.preventDefault())}>Registrovať</Button>
                 </Grid>
+                {registerUser && <Alert className="w-75 mx-auto my-4" severity={alertColor}><Typography variant="h6">{registerUser}</Typography></Alert>}
             </Card> :
             <Card className="mt-5 p-5 text-white text-center border border-dark bg-dark" id="card">
                 <Typography variant="h3" className="my-3">Prihlásenie</Typography>
@@ -396,8 +429,8 @@ export default function SignInRegistration(){
                     <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><input placeholder="E-mail" className="form-control w-50 text-center text-white mx-auto" onChange={(e) => {setLoginEmail(e.target.value)}} type="text" name="loginEmail" /></Grid>
                     <Grid item xs={12} sm={12} md={12} xl={12} lg={12} className="my-2"><input placeholder="Heslo" className="form-control w-50 text-center text-white mx-auto" onChange={(e) => {setLoginPassword(e.target.value)}} type="password" name="loginPassword" /></Grid>
                 </Grid>
-                {user === null ? 'ok' : <Typography className="text-white">{user}</Typography>}
-                <Button type="submit" variant="contained" color="primary" onClick={(e) => signUp(e.preventDefault())}>Prihlásiť</Button>
+                <Button type="submit" variant="contained" color="primary" onClick={() => signUp()}>Prihlásiť</Button>
+                {user && <Alert className="w-75 mx-auto my-4" severity={alertColor}><Typography variant="h6">{user}</Typography></Alert>}
             </Card>}
         </Container>
     </Modal></Box>);

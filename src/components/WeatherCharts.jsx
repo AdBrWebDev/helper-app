@@ -5,7 +5,7 @@ import { LineChart, Line} from 'recharts';
 export default function WeatherCharts(props) {
   console.log(props.hours)
     return(<div>
-        <ResponsiveContainer width="100%" aspect={3} className="mb-5">
+        <ResponsiveContainer data-aos="fade-up" data-aos-offset="200" width="100%" aspect={3} className="mb-5">
         <BarChart
           width={500}
           height={300}
@@ -26,7 +26,7 @@ export default function WeatherCharts(props) {
           <Bar name="Nárazový vietor v km/h" dataKey="gust_kph" fill="#82ca9d" />
         </BarChart>
       </ResponsiveContainer>
-      <ResponsiveContainer width="100%" aspect={3} className="mb-5">
+      <ResponsiveContainer data-aos="fade-up" data-aos-offset="200" width="100%" aspect={3} className="mb-5">
         <LineChart
           width={500}
           height={300}
@@ -47,7 +47,7 @@ export default function WeatherCharts(props) {
           <Line name="Pocitová teplota °C" type="monotone" dataKey="windchill_c" stroke="#2E9ACB" strokeWidth={3} />
         </LineChart>
       </ResponsiveContainer>
-      <ResponsiveContainer width="100%" aspect={3} className="mb-5">
+      <ResponsiveContainer data-aos="fade-up" data-aos-offset="200" width="100%" aspect={3} className="mb-5">
         <LineChart
           width={500}
           height={300}
@@ -67,7 +67,7 @@ export default function WeatherCharts(props) {
           <Line name="oblačnosť v %" type="monotene" dataKey="cloud" stroke="#2E9ACB" strokeWidth={3} />
         </LineChart>
       </ResponsiveContainer>
-      <ResponsiveContainer width="100%" aspect={3} className="mb-5">
+      <ResponsiveContainer data-aos="fade-up" data-aos-offset="200" width="100%" aspect={3} className="mb-5">
         <LineChart
           width={500}
           height={300}
@@ -88,7 +88,7 @@ export default function WeatherCharts(props) {
         </LineChart>
       </ResponsiveContainer>
       
-      <ResponsiveContainer width="100%" aspect={3} className="mb-5">
+      <ResponsiveContainer data-aos="fade-up" data-aos-offset="200" width="100%" aspect={3} className="mb-5">
         <LineChart
           width={500}
           height={300}
@@ -108,7 +108,7 @@ export default function WeatherCharts(props) {
           <Line name="Rosný bod v °C" type="monotene" dataKey="dewpoint_c" stroke="#2E9ACB" strokeWidth={3} />
         </LineChart>
       </ResponsiveContainer>
-      <ResponsiveContainer width="100%" aspect={3} className="mb-5 text-white">
+      <ResponsiveContainer data-aos="fade-up" data-aos-offset="200" width="100%" aspect={3} className="mb-5 text-white">
         <BarChart
           width={500}
           height={300}

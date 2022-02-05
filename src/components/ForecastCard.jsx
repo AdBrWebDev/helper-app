@@ -9,6 +9,7 @@ import Slider from "react-slick";
 import Box from '@mui/material/Box'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import {motion} from 'framer-motion'
 const HourForecast = lazy(() => import('./HourForecast'));
 const WeatherCharts = lazy(() => import('./WeatherCharts'));
 
@@ -64,6 +65,7 @@ export default function ForecastCard(props){
         </Paper>
         </Grid>
         <Modal open={showWeather} onClose={()=> openWeather(false)}>
+        <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
         <Card style={{'height': '90%', 'overflowY': 'scroll'}} id="card" className="text-white container mt-5 p-5 border border-dark text-center">
         <Typography variant="h6" className="mb-1">{props.forecast.date}</Typography>
         <img style={{transform: "scale(1.8)"}} className="mb-5" src={conditionIcon} alt="icon" />
@@ -96,6 +98,6 @@ export default function ForecastCard(props){
           <Box>
             <WeatherCharts hours={props.forecast.hour} />
           </Box>
-        </Card>
+        </Card></motion.div>
         </Modal></>)
 }

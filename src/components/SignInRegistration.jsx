@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, lazy} from 'react';
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -24,6 +24,7 @@ import LazyHero from 'react-lazy-hero'
 import {motion} from 'framer-motion'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+const ShoppingCart = lazy(() => import('./ShoppingCart'))
 
 export default function SignInRegistration(){
     const [form, openForm] = useState(false)
@@ -162,6 +163,7 @@ export default function SignInRegistration(){
             <List>
             <ListItem style={{'cursor': 'pointer'}} onClick={() => {userProfile(); setOpenOptions(false)}}>Môj profil</ListItem>
             <ListItem style={{'cursor': 'pointer'}} onClick={() => logout()}>Odhlásenie</ListItem>
+            <ListItem style={{'cursor': 'pointer'}} onClick={() => setOpenOptions(false)}>Nákupný košík<ShoppingCart /></ListItem>
             </List>
         </DialogContent>
         </Box></Dialog>
@@ -381,6 +383,7 @@ export default function SignInRegistration(){
                                 </Box>
                     </Card></motion.div></Modal>
             <Modal open={form} onClose={() => {openForm(!form); setUser('')}}>
+            <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
         <Container>
         <BottomNavigation sx={{ width: 500 }} className="mx-auto border border-dark" id="card" style={{'marginTop': 60, 'transform': 'scale(1.1)'}} value={selectedForm} onChange={ChangeForm}>
       <BottomNavigationAction className="text-white" label="Prihlásenie" value="SignUp" icon={<i className="material-icons">person</i>} />
@@ -433,5 +436,5 @@ export default function SignInRegistration(){
                 {user && <Alert className="w-75 mx-auto my-4" severity={alertColor}><Typography variant="h6">{user}</Typography></Alert>}
             </Card>}
         </Container>
-    </Modal></Box>);
+    </motion.div></Modal></Box>);
 }

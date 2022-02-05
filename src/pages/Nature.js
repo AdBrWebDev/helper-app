@@ -91,6 +91,7 @@ export default function Nature(){
                     <Typography className="mt-4" style={{'opacity': .3, 'fontSize': '12px'}}>Platí pre územie slovenskej republiky</Typography>
                 </Card>
                 <Modal open={form} onClose={() => openForm(!form)}>
+                <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                 <Card className="my-5 container p-5 bg-dark border text-center border-success" id='nature-border'>
                 <Box className="w-25 h-25 mx-auto my-3">
                     <img src="/images/sEarth.png" alt="save nature" />
@@ -102,7 +103,7 @@ export default function Nature(){
     Pre úspešné podpísanie sa musíte prihlásiť!
   </Typography>
 </Box>}
-                </Card></Modal>
+                </Card></motion.div></Modal>
             </Container>
             <Typography variant="h3" className="my-3 mt-5 pt-5" data-aos="fade-up">Top 10 ako pomôcť prírode</Typography>
             <Box>

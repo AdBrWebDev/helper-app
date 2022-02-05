@@ -1,4 +1,4 @@
-import React, { Suspense, lazy} from "react";
+import React, { lazy} from "react";
 import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'material-icons/iconfont/material-icons.css';
@@ -9,8 +9,6 @@ import '../../App.css'
 import Box from '@mui/material/Box'
 import Footer from '../../components/Footer';
 import Cookies from 'js-cookie'
-import CircularProgress from '@mui/material/CircularProgress';
-import Backdrop from '@mui/material/Backdrop';
 import Avatar from '@mui/material/Avatar'
 import {AnimatePresence} from 'framer-motion'
 const Nature = lazy(() => import('../Nature'))
@@ -23,14 +21,9 @@ const SignInRegistration = lazy(() => import('../../components/SignInRegistratio
 const ShoppingCart = lazy(() => import('../../components/ShoppingCart'))
 
 export default function CyclingMNPG(){
+
     return(
     <Router>
-      {/*<Suspense fallback={<Backdrop
-        sx={{ color: 'rgba(1,1,1,1)', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={true}
-      >
-        <CircularProgress color="inherit" />
-    </Backdrop>}>*/}
       <AnimatePresence>
     <nav class="navbar navbar-expand-lg navbar-light bg-dark position-fixed top-0">
   <button class="navbar-toggler bg-white my-auto top-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +42,7 @@ export default function CyclingMNPG(){
     </ul>
     <Box className="navbar-end">
                 <Box className="navbar-item text-center">
-                    {Cookies.get("id") ? <ShoppingCart />: ''}
+                    {Cookies.get("id")  ? <ShoppingCart /> : ''}
                     <SignInRegistration />
                 </Box>
             </Box>
@@ -65,6 +58,5 @@ export default function CyclingMNPG(){
       </Switch>
       <Footer />
       </AnimatePresence>
-      {/*</Suspense>*/}
     </Router>)
 }

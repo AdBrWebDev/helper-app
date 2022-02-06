@@ -47,7 +47,7 @@ export default function PathfinderPlus(props){
     }
 
     return(<Box className="text-center align-middle">
-    <Grid container>
+    <Grid container style={{'minHeight': '1000px'}}>
         <Grid item xs={12} sm={12} md={6} xl={6} lg={6} style={{'height': '700px'}}>
             <Health />
         </Grid>

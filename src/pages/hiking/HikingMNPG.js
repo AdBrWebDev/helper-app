@@ -32,7 +32,7 @@ export default function CyclingMNPG(){
 
   <Box className="collapse navbar-collapse bg-dark text-cetnter" id="navbarTogglerDemo03">
     <ul className="navbar-nav mr-auto text-center">
-      <Link className="text-white" to="/m"><i className="material-icons">home</i></Link>
+      <Link className="text-white" to="/"><i className="material-icons">home</i></Link>
       <Link className="text-white" to="/eshop">E-shop</Link>
       <Link className="text-white" to="/ForumData">Forum</Link>
       <Link className="text-white" to="/ArticlesData">Články</Link>
@@ -48,7 +48,7 @@ export default function CyclingMNPG(){
   </Box>
 </nav>
       <Switch key="2">
-          <Route exact path="/m" component={MainPage} />
+          <Route exact path="/" component={MainPage} />
           <Route path="/eshop" component={Eshop} />
           <Route path="/ForumData" component={ForumData} />
           <Route path="/ArticlesData" component={ArticlesData} />

@@ -8,11 +8,8 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import './App.css'
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-/*import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-import Avatar from '@mui/material/Avatar'*/
+import Avatar from '@mui/material/Avatar'
 import CircularProgress from '@mui/material/CircularProgress';
 import Backdrop from '@mui/material/Backdrop';
 const Weather = lazy(() => import('./pages/Weather'))
@@ -25,6 +22,18 @@ function App() {
   useEffect(() => {
     Aos.init();
   })
+
+  function defaultPage(){
+    return(
+      <Box className="bg-dark vh-100">
+        <Box className="container p-5 text-center" style={{'marginTop': "12%"}}>
+          <Avatar data-aos="zoom-in" data-aos-delay="200" src="images/pathfinder.jpg" style={{'height': '160px', 'width': '160px'}} className="mx-auto mb-5" />
+          <Typography data-aos="fade-up" data-aos-delay="800" data-aos-duration="600" variant="h2" color="white">Sme radi, že si späť</Typography>
+        </Box>
+      </Box>
+    )
+  }
+
   return (<Suspense fallback={<Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={true}
@@ -33,51 +42,27 @@ function App() {
   </Backdrop>}>
   <Router>
     <Box className="bg-dark">
-          {/*<Box style={{'paddingTop': '20%'}}>
-          <Grid container >
-              <Grid className="text-center my-4" item xs={6} sm={6} md={3} lg={3} xl={3}>
-                <Box id="circle" className="mx-auto">
-                <Link to="/cycling">Cyklistika</Link>
-                </Box>
-              </Grid>
-              <Grid className="text-center my-4" item xs={6} sm={6} md={3} lg={3} xl={3}>
-                <Box id="circle" className="mx-auto">
-                <a targer="_self" href="../src/pages/cycling/CyclingMNPG.js">Cyklistika</a>
-                </Box>
-              </Grid>
-              <Grid className="text-center my-4" item xs={6} sm={6} md={3} lg={3} xl={3}>
-                <Box id="circle" className="mx-auto">
-                <a targer="_self" href="../src/pages/cycling/CyclingMNPG.js">Cyklistika</a>
-                </Box>
-              </Grid>
-              <Grid className="text-center my-4"  item xs={6} sm={6} md={3} lg={3} xl={3}>
-                <Box id="circle" className="mx-auto">
-                <a targer="_self" href="../src/pages/cycling/CyclingMNPG.js">Cyklistika</a>
-                </Box>
-              </Grid>
-  </Grid>  </Box></Box>*/}
         <nav className="bg-dark">
           <ul>
             <li>
-              <Link className="nav-item" to="/c">logo</Link>
+              <Link className="nav-item" to="/"><Avatar src="images/pathfinder.jpg" style={{'height': '55px', 'width': '55px'}} className="mx-5" /></Link>
             </li>
             <li>
-              
-              <Link className="nav-item" to="/cycling">Cyklistika</Link>
+              <Link className="nav-item text-white" to="/cycling">Cyklistika</Link>
             </li>
             <li>
-               <Link className="nav-item" to="/hiking">Turistika</Link>
+               <Link className="nav-item text-white" to="/hiking">Turistika</Link>
             </li>
             <li>
-              <Link className="nav-item" to="/running">Beh</Link>
+              <Link className="nav-item text-white" to="/running">Beh</Link>
             </li>
             <li>
-              <Link className="nav-item" to="/skiing">Lyžovanie</Link>
+              <Link className="nav-item text-white" to="/skiing">Lyžovanie</Link>
             </li>
           </ul>
   </nav>
         <Switch>
-            {<Route path="/c" component={Cycling} />}
+            <Route exact path="/" component={defaultPage} />
             <Route path="/cycling" component={Cycling} />
             <Route path="/hiking" component={Hiking} />
             <Route path="/running" component={Running} />

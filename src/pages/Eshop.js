@@ -25,7 +25,7 @@ export default function Eshop(){
                 <img style={{'height': '600px', 'transformOrigin': ' bottom', 'transform': 'skewY(-3deg)'}} src="images/gps.png" alt="" />
             </Grid>
             <Grid className="my-auto text-center" item xs={12} sm={12} md={6} lg={6} xl={6}>
-                <Typography variant="h3" className="text-white">Pridaj sa k nám</Typography>
+                <Typography variant="h3" className="text-white">Chceš sa pridať k nám?</Typography>
             </Grid>
         </Grid>
         <Box className="container p-5 my-5">

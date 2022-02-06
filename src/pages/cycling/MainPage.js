@@ -11,7 +11,7 @@ export default function MainPage(){
     const sections = [{img: 'gps.png', title: 'E-shop', link: '../Eshop.js', text: "Chceš sa k nám pridať?"},
     {img: 'forum-img.jpg', title: 'Fórum', link: './Forum', text: "Potrebuješ pomôcť?"},
     {img: 'maps.png', title: 'Mapa', link: '../Map.js', text: "So mnou sa nestratíš"},
-    {img: 'slDom.jpg', title: 'Články', link: './Articles', text: "Spoznávaj nové miesta"},
+    {img: 'articles-img.jpg', title: 'Články', link: './Articles', text: "Spoznávaj nové miesta"},
     {img: 'forest.jpg', title: 'Príroda', link: './Nature', text: "Pomôž zachrániť prírodu"},
     {img: 'cyclingMain.jpg', title: 'Pathfinder plus', link: './BikeHelper', text:"Tu najdeš pomoc pri tvojich problémoch"}]
 

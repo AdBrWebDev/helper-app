@@ -21,10 +21,9 @@ const SignInRegistration = lazy(() => import('../../components/SignInRegistratio
 const ShoppingCart = lazy(() => import('../../components/ShoppingCart'))
 
 export default function CyclingMNPG(){
-
     return(
     <Router style={{'zIndex': 100}}>
-      <AnimatePresence>
+    <AnimatePresence>
     <nav key="1" className="navbar navbar-expand-lg navbar-light bg-dark position-fixed top-0">
   <button className="navbar-toggler bg-white my-auto top-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
@@ -33,12 +32,12 @@ export default function CyclingMNPG(){
 
   <Box className="collapse navbar-collapse bg-dark text-cetnter" id="navbarTogglerDemo03">
     <ul className="navbar-nav mr-auto text-center">
-      <Link className="text-white" to="/m"><i className="material-icons">home</i></Link>
+      <Link className="text-white" to="/"><i className="material-icons">home</i></Link>
       <Link className="text-white" to="/eshop">E-shop</Link>
       <Link className="text-white" to="/ForumData">Forum</Link>
       <Link className="text-white" to="/ArticlesData">Články</Link>
       <Link className="text-white" to="/Nature">Príroda</Link>
-      <Link className="text-white" to="/BikeHelper">Pathfinder plus</Link>
+      <Link className="text-white" to="/HikeHelper">Pathfinder plus</Link>
     </ul>
     <Box className="navbar-end">
                 <Box className="navbar-item text-center">
@@ -47,14 +46,14 @@ export default function CyclingMNPG(){
                 </Box>
             </Box>
   </Box>
-</nav> 
+</nav>
       <Switch key="2">
-          <Route exact path="/m" component={MainPage} />
+          <Route exact path="/" component={MainPage} />
           <Route path="/eshop" component={Eshop} />
           <Route path="/ForumData" component={ForumData} />
           <Route path="/ArticlesData" component={ArticlesData} />
           <Route path="/Nature" component={Nature} />
-          <Route path="/BikeHelper" component={BikeHelper} />
+          <Route path="/HikeHelper" component={BikeHelper} />
       </Switch>
       <Footer key="3" />
       </AnimatePresence>

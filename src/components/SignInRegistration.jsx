@@ -163,11 +163,11 @@ export default function SignInRegistration(){
             <List>
             <ListItem style={{'cursor': 'pointer'}} onClick={() => {userProfile(); setOpenOptions(false)}}>Môj profil</ListItem>
             <ListItem style={{'cursor': 'pointer'}} onClick={() => logout()}>Odhlásenie</ListItem>
-            <ListItem style={{'cursor': 'pointer'}} onClick={() => setOpenOptions(false)}>Nákupný košík<ShoppingCart /></ListItem>
+            <ListItem style={{'cursor': 'pointer'}}><ShoppingCart variant="contained" color="info" /></ListItem>
             </List>
         </DialogContent>
         </Box></Dialog>
-        </Box> : <Button variant="outlined" color="info" onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>}   
+        </Box> : <Button onClick={() => openForm(!form)}>Prihlásenie / registrácia</Button>}   
         <Modal open={profile} onClose={() => userProfile(false)}>
         <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
         <Card style={{'overflowY': 'scroll', 'height': '90%', 'marginTop': '2%', 'borderRadius': '30px'}} className="text-center text-white w-75 bg-dark text-dark p-5 border mx-auto border-dark" id="card">

@@ -7,7 +7,6 @@ import '../App.css'
 import Axios from 'axios'
 import {motion} from 'framer-motion'
 const ProductCard = lazy(() => import('../components/ProductCard'))
-const MainImageOfPage = lazy(() => import('../components/MainImageOfPage'))
 
 export default function Eshop(){
     const [products, setProducts] = useState([])
@@ -21,7 +20,14 @@ export default function Eshop(){
 
     return(<motion.div initial={{y: 200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
         <Box className="text-white">
-        {<MainImageOfPage id="main-image" img="gps-tracker.png" text="Pridaj sa k nám" href="" />}
+        <Grid container className="mt-5">
+            <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                <img style={{'height': '600px', 'transformOrigin': ' bottom', 'transform': 'skewY(-3deg)'}} src="images/gps.png" alt="" />
+            </Grid>
+            <Grid className="my-auto text-center" item xs={12} sm={12} md={6} lg={6} xl={6}>
+                <Typography variant="h3" className="text-white">Pridaj sa k nám</Typography>
+            </Grid>
+        </Grid>
         <Box className="container p-5 my-5">
         <Box className="message is-info mt-3" data-aos="fade-up" data-aos-offset="100">
             <Typography className="message-body">Začiatok predaja 22.11.2022</Typography>

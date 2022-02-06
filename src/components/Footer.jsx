@@ -35,7 +35,7 @@ export default function Footer(){
                         </Grid>
                         <Grid data-aos="fade-left" item xs={12} sm={12} md={6} lg={6} xl={6}>
                             <Typography className="text-white mb-3" variant="h4">Appka aj v mobile</Typography>
-                            <Button title="stiahnuť" id="footer-icons" variant="outlined" className="text-white my-auto" disabled="true"><i className="material-icons">shop</i></Button>
+                            <Button title="stiahnuť" id="footer-icons" variant="outlined" className="text-white my-auto" disabled={true}><i className="material-icons">shop</i></Button>
                         </Grid>
                     </Grid>
                 </Grid>

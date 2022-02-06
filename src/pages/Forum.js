@@ -4,13 +4,13 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import '../App.css'
-import MainImageOfPage from '../components/MainImageOfPage'
 import Axios from 'axios'
 import Cookies from 'js-cookie'
 import Modal from '@mui/material/Modal'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import {motion} from 'framer-motion'
+import Grid from '@mui/material/Grid'
 const ForumItems = lazy(() => import('../components/ForumItems'))
 
 export default function Forum(props){
@@ -74,7 +74,13 @@ export default function Forum(props){
         } 
 
     return (<motion.div initial={{y: 200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
-        <MainImageOfPage img={props.img} text={props.text} />
+        <Grid container className="mt-5">
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+            <img style={{'height': '500px', 'transformOrigin': ' bottom', 'transform': 'skewY(-3deg)'}} src={`images/${props.img}`} alt="" />
+            </Grid>
+            <Grid className="my-auto text-center" item xs={12} sm={12} md={6} lg={6} xl={6}>
+                <Typography variant="h3" className="text-white">{props.text}</Typography>
+            </Grid></Grid>
         <Box className="container p-3 rounded bg-dark shadow my-5">
             <Box className="text-end mb-5">
             <Button variant="outlined" color="info" disabled={!Cookies.get("id")} onClick={() => Cookies.get("id") ? NewTheme(!newTheme) : console.log("nie ste prihlásený")}>Pridať tému</Button>

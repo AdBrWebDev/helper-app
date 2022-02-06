@@ -8,6 +8,8 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import './App.css'
 import Box from '@mui/material/Box'
+import {AnimatePresence} from 'framer-motion'
+import Grid from '@mui/material/Grid'
 /*import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
@@ -29,8 +31,9 @@ function App() {
       open={true}
     >
       <CircularProgress color="inherit" />
-    </Backdrop>}>
+  </Backdrop>}>
     <Router>
+    <AnimatePresence>
     <Box className="bg-dark">
           {/*<Box style={{'paddingTop': '20%'}}>
           <Grid container >
@@ -41,24 +44,24 @@ function App() {
               </Grid>
               <Grid className="text-center my-4" item xs={6} sm={6} md={3} lg={3} xl={3}>
                 <Box id="circle" className="mx-auto">
-                <Link to="/cycling">Cyklistika</Link>
+                <Link to="/hiking">Cyklistika</Link>
                 </Box>
               </Grid>
               <Grid className="text-center my-4" item xs={6} sm={6} md={3} lg={3} xl={3}>
                 <Box id="circle" className="mx-auto">
-                <Link to="/cycling">Cyklistika</Link>
+                <Link to="/running">Cyklistika</Link>
                 </Box>
               </Grid>
               <Grid className="text-center my-4"  item xs={6} sm={6} md={3} lg={3} xl={3}>
                 <Box id="circle" className="mx-auto">
-                <Link to="/cycling">Cyklistika</Link>
+                <Link to="/skiing">Cyklistika</Link>
                 </Box>
               </Grid>
-    </Grid>*/}
+  </Grid>*/}
         <nav className="bg-dark">
           <ul>
             <li>
-              <Link className="nav-item" to="/">logo</Link>
+              <Link className="nav-item" to="/c">logo</Link>
             </li>
             <li>
               
@@ -74,15 +77,16 @@ function App() {
               <Link className="nav-item" to="/skiing">Lyžovanie</Link>
             </li>
           </ul>
-      </nav>
+  </nav>
         <Switch>
-            {<Route exact path="/" component={Cycling} />}
+            {/*<Route path="/c" component={Cycling} />*/}
             <Route path="/cycling" component={Cycling} />
             <Route path="/hiking" component={Hiking} />
             <Route path="/running" component={Running} />
             <Route path="/skiing" component={Skiing} />
         </Switch>
   </Box>
+  </AnimatePresence>
         </Router>
       <Weather />
         </Suspense>

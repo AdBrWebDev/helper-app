@@ -40,7 +40,7 @@ export default function ArticlesItem(props){
                 <CardContent>
                     <Box className="card-image mb-5">
                         <figure className="image is-4by3">
-                            <img src={`/images/${props.article.mainImg}`} alt={props.article.title} />
+                            <img src={`upload/${props.article.mainImg}`} alt={props.article.title} />
                         </figure>
                         <button data-aos="zoom-in" data-aos-offset="100" className="btn-floating halfway-fab btn-large waves-effect btn-info" onClick={() => openArticle(props.article.id_article)}><i class="material-icons">auto_stories</i></button>
                     </Box>

@@ -23,17 +23,17 @@ const ShoppingCart = lazy(() => import('../../components/ShoppingCart'))
 export default function CyclingMNPG(){
 
     return(
-    <Router>
+    <Router style={{'zIndex': 100}}>
       <AnimatePresence>
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark position-fixed top-0">
-  <button class="navbar-toggler bg-white my-auto top-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <nav key="1" className="navbar navbar-expand-lg navbar-light bg-dark position-fixed top-0">
+  <button className="navbar-toggler bg-white my-auto top-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
   </button>
-  <a href=""><Avatar src="images/pathfinder.jpg" className="my-auto mx-5 " /></a>
+  <a href="../../App.js"><Avatar src="images/pathfinder.jpg" className="my-auto mx-5 " /></a>
 
-  <Box class="collapse navbar-collapse bg-dark text-cetnter" id="navbarTogglerDemo03">
-    <ul class="navbar-nav mr-auto text-center">
-      <Link className="text-white" to="/"><i className="material-icons">home</i></Link>
+  <Box className="collapse navbar-collapse bg-dark text-cetnter" id="navbarTogglerDemo03">
+    <ul className="navbar-nav mr-auto text-center">
+      <Link className="text-white" to="/m"><i className="material-icons">home</i></Link>
       <Link className="text-white" to="/eshop">E-shop</Link>
       <Link className="text-white" to="/ForumData">Forum</Link>
       <Link className="text-white" to="/ArticlesData">Články</Link>
@@ -48,15 +48,15 @@ export default function CyclingMNPG(){
             </Box>
   </Box>
 </nav>
-      <Switch>
-          <Route exact path="/" component={MainPage} />
+      <Switch key="2">
+          <Route exact path="/m" component={MainPage} />
           <Route path="/eshop" component={Eshop} />
           <Route path="/ForumData" component={ForumData} />
           <Route path="/ArticlesData" component={ArticlesData} />
           <Route path="/Nature" component={Nature} />
           <Route path="/BikeHelper" component={BikeHelper} />
       </Switch>
-      <Footer />
+      <Footer key="3" />
       </AnimatePresence>
     </Router>)
 }

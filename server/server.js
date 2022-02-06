@@ -8,7 +8,6 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const rounds = 10;
 const multer = require('multer');
-const path = require('path');
 
 const dbcon = mysql.createPool({
     host: 'localhost',
@@ -35,24 +34,19 @@ app.use(session({
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "/public/uploads")
+        cb(null, "uploads")
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now()+path.extname(file.originalname))
+        console.log(file.originalname)
+        cb(null, file.originalname)
     }
 })
 
 const upload = multer({storage: storage})
 
-app.post('/publicateImg', upload.single('mainImg') /*,async (req, res) => {
-    if(res){
-        dbcon.query("UPDATE articles SET mainImg = ? WHERE specialId = ?", [req.body.mainImg, req.body.id], (err, result) => {
-            res.send(result)
-        })
-    }else{
-        console.log('err')
-    }
-}*/)
+app.post('/publicateImg', upload.single('mainImg'))
+
+app.post('/publicateImages', upload.array('images'))
 
 app.post("/user", (req, res) => {
     dbcon.query("SELECT * FROM users WHERE id_user = ?", [req.body.user_id], (err, result) => {
@@ -233,7 +227,7 @@ app.post('/natureForm', (req, res) => {
 
 app.post('/publicate', upload.single('mainImg'), (req, res) => {
     const PublicInsert = "INSERT INTO articles (id_user, id_article, mainImg, title, rating, likes, text, theme, date, specialId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    dbcon.query(PublicInsert, [req.body.id_user, '', '', req.body.sign, req.body.rating, 0, req.body.text, req.body.theme, new Date(), req.body.specialId], (err, result) => {
+    dbcon.query(PublicInsert, [req.body.id_user, '', req.body.mainImg, req.body.sign, req.body.rating, 0, req.body.text, req.body.theme, new Date(), req.body.specialId], (err, result) => {
         res.send(result)
     })
 })

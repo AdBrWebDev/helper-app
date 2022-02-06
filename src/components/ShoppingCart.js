@@ -57,7 +57,7 @@ const Cart = () => {
 
     return(
         <Box>
-            <Button onClick={() => openForm(!form)}><span className="material-icons text-white">shopping_cart</span></Button>
+            <Button variant="contained" color="info" onClick={() => openForm(!form)}><span className="material-icons text-white">shopping_cart</span></Button>
             <Modal open={form} onClose={() => openForm(false)}>
             <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
             <Card id="card" className="mt-4 p-5 text-center mt-5 bg-dark" style={{'height': '90%', 'overflowY': 'scroll'}}>

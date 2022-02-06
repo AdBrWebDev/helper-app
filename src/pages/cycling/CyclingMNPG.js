@@ -47,7 +47,7 @@ export default function CyclingMNPG(){
                 </Box>
             </Box>
   </Box>
-</nav>
+</nav> 
       <Switch key="2">
           <Route exact path="/m" component={MainPage} />
           <Route path="/eshop" component={Eshop} />

@@ -8,7 +8,6 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import './App.css'
 import Box from '@mui/material/Box'
-import {AnimatePresence} from 'framer-motion'
 import Grid from '@mui/material/Grid'
 /*import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
@@ -32,8 +31,7 @@ function App() {
     >
       <CircularProgress color="inherit" />
   </Backdrop>}>
-    <Router>
-    <AnimatePresence>
+  <Router>
     <Box className="bg-dark">
           {/*<Box style={{'paddingTop': '20%'}}>
           <Grid container >
@@ -44,20 +42,20 @@ function App() {
               </Grid>
               <Grid className="text-center my-4" item xs={6} sm={6} md={3} lg={3} xl={3}>
                 <Box id="circle" className="mx-auto">
-                <Link to="/hiking">Cyklistika</Link>
+                <a targer="_self" href="../src/pages/cycling/CyclingMNPG.js">Cyklistika</a>
                 </Box>
               </Grid>
               <Grid className="text-center my-4" item xs={6} sm={6} md={3} lg={3} xl={3}>
                 <Box id="circle" className="mx-auto">
-                <Link to="/running">Cyklistika</Link>
+                <a targer="_self" href="../src/pages/cycling/CyclingMNPG.js">Cyklistika</a>
                 </Box>
               </Grid>
               <Grid className="text-center my-4"  item xs={6} sm={6} md={3} lg={3} xl={3}>
                 <Box id="circle" className="mx-auto">
-                <Link to="/skiing">Cyklistika</Link>
+                <a targer="_self" href="../src/pages/cycling/CyclingMNPG.js">Cyklistika</a>
                 </Box>
               </Grid>
-  </Grid>*/}
+  </Grid>  </Box></Box>*/}
         <nav className="bg-dark">
           <ul>
             <li>
@@ -79,14 +77,12 @@ function App() {
           </ul>
   </nav>
         <Switch>
-            {/*<Route path="/c" component={Cycling} />*/}
+            {<Route path="/c" component={Cycling} />}
             <Route path="/cycling" component={Cycling} />
             <Route path="/hiking" component={Hiking} />
             <Route path="/running" component={Running} />
             <Route path="/skiing" component={Skiing} />
-        </Switch>
-  </Box>
-  </AnimatePresence>
+        </Switch></Box>
         </Router>
       <Weather />
         </Suspense>

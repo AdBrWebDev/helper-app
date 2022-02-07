@@ -45,9 +45,13 @@ export default function Nature(){
     useEffect(() => {
         if(Cookies.get('id')){
         Axios.post('http://localhost:3001/natureUser', {user: Cookies.get('id')}).then((response) => {
-                    setUser(response.data[0].id_user) 
+                    if(!response.data.message){
+                        setUser(response.data[0].id_user) 
+                    }else{
+                        setUser(0)
+                    }
             })}
-    })
+    }, [])
 
     const submitNatureForm = () => {
         if(!Cookies.get("id")){

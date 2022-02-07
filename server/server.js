@@ -225,9 +225,9 @@ app.post('/natureForm', (req, res) => {
     })
 })
 
-app.post('/publicate', upload.single('mainImg'), (req, res) => {
+app.post('/publicate', (req, res) => {
     const PublicInsert = "INSERT INTO articles (id_user, id_article, mainImg, title, rating, likes, text, theme, date, specialId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    dbcon.query(PublicInsert, [req.body.id_user, '', req.body.mainImg, req.body.sign, req.body.rating, 0, req.body.text, req.body.theme, new Date(), req.body.specialId], (err, result) => {
+    dbcon.query(PublicInsert, [req.body.id_user, '', '', req.body.sign, req.body.rating, 0, req.body.text, req.body.theme, new Date(), req.body.specialId], (err, result) => {
         res.send(result)
     })
 })
@@ -297,7 +297,11 @@ app.post('/register', (req, res) => {
 
 app.post('/natureUser', (req, res) => {
     dbcon.query("SELECT id_user from nature_form WHERE id_user = ?", [req.body.user], (err, result) => {
-        res.send(result)
+        if(result){
+            res.send(result)
+        }else{
+            res.send({message: "Neevidovane"})
+        }
     })
 })
 

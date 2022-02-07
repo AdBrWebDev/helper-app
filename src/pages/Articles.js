@@ -27,13 +27,11 @@ export default function Articles(props){
 
     useEffect(() => {
         Axios.post('http://localhost:3001/articles', {title: props.title}).then((response) => { 
-            console.log(response.data)
             getArticles(response.data)
     });
 }, [props.title]);
 
-const publicArticle = (e) => {
-    e.preventDefault();
+const publicArticle = () => {
     let specialId = new Date()+Cookies.get("id").toString()
     const formData = new FormData();
     const formDataImages = new FormData();
@@ -42,9 +40,9 @@ const publicArticle = (e) => {
     for(let i = 0; i< images.length; i++) {
         formDataImages.append('images', images[i])
     }
-    Axios.post('http://localhost:3000/publicate', {id_user: Cookies.get("id"), sign: title, mainImg: MainImg.file.name, rating: rating, text: text, theme: props.title, specialId: specialId, formData})
-    Axios.post('http://localhost:3000/publicateImg', formData)
-    Axios.post('http://localhost:3000/publicateImages', formDataImages)
+    Axios.post('http://localhost:3001/publicate', {id_user: Cookies.get("id"), sign: title, rating: rating, text: text, theme: props.title, specialId: specialId})
+    Axios.post('http://localhost:3001/publicateImg', formData)
+    Axios.post('http://localhost:3001/publicateImages', formDataImages)
     openAddArticle(false)
     handleClick()
 }
@@ -102,7 +100,7 @@ const handleClick = () => {
                 <Card id="card" className="p-5 border bg-dark text-center border-dark text-white mt-5" style={{'overflowY': 'scroll', 'height': '90%'}}>
                     <Typography variant="h2">{title}</Typography>
                     <input type="text" className="w-75 mx-auto text-center text-white" onChange={(e) => setTitle(e.target.value)} placeholder="názov článku" />
-                    <Typography className="text-white mr-3" variant="h6">náročnosť trasy</Typography>
+                    <Typography className="text-white mr-3" variant="h6">náročnosť</Typography>
                     <input type="number" className="w-25 text-white" min={0} max={5} onChange={(e) => setRating(e.target.value)}/>
                     <Typography variant="h6" className="mt-4">Nahrať hlavný obrázok</Typography>
                     <Box className="mx-auto w-75 bg-white">

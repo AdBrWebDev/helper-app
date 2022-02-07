@@ -22,7 +22,6 @@ export default function ArticlesItem(props){
     const openArticle = (id) => {
         Axios.post('http://localhost:3001/articlesData', {id: id}).then((response) => { 
             getData(response.data[0])
-            console.log(response.data[0])
     });
     openWindow(!window)
     }
@@ -44,7 +43,7 @@ export default function ArticlesItem(props){
                         </figure>
                         <button data-aos="zoom-in" data-aos-offset="100" className="btn-floating halfway-fab btn-large waves-effect btn-info" onClick={() => openArticle(props.article.id_article)}><i class="material-icons">auto_stories</i></button>
                     </Box>
-                    <Typography variant="h4">{props.article.title}</Typography>
+                    <Box style={{'minHeight': '60px'}}><Typography variant="h4">{props.article.title}</Typography></Box>
                 </CardContent>
                 <CardActions className="px-2">
                     <Grid container>
@@ -60,9 +59,9 @@ export default function ArticlesItem(props){
                 </CardActions>
             </Card>
             <Modal open={window} onClose={() => openWindow(false)}>
-            <motion.div className="container" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
+            <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
                 <Card className="border text-center border-dark mt-5 bg-dark" id="card" style={{'overflowY': 'scroll', 'height': '95%'}}>
-                    <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/images/${props.article.mainImg}`}>
+                    <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/upload/${props.article.mainImg}`}>
                         <Box>
                             <Typography color="white" variant="h2">{props.article.title}</Typography>
                         </Box>

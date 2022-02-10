@@ -18,7 +18,7 @@ const dbcon = mysql.createPool({
 
 app.use(express.json());
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: /*"http://localhost:3000"*/"https://pathfinder-help-app.herokuapp.com/",
     methods: ['GET', 'POST'], 
     credentials: true
 }));
@@ -312,6 +312,6 @@ app.post('/natureUser', (req, res) => {
     })
 })
 
-app.listen(3001, () => {
+app.listen(process.env.PORT || 3001, () => {
     console.log("Server running on 3001")
 })

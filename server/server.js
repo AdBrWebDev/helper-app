@@ -10,10 +10,10 @@ const rounds = 10;
 const multer = require('multer');
 
 const dbcon = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'pathfinder',
+    host: 'sql11.freemysqlhosting.net',
+    user: 'sql11471613',
+    password: 'jdRPV7ihtJ',
+    database: 'sql11471613',
 })
 
 app.use(express.json());
@@ -193,7 +193,14 @@ app.post('/articles', (req, res) => {
 })
 
 app.post('/articlesData', (req, res) => {
-    const SelectPlus = "SELECT likes, text, date FROM articles WHERE id_article = ?";
+    const SelectPlus = "SELECT likes, text, date, id_article FROM articles WHERE id_article = ?";
+    dbcon.query(SelectPlus, [req.body.id], (err, result) => {
+        res.send(result)
+    })
+})
+
+app.post('/articlesDataGalery', (req, res) => {
+    const SelectPlus = "SELECT image FROM articles_galery WHERE id_article = ?";
     dbcon.query(SelectPlus, [req.body.id], (err, result) => {
         res.send(result)
     })

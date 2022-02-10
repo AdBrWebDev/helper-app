@@ -17,17 +17,24 @@ import {motion} from 'framer-motion'
 
 export default function ArticlesItem(props){
     const [data, getData] =  useState([])
+    const [galery, getArticleImages] =  useState([])
     const [window, openWindow] = useState(false)
 
     const openArticle = (id) => {
         Axios.post('http://localhost:3001/articlesData', {id: id}).then((response) => { 
             getData(response.data[0])
+            console.log(response.data[0])
+            Axios.post('http://localhost:3001/articlesDataGalery', {id: response.data[0].id_article}).then((response) => { 
+        getArticleImages(response.data)
+        console.log(response.data)
+    });
     });
     openWindow(!window)
     }
 
     function addToFavorite(id){
-        Axios.post('http://localhost:3001/addToFav', {id: id, user: Cookies.get("id")})
+        Axios.post('http://localhost:3001/addToFav', {id: id, user: Cookies.get("id")}).then((response) => {})
+
     }
 
     function addLike(like, id){
@@ -60,8 +67,8 @@ export default function ArticlesItem(props){
             </Card>
             <Modal open={window} onClose={() => openWindow(false)}>
             <motion.div className="container h-100" initial={{y: -200, opacity: 0, transform: "scale(0)"}} animate={{y: 0, opacity: 1, transform: "scale(1)"}} transition={{default: {duration: 1}}}>
-                <Card className="border text-center border-dark mt-5 bg-dark" id="card" style={{'overflowY': 'scroll', 'height': '95%'}}>
-                    <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`/upload/${props.article.mainImg}`}>
+                <Card className="border text-center border-dark pb-5 mt-5 bg-dark" id="card" style={{'overflowY': 'scroll', 'height': '95%'}}>
+                    <LazyHero color="#111111" minHeight="80vh" opacity="0.5" parallaxOffset={150} imageSrc={`upload/${props.article.mainImg}`}>
                         <Box>
                             <Typography color="white" variant="h2">{props.article.title}</Typography>
                         </Box>
@@ -69,6 +76,16 @@ export default function ArticlesItem(props){
                     <Box className="text-white container mx-auto">
                     <Typography style={{'font-size': '18px'}} className="w-75 mx-auto mt-5">{data.text}</Typography>
                     <Typography variant="h2">Galeria</Typography>
+                    <Grid container spacing={2}>
+                    {galery.map((galery, index) => 
+                        <Grid key={index} item xs={12} sm={12} md={4} lg={3} xl={3}>
+                            <Box className="card-image">
+                        <figure className="image is-4by3" style={{'cursor': 'pointer'}}>
+                            <img src={`upload/${galery.image}`} alt="galery" />
+                        </figure>
+                    </Box>
+                        </Grid>
+                    )}</Grid>
                     </Box>
                 </Card></motion.div>
                 </Modal>

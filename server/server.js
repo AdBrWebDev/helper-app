@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 const rounds = 10;
 const multer = require('multer'); 
 require("dotenv").config()
+const port = process.env.PORT || 3001
 
 const dbcon = mysql.createPool({
     host: 'sql11.freemysqlhosting.net',
@@ -16,6 +17,7 @@ const dbcon = mysql.createPool({
     password: 'jdRPV7ihtJ',
     database: 'sql11471613',
 })
+app.set("port", port)
 
 app.use(express.json());
 app.use(cors(/*{
@@ -313,6 +315,6 @@ app.post('/natureUser', (req, res) => {
     })
 })
 
-app.listen(process.env.PORT || 3001, () => {
-    console.log("Server running on"+process.env.PORT || 3001)
+app.listen(port || 3001, () => {
+    console.log("Server running on"+port || 3001)
 })

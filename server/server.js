@@ -17,7 +17,6 @@ const dbcon = mysql.createPool({
     password: 'jdRPV7ihtJ',
     database: 'sql11471613',
 })
-app.set("port", port)
 
 app.use(express.json());
 app.use(cors(/*{
@@ -315,6 +314,6 @@ app.post('/natureUser', (req, res) => {
     })
 })
 
-app.listen(port || 3001, () => {
+app.listen(port, () => {
     console.log("Server running on"+port || 3001)
 })

@@ -17,11 +17,11 @@ const dbcon = mysql.createPool({
 })
 
 app.use(express.json());
-/*app.use(cors({
-    origin: "http://localhost:3000""https://pathfinder-help-app.herokuapp.com",
+app.use(cors({
+    origin: /*"http://localhost:3000"*/"https://pathfinder-help-app.herokuapp.com",
     methods: ['GET', 'POST'], 
     credentials: true
-}));*/
+}));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(session({

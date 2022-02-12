@@ -18,6 +18,10 @@ const dbcon = mysql.createPool({
     database: 'sql11471613',
 })
 
+app.get("/", (res, req) => {
+    res.send("hello")
+})
+
 app.use(express.json());
 app.use(cors(/*{
     origin: "http://localhost:3000""https://pathfinder-help-app.herokuapp.com",

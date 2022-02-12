@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 const rounds = 10;
 const multer = require('multer');
 require("dotenv").config()
+
 const dbcon = mysql.createPool({
     host: 'sql11.freemysqlhosting.net',
     user: 'sql11471613',
@@ -17,11 +18,11 @@ const dbcon = mysql.createPool({
 })
 
 app.use(express.json());
-app.use(cors({
-    origin: /*"http://localhost:3000"*/"https://pathfinder-help-app.herokuapp.com",
+app.use(cors(/*{
+    origin: "http://localhost:3000""https://pathfinder-help-app.herokuapp.com",
     methods: ['GET', 'POST'], 
     credentials: true
-}));
+}*/));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(session({
@@ -313,5 +314,5 @@ app.post('/natureUser', (req, res) => {
 })
 
 app.listen(process.env.PORT || 3001, () => {
-    console.log("Server running on 3001")
+    console.log("Server running on"+process.env.PORT || 3001)
 })

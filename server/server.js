@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const rounds = 10;
-const multer = require('multer');
+const multer = require('multer'); 
 require("dotenv").config()
 
 const dbcon = mysql.createPool({

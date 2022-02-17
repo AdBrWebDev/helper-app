@@ -11,20 +11,16 @@ const multer = require('multer');
 require("dotenv").config()
 const port = process.env.PORT || 3001
 
-/*const dbcon = mysql.createPool({
+const dbcon = mysql.createPool({
     host: 'sql11.freemysqlhosting.net',
     user: 'sql11471613',
     password: 'jdRPV7ihtJ',
     database: 'sql11471613',
-})*/
-
-app.get("/", (res, req) => {
-    res.send("hello")
 })
 
-/*app.use(express.json());
-app.use(cors(/*{
-    origin: "http://localhost:3000""https://pathfinder-help-app.herokuapp.com",
+app.use(express.json());
+app.use(cors({
+    origin: "http://localhost:3000",
     methods: ['GET', 'POST'], 
     credentials: true
 }));
@@ -296,7 +292,7 @@ app.post('/register', (req, res) => {
                 bcrypt.compare(req.body.loginPassword, result[0].password, (error, response) => {
                     if(response){
                         /*req.session.user = result;
-                        console.log(req.session.user)
+                        console.log(req.session.user)*/
                         res.send(result)
                     }else{
                         res.send({message: "Nesprávny e-mail alebo heslo!"})
@@ -316,7 +312,7 @@ app.post('/natureUser', (req, res) => {
             res.send({message: "Neevidovane"})
         }
     })
-})*/
+})
 
 app.listen(port, () => {
     console.log("Server running on"+port || 3001)

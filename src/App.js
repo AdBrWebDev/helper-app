@@ -62,11 +62,11 @@ function App() {
           </ul>
   </nav>
         <Routes>
-            <Route exact path="/" element={DefaultPage} />
-            <Route path="/cycling" element={Cycling} />
-            <Route path="/hiking" element={Hiking} />
-            <Route path="/running" element={Running} />
-            <Route path="/skiing" element={Skiing} />
+            <Route exact path="/" element={<DefaultPage />} />
+            <Route path="/cycling" element={<Cycling />} />
+            <Route path="/hiking" element={<Hiking />} />
+            <Route path="/running" element={<Running />} />
+            <Route path="/skiing" element={<Skiing />} />
         </Routes></Box>
         </Router>
       <Weather />

@@ -20,7 +20,7 @@ const SignInRegistration = lazy(() => import('../../components/SignInRegistratio
 const ShoppingCart = lazy(() => import('../../components/ShoppingCart'))
 
 export default function CyclingMNPG(){
-    return(<Router>
+    return(<>{/*<Router>
     <AnimatePresence>
     <nav key="1" className="navbar navbar-expand-lg navbar-light bg-dark position-fixed top-0">
   <button className="navbar-toggler bg-white my-auto top-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,5 +55,5 @@ export default function CyclingMNPG(){
       </Routes>
       <Footer key="3" />
       </AnimatePresence>
-    </Router>)
+</Router>*/}</>)
 }

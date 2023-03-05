@@ -1,5 +1,5 @@
 import React, { lazy} from "react";
-import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {Link, BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'material-icons/iconfont/material-icons.css';
 import 'materialize-css/dist/css/materialize.css';
@@ -47,14 +47,14 @@ export default function CyclingMNPG(){
             </Box>
   </Box>
 </nav>
-      <Switch key="2">
+      <Routes key="2">
           <Route exact path="/" component={MainPage} />
           <Route path="/eshop" component={Eshop} />
           <Route path="/ForumData" component={ForumData} />
           <Route path="/ArticlesData" component={ArticlesData} />
           <Route path="/Nature" component={Nature} />
           <Route path="/HikeHelper" component={BikeHelper} />
-      </Switch>
+      </Routes>
       <Footer key="3" />
       </AnimatePresence>
     </Router>)

@@ -1,18 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import './App.css';
 import App from './App';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux'
-import Reducer from '../src/components/Reducer'
-const store = createStore(Reducer)
+import {createRoot} from 'react-dom/client'
 
-ReactDOM.render(
+const Apps = () => {
+  <App />
+}
+
+/*ReactDOM.render(
   <Provider store={store}>
       <App />
   </Provider>,
   document.getElementById('root')
-);
+);*/
+
+const container = document.getElementById("root")
+const root = createRoot(container)
+root.render(<Apps />)
+root.unmount();
 
 reportWebVitals();

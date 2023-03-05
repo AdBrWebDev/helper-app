@@ -1,4 +1,4 @@
-import {Link, BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {Link, BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import React, {Suspense, lazy, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'material-icons/iconfont/material-icons.css'
@@ -23,7 +23,7 @@ function App() {
     Aos.init();
   })
 
-  function defaultPage(){
+  function DefaultPage(){
     return(
       <Box className="bg-dark vh-100">
         <Box className="container p-5 text-center" style={{'marginTop': "12%"}}>
@@ -61,13 +61,13 @@ function App() {
             </li>
           </ul>
   </nav>
-        <Switch>
-            <Route exact path="/" component={defaultPage} />
-            <Route path="/cycling" component={Cycling} />
-            <Route path="/hiking" component={Hiking} />
-            <Route path="/running" component={Running} />
-            <Route path="/skiing" component={Skiing} />
-        </Switch></Box>
+        <Routes>
+            <Route exact path="/" element={DefaultPage} />
+            <Route path="/cycling" element={Cycling} />
+            <Route path="/hiking" element={Hiking} />
+            <Route path="/running" element={Running} />
+            <Route path="/skiing" element={Skiing} />
+        </Routes></Box>
         </Router>
       <Weather />
         </Suspense>

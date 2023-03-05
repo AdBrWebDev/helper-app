@@ -12,15 +12,15 @@ require("dotenv").config()
 const port = process.env.PORT || 3001
 
 const dbcon = mysql.createPool({
-    host: 'sql11.freemysqlhosting.net',
-    user: 'sql11471613',
-    password: 'jdRPV7ihtJ',
-    database: 'sql11471613',
+    host: "http://192.168.0.107/phpmyadmin",
+    user: "debian-sys-maint",
+    password: "odroidserver",
+    database: "pathfinder",
 })
 
 app.use(express.json());
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "http://192.168.0.107/pathfinder",
     methods: ['GET', 'POST'], 
     credentials: true
 }));

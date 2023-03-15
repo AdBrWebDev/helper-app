@@ -22,6 +22,9 @@ export default function ProductCard(props){
     const dispatch = useDispatch();
     console.log(cart)
     console.log(props.product.color)
+    
+    const prop = props.product
+    console.log(prop)
 
     const openInfo = (id) => {
         infoOpened(!iWindow)
@@ -55,7 +58,7 @@ export default function ProductCard(props){
         <Box className="card border border-dark" data-aos="fade-up" data-aos-offset="200" id="cardh" onClick={() => openInfo(props.id)}>
                     <Box className="card-image">
                         <figure className="image is 4by3 m-2">
-                            <img style={{"height": 250, 'width': 250, 'margin': 'auto'}} src={`/images/${props.img}`} alt={props.title} />
+                            <img style={{"height": 250, 'width': 250, 'margin': 'auto'}} src={`/images/${prop.img}`} alt={props.title} />
                         </figure>
                     </Box>
                     <Box className="card-content text-center">
@@ -65,7 +68,7 @@ export default function ProductCard(props){
                             </Box>
                             <Typography className="text-white" variant="h4">{props.price} €</Typography>
                             <Box style={{'height': 60}} data-aos="zoom-in" data-aos-offset="100">
-                            {props.contain > 0 ? <Box className="message is-success mt-3"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box> : 
+                            {prop.contain_in_warehouse > 0 ? <Box className="message is-success mt-3"><Typography className="message-body">Skladom {prop.contain_in_warehouse} ks</Typography></Box> : 
                             <Box className="message is-danger mt-3"><Typography className="message-body">Nedostupné</Typography></Box>}</Box>
                         </Box>
                     </Box>
@@ -75,20 +78,20 @@ export default function ProductCard(props){
                     <Card className="text-center text-white border p-5 border-dark" id="card" style={{'marginTop': 30, 'overflowY': 'scroll', 'height': '90%'}}>
                             <Grid container>
                                 <Grid item xs={12} sm={12} md={5} xl={5} lg={5}>
-                                <img style={{'height': 350, 'marginTop': 50}} src={`/images/${props.img}`} alt={props.title} />
+                                <img style={{'height': 350, 'marginTop': 50}} src={`/images/${prop.img}`} alt={props.title} />
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={7} xl={7} lg={7}>
                                     <Card id="card" className="border p-5 h-100 border-dark">
                                 <Typography variant="h3">{props.title}</Typography>
                                 <Divider className="w-75 mx-auto my-3 bg-dark" />
                                 <Box>
-                                    <Typography variant="h5" style={{'text-align': 'left', 'marginTop': '5%'}}>Prevedenie: {props.product.color}</Typography>
+                                    <Typography variant="h5" style={{'text-align': 'left', 'marginTop': '5%'}}>Prevedenie: {prop.product.color}</Typography>
                                 </Box>
                             <Box>
                             <Typography variant="h2" style={{'textAlign': 'left', 'marginTop': '10%'}}>{props.price} €</Typography>
                              </Box>
                             <Box className="d-flex mt-5">
-                            {props.contain > 0 ? <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {props.contain} ks</Typography></Box> : 
+                            {prop.contain_in_warehouse > 0 ? <Box className="message is-success w-50 mx-auto my-auto"><Typography className="message-body">Skladom {prop.contain_in_warehouse} ks</Typography></Box> : 
                             <Box className="message is-danger w-50 mx-auto my-auto"><Typography className="message-body">Nedostupné</Typography></Box>}
                             <Button disabled={props.contain < 1 || !Cookies.get("id")} variant="contained" className="mr-5" color="success"><i className="material-icons" onClick={() => {dispatch({type: "ADD", payload: props.product}); handleClick()}}>shopping_cart</i></Button>
                             </Box>

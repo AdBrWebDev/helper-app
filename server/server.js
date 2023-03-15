@@ -12,10 +12,10 @@ require("dotenv").config()
 const port = process.env.PORT || 3001
 
 const dbcon = mysql.createPool({
-    host: 'sql11.freemysqlhosting.net',
-    user: 'sql11471613',
-    password: 'jdRPV7ihtJ',
-    database: 'sql11471613',
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'pathfinder',
 })
 
 app.use(express.json());

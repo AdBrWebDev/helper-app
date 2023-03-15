@@ -14,7 +14,7 @@ CREATE TABLE users
     e_mail VARCHAR(50)
 )
 ENGINE=INNODB
-
+;
 /*database user members*/
 CREATE TABLE user_members
 (
@@ -25,7 +25,7 @@ CREATE TABLE user_members
     FOREIGN KEY (id_user) REFERENCES users(id_user)
 )
 ENGINE=INNODB
-
+;
 /*nature form*/
 CREATE TABLE nature_form
 (
@@ -34,7 +34,7 @@ CREATE TABLE nature_form
     FOREIGN KEY (id_user) REFERENCES users(id_user)
 )
 ENGINE=INNODB
-
+;
 /*e-shop*/
 CREATE TABLE e_shop
 (
@@ -44,7 +44,7 @@ CREATE TABLE e_shop
     contain_in_warehouse INT
 )
 ENGINE=INNODB
-
+;
 /*orders*/
 CREATE TABLE orders
 (
@@ -57,7 +57,7 @@ CREATE TABLE orders
     FOREIGN KEY (id_user) REFERENCES users(id_user)
 )
 ENGINE=INNODB
-
+;
 
 /*e-shop insert */
 INSERT INTO e_shop
@@ -67,7 +67,7 @@ VALUES
 ('', 'Mikina pathfinder climber', 40, 3),
 ('', 'Tričko pathfinder liner', 24, 0),
 ('', 'Šiltovka pathfinder stealth', 12, 0)
-
+;
 /*pathfinder plus*/
 CREATE TABLE pathfinder_plus
 (
@@ -77,7 +77,8 @@ CREATE TABLE pathfinder_plus
     header VARCHAR(100),
     text MEDIUMTEXT
 )
-
+ENGINE=INNODB
+;
 /*forum*/
 CREATE TABLE forum
 (
@@ -91,7 +92,7 @@ CREATE TABLE forum
     FOREIGN KEY (id_user) REFERENCES users(id_user)
 )
 ENGINE=INNODB
-
+;
 /*pathfinder plus cycling part*/
 INSERT INTO pathfinder_plus(theme, image, header, text)
 VALUES
@@ -101,7 +102,7 @@ VALUES
 ('cycling', 'tubeRe3.jpg','Oprava defektu','Miesto defektu zdrsnite jemným brúsnym papierom (často býva súčasťou balenia), záplata bude lepšie držať. Potom zbavte miesto mastnoty a nečistôt, najlepšie liehom alebo technickým benzínom. Naneste tenkú vrstvu lepidla na dušu. Nechajte približne 2 až 5 minút odvetrať alebo postupujte podľa návodu na obale od lepidla. Pripravte si záplatu podľa veľkosti defektu a odstráňte hliníkovú fóliu. Akonáhle zaschne lepidlo priložte záplatu a pevne stlačte proti sebe. Spoj sa za niekoľko sekúnd stáva pevným. Nakoniec už len očistite zbytky lepidla, aby sa duša neprilepila na plášť.'),
 ('cycling', 'tubeRe4.jpg','Oprava defektu','Kontrola plášťa je veľmi dôležitou časťou na ktorú nikdy nezabúdajte. Zistite či nemáte niečo pichnuté v plášti, napr. kúsok drôtu alebo sklo, ktoré by mohlo opätovným osadením a nafúknutím dušu prepichnúť. Tak isto skontrolujte spoj, či je pevný, nikde neuniká vzduch alebo kontrola ďalších defektov. V prípade, že nájde ďalší defekt vám odporúčame rovno vymeniť celý plášť. Ak ho nemáte po ruke, tak ďalšie plátanie dier je len nevyhnutnosťou dojazdu do vášho cieľa.'),
 ('cycling', 'tubeRe5.jpg','Oprava defektu','Priložte zalepenú dušu do ráfiku a umiestnite ventil na správne miesto. Ďalej už môžete postupovať tak, že nahodíte dušu a plášť na ráfik kolesa pomocou montpáky. Odporúčame vám používať zásadne montpáku, kľúče a skrutkovač sa nepoužívajú, pretože by mohlo prísť k trvalému poškodeniu ráfika. Dušu dofúkajte asi na polovicu a z každej strany ju po obvode pobúchajte, aby dobre sadla. Potom ju nafúkajte na požadovanú tuhosť podľa parametru, ktorý je uvedený na každom plášti v psi. Nakoniec skontrolujte správne osadenie v ráfiku a môžete pokračovať v jazde.')
-
+;
 /*pathPlus cycling insert*/
 INSERT INTO pathfinder_plus(theme, image, header, text)
 VALUES
@@ -210,7 +211,7 @@ Jim Potter, majiteľ legendárnej opravovne bicyklov Vecchio’s Bicicletteria v
 ('cycling', 'brakeBl.jpg', 'Odvzdušnenie brzd', 'Nainštalujte a bezpečne utiahnite skrutky na upevnenie doštičiek.'),
 ('cycling', 'brakeBl.jpg', 'Odvzdušnenie brzd', 'Nainštalujte kryt nádrže a zaistite skrutkami.'),
 ('cycling', 'brakeBl.jpg', 'Odvzdušnenie brzd', 'Nainštalujte koleso a vyskúšajte brzdu silným stlačením brzdovej páčky. Ak je páčka na pocit mäkká, bude potrebné doplniť brzdovú kvaplainu. Ak doštičky drú alebo sú nevyrovnané, nas')
-
+;
 
 /*first-aid */
 INSERT INTO pathfinder_plus(theme, image, header, text)
@@ -257,7 +258,7 @@ prikrytím postihnutého vlhkou plachtou.'),
 ('first-aid', 'fracture1.jpg', 'Zlomenina', 'Znehybnenie tak, aby bol znehybnený jeden kĺb pod aj nad zlomeninou'),
 ('first-aid', 'fracture2.jpg', 'Zlomenina', 'Horná končatina: Zlomenú hornú končatinu dáme buď do závesu z trojrohej šatky alebo znehybníme priamo v rukáve odevu. Zlomenina kľúčnej kosti sa ošetruje ako zlomenina hornej končatiny'),
 ('first-aid', 'fracture3.jpg', 'Zlomenina', 'Dolná končatina: Pri zlomenine dolnej končatiny priložíme zdravú končatinu k postihnutej tak, aby sme s postihnutou nehýbali a priviažeme. Pri veľkej deformácii možno využiť rôzne druhy obloženia na znehybnenie (vankúš, deku, noviny)')
-
+;
 /*articles*/
 CREATE TABLE articles
 (
@@ -269,7 +270,7 @@ CREATE TABLE articles
     likes INT
 )
 ENGINE=INNODB
-
+;
 /*sponsors*/
 CREATE TABLE sponsors
 (
@@ -277,7 +278,7 @@ CREATE TABLE sponsors
     img VARCHAR(60)
 )
 ENGINE=INNODB
-
+;
 /*sponsors*/
 INSERT INTO sponsors(title, img)
 VALUES
@@ -289,7 +290,7 @@ VALUES
 ('northwave', 'northwave.png'),
 ('poc', 'poc.png'),
 ('birell', 'birell.png')
-
+;
 /*skiing data*/
 INSERT INTO pathfinderplus(theme, image, header, text)
 VALUES
@@ -306,7 +307,7 @@ VALUES
 ('skiing', 'injuredHands.jpg3','Zranenia rúk','Zlomeniny prstov : Môžu sa vyskytnúť aj pri páde. Liečba je zvyčajne s dlahou, ale môže byť potrebná redukcia alebo chirurgický zákrok. Bez vhodnej liečby môže postihnutý prst zostať stuhnutý a bolestivý.'),
 ('skiing', 'injuredBack.jpg','Zranenia chrbta','Bolesť krížov : Silné pohyby sú jednou z príčin bolestí krížov a môžete si spôsobiť zranenie z nadmerného používania, pádov alebo nepríjemného vstávania po páde.'),
 ('skiing', 'injuredBack2.jpg','Zranenia chrbta','Herniované disky : Pri páde môže dôjsť k zraneniu, pri ktorom vám praskne disk v chrbtici a vytečie tekutina podobná želé. To môže podráždiť vaše nervy a spôsobiť bolesť chrbta. Toto zranenie sa často bude liečiť konzervatívne, ale môže sa odporučiť chirurgický zákrok.')
-
+;
 /*atricleImages*/
 CREATE TABLE articleImages
 (
@@ -314,7 +315,7 @@ CREATE TABLE articleImages
     image TEXT
 )
 ENGINE=INNODB
-
+;
 /*running pathfinder_plus data*/
 INSERT INTO pathfinder_plus(theme, image, header, text)
 VALUES
@@ -355,7 +356,7 @@ VALUES
 ('running', 'pain2.jpg', 'Bolesti na ďalší deň', 'Neprestávajte sa hýbať. Ak po náročnom tréningu sedíte pridlho na zadku, môže to predĺžiť stuhnutosť svalov. Preto zostaňte po behu v pohybe a na druhý deň nebudete zomierať od bolesti.'),
 ('running', 'pain3.jpg', 'Bolesti na ďalší deň', 'Vyskúšajte zotavovací beh. Relaxačný beh v úplne ľahučkom tempe vám pomôže vyplaviť zo svalov toxíny a zlepší prúdenie krvi. Doprajte si ho na druhý deň po tvrdom tréningu, no skutočne si ho nastavte tak, aby ste si pri ňom oddýchli. Takýto beh by nemal trvať dlhšie než tridsať minút.'),
 ('running', 'pain4.jpg', 'Bolesti na ďalší deň', 'Po behu sa dobre najedzte. To, čo si vložíte po tréningu do úst, však vyberajte s rozumom. Do tridsiatich minút po návrate z neho si dajte chudé bielkoviny a zdravé sacharidy. Vaše telo sa tak zotaví rýchlejšie.')
-
+;
 /*pathfinder_plus hiking data*/
 INSERT INTO pathfinder_plus(theme, image, header, text)
 VALUES
@@ -381,7 +382,7 @@ Na záver treba povedať, že ani využitie služieb horského vodcu nie sú han
 ('hiking', 'hikingM.jpg', 'Poistenie na hory','Určite výhodnou výbavou turistu v horách je aj správne poistenie. Ide síce o preventívne opatrenie, ale ak sa niečo stane, môže vám ušetriť nemalé peniaze.'),
 ('hiking', 'hikingM1.jpg', 'Poistenie na hory','Zásah horskej záchrannej služby je totiž rozdelený na poskytnutie zdravotnej starostlivosti a technický zásah. Na zdravotnú starostlivosť máte nárok za svojho zdravotného poistenia, technický zásah však musíte hradiť vy alebo, v prípade, že ste mysleli aj na poistenie na hory, vaša poisťovňa.'),
 ('hiking', 'hikingM2.jpg', 'Poistenie na hory','Môže ísť o vyhľadávanie, vyslobodzovanie osôb v tiesni, poskytovanie prvej pomoci v teréne, preprava k najbližšiemu zdravotníckemu zariadeniu alebo dopravnému prostriedku, prípadne prevoz telesných pozostatkov. Keďže v takýchto prípadoch býva bežné aj využitie záchranárskeho vrtuľníka, náklady sa môžu vyšplhať až na tisícky eur. Preto sa určite poistenie na hory oplatí uzatvoriť. Navyše, ak plánujete zdolávať slovenské ferraty, tam je poistenie povinné.')
-
+;
 /*product properties*/
 CREATE TABLE product_properties
 (
@@ -390,7 +391,7 @@ CREATE TABLE product_properties
     title VARCHAR(100),
 )
 ENGINE=INNODB
-
+;
 /*product properties data*/
 INSERT INTO product_properties(id_product, text, title)
 VALUES
@@ -403,7 +404,7 @@ VALUES
 (2, 'Batéria s kapacitou 600 mAh, vydrží na jedno nabitie 2 mesiace. Je to dosiahnuté aj použitím úsporných čipov. Odporúčané rozmedzi teplôt je od -40°C do 80°C', '2 mesiace na jedno nabitie'),
 (2, 'Vďaka odľahčenému púzdru vyrobeného z polykarbonátu bolo možné dosiahnúť nízku hmotnosť, ktorú ani nepocítite.', 'Hmotnosť len 43 gramov'),
 (2, 'Prostredníctvom tohto zariadenia vás horská služba môže ľahšie nájsť. Nezáleží na tom či spadla lavína, ste hlboko v lese, vďaka vysoko presným čipom od sony vás záchranári nájdu všade. !!Je potrebné si zakúpiť aj aktivačný čip, viac informácii na stránke horskej služby!!', 'Funkcia horskej služby')
-
+;
 /*product color and size*/
 CREATE TABLE product_color_size
 (
@@ -412,7 +413,7 @@ CREATE TABLE product_color_size
     color VARCHAR(12)
 )
 ENGINE=INNODB
-
+;
 /*product color size data*/
 INSERT INTO product_color_size
 VALUES
@@ -430,7 +431,7 @@ VALUES
 (4, 'XXL', 'čierna'),
 (5, '54-58cm', 'čierna'),
 (5, '54-60cm', 'čierna')
-
+;
 /*favorite articles*/
 CREATE TABLE favArticles
 (
@@ -438,3 +439,4 @@ CREATE TABLE favArticles
     article_id INT
 )
 ENGINE=INNODB
+;

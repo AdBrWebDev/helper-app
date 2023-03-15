@@ -62,11 +62,11 @@ ENGINE=INNODB
 /*e-shop insert */
 INSERT INTO e_shop
 VALUES
-('', 'GPS pathfinder 1.0', 50, 13),
-('', 'GPS pathfinder 2.0', 80, 5),
-('', 'Mikina pathfinder climber', 40, 3),
-('', 'Tričko pathfinder liner', 24, 0),
-('', 'Šiltovka pathfinder stealth', 12, 0)
+(null, 'GPS pathfinder 1.0', 50, 13),
+(null, 'GPS pathfinder 2.0', 80, 5),
+(null, 'Mikina pathfinder climber', 40, 3),
+(null, 'Tričko pathfinder liner', 24, 0),
+(null, 'Šiltovka pathfinder stealth', 12, 0)
 ;
 /*pathfinder plus*/
 CREATE TABLE pathfinder_plus
@@ -292,7 +292,7 @@ VALUES
 ('birell', 'birell.png')
 ;
 /*skiing data*/
-INSERT INTO pathfinderplus(theme, image, header, text)
+INSERT INTO pathfinder_plus(theme, image, header, text)
 VALUES
 ('skiing', 'broken-knee.jpg', 'Zranenia kolena', 'Poranenia predného a zadného skríženého väzu (ACL/PCL) : Ide o poranenia väzov, ktoré stabilizujú koleno, a často sa vyskytujú s náhlym skrútením, kým sú nohy zasadené. Poranenia ACL sa často liečia konzervatívne, ale v prípade úplného roztrhnutia môže byť potrebná operácia a rekonštrukcia.'),
 ('skiing', 'broken-knee2.jpg', 'Zranenie kolena', 'Meniskus sa trhá : Meniskus je chrupavka v kolene, ktorá umožňuje plynulý pohyb. Pri náhlych krútivých pohyboch môže dôjsť k roztrhnutiu. Liečba je zvyčajne konzervatívna, ale veľké slzy môžu vyžadovať chirurgický zákrok.'),
@@ -388,7 +388,7 @@ CREATE TABLE product_properties
 (
 	id_product INT,
     text TEXT(50000),
-    title VARCHAR(100),
+    title VARCHAR(100)
 )
 ENGINE=INNODB
 ;
